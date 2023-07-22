@@ -1,0 +1,110 @@
+// Create a user
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+  "name": "Dicky Anggoro Wicaksono, S.Kom.",
+  "position": "Pranata Komputer Ahli Muda",
+  "nip": "19830906 201101 1 001",
+  "address": "Teguhan RT 05 RW 19, Kalitirto, Berbah, Sleman, DIY",
+  "email": "pegawai@gmail.com",
+  "password": "dicky123",
+  "confPassword": "dicky123",
+  "role": "Pegawai"
+}
+
+###
+// Get all users
+GET http://localhost:5000/users
+
+###
+// Get single user
+GET http://localhost:5000/users/494e8dc9-f564-4b3b-bb73-be29177d7759
+
+###
+// Update user
+PATCH http://localhost:5000/users/71177af7-d2b8-4ea8-9a39-90cc3ffeea3b
+Content-Type: application/json
+
+{
+  "name": "Brandon",
+  "position": "Kepegawaian Diskominfosan",
+  "nip": "960289345",
+  "address": "Jalan Kesehatan",
+  "email": "kepegawaian@gmail.com",
+  "password": "brandon123",
+  "confPassword": "brandon123",
+  "role": "Kepegawaian"
+}
+
+###
+// Delete user
+DELETE http://localhost:5000/users/71177af7-d2b8-4ea8-9a39-90cc3ffeea3b
+
+###
+// Login user
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+  "email": "kepegawaian@gmail.com",
+  "password": "brandon123"
+}
+
+###
+// Login user
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+  "email": "pegawai@gmail.com",
+  "password": "dicky123"
+}
+
+###
+// Session user
+GET http://localhost:5000/me
+
+###
+// Logout user
+DELETE http://localhost:5000/logout
+
+
+
+###
+// Get all cutidata
+GET http://localhost:5000/cutidata
+
+###
+// Get single cutidata
+GET http://localhost:5000/cutidata/a5d5e2fa-8588-4ede-b344-5a2f8383aa4c
+
+###
+// POST cutidata
+POST http://localhost:5000/cutidata
+Content-Type: application/json
+
+{
+  "type": "Cuti Tahunan",
+  "reason": "Antar anak ke rumah sakit",
+  "startDate": "05-21-2023",
+  "endDate": "05-21-2023",
+  "duration": 1
+}
+
+###
+// Update cutidata
+PATCH http://localhost:5000/cutidata/a5d5e2fa-8588-4ede-b344-5a2f8383aa4c
+Content-Type: application/json
+
+{
+  "startDate": "2022-10-14",
+  "endDate": "2022-10-17",
+  "type": "Cuti Tahunan",
+  "reason": "Liburan ke luar negeri",
+  "duration": 4
+}
+
+###
+// Delete cutidata
+DELETE http://localhost:5000/cutidata/25e2c4d9-fc9d-464b-9e7f-2463e3834d9f

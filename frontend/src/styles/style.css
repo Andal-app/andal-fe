@@ -1,0 +1,119 @@
+:root {
+  --color1: #eeeeee;
+  --color2: #50c878;
+  --color3: #191716;
+  --color4: #dadff7;
+}
+
+header {
+  display: block;
+}
+
+form {
+  width: 100%;
+  min-width: 300px;
+  /* margin: 0 auto; */
+  padding: 0 15px 15px 0;
+}
+
+label {
+  display: block;
+}
+
+table {
+  margin: 10px auto;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--color3);
+}
+
+th {
+  border: 1px solid var(--color3);
+  font-size: 1.15rem;
+}
+
+td {
+  border: 1px solid var(--color3);
+  padding: 4px 10px;
+}
+
+tbody td {
+  min-width: 4rem;
+  /* max-width: 4rem; */
+}
+
+.cuti-app {
+  margin: 0 auto;
+  /* padding: 16px; */
+  min-width: 300px;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+}
+
+.cuti-input label input {
+  width: 100%;
+}
+
+.cuti-input label > textarea {
+  width: 100%;
+  height: 6rem;
+}
+
+.cuti-input > .cuti-duration {
+  margin-bottom: 0.4rem;
+}
+
+.cuti-input .datepicker-item {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 50%;
+}
+
+.menu {
+  background: #ffffff !important;
+  border-radius: 8px !important;
+  position: absolute !important;
+  top: 60px !important;
+  right: 0 !important;
+  width: 200px !important;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-20px) !important;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s !important;
+}
+
+.menu.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li:nth-child(2) {
+  border-bottom: 1px solid #dddddd;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: #333333;
+  padding: 15px 20px;
+  display: block;
+}
+
+.btn-logout {
+  background-color: #212529;
+  border: none;
+  color: var(--bs-nav-link-color);
+  width: 100%;
+  text-align: left;
+  padding-left: 1px;
+}
