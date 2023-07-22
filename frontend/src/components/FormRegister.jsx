@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
-const FormSignUp = () => {
+const FormRegister = () => {
   const [name, setName] = useState('');
   const [position, setPosition] = useState('');
   const [nip, setNip] = useState('');
@@ -190,4 +190,4 @@ const FormSignUp = () => {
   );
 };
 
-export default FormSignUp;
+export default FormRegister;
