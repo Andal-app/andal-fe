@@ -12,7 +12,8 @@ const { useGlobalState } = createGlobalState({
   cutiData: [],
   isVerifiedAtasan: false,
   isVerifiedKadis: false,
-  isVerifiedKepegawaian: false
+  isVerifiedKepegawaian: false,
+  isLogin: false
 });
 
 export { useGlobalState };

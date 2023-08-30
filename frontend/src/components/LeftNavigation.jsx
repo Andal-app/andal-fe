@@ -3,16 +3,19 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { FaTachometerAlt, FaTable, FaSignOutAlt, FaUser, FaUserEdit } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { Logout, reset } from '../features/authSlice';
+import { useGlobalState } from '../state/index.js';
 
 function LeftNavigation() {
+  const [isLogin, setIsLogin] = useGlobalState('isLogin');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector(state => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   const logout = () => {
     dispatch(Logout());
     dispatch(reset());
     navigate('/');
+    setIsLogin(false);
   };
 
   return (

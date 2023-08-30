@@ -1,8 +1,9 @@
 :root {
-  --color1: #eeeeee;
-  --color2: #50c878;
-  --color3: #191716;
-  --color4: #dadff7;
+  --verdigris: #16bac5;
+  --maya-blue: #5fbff9;
+  --magnolia: #efe9f4;
+  --eerie-black: #171d1c;
+  --neon-blue: #5863f8;
 }
 
 header {
@@ -24,16 +25,16 @@ table {
   margin: 10px auto;
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid var(--color3);
+  border: 1px solid var(--eerie-black);
 }
 
 th {
-  border: 1px solid var(--color3);
+  border: 1px solid var(--eerie-black);
   font-size: 1.15rem;
 }
 
 td {
-  border: 1px solid var(--color3);
+  border: 1px solid var(--eerie-black);
   padding: 4px 10px;
 }
 
@@ -116,4 +117,48 @@ tbody td {
   width: 100%;
   text-align: left;
   padding-left: 1px;
+}
+
+.box {
+  background-color: var(--maya-blue);
+  /* background-color: var(--neon-blue); */
+  /* background-color: var(--verdigris); */
+}
+
+.box.magnolia {
+  margin: 1rem auto;
+}
+
+.title,
+.label {
+  color: var(--magnolia);
+}
+
+.hero-body {
+  background-image: linear-gradient(to bottom left, var(--neon-blue) 5%, var(--verdigris) 65%);
+}
+
+.button.is-success {
+  background-color: var(--neon-blue);
+  color: var(--magnolia);
+}
+
+.verdigris {
+  background-color: var(--verdigris);
+}
+
+.maya-blue {
+  background-color: var(--maya-blue);
+}
+
+.magnolia {
+  background-color: var(--magnolia);
+}
+
+.eerie-black {
+  background-color: var(--eerie-black);
+}
+
+.neon-blue {
+  background-color: var(--neon-blue);
 }

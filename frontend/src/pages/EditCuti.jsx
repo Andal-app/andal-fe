@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMe } from '../features/authSlice';
+// import { getMe } from '../features/authSlice';
 import axios from 'axios';
 
 import Layout from './Layout';
@@ -18,11 +18,11 @@ const EditCuti = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isError } = useSelector(state => state.auth);
+  const { isError } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    dispatch(getMe());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getMe());
+  // }, [dispatch]);
 
   useEffect(() => {
     if (isError) {
@@ -47,7 +47,7 @@ const EditCuti = () => {
     getCutiById();
   }, [id]);
 
-  const updateCutiData = async e => {
+  const updateCutiData = async (e) => {
     e.preventDefault();
     try {
       await axios.patch(`http://localhost:5000/cutidata/${id}`, {

@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginUser, reset } from '../features/authSlice';
+import axios from 'axios';
+import linkNgrok from '../utils/env';
 
-const Login = () => {
-  const [email, setEmail] = useState('');
+const FormLogin = ({ getDataByRole, registerURLByRole }) => {
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, isError, isSuccess, isLoading, message } = useSelector(state => state.auth);
+  const { user, isSuccess, isLoading } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (user || isSuccess) {
@@ -17,9 +19,39 @@ const Login = () => {
     dispatch(reset());
   }, [user, isSuccess, dispatch, navigate]);
 
-  const Auth = e => {
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    axios
+      .get(linkNgrok + getDataByRole, {
+        headers: {
+          'ngrok-skip-browser-warning': true
+        }
+      })
+      .then((response) => {
+        // Handle successful response
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle errors
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          console.log('Response Error:', error.response.status);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log('Request Error:', error.request);
+        } else {
+          // Something else happened while setting up the request
+          console.log('Error:', error.message);
+        }
+      });
+  };
+
+  const Auth = (e) => {
     e.preventDefault();
-    dispatch(LoginUser({ email, password }));
+    dispatch(LoginUser({ username, password }));
   };
 
   return (
@@ -29,26 +61,25 @@ const Login = () => {
           <div className="columns is-centered">
             <div className="column is-4">
               <form onSubmit={Auth} className="box">
-                {isError && <p className="has-text-centered">{message}</p>}
-                <h1 className="title is-2">Masuk</h1>
+                <h1 className="title is-2 has-text-centered">Login</h1>
                 <div className="field">
-                  <label htmlFor="email" className="label">
-                    Email
+                  <label htmlFor="username" className="label">
+                    Username
                   </label>
                   <div className="control">
                     <input
-                      type="email"
-                      id="email"
+                      type="username"
+                      id="username"
                       className="input"
-                      value={email}
-                      onChange={e => setEmail(e.target.value)}
-                      placeholder="pegawai@gmail.com"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      placeholder="Username"
                     />
                   </div>
                 </div>
                 <div className="field">
                   <label htmlFor="password" className="label">
-                    Kata Sandi
+                    Password
                   </label>
                   <div className="control">
                     <input
@@ -56,7 +87,7 @@ const Login = () => {
                       id="password"
                       className="input"
                       value={password}
-                      onChange={e => setPassword(e.target.value)}
+                      onChange={(e) => setPassword(e.target.value)}
                       placeholder="********"
                     />
                   </div>
@@ -64,13 +95,13 @@ const Login = () => {
                 <div className="field has-text-centered">
                   <label className="label">
                     <span className="small">
-                      Belum Daftar? <Link to="/daftar">Daftar</Link>
+                      Don't have an account? <Link to={registerURLByRole}>Register</Link>
                     </span>
                   </label>
                 </div>
                 <div className="field mt-5">
                   <button type="submit" className="button is-success is-fullwidth">
-                    {isLoading ? 'Memuat...' : 'Masuk'}
+                    {isLoading ? 'Loading...' : 'Login'}
                   </button>
                 </div>
               </form>
@@ -82,4 +113,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default FormLogin;
