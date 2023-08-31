@@ -12,6 +12,12 @@
  */
 
 :root {
+  --verdigris: #16bac5;
+  --maya-blue: #5fbff9;
+  --magnolia: #efe9f4;
+  --eerie-black: #171d1c;
+  --neon-blue: #5863f8;
+
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
@@ -151,11 +157,11 @@ sub {
 }
 
 a {
-  color: var(--bs-link-color);
-  text-decoration: underline;
+  color: var(--eerie-black);
+  /* text-decoration: underline; */
 }
 a:hover {
-  color: #fff;
+  color: var(--neon-blue);
 }
 
 pre,

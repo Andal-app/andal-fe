@@ -5,7 +5,7 @@ import { LoginUser, reset } from '../features/authSlice';
 import axios from 'axios';
 import linkNgrok from '../utils/env';
 
-const FormLogin = ({ getDataByRole, registerURLByRole }) => {
+const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ const FormLogin = ({ getDataByRole, registerURLByRole }) => {
           <div className="columns is-centered">
             <div className="column is-4">
               <form onSubmit={Auth} className="box">
-                <h1 className="title is-2 has-text-centered">Login</h1>
+                <h1 className="title is-2 has-text-centered">{roleTitle} Login</h1>
                 <div className="field">
                   <label htmlFor="username" className="label">
                     Username

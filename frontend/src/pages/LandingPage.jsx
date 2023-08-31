@@ -14,18 +14,18 @@ function LandingPage() {
               <div className="column is-4">
                 <div className="box columns is-flex-direction-column">
                   <h1 className="title is-2 has-text-centered">Welcome</h1>
-                  <Link to="/parent/login">
-                    <div className="box column magnolia is-8 is-flex is-flex-direction-column is-align-items-center">
+                  <div className="box column magnolia is-8 is-flex is-flex-direction-column is-align-items-center">
+                    <Link to="/parent/login">
                       <MdPersonOutline size={160} />
                       <h2 className="has-text-centered">Orang Tua</h2>
-                    </div>
-                  </Link>
-                  <Link to="/child/childlogin">
-                    <div className="box column magnolia is-8 is-flex is-flex-direction-column is-align-items-center">
+                    </Link>
+                  </div>
+                  <div className="box column magnolia is-8 is-flex is-flex-direction-column is-align-items-center">
+                    <Link to="/child/childlogin">
                       <MdChildCare size={160} />
                       <h2 className="has-text-centered">Anak</h2>
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
