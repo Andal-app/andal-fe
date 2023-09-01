@@ -123,10 +123,6 @@ a {
   /* text-decoration: underline; */
 }
 
-.box > a:hover {
-  color: var(--neon-blue);
-}
-
 pre,
 code,
 kbd {
@@ -443,9 +439,6 @@ textarea {
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
   color: #fff;
-}
-.sb-sidenav-dark .sb-sidenav-footer {
-  background-color: var(--neon-blue);
 }
 
 .accordion {
@@ -1397,11 +1390,27 @@ fieldset:disabled .btn {
 
 .bg-dark {
   --bs-bg-opacity: 1;
-  background-image: linear-gradient(to bottom left, var(--neon-blue) 5%, var(--verdigris) 65%);
   /* background-color: var(--neon-blue) !important; */
 }
 
-.sb-sidenav-dark {
-  background-color: var(--neon-blue);
+.bg-dark,
+.sb-sidenav-dark,
+.sb-sidenav-dark .sb-sidenav-footer,
+.btn-logout {
+  background-color: var(--verdigris);
+  /* background-image: linear-gradient(to bottom left, var(--neon-blue) 5%, var(--verdigris) 65%); */
+
   color: rgba(255, 255, 255, 0.5);
 }
+
+.box > a:hover {
+  color: var(--neon-blue);
+}
+
+/* h1,
+h2,
+h3,
+h4,
+p {
+  color: var(--eerie-black) !important;
+} */

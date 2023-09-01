@@ -111,7 +111,6 @@ tbody td {
 }
 
 .btn-logout {
-  background-color: var(--neon-blue);
   border: none;
   color: var(--bs-nav-link-color);
   width: 100%;
