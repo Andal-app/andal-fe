@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import linkNgrok from '../utils/env';
 
-const FormRegister = ({ urlRole }) => {
+const FormRegister = ({ roleTitle, urlRole }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
@@ -33,7 +33,7 @@ const FormRegister = ({ urlRole }) => {
             <div className="column is-4">
               <form onSubmit={saveUser} className="box">
                 {/* <p className="has-text-centered">{msg}</p> */}
-                <h1 className="title is-2 has-text-centered">Register</h1>
+                <h1 className="title is-2 has-text-centered">{roleTitle} Register</h1>
                 <div className="field">
                   <label htmlFor="username" className="label">
                     Username

@@ -2,7 +2,7 @@ import React from 'react';
 import FormRegister from '../components/FormRegister';
 
 const ParentRegister = () => {
-  return <FormRegister urlRole="/user/register" />;
+  return <FormRegister roleTitle="Parent" urlRole="/user/register" />;
 };
 
 export default ParentRegister;
