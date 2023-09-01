@@ -111,7 +111,7 @@ tbody td {
 }
 
 .btn-logout {
-  background-color: #212529;
+  background-color: var(--neon-blue);
   border: none;
   color: var(--bs-nav-link-color);
   width: 100%;
@@ -121,8 +121,6 @@ tbody td {
 
 .box {
   background-color: var(--maya-blue);
-  /* background-color: var(--neon-blue); */
-  /* background-color: var(--verdigris); */
 }
 
 .box.magnolia {

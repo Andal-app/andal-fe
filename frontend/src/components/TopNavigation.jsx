@@ -7,7 +7,7 @@ function TopNavigation() {
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         {/* <!-- Navbar Brand--> */}
         <a className="navbar-brand ps-3" href="/dashboard">
-          Aplikasi SIM Cuti
+          Aplikasi Child Tracker
         </a>
         {/* <!-- Sidebar Toggle--> */}
         <button

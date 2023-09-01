@@ -1,3 +1,3 @@
-const linkNgrok = 'https://c530-180-254-107-82.ngrok-free.app';
+const linkNgrok = 'https://childtrackr-backend-production.up.railway.app/';
 
 export default linkNgrok;
