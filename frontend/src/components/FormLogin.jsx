@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { LoginUser, reset } from '../features/authSlice';
+import { LoginUser, LoginChild, reset } from '../features/authSlice';
 import axios from 'axios';
 import linkNgrok from '../utils/env';
 
@@ -51,7 +51,7 @@ const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
 
   const Auth = (e) => {
     e.preventDefault();
-    dispatch(LoginUser({ username, password }));
+    roleTitle == 'Parent' ? dispatch(LoginUser({ username, password })) : dispatch(LoginChild({ username, password }));
   };
 
   return (

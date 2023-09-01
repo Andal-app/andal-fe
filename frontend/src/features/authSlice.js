@@ -4,6 +4,7 @@ import linkNgrok from '../utils/env';
 
 const initialState = {
   user: null,
+  child: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -33,6 +34,7 @@ export const LoginUser = createAsyncThunk('user/login', async (user, thunkAPI) =
     }
   }
 });
+
 export const LoginChild = createAsyncThunk('child/childlogin', async (child, thunkAPI) => {
   try {
     const response = await axios.post(
@@ -100,7 +102,7 @@ export const authSlice = createSlice({
     builder.addCase(LoginChild.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.user = action.payload;
+      state.child = action.payload;
     });
     builder.addCase(LoginChild.rejected, (state, action) => {
       state.isLoading = false;

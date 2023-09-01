@@ -423,10 +423,6 @@ textarea {
   flex-shrink: 0;
 }
 
-.sb-sidenav-dark {
-  background-color: var(--neon-blue);
-  color: rgba(255, 255, 255, 0.5);
-}
 .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
   color: rgba(255, 255, 255, 0.25);
 }
@@ -607,10 +603,6 @@ button:not(:disabled),
   --bs-navbar-brand-hover-color: #fff;
   --bs-navbar-toggler-border-color: rgba(255, 255, 255, 0.1);
   --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-.bg-dark {
-  --bs-bg-opacity: 1;
-  background-color: var(--neon-blue) !important;
 }
 
 .navbar-brand {
@@ -1401,4 +1393,15 @@ fieldset:disabled .btn {
     padding-right: var(--bs-navbar-nav-link-padding-x);
     padding-left: var(--bs-navbar-nav-link-padding-x);
   }
+}
+
+.bg-dark {
+  --bs-bg-opacity: 1;
+  background-image: linear-gradient(to bottom left, var(--neon-blue) 5%, var(--verdigris) 65%);
+  /* background-color: var(--neon-blue) !important; */
+}
+
+.sb-sidenav-dark {
+  background-color: var(--neon-blue);
+  color: rgba(255, 255, 255, 0.5);
 }

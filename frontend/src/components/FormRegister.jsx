@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import linkNgrok from '../utils/env';
 
-const FormRegister = ({ roleTitle, urlRole }) => {
+const FormRegister = ({ roleTitle, urlRole, urlRoleLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
@@ -16,7 +16,7 @@ const FormRegister = ({ roleTitle, urlRole }) => {
         username,
         password
       });
-      navigate('/');
+      navigate(urlRoleLogin);
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);
