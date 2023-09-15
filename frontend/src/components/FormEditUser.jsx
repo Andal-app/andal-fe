@@ -15,7 +15,7 @@ const FormEditUser = ({ featureHeading, disabled, children, quota, setQuota }) =
   const [msg, setMsg] = useState('');
   const navigate = useNavigate();
   const { id } = useParams();
-  const { user } = useSelector(state => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const getUserById = async () => {
@@ -37,7 +37,7 @@ const FormEditUser = ({ featureHeading, disabled, children, quota, setQuota }) =
     getUserById();
   }, [id]);
 
-  const updateUser = async e => {
+  const updateUser = async (e) => {
     e.preventDefault();
     try {
       await axios.patch(`http://localhost:5000/users/${id}`, {
@@ -61,7 +61,8 @@ const FormEditUser = ({ featureHeading, disabled, children, quota, setQuota }) =
 
   return (
     <div className="column is-6">
-      <form onSubmit={updateUser}>
+      <h1 className="title mt-4 is-2">{featureHeading}</h1>
+      {/* <form onSubmit={updateUser}>
         <p className="has-text-centered">{msg}</p>
         <h1 className="title mt-4 is-2">{featureHeading}</h1>
         <div className="field">
@@ -129,7 +130,7 @@ const FormEditUser = ({ featureHeading, disabled, children, quota, setQuota }) =
             />
           </div>
         </div> */}
-        {user && user.role === 'Kepegawaian' && (
+      {/* {user && user.role === 'Kepegawaian' && (
           <div className="field">
             <label className="label">Peran</label>
             <div className="control">
@@ -148,11 +149,11 @@ const FormEditUser = ({ featureHeading, disabled, children, quota, setQuota }) =
         <div className="field mt-5">
           <div className="control">
             <button type="submit" className="button is-success is-fullwidth">
-              Simpan
+              Save
             </button>
           </div>
         </div>
-      </form>
+      </form> */}
     </div>
   );
 };

@@ -17,13 +17,13 @@ function LandingPage() {
                   <div className="box column magnolia is-8 is-flex is-flex-direction-column is-align-items-center">
                     <Link to="/parent/login">
                       <MdPersonOutline size={160} />
-                      <h2 className="has-text-centered">Orang Tua</h2>
+                      <h2 className="has-text-centered">Parent</h2>
                     </Link>
                   </div>
                   <div className="box column magnolia is-8 is-flex is-flex-direction-column is-align-items-center">
                     <Link to="/child/childlogin">
                       <MdChildCare size={160} />
-                      <h2 className="has-text-centered">Anak</h2>
+                      <h2 className="has-text-centered">Child</h2>
                     </Link>
                   </div>
                 </div>

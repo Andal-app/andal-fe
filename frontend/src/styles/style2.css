@@ -26,27 +26,16 @@
   --bs-font-sans-serif: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans',
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-body-font-family: var(--bs-font-sans-serif);
   --bs-body-font-size: 1rem;
-  --bs-body-font-weight: 400;
+  --bs-body-font-weight: 500;
   --bs-body-line-height: 1.5;
-  --bs-body-color: #212529;
+  --bs-body-color: var(--eerie-black);
   --bs-body-bg: #fff;
-  --bs-border-width: 1px;
-  --bs-border-style: solid;
   --bs-border-color: #dee2e6;
   --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
-  --bs-border-radius: 0.375rem;
-  --bs-border-radius-sm: 0.25rem;
-  --bs-border-radius-lg: 0.5rem;
-  --bs-border-radius-xl: 1rem;
-  --bs-border-radius-2xl: 2rem;
-  --bs-border-radius-pill: 50rem;
   --bs-link-color: #0d6efd;
   --bs-link-hover-color: #0a58ca;
-  --bs-code-color: #d63384;
-  --bs-highlight-bg: #fff3cd;
 }
 
 *,
@@ -319,7 +308,7 @@ textarea {
   padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
   font-size: var(--bs-nav-link-font-size);
   font-weight: var(--bs-nav-link-font-weight);
-  color: var(--bs-nav-link-color);
+  /* color: var(--bs-nav-link-color); */
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
@@ -358,6 +347,7 @@ textarea {
 
 .sb-nav-fixed .sb-topnav {
   z-index: 1039;
+  order: 3;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
   width: 225px;
@@ -396,7 +386,8 @@ textarea {
 .sb-sidenav .sb-sidenav-menu .nav .nav-link {
   display: flex;
   align-items: center;
-  padding: 0.75rem 1rem 0.75rem;
+  padding: 0.75rem 0rem 0.75rem;
+  margin-inline: 1rem;
   position: relative;
 }
 .sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-nav-link-icon {
@@ -420,23 +411,18 @@ textarea {
 }
 
 .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
-  color: rgba(255, 255, 255, 0.25);
+  /* color: rgba(255, 255, 255, 0.25); */
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  /* color: rgba(255, 255, 255, 0.5); */
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-nav-link-icon {
-  color: rgba(255, 255, 255, 0.25);
+  /* color: rgba(255, 255, 255, 0.25); */
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-sidenav-collapse-arrow {
   color: rgba(255, 255, 255, 0.25);
 }
-.sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
-  color: #fff;
-}
-.sb-sidenav-dark .sb-sidenav-menu .nav-link.active {
-  color: #fff;
-}
+
 .sb-sidenav-dark .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
   color: #fff;
 }
@@ -489,7 +475,7 @@ button:not(:disabled),
   --bs-navbar-brand-margin-end: 1rem;
   --bs-navbar-brand-font-size: 1.25rem;
   --bs-navbar-brand-color: rgba(0, 0, 0, 0.9);
-  --bs-navbar-brand-hover-color: rgba(0, 0, 0, 0.9);
+  --bs-navbar-brand-hover-color: #fff;
   --bs-navbar-nav-link-padding-x: 0.5rem;
   --bs-navbar-toggler-padding-y: 0.25rem;
   --bs-navbar-toggler-padding-x: 0.75rem;
@@ -589,7 +575,7 @@ button:not(:disabled),
 
 .navbar-dark {
   --bs-navbar-color: rgba(255, 255, 255, 0.55);
-  --bs-navbar-hover-color: rgba(255, 255, 255, 0.75);
+  --bs-navbar-hover-color: rgba(255, 255, 255, 0.75) !important;
   --bs-navbar-disabled-color: rgba(255, 255, 255, 0.25);
   --bs-navbar-active-color: #fff;
   --bs-navbar-brand-color: #fff;
@@ -603,7 +589,7 @@ button:not(:disabled),
   padding-bottom: var(--bs-navbar-brand-padding-y);
   margin-right: var(--bs-navbar-brand-margin-end);
   font-size: var(--bs-navbar-brand-font-size);
-  color: var(--magnolia);
+  /* color: var(--magnolia); */
   text-decoration: none;
   white-space: nowrap;
   min-height: 0 !important;
@@ -795,7 +781,7 @@ fieldset:disabled .btn {
 
 .btn-link {
   --bs-btn-font-weight: 400;
-  --bs-btn-color: var(--bs-link-color);
+  /* --bs-btn-color: var(--bs-link-color); */
   --bs-btn-bg: transparent;
   --bs-btn-border-color: transparent;
   --bs-btn-hover-color: var(--bs-link-hover-color);
@@ -810,7 +796,7 @@ fieldset:disabled .btn {
 }
 
 .btn-link:hover {
-  color: var(--bs-btn-hover-color);
+  /* color: var(--bs-btn-hover-color); */
 }
 .btn:focus-visible {
   color: var(--bs-btn-hover-color);
@@ -823,6 +809,15 @@ fieldset:disabled .btn {
 .order-1 {
   order: 1 !important;
 }
+
+.order-2 {
+  order: 2 !important;
+}
+
+.order-3 {
+  order: 3 !important;
+}
+
 .me-0 {
   margin-right: 0 !important;
 }
@@ -880,15 +875,11 @@ fieldset:disabled .btn {
 }
 
 .sb-topnav.navbar-dark #sidebarToggle {
-  color: rgba(255, 255, 255, 0.5);
+  /* color: rgba(255, 255, 255, 0.5); */
 }
 
 .sb-topnav.navbar-light #sidebarToggle {
   color: #212529;
-}
-
-.sb-topnav.navbar-dark #sidebarToggle:hover {
-  color: #e9ecef;
 }
 
 .sb-topnav.navbar-light #sidebarToggle:hover {
@@ -1390,6 +1381,8 @@ fieldset:disabled .btn {
 
 .bg-dark {
   --bs-bg-opacity: 1;
+  background-image: linear-gradient(to bottom left, var(--neon-blue) 5%, var(--verdigris) 65%);
+  border: solid 1px black;
   /* background-color: var(--neon-blue) !important; */
 }
 
@@ -1398,19 +1391,36 @@ fieldset:disabled .btn {
 .sb-sidenav-dark .sb-sidenav-footer,
 .btn-logout {
   background-color: var(--verdigris);
-  /* background-image: linear-gradient(to bottom left, var(--neon-blue) 5%, var(--verdigris) 65%); */
-
-  color: rgba(255, 255, 255, 0.5);
+  /* color: rgba(255, 255, 255, 0.5); */
 }
 
 .box > a:hover {
   color: var(--neon-blue);
 }
 
-/* h1,
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+h1,
 h2,
 h3,
 h4,
 p {
   color: var(--eerie-black) !important;
-} */
+}
+
+.sb-sidenav-dark .sb-sidenav-menu .nav-link.active {
+  color: var(--magnolia);
+}
+
+.sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
+  /* color: #fff; */
+  transform: scale(1.05);
+  overflow: hidden;
+}
+
+.sb-topnav.navbar-dark #sidebarToggle:hover {
+  /* color: #e9ecef; */
+  transform: scale(1.05);
+}

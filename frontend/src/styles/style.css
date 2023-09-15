@@ -1,9 +1,9 @@
 :root {
-  --verdigris: #16bac5;
+  /* --verdigris: #16bac5;
   --maya-blue: #5fbff9;
   --magnolia: #efe9f4;
   --eerie-black: #171d1c;
-  --neon-blue: #5863f8;
+  --neon-blue: #5863f8; */
 }
 
 header {
@@ -112,6 +112,7 @@ tbody td {
 
 .btn-logout {
   border: none;
+  font-weight: 500;
   color: var(--bs-nav-link-color);
   width: 100%;
   text-align: left;

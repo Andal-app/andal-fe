@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { FaTachometerAlt, FaTable, FaSignOutAlt, FaUser, FaUserEdit } from 'react-icons/fa';
+import { FaHome, FaBell, FaMap, FaSignOutAlt, FaUser, FaEdit } from 'react-icons/fa';
+import { FaMapLocationDot } from 'react-icons/fa6';
 import { useDispatch, useSelector } from 'react-redux';
 import { Logout, reset } from '../features/authSlice';
 import { useGlobalState } from '../state/index.js';
@@ -23,20 +24,32 @@ function LeftNavigation() {
       <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div className="sb-sidenav-menu">
           <div className="nav">
-            <div className="sb-sidenav-menu-heading">Menu Utama</div>
+            <div className="sb-sidenav-menu-heading">Main Menu</div>
             <NavLink to="/dashboard" className="nav-link">
               <div className="sb-nav-link-icon">
-                <FaTachometerAlt />
+                <FaHome />
               </div>
-              Beranda
+              Home
             </NavLink>
-            <NavLink to="/pengajuan_cuti" className="nav-link">
+            <NavLink to="/notifikasi" className="nav-link">
               <div className="sb-nav-link-icon">
-                <FaTable />
+                <FaBell />
               </div>
-              Pengajuan Cuti
+              Notification
             </NavLink>
-            {user && user.role === 'Kepegawaian' && (
+            <NavLink to="/lokasianak" className="nav-link">
+              <div className="sb-nav-link-icon">
+                <FaMap />
+              </div>
+              Child Location
+            </NavLink>
+            <NavLink to="/geofencing" className="nav-link">
+              <div className="sb-nav-link-icon">
+                <FaMapLocationDot />
+              </div>
+              Geofencing
+            </NavLink>
+            {/* {user && user.role === 'Kepegawaian' && (
               <>
                 <div className="sb-sidenav-menu-heading">Admin</div>
                 <NavLink to="/users" className="nav-link">
@@ -46,27 +59,27 @@ function LeftNavigation() {
                   Daftar Pegawai
                 </NavLink>
               </>
-            )}
-            <div className="sb-sidenav-menu-heading">Pengaturan</div>
+            )} */}
+            <div className="sb-sidenav-menu-heading">Settings</div>
             <NavLink to={`/users/edit/${user && user.uuid}`} className="nav-link">
               <div className="sb-nav-link-icon">
-                <FaUserEdit />
+                <FaEdit />
               </div>
-              Edit Profil
+              Edit Profile
             </NavLink>
-            <div className="nav-link">
+            <a className="nav-link">
               <div className="sb-nav-link-icon">
                 <FaSignOutAlt />
               </div>
               <button onClick={logout} className="btn-logout">
-                Keluar
+                Logout
               </button>
-            </div>
+            </a>
           </div>
         </div>
         <div className="sb-sidenav-footer">
-          <div className="small">Masuk sebagai:</div>
-          {user && user.name} <br />
+          <div className="small">Logged in as:</div>
+          Parent{user && user.name} <br />
           {user && user.role}
         </div>
       </nav>
