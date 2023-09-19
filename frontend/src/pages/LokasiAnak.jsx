@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useJsApiLoader, Marker } from '@react-google-maps/api';
 // import { getMe } from '../features/authSlice';
-import GoogleMap from '../components/GoogleMap';
-import GoogleMapsAPI from '../utils/env';
+import OpenStreetMap from '../components/OpenStreetMap';
 import Layout from './Layout';
 
 function LokasiAnak() {
@@ -34,7 +32,7 @@ function LokasiAnak() {
       <div className="column">
         <h1 className="title mt-4 is-2">Child Location</h1>
         <div className="row">
-          <GoogleMap />
+          <OpenStreetMap />
         </div>
       </div>
     </Layout>
