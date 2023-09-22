@@ -25,7 +25,7 @@ function LeftNavigation() {
         <div className="sb-sidenav-menu">
           <div className="nav">
             <div className="sb-sidenav-menu-heading">Main Menu</div>
-            <NavLink to="/dashboard" className="nav-link">
+            <NavLink to="/home" className="nav-link">
               <div className="sb-nav-link-icon">
                 <FaHome />
               </div>
@@ -79,7 +79,7 @@ function LeftNavigation() {
         </div>
         <div className="sb-sidenav-footer">
           <div className="small">Logged in as:</div>
-          Parent{user && user.name} <br />
+          {user && user.name} <br />
           {user && user.role}
         </div>
       </nav>

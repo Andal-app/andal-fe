@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { LoginUser, LoginChild, reset } from '../features/authSlice';
+import { LoginUser, reset } from '../features/authSlice';
 import axios from 'axios';
-import linkNgrok from '../utils/env';
 
 const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
   const [username, setUsername] = useState('');
@@ -14,10 +13,15 @@ const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
 
   useEffect(() => {
     if (user || isSuccess) {
-      navigate('/dashboard');
+      navigate('/home');
     }
     dispatch(reset());
   }, [user, isSuccess, dispatch, navigate]);
+
+  const Auth = (e) => {
+    e.preventDefault();
+    dispatch(LoginUser({ username, password }));
+  };
 
   useEffect(() => {
     getUsers();
@@ -25,7 +29,7 @@ const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
 
   const getUsers = async () => {
     axios
-      .get(linkNgrok + getDataByRole, {
+      .get(process.env.REACT_APP_linkNgrok + getDataByRole, {
         headers: {
           'ngrok-skip-browser-warning': true
         }
@@ -47,11 +51,6 @@ const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
           console.log('Error:', error.message);
         }
       });
-  };
-
-  const Auth = (e) => {
-    e.preventDefault();
-    roleTitle == 'Parent' ? dispatch(LoginUser({ username, password })) : dispatch(LoginChild({ username, password }));
   };
 
   return (

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import linkNgrok from '../utils/env';
 
 const FormRegister = ({ roleTitle, urlRole, urlRoleLogin }) => {
   const [username, setUsername] = useState('');
@@ -12,7 +11,7 @@ const FormRegister = ({ roleTitle, urlRole, urlRoleLogin }) => {
   const saveUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(linkNgrok + urlRole, {
+      await axios.post(process.env.REACT_APP_linkNgrok + urlRole, {
         username,
         password
       });

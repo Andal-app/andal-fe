@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import linkNgrok from '../utils/env';
 
 const initialState = {
   user: null,
@@ -14,7 +13,7 @@ const initialState = {
 export const LoginUser = createAsyncThunk('user/login', async (user, thunkAPI) => {
   try {
     const response = await axios.post(
-      `${linkNgrok}/user/login`,
+      `${process.env.REACT_APP_linkNgrok}/user/login`,
       {
         username: user.username,
         password: user.password
@@ -38,7 +37,7 @@ export const LoginUser = createAsyncThunk('user/login', async (user, thunkAPI) =
 export const LoginChild = createAsyncThunk('child/childlogin', async (child, thunkAPI) => {
   try {
     const response = await axios.post(
-      `${linkNgrok}/child/childlogin`,
+      `${process.env.REACT_APP_linkNgrok}/child/childlogin`,
       {
         username: child.username,
         password: child.password

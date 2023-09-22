@@ -6,7 +6,7 @@ function TopNavigation() {
     <>
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         {/* <!-- Navbar Brand--> */}
-        <a className="navbar-brand ps-3 order-2" href="/dashboard">
+        <a className="navbar-brand ps-3 order-2" href="/home">
           Andal
         </a>
         {/* <!-- Sidebar Toggle--> */}

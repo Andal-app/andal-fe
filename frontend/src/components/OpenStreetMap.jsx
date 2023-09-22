@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import customMapStyle from '../utils/mapstyle.json';
 
 class OpenStreetMap extends Component {
   componentDidMount() {

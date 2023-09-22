@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // import { getMe } from '../features/authSlice';
 import OpenStreetMap from '../components/OpenStreetMap';
+import GetCurrentPosition from '../components/GetCurrentPosition';
 import Layout from './Layout';
 
 function LokasiAnak() {
@@ -32,7 +33,7 @@ function LokasiAnak() {
       <div className="column">
         <h1 className="title mt-4 is-2">Child Location</h1>
         <div className="row">
-          <OpenStreetMap />
+          <GetCurrentPosition />
         </div>
       </div>
     </Layout>
