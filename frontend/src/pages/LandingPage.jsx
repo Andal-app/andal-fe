@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useGlobalState } from '../state/index.js';
 
 function LandingPage() {
-  const [isLogin] = useGlobalState('isLogin');
+  // const [isLogin] = useGlobalState('isLogin');
   return (
     <>
       <section className="hero has-background-grey-light is-fullheight is-fullwidth">

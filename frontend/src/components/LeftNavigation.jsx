@@ -7,7 +7,7 @@ import { Logout, reset } from '../features/authSlice';
 import { useGlobalState } from '../state/index.js';
 
 function LeftNavigation() {
-  const [isLogin, setIsLogin] = useGlobalState('isLogin');
+  // const [isLogin, setIsLogin] = useGlobalState('isLogin');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
@@ -16,7 +16,7 @@ function LeftNavigation() {
     dispatch(Logout());
     dispatch(reset());
     navigate('/');
-    setIsLogin(false);
+    // setIsLogin(false);
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginUser, reset } from '../features/authSlice';
 import axios from 'axios';
@@ -10,6 +10,7 @@ const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, isSuccess, isLoading } = useSelector((state) => state.auth);
+  // console.log(isSuccess);
 
   useEffect(() => {
     if (user || isSuccess) {

@@ -7,10 +7,10 @@ import { useGlobalState } from '../state/index.js';
 
 const Home = () => {
   const [children, setChildren] = useState([]);
-  const [isLogin, setIsLogin] = useGlobalState('isLogin');
+  // const [isLogin, setIsLogin] = useGlobalState('isLogin');
   const navigate = useNavigate();
   const { user, isError } = useSelector((state) => state.auth);
-  setIsLogin(true);
+  // setIsLogin(true);
   // console.log(isLogin);
 
   useEffect(() => {
