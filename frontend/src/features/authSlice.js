@@ -3,7 +3,6 @@ import axios from 'axios';
 
 const initialState = {
   user: null,
-  child: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -25,6 +24,7 @@ export const LoginUser = createAsyncThunk('user/login', async (user, thunkAPI) =
         }
       }
     );
+    localStorage.setItem('username', user.username);
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -34,33 +34,21 @@ export const LoginUser = createAsyncThunk('user/login', async (user, thunkAPI) =
   }
 });
 
-export const LoginChild = createAsyncThunk('child/childlogin', async (child, thunkAPI) => {
-  try {
-    const response = await axios.post(
-      `${process.env.REACT_APP_linkNgrok}/child/childlogin`,
-      {
-        username: child.username,
-        password: child.password
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json'
-          // 'ngrok-skip-browser-warning': true
-        }
-      }
-    );
-    return response.data;
-  } catch (error) {
-    if (error.response) {
-      const message = error.response.data.msg;
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
-});
-
-// export const getMe = createAsyncThunk('user/getMe', async (_, thunkAPI) => {
+// export const LoginChild = createAsyncThunk('child/childlogin', async (child, thunkAPI) => {
 //   try {
-//     const response = await axios.get('http://localhost:5000/me');
+//     const response = await axios.post(
+//       `${process.env.REACT_APP_linkNgrok}/child/childlogin`,
+//       {
+//         username: child.username,
+//         password: child.password
+//       },
+//       {
+//         headers: {
+//           'Content-Type': 'application/json'
+//           // 'ngrok-skip-browser-warning': true
+//         }
+//       }
+//     );
 //     return response.data;
 //   } catch (error) {
 //     if (error.response) {
@@ -69,6 +57,18 @@ export const LoginChild = createAsyncThunk('child/childlogin', async (child, thu
 //     }
 //   }
 // });
+
+export const getMe = createAsyncThunk('user/getMe', async (_, thunkAPI) => {
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_linkNgrok}/user/login`);
+    return localStorage.getItem('username');
+  } catch (error) {
+    if (error.response) {
+      const message = error.response.data.msg;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+});
 
 export const Logout = createAsyncThunk('user/Logout', async () => {
   await axios.delete('http://localhost:5000/logout');
@@ -95,30 +95,30 @@ export const authSlice = createSlice({
       state.message = action.payload;
     });
 
-    builder.addCase(LoginChild.pending, (state) => {
+    // Get User Login
+    builder.addCase(getMe.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(LoginChild.fulfilled, (state, action) => {
+    builder.addCase(getMe.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.child = action.payload;
+      state.user = action.payload;
     });
-    builder.addCase(LoginChild.rejected, (state, action) => {
+    builder.addCase(getMe.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload;
     });
 
-    // Get User Login
-    // builder.addCase(getMe.pending, (state) => {
+    // builder.addCase(LoginChild.pending, (state) => {
     //   state.isLoading = true;
     // });
-    // builder.addCase(getMe.fulfilled, (state, action) => {
+    // builder.addCase(LoginChild.fulfilled, (state, action) => {
     //   state.isLoading = false;
     //   state.isSuccess = true;
-    //   state.user = action.payload;
+    //   state.child = action.payload;
     // });
-    // builder.addCase(getMe.rejected, (state, action) => {
+    // builder.addCase(LoginChild.rejected, (state, action) => {
     //   state.isLoading = false;
     //   state.isError = true;
     //   state.message = action.payload;

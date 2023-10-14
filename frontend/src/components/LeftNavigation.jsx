@@ -61,12 +61,12 @@ function LeftNavigation() {
               </>
             )} */}
             <div className="sb-sidenav-menu-heading">Settings</div>
-            <NavLink to={`/users/edit/${user && user.uuid}`} className="nav-link">
+            {/* <NavLink to={`/users/edit/${user && user.uuid}`} className="nav-link">
               <div className="sb-nav-link-icon">
                 <FaEdit />
               </div>
               Edit Profile
-            </NavLink>
+            </NavLink> */}
             <a className="nav-link">
               <div className="sb-nav-link-icon">
                 <FaSignOutAlt />
@@ -79,8 +79,7 @@ function LeftNavigation() {
         </div>
         <div className="sb-sidenav-footer">
           <div className="small">Logged in as:</div>
-          {user && user.name} <br />
-          {user && user.role}
+          {user && user} <br />
         </div>
       </nav>
     </div>
