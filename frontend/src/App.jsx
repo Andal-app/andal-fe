@@ -1,12 +1,13 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import ParentLogin from './pages/ParentLogin';
 import ChildLogin from './pages/ChildLogin';
 import ParentRegister from './pages/ParentRegister';
 import ChildRegister from './pages/ChildRegister';
-import Home from './pages/Home';
-import Notifikasi from './pages/Notifikasi';
+import ParentHome from './pages/ParentHome';
+import ChildHome from './pages/ChildHome';
+import History from './pages/History';
 import LokasiAnak from './pages/LokasiAnak';
 import Geofencing from './pages/Geofencing';
 // import { useGlobalState } from './state/index.js';
@@ -22,10 +23,11 @@ function App() {
         <Route path="/child/childlogin" element={<ChildLogin />} />
         <Route path="/parent/register" element={<ParentRegister />} />
         <Route path="/child/register" element={<ChildRegister />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/notifikasi" element={<Notifikasi />} />
-        <Route path="/lokasianak" element={<LokasiAnak />} />
-        <Route path="/geofencing" element={<Geofencing />} />
+        <Route path="/child/home" element={<ChildHome />} />
+        <Route path="/parent/home" element={<ParentHome />} />
+        <Route path="/parent/history" element={<History />} />
+        <Route path="/parent/lokasianak" element={<LokasiAnak />} />
+        <Route path="/parent/geofencing" element={<Geofencing />} />
       </Routes>
     </BrowserRouter>
   );

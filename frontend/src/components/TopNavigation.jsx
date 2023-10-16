@@ -1,14 +1,20 @@
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
 
-function TopNavigation() {
+function TopNavigation({ roleTitle }) {
   return (
     <>
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         {/* <!-- Navbar Brand--> */}
-        <a className="navbar-brand ps-3 order-2" href="/home">
-          Andal
-        </a>
+        {roleTitle === 'Parent' ? (
+          <a className="navbar-brand ps-3 order-2" href="/parent/home">
+            Andal
+          </a>
+        ) : (
+          <a className="navbar-brand ps-3 order-2" href="/child/home">
+            Andal
+          </a>
+        )}
         {/* <!-- Sidebar Toggle--> */}
         <button
           className="btn btn-link btn-sm order-1 me-4 me-lg-0"

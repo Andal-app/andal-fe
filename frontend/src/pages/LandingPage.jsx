@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MdPersonOutline, MdChildCare } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import { useGlobalState } from '../state/index.js';
+// import { useGlobalState } from '../state/index.js';
 
 function LandingPage() {
   // const [isLogin] = useGlobalState('isLogin');

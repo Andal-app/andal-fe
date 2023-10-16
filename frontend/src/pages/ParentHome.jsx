@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMe } from '../features/authSlice';
+import { getMeParent } from '../features/parentSlice';
 import axios from 'axios';
 import Layout from './Layout';
-import { useGlobalState } from '../state/index.js';
+// import { useGlobalState } from '../state/index.js';
 
-const Home = () => {
+const ParentHome = () => {
   const [children, setChildren] = useState([]);
-  // const [isLogin, setIsLogin] = useGlobalState('isLogin');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, isError } = useSelector((state) => state.auth);
+  const { parent, isError } = useSelector((state) => state.parent);
 
   useEffect(() => {
-    dispatch(getMe());
+    dispatch(getMeParent());
   }, [dispatch]);
 
   useEffect(() => {
@@ -50,14 +49,14 @@ const Home = () => {
   };
 
   return (
-    <Layout>
+    <Layout roleTitle="Parent">
       <div className="column">
         <h1 className="title mt-4 is-2">Home</h1>
         <div className="row">
           {children
-            .filter((child) => child['username'] === user)
+            .filter((child) => child['username'] === parent)
             .map((filteredchild, index) => (
-              <NavLink to={'/lokasianak'} className="box" key={filteredchild._id}>
+              <NavLink to={'/parent/lokasianak'} className="box" key={filteredchild._id}>
                 <div>{filteredchild.name}</div>
               </NavLink>
             ))}
@@ -67,4 +66,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default ParentHome;

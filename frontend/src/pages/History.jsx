@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { getMe } from '../features/authSlice';
+// import { getMeParent } from '../features/parentSlice';
 import Layout from './Layout';
 
-function Notifikasi() {
+function History() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isError } = useSelector((state) => state.auth);
+  const { isError } = useSelector((state) => state.parent);
 
   // useEffect(() => {
-  //   dispatch(getMe());
+  //   dispatch(getMeParent());
   // }, [dispatch]);
 
   useEffect(() => {
@@ -20,13 +20,13 @@ function Notifikasi() {
   }, [isError, navigate]);
 
   return (
-    <Layout>
+    <Layout roleTitle="Parent">
       <div className="column">
-        <h1 className="title mt-4 is-2">Notification</h1>
+        <h1 className="title mt-4 is-2">History</h1>
         <div className="row"></div>
       </div>
     </Layout>
   );
 }
 
-export default Notifikasi;
+export default History;

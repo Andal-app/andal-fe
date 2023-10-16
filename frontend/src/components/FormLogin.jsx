@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { LoginUser, reset } from '../features/authSlice';
+import { loginParent, reset } from '../features/parentSlice';
+import { loginChild, resetChild } from '../features/childSlice';
 import axios from 'axios';
 
 const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
@@ -9,19 +10,21 @@ const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, isSuccess, isLoading } = useSelector((state) => state.auth);
+  const { parent, isSuccess, isLoading } = useSelector((state) => state.parent);
+  const { child, success, loading } = useSelector((state) => state.child);
   // console.log(isSuccess);
 
   useEffect(() => {
-    if (user || isSuccess) {
-      navigate('/home');
-    }
+    if (parent || (isSuccess && roleTitle === 'Parent')) navigate('/parent/home');
+    if (child || (success && roleTitle === 'Child')) navigate('/child/home');
     dispatch(reset());
-  }, [user, isSuccess, dispatch, navigate]);
+    dispatch(resetChild());
+  }, [parent, isSuccess, child, success, dispatch, navigate]);
 
   const Auth = (e) => {
     e.preventDefault();
-    dispatch(LoginUser({ username, password }));
+    if (roleTitle === 'Parent') dispatch(loginParent({ username, password }));
+    if (roleTitle === 'Child') dispatch(loginChild({ username, password }));
   };
 
   useEffect(() => {
