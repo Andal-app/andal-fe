@@ -52,18 +52,18 @@ function LeftNavigation({ roleTitle }) {
                   </div>
                   History
                 </NavLink>
-                <NavLink to="/parent/lokasianak" className="nav-link">
+                {/* <NavLink to="/parent/lokasianak" className="nav-link">
                   <div className="sb-nav-link-icon">
                     <FaMap />
                   </div>
                   Child Location
-                </NavLink>
-                <NavLink to="/parent/geofencing" className="nav-link">
+                </NavLink> */}
+                {/* <NavLink to="/parent/geofencing" className="nav-link">
                   <div className="sb-nav-link-icon">
                     <FaMapLocationDot />
                   </div>
                   Geofencing
-                </NavLink>
+                </NavLink> */}
               </>
             )}
             {/* {user && user.role === 'Kepegawaian' && (

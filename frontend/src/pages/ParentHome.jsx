@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMeParent } from '../features/parentSlice';
 import axios from 'axios';
 import Layout from './Layout';
+import LokasiAnak from './LokasiAnak';
 // import { useGlobalState } from '../state/index.js';
 
 const ParentHome = () => {
@@ -48,17 +49,25 @@ const ParentHome = () => {
       });
   };
 
+  // const navigateToMap = () => {
+  //   navigate('/parent/lokasianak');
+  // };
+
   return (
     <Layout roleTitle="Parent">
       <div className="column">
         <h1 className="title mt-4 is-2">Home</h1>
         <div className="row">
           {children
-            .filter((child) => child['username'] === parent)
-            .map((filteredchild, index) => (
-              <NavLink to={'/parent/lokasianak'} className="box" key={filteredchild._id}>
-                <div>{filteredchild.name}</div>
+            .filter((filteredchildren) => filteredchildren['username'] === parent)
+            .map((child, index) => (
+              <NavLink to={`/parent/lokasianak/${child._id}`} className="box" key={child._id}>
+                <div>{child.name}</div>
               </NavLink>
+              // <LokasiAnak childName={child.name} latitude={child.latitude} longitude={child.longitude} /> */}
+              // <button className="box child-list" onClick={navigateToMap}>
+              //   <div>{child.name}</div>
+              // </button>
             ))}
         </div>
       </div>

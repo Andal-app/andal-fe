@@ -26,7 +26,7 @@ function App() {
         <Route path="/child/home" element={<ChildHome />} />
         <Route path="/parent/home" element={<ParentHome />} />
         <Route path="/parent/history" element={<History />} />
-        <Route path="/parent/lokasianak" element={<LokasiAnak />} />
+        <Route path="/parent/lokasianak/:id" element={<LokasiAnak />} />
         <Route path="/parent/geofencing" element={<Geofencing />} />
       </Routes>
     </BrowserRouter>

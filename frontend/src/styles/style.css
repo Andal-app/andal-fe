@@ -160,3 +160,9 @@ tbody td {
 .neon-blue {
   background-color: var(--neon-blue);
 }
+
+.child-list {
+  border: none;
+  text-align: left;
+  font-weight: bold;
+}
