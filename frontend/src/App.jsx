@@ -7,27 +7,30 @@ import ParentRegister from './pages/ParentRegister';
 import ChildRegister from './pages/ChildRegister';
 import ParentHome from './pages/ParentHome';
 import ChildHome from './pages/ChildHome';
-import History from './pages/History';
+import History from './pages/ParentHistory';
 import LokasiAnak from './pages/LokasiAnak';
 import Geofencing from './pages/Geofencing';
-// import { useGlobalState } from './state/index.js';
+import PrivateRoute from './routes/PrivateRoute';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
-  // const [isLogin] = useGlobalState('isLogin');
-  // console.log(isLogin);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/parent/login" element={<ParentLogin />} />
-        <Route path="/child/childlogin" element={<ChildLogin />} />
-        <Route path="/parent/register" element={<ParentRegister />} />
-        <Route path="/child/register" element={<ChildRegister />} />
-        <Route path="/child/home" element={<ChildHome />} />
-        <Route path="/parent/home" element={<ParentHome />} />
-        <Route path="/parent/history" element={<History />} />
-        <Route path="/parent/lokasianak/:id" element={<LokasiAnak />} />
-        <Route path="/parent/geofencing" element={<Geofencing />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/parent/login" element={<ParentLogin />} />
+          <Route path="/child/childlogin" element={<ChildLogin />} />
+          <Route path="/parent/register" element={<ParentRegister />} />
+          <Route path="/child/register" element={<ChildRegister />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/child/home" element={<ChildHome />} />
+          <Route path="/parent/home" element={<ParentHome />} />
+          <Route path="/parent/history" element={<History />} />
+          <Route path="/parent/lokasianak/:id" element={<LokasiAnak />} />
+          <Route path="/parent/geofencing" element={<Geofencing />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

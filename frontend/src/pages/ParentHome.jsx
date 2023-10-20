@@ -18,10 +18,10 @@ const ParentHome = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isError) {
+    if (!parent) {
       navigate('/');
     }
-  }, [isError, navigate]);
+  }, [parent, navigate]);
 
   useEffect(() => {
     getUsers();
@@ -57,11 +57,12 @@ const ParentHome = () => {
     <Layout roleTitle="Parent">
       <div className="column">
         <h1 className="title mt-4 is-2">Home</h1>
+        <h2 className="has-text-weight-semibold is-size-4 mb-3">Daftar Anak</h2>
         <div className="row">
           {children
             .filter((filteredchildren) => filteredchildren['username'] === parent)
             .map((child, index) => (
-              <NavLink to={`/parent/lokasianak/${child._id}`} className="box" key={child._id}>
+              <NavLink to={`/parent/lokasianak/${child._id}`} className="box ml-3" key={child._id}>
                 <div>{child.name}</div>
               </NavLink>
               // <LokasiAnak childName={child.name} latitude={child.latitude} longitude={child.longitude} /> */}

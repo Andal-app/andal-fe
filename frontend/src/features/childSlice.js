@@ -24,6 +24,7 @@ export const loginChild = createAsyncThunk('child/login', async (child, thunkAPI
       }
     );
     localStorage.setItem('username', child.username);
+    localStorage.setItem('role', 'Child');
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -35,7 +36,7 @@ export const loginChild = createAsyncThunk('child/login', async (child, thunkAPI
 
 export const getMeChild = createAsyncThunk('child/getMeChild', async (_, thunkAPI) => {
   try {
-    return localStorage.getItem('username');
+    if (localStorage.getItem('role') === 'Child') return localStorage.getItem('username');
   } catch (error) {
     if (error.response) {
       const message = error.response.data.msg;
@@ -46,6 +47,7 @@ export const getMeChild = createAsyncThunk('child/getMeChild', async (_, thunkAP
 
 export const logoutChild = createAsyncThunk('child/logout', async () => {
   localStorage.removeItem('username');
+  localStorage.removeItem('role');
 });
 
 export const childSlice = createSlice({

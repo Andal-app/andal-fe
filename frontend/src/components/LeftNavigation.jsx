@@ -1,26 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FaHome, FaHistory, FaMap, FaSignOutAlt, FaUser, FaEdit } from 'react-icons/fa';
 import { FaMapLocationDot } from 'react-icons/fa6';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutParent, reset } from '../features/parentSlice';
-import { logoutChild, resetChild } from '../features/childSlice';
-// import { useGlobalState } from '../state/index.js';
+import { logoutParent } from '../features/parentSlice';
+import { logoutChild } from '../features/childSlice';
 
 function LeftNavigation({ roleTitle }) {
-  // const [isLogin, setIsLogin] = useGlobalState('isLogin');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { parent } = useSelector((state) => state.parent);
   const { child } = useSelector((state) => state.child);
 
   const logout = () => {
-    dispatch(logoutParent());
-    dispatch(logoutChild());
-    dispatch(reset());
-    dispatch(resetChild());
+    if (parent) dispatch(logoutParent());
+    if (child) dispatch(logoutChild());
     navigate('/');
-    // setIsLogin(false);
   };
 
   return (
@@ -96,7 +91,7 @@ function LeftNavigation({ roleTitle }) {
         </div>
         <div className="sb-sidenav-footer">
           <div className="small">Logged in as:</div>
-          {roleTitle === 'Parent' ? parent : child} <br />
+          {localStorage.getItem('username')}
         </div>
       </nav>
     </div>

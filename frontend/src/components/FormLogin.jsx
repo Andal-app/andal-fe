@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginParent, reset } from '../features/parentSlice';
-import { loginChild, resetChild } from '../features/childSlice';
+import { getMeParent, loginParent, reset } from '../features/parentSlice';
+import { getMeChild, loginChild, resetChild } from '../features/childSlice';
 import axios from 'axios';
 
 const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
@@ -12,14 +12,17 @@ const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
   const navigate = useNavigate();
   const { parent, isSuccess, isLoading } = useSelector((state) => state.parent);
   const { child, success, loading } = useSelector((state) => state.child);
-  // console.log(isSuccess);
 
   useEffect(() => {
-    if (parent || (isSuccess && roleTitle === 'Parent')) navigate('/parent/home');
-    if (child || (success && roleTitle === 'Child')) navigate('/child/home');
-    dispatch(reset());
-    dispatch(resetChild());
-  }, [parent, isSuccess, child, success, dispatch, navigate]);
+    if (parent || (isSuccess && roleTitle === 'Parent')) {
+      dispatch(getMeParent());
+      navigate('/parent/home');
+    }
+    if (child || (success && roleTitle === 'Child')) {
+      dispatch(getMeChild());
+      navigate('/child/home');
+    }
+  }, [isSuccess, success]);
 
   const Auth = (e) => {
     e.preventDefault();

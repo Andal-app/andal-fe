@@ -14,10 +14,10 @@ function ChildHome() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (error) {
+    if (!child) {
       navigate('/');
     }
-  }, [error, navigate]);
+  }, [child, navigate]);
 
   return (
     <Layout>

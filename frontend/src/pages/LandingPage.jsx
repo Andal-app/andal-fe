@@ -1,10 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { MdPersonOutline, MdChildCare } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { useGlobalState } from '../state/index.js';
+import { reset } from '../features/parentSlice';
+import { resetChild } from '../features/childSlice';
 
 function LandingPage() {
-  // const [isLogin] = useGlobalState('isLogin');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(reset());
+    dispatch(resetChild());
+  }, []);
+
   return (
     <>
       <section className="hero has-background-grey-light is-fullheight is-fullwidth">
