@@ -147,23 +147,43 @@ tbody td {
 }
 
 .verdigris {
-  background-color: var(--verdigris);
+  background-color: var(--verdigris) !important;
 }
 
 .maya-blue {
-  background-color: var(--maya-blue);
+  background-color: var(--maya-blue) !important;
 }
 
 .magnolia {
-  background-color: var(--magnolia);
+  background-color: var(--magnolia) !important;
 }
 
 .eerie-black {
-  background-color: var(--eerie-black);
+  background-color: var(--eerie-black) !important;
 }
 
 .neon-blue {
-  background-color: var(--neon-blue);
+  background-color: var(--neon-blue) !important;
+}
+
+.text-verdigris {
+  color: var(--verdigris) !important;
+}
+
+.text-maya-blue {
+  color: var(--maya-blue) !important;
+}
+
+.text-magnolia {
+  color: var(--magnolia) !important;
+}
+
+.text-eerie-black {
+  color: var(--eerie-black) !important;
+}
+
+.text-neon-blue {
+  color: var(--neon-blue) !important;
 }
 
 .child-list {
@@ -174,4 +194,14 @@ tbody td {
 
 h1 {
   margin-block-end: 0.5rem !important;
+}
+
+.map-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.modal-card-body {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
