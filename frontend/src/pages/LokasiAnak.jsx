@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getMeParent } from '../features/parentSlice';
 import axios from 'axios';
-// import OpenStreetMap from '../components/OpenStreetMap';
 import GetCurrentPosition from '../components/GetCurrentPosition';
 import Layout from './Layout';
 
@@ -16,13 +15,6 @@ function LokasiAnak() {
   const [child, setChild] = useState(null);
   const [latitude, setLatitude] = useState();
   const [longitude, setLongitude] = useState();
-
-  // const { isLoaded } = useJsApiLoader({
-  //   googleMapsApiKey: GoogleMapsAPI
-  // });
-
-  // if (!isLoaded) return <div>Loading...</div>;
-  // return <div>Map</div>;
 
   useEffect(() => {
     dispatch(getMeParent());

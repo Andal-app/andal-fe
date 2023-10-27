@@ -7,7 +7,7 @@ import Layout from './Layout';
 function ChildHome() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { child, error } = useSelector((state) => state.child);
+  const { child } = useSelector((state) => state.child);
 
   useEffect(() => {
     dispatch(getMeChild());

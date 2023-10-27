@@ -5,6 +5,11 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/lab": "^5.0.0-alpha.150",
+    "@mui/material": "^5.14.15",
+    "@mui/x-date-pickers": "^6.16.3",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "bulma": "^0.9.4",
@@ -22,7 +27,8 @@
     "react-leaflet-draw": "^0.20.4",
     "react-redux": "^8.1.0",
     "react-router-dom": "^6.11.2",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^5.0.1",
+    "react-time-picker": "^6.5.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",

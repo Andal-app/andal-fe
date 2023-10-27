@@ -12,6 +12,7 @@ import LokasiAnak from './pages/LokasiAnak';
 import Geofencing from './pages/Geofencing';
 import PrivateRoute from './routes/PrivateRoute';
 import ProtectedRoute from './routes/ProtectedRoute';
+import ParentSchedule from './pages/ParentSchedule';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/parent/history" element={<History />} />
           <Route path="/parent/lokasianak/:id" element={<LokasiAnak />} />
           <Route path="/parent/geofencing" element={<Geofencing />} />
+          <Route path="/parent/set_schedule" element={<ParentSchedule />} />
         </Route>
       </Routes>
     </BrowserRouter>

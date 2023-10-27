@@ -4,14 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMeParent } from '../features/parentSlice';
 import axios from 'axios';
 import Layout from './Layout';
-import LokasiAnak from './LokasiAnak';
-// import { useGlobalState } from '../state/index.js';
+import { useGlobalState } from '../state';
+import Modal from '../components/Modal';
 
 const ParentHome = () => {
+  const [childUsername, setChildUsername] = useState('');
+  const [latitude, setLatitude] = useState(0.0);
+  const [longitude, setLongitude] = useState(0.0);
   const [children, setChildren] = useState([]);
+  const [showModal, setShowModal] = useState({
+    id: null,
+    show: false
+  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { parent, isError } = useSelector((state) => state.parent);
+  const { parent } = useSelector((state) => state.parent);
+  const [allChildren, setAllChildren] = useGlobalState('allChildren');
 
   useEffect(() => {
     dispatch(getMeParent());
@@ -33,6 +41,7 @@ const ParentHome = () => {
       .then((response) => {
         // Handle successful response
         setChildren(response.data);
+        setAllChildren(response.data);
       })
       .catch((error) => {
         // Handle errors
@@ -49,26 +58,95 @@ const ParentHome = () => {
       });
   };
 
-  // const navigateToMap = () => {
-  //   navigate('/parent/lokasianak');
-  // };
+  const getChildProfilesInformation = async () => {
+    try {
+      const response = await axios.post(process.env.REACT_APP_linkNgrok + '/child/findCoordinates', {
+        username: childUsername
+      });
+
+      if (response.status === 200) {
+        const responseData = response.data;
+        console.log(responseData);
+        if (responseData.latitude !== null && responseData.longitude !== null) {
+          setLatitude(responseData.latitude);
+          setLongitude(responseData.longitude);
+        } else {
+          throw new Error('Data koordinat tidak ditemukan.');
+        }
+      } else {
+        throw new Error('Gagal mengambil data koordinat.');
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
+
+  const saveChildProfile = async () => {
+    const newProfile = {
+      username: parent,
+      name: childUsername,
+      latitude: latitude,
+      longitude: longitude
+    };
+
+    try {
+      const response = await axios.post(process.env.REACT_APP_linkNgrok + '/user/addProfile', {
+        username: newProfile.username,
+        name: newProfile.name,
+        latitude: newProfile.latitude.toString(),
+        longitude: newProfile.longitude.toString()
+      });
+
+      if (response.status === 200) {
+        // Handle success
+        alert('Profil berhasil dibuat');
+      } else {
+        // Handle error
+        alert('Gagal menyimpan profil');
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
 
   return (
     <Layout roleTitle="Parent">
       <div className="column">
         <h1 className="title mt-4 is-2">Home</h1>
+        <button
+          className="button is-success has-text-weight-semibold mb-2"
+          onClick={() => setShowModal({ show: true })}
+        >
+          Tambah Profil Anak
+        </button>
+        <Modal show={showModal} onClose={() => setShowModal({ show: false })} title="Tambah Profil Anak">
+          <input
+            type="text"
+            placeholder="Username anak"
+            onChange={(e) => setChildUsername(e.target.value)}
+            className="input"
+          />
+          <div>
+            <button onClick={getChildProfilesInformation} className="button maya-blue mt-2 has-text-weight-semibold">
+              Dapatkan informasi anak
+            </button>
+          </div>
+          <div>Username: {childUsername}</div>
+          <div>Latitude: {latitude.toFixed(6)}</div>
+          <div>Longitude: {longitude.toFixed(6)}</div>
+          <button onClick={saveChildProfile} className="button is-success mt-4">
+            Simpan
+          </button>
+        </Modal>
+        {/* <button className="button is-success has-text-weight-semibold mb-2">Tambah Profil Anak</button> */}
         <h2 className="has-text-weight-semibold is-size-4 mb-3">Daftar Anak</h2>
         <div className="row">
           {children
             .filter((filteredchildren) => filteredchildren['username'] === parent)
-            .map((child, index) => (
+            .map((child) => (
               <NavLink to={`/parent/lokasianak/${child._id}`} className="box ml-3" key={child._id}>
                 <div>{child.name}</div>
               </NavLink>
-              // <LokasiAnak childName={child.name} latitude={child.latitude} longitude={child.longitude} /> */}
-              // <button className="box child-list" onClick={navigateToMap}>
-              //   <div>{child.name}</div>
-              // </button>
             ))}
         </div>
       </div>

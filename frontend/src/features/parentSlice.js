@@ -37,7 +37,6 @@ export const loginParent = createAsyncThunk('parent/login', async (parent, thunk
 
 export const getMeParent = createAsyncThunk('parent/getMeParent', async (_, thunkAPI) => {
   try {
-    // const response = await axios.get(`${process.env.REACT_APP_linkNgrok}/user/login`);
     if (localStorage.getItem('role') === 'Parent') return localStorage.getItem('username');
   } catch (error) {
     if (error.response) {
@@ -50,7 +49,6 @@ export const getMeParent = createAsyncThunk('parent/getMeParent', async (_, thun
 export const logoutParent = createAsyncThunk('parent/logoutParent', async () => {
   localStorage.removeItem('username');
   localStorage.removeItem('role');
-  // await axios.delete('http://localhost:5000/logout');
 });
 
 export const parentSlice = createSlice({

@@ -1,10 +1,10 @@
-:root {
-  /* --verdigris: #16bac5;
+/* :root {
+  --verdigris: #16bac5;
   --maya-blue: #5fbff9;
   --magnolia: #efe9f4;
   --eerie-black: #171d1c;
-  --neon-blue: #5863f8; */
-}
+  --neon-blue: #5863f8;
+} */
 
 header {
   display: block;
@@ -123,6 +123,11 @@ tbody td {
   background-color: var(--maya-blue);
 }
 
+.modified {
+  padding: 0.45rem 0.75rem;
+  margin-bottom: 0.75rem !important;
+}
+
 .box.magnolia {
   margin: 1rem auto;
 }
@@ -165,4 +170,8 @@ tbody td {
   border: none;
   text-align: left;
   font-weight: bold;
+}
+
+h1 {
+  margin-block-end: 0.5rem !important;
 }
