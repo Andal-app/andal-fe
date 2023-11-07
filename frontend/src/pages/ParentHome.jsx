@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMeParent } from '../features/parentSlice';
 import axios from 'axios';
 import Layout from './Layout';
-import { useGlobalState } from '../state';
 import Modal from '../components/Modal';
 
 const ParentHome = () => {
@@ -19,7 +18,6 @@ const ParentHome = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { parent } = useSelector((state) => state.parent);
-  const [allChildren, setAllChildren] = useGlobalState('allChildren');
 
   useEffect(() => {
     dispatch(getMeParent());
@@ -41,7 +39,6 @@ const ParentHome = () => {
       .then((response) => {
         // Handle successful response
         setChildren(response.data);
-        setAllChildren(response.data);
       })
       .catch((error) => {
         // Handle errors
@@ -66,9 +63,11 @@ const ParentHome = () => {
 
       if (response.status === 200) {
         const responseData = response.data;
-        console.log(responseData);
+        // console.log(responseData);
         if (responseData.latitude !== null && responseData.longitude !== null) {
           setLatitude(responseData.latitude);
+          // console.log(latitude);
+          // console.log(longitude);
           setLongitude(responseData.longitude);
         } else {
           throw new Error('Data koordinat tidak ditemukan.');
@@ -78,6 +77,8 @@ const ParentHome = () => {
       }
     } catch (error) {
       console.error('Error:', error.message);
+      setLatitude(0.0);
+      setLongitude(0.0);
     }
   };
 
@@ -132,8 +133,8 @@ const ParentHome = () => {
             </button>
           </div>
           <div>Username: {childUsername}</div>
-          <div>Latitude: {latitude.toFixed(6)}</div>
-          <div>Longitude: {longitude.toFixed(6)}</div>
+          <div>Latitude: {latitude}</div>
+          <div>Longitude: {longitude}</div>
           <button onClick={saveChildProfile} className="button is-success mt-4">
             Simpan
           </button>
@@ -144,7 +145,7 @@ const ParentHome = () => {
           {children
             .filter((filteredchildren) => filteredchildren['username'] === parent)
             .map((child) => (
-              <NavLink to={`/parent/lokasianak/${child._id}`} className="box ml-3" key={child._id}>
+              <NavLink to={`/parent/lokasianak/${child.name}`} className="box ml-3" key={child._id}>
                 <div>{child.name}</div>
               </NavLink>
             ))}

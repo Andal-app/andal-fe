@@ -112,6 +112,39 @@ function ParentHistory() {
     }
   }
 
+  // const getAddress = async (data) => {
+  //   axios
+  //     .get(`https://nominatim.openstreetmap.org/reverse?lat=${data.latitude}&lon=${data.longitude}&format=json`)
+  //     .then((response) => {
+  //       console.log(response.data.display_name);
+  //       console.log(response.data.address);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error:', error);
+  //     });
+  // };
+
+  const getGeocodingData = async () => {
+    const latitude = 38.748;
+    const longitude = -9.103;
+    const API_URL = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+    try {
+      const response = await axios.get(API_URL, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log(response.data.display_name);
+      console.log(response.data.address);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    getGeocodingData();
+  }, []);
+
   return (
     <Layout roleTitle="Parent">
       <div className="column">
@@ -120,9 +153,13 @@ function ParentHistory() {
           {childHistory.map((historyData, index) => (
             <div className="box modified ml-3" key={index}>
               <div>
-                {displayDateFormat(historyData.date)} <br />
-                {historyData.childName} <br />
-                Pukul: {convertToIndonesianTime(historyData.startTime)} - {convertToIndonesianTime(historyData.endTime)}
+                {historyData.childName}
+                <br />
+                Pukul: {convertToIndonesianTime(historyData.startTime)} - {convertToIndonesianTime(historyData.endTime)}{' '}
+                <br />
+                Lokasi: {historyData.latitude}, {historyData.longitude}
+                <span className="to-the-right">{displayDateFormat(historyData.date)}</span>
+                {/* {console.log(getAddress(historyData))} */}
               </div>
             </div>
           ))}

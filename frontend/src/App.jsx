@@ -7,12 +7,11 @@ import ParentRegister from './pages/ParentRegister';
 import ChildRegister from './pages/ChildRegister';
 import ParentHome from './pages/ParentHome';
 import ChildHome from './pages/ChildHome';
-import History from './pages/ParentHistory';
-import LokasiAnak from './pages/LokasiAnak';
-import Geofencing from './pages/Geofencing';
+import ParentHistory from './pages/ParentHistory';
+import ParentChildLocation from './pages/ParentChildLocation';
+import ParentGeofencing from './pages/ParentGeofencing';
 import PrivateRoute from './routes/PrivateRoute';
 import ProtectedRoute from './routes/ProtectedRoute';
-import ParentSchedule from './pages/ParentSchedule';
 
 function App() {
   return (
@@ -28,10 +27,9 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/child/home" element={<ChildHome />} />
           <Route path="/parent/home" element={<ParentHome />} />
-          <Route path="/parent/history" element={<History />} />
-          <Route path="/parent/lokasianak/:id" element={<LokasiAnak />} />
-          <Route path="/parent/geofencing" element={<Geofencing />} />
-          <Route path="/parent/set_schedule" element={<ParentSchedule />} />
+          <Route path="/parent/history" element={<ParentHistory />} />
+          <Route path="/parent/lokasianak/:childname" element={<ParentChildLocation />} />
+          <Route path="/parent/geofencing/:childname" element={<ParentGeofencing />} />
         </Route>
       </Routes>
     </BrowserRouter>
