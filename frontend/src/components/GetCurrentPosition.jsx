@@ -112,7 +112,7 @@ const GetCurrentPosition = ({
     <div className="GetCurrentPosition">
       {error && <p>Error: {error}</p>}
       <button className="button is-success has-text-weight-semibold mb-2 mr-5" onClick={showChildLocation}>
-        Locate Child
+        Locate {localStorage.getItem('role') === 'Child' ? 'Me' : 'Child'}
       </button>
       {isShowButton && (
         <button
@@ -154,6 +154,7 @@ const GetCurrentPosition = ({
         zoom={14}
         style={{ height: '480px', width: '100%' }}
         ref={setMap}
+        className="z-index-1"
       >
         <FeatureGroup>
           <EditControl

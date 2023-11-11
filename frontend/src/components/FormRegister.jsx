@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
 const FormRegister = ({ roleTitle, urlRole, urlRoleLogin }) => {
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [msg, setMsg] = useState('');
@@ -12,12 +13,14 @@ const FormRegister = ({ roleTitle, urlRole, urlRoleLogin }) => {
     e.preventDefault();
     try {
       await axios.post(process.env.REACT_APP_linkNgrok + urlRole, {
+        email,
         username,
         password
       });
       navigate(urlRoleLogin);
     } catch (error) {
       if (error.response) {
+        console.log(error.response);
         setMsg(error.response.data.msg);
         alert('Akun dengan username tersebut telah terdaftar');
       }
@@ -33,6 +36,24 @@ const FormRegister = ({ roleTitle, urlRole, urlRoleLogin }) => {
               <form onSubmit={saveUser} className="box">
                 {/* <p className="has-text-centered">{msg}</p> */}
                 <h1 className="title is-2 has-text-centered">{roleTitle} Register</h1>
+                {roleTitle === 'Parent' && (
+                  <div className="field">
+                    <label htmlFor="email" className="label">
+                      Email
+                    </label>
+                    <div className="control">
+                      <input
+                        type="email"
+                        id="email"
+                        className="input"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        required
+                      />
+                    </div>
+                  </div>
+                )}
                 <div className="field">
                   <label htmlFor="username" className="label">
                     Username

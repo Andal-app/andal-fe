@@ -7,11 +7,12 @@ import axios from 'axios';
 
 const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { parent, isSuccess, isLoading } = useSelector((state) => state.parent);
-  const { child, success, loading } = useSelector((state) => state.child);
+  const { parent, isSuccess, isLoading, isError } = useSelector((state) => state.parent);
+  const { child, success, loading, error } = useSelector((state) => state.child);
 
   useEffect(() => {
     if (parent || (isSuccess && roleTitle === 'Parent')) {
@@ -22,42 +23,27 @@ const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
       dispatch(getMeChild());
       navigate('/child/home');
     }
-  }, [isSuccess, success]);
+  }, [isSuccess, success, parent, child]);
 
-  const Auth = (e) => {
+  const Auth = async (e) => {
     e.preventDefault();
-    if (roleTitle === 'Parent') dispatch(loginParent({ username, password }));
-    if (roleTitle === 'Child') dispatch(loginChild({ username, password }));
+    if (roleTitle === 'Parent') await dispatch(loginParent({ email, password }));
+    if (roleTitle === 'Child') await dispatch(loginChild({ username, password }));
+    getUsers();
   };
 
-  useEffect(() => {
-    getUsers();
-  }, []);
-
   const getUsers = async () => {
-    axios
-      .get(process.env.REACT_APP_linkNgrok + getDataByRole, {
+    try {
+      const response = await axios.get(process.env.REACT_APP_linkNgrok + getDataByRole, {
         headers: {
-          'ngrok-skip-browser-warning': true
-        }
-      })
-      .then((response) => {
-        // Handle successful response
-        console.log(response.data);
-      })
-      .catch((error) => {
-        // Handle errors
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          console.log('Response Error:', error.response.status);
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log('Request Error:', error.request);
-        } else {
-          // Something else happened while setting up the request
-          console.log('Error:', error.message);
+          'ngrok-skip-browser-warning': true,
+          Authorization: `${localStorage.getItem('token')}`
         }
       });
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   return (
@@ -68,22 +54,42 @@ const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
             <div className="column is-4">
               <form onSubmit={Auth} className="box">
                 <h1 className="title is-2 has-text-centered">{roleTitle} Login</h1>
-                <div className="field">
-                  <label htmlFor="username" className="label">
-                    Username
-                  </label>
-                  <div className="control">
-                    <input
-                      type="username"
-                      id="username"
-                      className="input"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      placeholder="Username"
-                      required
-                    />
+                {roleTitle === 'Parent' && (
+                  <div className="field">
+                    <label htmlFor="email" className="label">
+                      Email
+                    </label>
+                    <div className="control">
+                      <input
+                        type="email"
+                        id="email"
+                        className="input"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        required
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
+                {roleTitle === 'Child' && (
+                  <div className="field">
+                    <label htmlFor="username" className="label">
+                      Username
+                    </label>
+                    <div className="control">
+                      <input
+                        type="username"
+                        id="username"
+                        className="input"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Username"
+                        required
+                      />
+                    </div>
+                  </div>
+                )}
                 <div className="field">
                   <label htmlFor="password" className="label">
                     Password
@@ -109,7 +115,7 @@ const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
                 </div>
                 <div className="field mt-5">
                   <button type="submit" className="button is-success is-fullwidth">
-                    {isLoading ? 'Loading...' : 'Login'}
+                    {isLoading || loading ? 'Loading...' : 'Login'}
                   </button>
                 </div>
               </form>

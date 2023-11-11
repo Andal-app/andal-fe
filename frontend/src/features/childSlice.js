@@ -47,6 +47,7 @@ export const getMeChild = createAsyncThunk('child/getMeChild', async (_, thunkAP
 
 export const logoutChild = createAsyncThunk('child/logout', async () => {
   localStorage.removeItem('username');
+  localStorage.removeItem('token');
   localStorage.removeItem('role');
 });
 
@@ -69,6 +70,7 @@ export const childSlice = createSlice({
       state.loading = false;
       state.error = true;
       state.message = action.payload;
+      alert('Username atau password salah');
     });
 
     // Get child login

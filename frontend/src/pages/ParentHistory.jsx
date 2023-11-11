@@ -25,8 +25,13 @@ function ParentHistory() {
 
   useEffect(() => {
     const getChildHistory = async () => {
+      const token = localStorage.getItem('token');
       try {
-        const response = await axios.get(process.env.REACT_APP_linkNgrok + '/history/data');
+        const response = await axios.get(process.env.REACT_APP_linkNgrok + '/history/data', {
+          headers: {
+            Authorization: `${token}`
+          }
+        });
 
         if (response.status === 200) {
           const childHistoryData = response.data.map((item) => ({

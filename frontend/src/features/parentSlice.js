@@ -14,7 +14,7 @@ export const loginParent = createAsyncThunk('parent/login', async (parent, thunk
     const response = await axios.post(
       `${process.env.REACT_APP_linkNgrok}/user/login`,
       {
-        username: parent.username,
+        email: parent.email,
         password: parent.password
       },
       {
@@ -24,14 +24,21 @@ export const loginParent = createAsyncThunk('parent/login', async (parent, thunk
         }
       }
     );
-    localStorage.setItem('username', parent.username);
+    const newToken = response.data.token;
+
+    // Simpan token di state atau localStorage
+    // Misalnya, simpan di dalam state
+    // atau simpan di localStorage
+    localStorage.setItem('token', newToken);
     localStorage.setItem('role', 'Parent');
+
     return response.data;
   } catch (error) {
     if (error.response) {
       const message = error.response.data.msg;
       return thunkAPI.rejectWithValue(message);
     }
+    return thunkAPI.rejectWithValue('Login failed');
   }
 });
 
@@ -48,6 +55,7 @@ export const getMeParent = createAsyncThunk('parent/getMeParent', async (_, thun
 
 export const logoutParent = createAsyncThunk('parent/logoutParent', async () => {
   localStorage.removeItem('username');
+  localStorage.removeItem('token');
   localStorage.removeItem('role');
 });
 
@@ -65,11 +73,13 @@ export const parentSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = true;
       state.parent = action.payload;
+      localStorage.setItem('username', action.payload.username);
     });
     builder.addCase(loginParent.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.message = action.payload;
+      alert('Email atau password salah');
     });
 
     // Get parent login

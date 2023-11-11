@@ -34,8 +34,13 @@ const ParentHome = () => {
   }, []);
 
   const getUsers = async () => {
-    axios
-      .get(process.env.REACT_APP_linkNgrok + '/user/userProfiles')
+    await axios
+      .get(process.env.REACT_APP_linkNgrok + '/user/userProfiles', {
+        headers: {
+          'ngrok-skip-browser-warning': true,
+          Authorization: `${localStorage.getItem('token')}`
+        }
+      })
       .then((response) => {
         // Handle successful response
         setChildren(response.data);
@@ -91,12 +96,18 @@ const ParentHome = () => {
     };
 
     try {
-      const response = await axios.post(process.env.REACT_APP_linkNgrok + '/user/addProfile', {
-        username: newProfile.username,
-        name: newProfile.name,
-        latitude: newProfile.latitude.toString(),
-        longitude: newProfile.longitude.toString()
-      });
+      const response = await axios.post(
+        process.env.REACT_APP_linkNgrok + '/user/addProfile',
+        {
+          username: newProfile.username,
+          name: newProfile.name,
+          latitude: newProfile.latitude.toString(),
+          longitude: newProfile.longitude.toString()
+        },
+        {
+          Authorization: `${localStorage.getItem('token')}`
+        }
+      );
 
       if (response.status === 200) {
         // Handle success
