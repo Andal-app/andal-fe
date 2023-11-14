@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
+import Logo from '../assets/images/logo.png';
 
 function TopNavigation({ roleTitle }) {
   return (
@@ -7,11 +8,13 @@ function TopNavigation({ roleTitle }) {
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         {/* <!-- Navbar Brand--> */}
         {roleTitle === 'Parent' ? (
-          <a className="navbar-brand ps-3 order-2" href="/parent/home">
+          <a className="navbar-brand order-2" href="/parent/home">
+            <img src={Logo} />
             Andal
           </a>
         ) : (
           <a className="navbar-brand ps-3 order-2" href="/child/home">
+            <img src={Logo} />
             Andal
           </a>
         )}

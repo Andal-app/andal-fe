@@ -41,7 +41,7 @@ function ParentHistory() {
             startTime: item.start_time,
             endTime: item.end_time,
             date: item.createdAt,
-            address: ''
+            address: getGeocodingData(item.latitude, item.longitude)
           }));
           setChildHistory(childHistoryData);
         } else {
@@ -129,21 +129,29 @@ function ParentHistory() {
   //     });
   // };
 
-  const getGeocodingData = async () => {
-    const latitude = 38.748;
-    const longitude = -9.103;
-    const API_URL = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
-    try {
-      const response = await axios.get(API_URL, {
+  const getGeocodingData = (latitude, longitude) => {
+    // const latitude = 38.748;
+    // const longitude = -9.103;
+    const API_URL = 'https://nominatim.openstreetmap.org/reverse';
+    axios
+      .get(API_URL, {
         headers: {
           'Content-Type': 'application/json'
+        },
+        params: {
+          lat: latitude,
+          lon: longitude,
+          format: 'json'
         }
+      })
+      .then((response) => {
+        return response.display_name;
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      console.log(response.data.display_name);
-      console.log(response.data.address);
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    // console.log(response.data.display_name);
+    // console.log(response.data.address);
   };
 
   useEffect(() => {
@@ -164,6 +172,7 @@ function ParentHistory() {
                 <br />
                 Lokasi: {historyData.latitude}, {historyData.longitude}
                 <span className="to-the-right">{displayDateFormat(historyData.date)}</span>
+                {/* {historyData.address} */}
                 {/* {console.log(getAddress(historyData))} */}
               </div>
             </div>

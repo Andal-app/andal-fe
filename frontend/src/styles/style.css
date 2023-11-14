@@ -10,6 +10,10 @@ header {
   display: block;
 }
 
+img {
+  height: 35px !important;
+}
+
 form {
   width: 100%;
   min-width: 300px;
