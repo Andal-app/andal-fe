@@ -40,8 +40,8 @@ function ParentHistory() {
             longitude: item.longitude,
             startTime: item.start_time,
             endTime: item.end_time,
-            date: item.createdAt,
-            address: getGeocodingData(item.latitude, item.longitude)
+            date: item.createdAt
+            // address: getGeocodingData(item.latitude, item.longitude)
           }));
           setChildHistory(childHistoryData);
         } else {

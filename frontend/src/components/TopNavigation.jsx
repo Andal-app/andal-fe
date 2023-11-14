@@ -9,12 +9,12 @@ function TopNavigation({ roleTitle }) {
         {/* <!-- Navbar Brand--> */}
         {roleTitle === 'Parent' ? (
           <a className="navbar-brand order-2" href="/parent/home">
-            <img src={Logo} />
+            <img className="logo" src={Logo} />
             Andal
           </a>
         ) : (
           <a className="navbar-brand ps-3 order-2" href="/child/home">
-            <img src={Logo} />
+            <img className="logo" src={Logo} />
             Andal
           </a>
         )}

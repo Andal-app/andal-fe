@@ -10,10 +10,6 @@ header {
   display: block;
 }
 
-img {
-  height: 35px !important;
-}
-
 form {
   width: 100%;
   min-width: 300px;
@@ -216,4 +212,8 @@ h1 {
 
 .z-index-1 {
   z-index: 1;
+}
+
+.logo {
+  height: 35px !important;
 }
