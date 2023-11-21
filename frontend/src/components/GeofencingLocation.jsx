@@ -17,7 +17,7 @@ const GeofencingLocation = ({ map, geofenceData }) => {
   useEffect(() => {
     getCurrentLocation();
     getGeofenceLocation();
-  }, []);
+  }, [geofenceData]);
 
   useEffect(() => {
     displayGeofenceLocation();

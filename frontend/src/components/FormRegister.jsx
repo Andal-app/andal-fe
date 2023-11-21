@@ -22,7 +22,7 @@ const FormRegister = ({ roleTitle, urlRole, urlRoleLogin }) => {
       if (error.response) {
         console.log(error.response);
         setMsg(error.response.data.msg);
-        alert('Akun dengan username tersebut telah terdaftar');
+        alert(error.response.data.message);
       }
     }
   };

@@ -13,7 +13,7 @@ function TopNavigation({ roleTitle }) {
             Andal
           </a>
         ) : (
-          <a className="navbar-brand ps-3 order-2" href="/child/home">
+          <a className="navbar-brand order-2" href="/child/home">
             <img className="logo" src={Logo} />
             Andal
           </a>

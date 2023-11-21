@@ -42,6 +42,7 @@ const ParentHome = () => {
         }
       })
       .then((response) => {
+        console.log(response.data);
         // Handle successful response
         setChildren(response.data);
       })
@@ -94,30 +95,56 @@ const ParentHome = () => {
       latitude: latitude,
       longitude: longitude
     };
+    if (newProfile.latitude === 0 && newProfile.longitude === 0) {
+      try {
+        const response = await axios.post(
+          process.env.REACT_APP_linkNgrok + '/user/addProfile',
+          {
+            username: newProfile.username,
+            name: newProfile.name,
+            latitude: newProfile.latitude.toString(),
+            longitude: newProfile.longitude.toString()
+          },
+          {
+            Authorization: `${localStorage.getItem('token')}`
+          }
+        );
 
-    try {
-      const response = await axios.post(
-        process.env.REACT_APP_linkNgrok + '/user/addProfile',
-        {
-          username: newProfile.username,
-          name: newProfile.name,
-          latitude: newProfile.latitude.toString(),
-          longitude: newProfile.longitude.toString()
-        },
-        {
-          Authorization: `${localStorage.getItem('token')}`
+        if (response.status === 200) {
+          // Handle success
+          alert('Profil berhasil dibuat');
+        } else {
+          // Handle error
+          alert('Gagal menyimpan profil');
         }
-      );
-
-      if (response.status === 200) {
-        // Handle success
-        alert('Profil berhasil dibuat');
-      } else {
-        // Handle error
-        alert('Gagal menyimpan profil');
+      } catch (error) {
+        console.error('Error:', error.message);
       }
-    } catch (error) {
-      console.error('Error:', error.message);
+    } else {
+      try {
+        const response = await axios.put(
+          process.env.REACT_APP_linkNgrok + `/child/findCoordinates/${newProfile.name}`,
+          {
+            username: newProfile.name,
+            latitude: newProfile.latitude.toString(),
+            longitude: newProfile.longitude.toString()
+          },
+          {
+            Authorization: `${localStorage.getItem('token')}`
+          }
+        );
+
+        if (response.status === 200) {
+          // Handle success
+          alert('Update profil berhasil');
+          setShowModal({ show: false });
+        } else {
+          // Handle error
+          alert('Gagal update profil');
+        }
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
     }
   };
 
@@ -131,11 +158,21 @@ const ParentHome = () => {
         >
           Tambah Profil Anak
         </button>
-        <Modal show={showModal} onClose={() => setShowModal({ show: false })} title="Tambah Profil Anak">
+        <Modal
+          show={showModal}
+          onClose={() => {
+            setShowModal({ show: false });
+            setChildUsername('');
+            setLatitude(0);
+            setLongitude(0);
+          }}
+          title="Tambah Profil Anak"
+        >
           <input
             type="text"
             placeholder="Username anak"
             onChange={(e) => setChildUsername(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && getChildProfilesInformation()}
             className="input"
           />
           <div>
@@ -146,7 +183,12 @@ const ParentHome = () => {
           <div>Username: {childUsername}</div>
           <div>Latitude: {latitude}</div>
           <div>Longitude: {longitude}</div>
-          <button onClick={saveChildProfile} className="button is-success mt-4">
+          <button
+            onClick={() => {
+              saveChildProfile();
+            }}
+            className="button is-success mt-4"
+          >
             Simpan
           </button>
         </Modal>

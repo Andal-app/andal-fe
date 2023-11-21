@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getMeParent } from '../features/parentSlice';
-import Layout from './Layout';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import moment from 'moment';
+import { getMeParent } from '../features/parentSlice';
+import Layout from './Layout';
+import Modal from '../components/Modal';
 
 function ParentHistory() {
   const dispatch = useDispatch();
@@ -12,6 +13,10 @@ function ParentHistory() {
   const { isError } = useSelector((state) => state.parent);
 
   const [childHistory, setChildHistory] = useState([]);
+  const [showModal, setShowModal] = useState({
+    id: null,
+    show: false
+  });
 
   useEffect(() => {
     dispatch(getMeParent());
@@ -171,6 +176,18 @@ function ParentHistory() {
                 Pukul: {convertToIndonesianTime(historyData.startTime)} - {convertToIndonesianTime(historyData.endTime)}{' '}
                 <br />
                 Lokasi: {historyData.latitude}, {historyData.longitude}
+                <br />
+                <button onClick={() => setShowModal({ show: true, id: index })} className="button is-info is-small">
+                  Lihat Lokasi
+                </button>
+                <Modal
+                  id={index}
+                  show={showModal}
+                  onClose={() => setShowModal({ show: false })}
+                  title={`Lokasi ${historyData.childName}`}
+                >
+                  Test
+                </Modal>
                 <span className="to-the-right">{displayDateFormat(historyData.date)}</span>
                 {/* {historyData.address} */}
                 {/* {console.log(getAddress(historyData))} */}

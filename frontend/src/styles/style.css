@@ -217,3 +217,7 @@ h1 {
 .logo {
   height: 35px !important;
 }
+
+.leaflet-geosearch-bar form {
+  border: 0.15rem solid #ed1c24 !important;
+}

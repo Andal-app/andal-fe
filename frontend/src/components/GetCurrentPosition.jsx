@@ -20,6 +20,7 @@ const markerIcon = new L.icon({
 });
 
 const GetCurrentPosition = ({
+  error,
   setGeofenceLat,
   setGeofenceLng,
   isShowButton,
@@ -30,7 +31,6 @@ const GetCurrentPosition = ({
 }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [map, setMap] = useState();
-  const [error, setError] = useState(null);
   const [geofenceData] = useGlobalState('geofenceData');
   const [allChildren] = useGlobalState('allChildren');
   const { childname } = useParams();
@@ -40,26 +40,30 @@ const GetCurrentPosition = ({
   const _created = (e) => console.log(e);
 
   useEffect(() => {
-    const options = {
-      enableHighAccuracy: true, // Request high accuracy for location
-      timeout: 10000, // Maximum time (in milliseconds) for obtaining location
-      maximumAge: 0 // Maximum age (in milliseconds) for a cached position
-    };
-
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation([latitude || position.coords.latitude, longitude || position.coords.longitude]);
-        },
-        (err) => {
-          setError(err.message);
-        },
-        options // Pass the options for geolocation
-      );
-    } else {
-      setError('Geolocation is not available in this browser.');
-    }
+    setUserLocation([latitude, longitude]);
   }, [latitude, longitude]);
+
+  // useEffect(() => {
+  //   const options = {
+  //     enableHighAccuracy: true, // Request high accuracy for location
+  //     timeout: 10000, // Maximum time (in milliseconds) for obtaining location
+  //     maximumAge: 0 // Maximum age (in milliseconds) for a cached position
+  //   };
+
+  //   if ('geolocation' in navigator) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         setUserLocation([latitude || position.coords.latitude, longitude || position.coords.longitude]);
+  //       },
+  //       (err) => {
+  //         setError(err.message);
+  //       },
+  //       options // Pass the options for geolocation
+  //     );
+  //   } else {
+  //     setError('Geolocation is not available in this browser.');
+  //   }
+  // }, [latitude, longitude]);
 
   function LeafletGeoSearch() {
     const map = useMap(); //here use useMap hook

@@ -80,7 +80,7 @@ const ParentSchedule = () => {
           disabled={geofenceLat === 0.0 || geofenceLng === 0.0 ? true : false}
           className="button has-text-weight-semibold verdigris text-eerie-black back mb-4"
         >
-          Pasang Geofence
+          Simpan Geofence
         </button>
       </div>
     </Layout>
