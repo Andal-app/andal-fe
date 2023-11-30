@@ -40,7 +40,6 @@ const FormLogin = ({ getDataByRole, registerURLByRole, roleTitle }) => {
           Authorization: `${localStorage.getItem('token')}`
         }
       });
-      console.log(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }

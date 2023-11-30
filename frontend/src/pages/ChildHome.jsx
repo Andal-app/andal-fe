@@ -35,7 +35,6 @@ function ChildHome() {
       if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            // setUserLocation([position.coords.latitude, position.coords.longitude]);
             setLatitude(position.coords.latitude);
             setLongitude(position.coords.longitude);
             axios.put(process.env.REACT_APP_linkNgrok + `/child/findCoordinates/${child}`, {
@@ -43,8 +42,6 @@ function ChildHome() {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude
             });
-            // setNewLat(position.coords.latitude);
-            // setNewLng(position.coords.longitude);
           },
           (err) => {
             setError(err.message);

@@ -21,17 +21,11 @@ const GeofencingLocation = ({ map, geofenceData }) => {
 
   useEffect(() => {
     displayGeofenceLocation();
-    // console.log(geofenceStartTime);
-    // console.log(geofenceEndTime);
   }, [geofenceLocation, geofenceStartTime]);
 
   useEffect(() => {
     checkGeofence();
   }, [geofenceLocation, currentLocation, geofenceStartTime, geofenceEndTime]);
-
-  // useEffect(() => {
-  //   console.log(isInsideGeofence);
-  // }, [geofenceLocation, currentLocation]);
 
   const getCurrentLocation = async () => {
     axios
@@ -74,7 +68,6 @@ const GeofencingLocation = ({ map, geofenceData }) => {
   // Function to check if the current time is within the geofence time
   const isWithinGeofenceTime = () => {
     const currentTime = new Date(); // Get current time
-    console.log(currentTime);
     const startTime = new Date(currentTime);
     startTime.setHours(geofenceStartTime.hour, geofenceStartTime.minute, 0, 0);
     const endTime = new Date(currentTime);

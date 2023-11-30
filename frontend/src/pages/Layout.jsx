@@ -25,7 +25,7 @@ const Layout = ({ children, roleTitle }) => {
 
   return (
     <>
-      <div className="cuti-app">
+      <div className="andal-app">
         <header>
           <TopNavigation roleTitle={roleTitle} />
         </header>
@@ -40,6 +40,7 @@ const Layout = ({ children, roleTitle }) => {
                 buttonMessage="Keluar"
                 buttonColor="is-danger"
                 onClose={() => setShowModal({ show: false })}
+                onKeyDown={(e) => e.key === 'Escape' && setShowModal({ show: false })}
                 title="Konfirmasi Logout"
               >
                 Apakah Anda yakin ingin keluar?

@@ -42,7 +42,6 @@ const ParentHome = () => {
         }
       })
       .then((response) => {
-        console.log(response.data);
         // Handle successful response
         setChildren(response.data);
       })
@@ -69,11 +68,8 @@ const ParentHome = () => {
 
       if (response.status === 200) {
         const responseData = response.data;
-        // console.log(responseData);
         if (responseData.latitude !== null && responseData.longitude !== null) {
           setLatitude(responseData.latitude);
-          // console.log(latitude);
-          // console.log(longitude);
           setLongitude(responseData.longitude);
         } else {
           throw new Error('Data koordinat tidak ditemukan.');
@@ -113,6 +109,7 @@ const ParentHome = () => {
         if (response.status === 200) {
           // Handle success
           alert('Profil berhasil dibuat');
+          setShowModal({ show: false });
         } else {
           // Handle error
           alert('Gagal menyimpan profil');
@@ -136,7 +133,7 @@ const ParentHome = () => {
 
         if (response.status === 200) {
           // Handle success
-          alert('Update profil berhasil');
+          alert('Akun anak berhasil terhubung');
           setShowModal({ show: false });
         } else {
           // Handle error
@@ -155,6 +152,7 @@ const ParentHome = () => {
         <button
           className="button is-success has-text-weight-semibold mb-2"
           onClick={() => setShowModal({ show: true })}
+          onKeyDown={(e) => e.key === 'Escape' && setShowModal({ show: false })}
         >
           Tambah Profil Anak
         </button>
@@ -192,7 +190,6 @@ const ParentHome = () => {
             Simpan
           </button>
         </Modal>
-        {/* <button className="button is-success has-text-weight-semibold mb-2">Tambah Profil Anak</button> */}
         <h2 className="has-text-weight-semibold is-size-4 mb-3">Daftar Anak</h2>
         <div className="row">
           {children

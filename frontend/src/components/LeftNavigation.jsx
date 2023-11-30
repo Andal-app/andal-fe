@@ -39,7 +39,11 @@ function LeftNavigation({ setShowModal, roleTitle }) {
               <div className="sb-nav-link-icon">
                 <FaSignOutAlt />
               </div>
-              <button onClick={() => setShowModal({ show: true })} className="btn-logout">
+              <button
+                onClick={() => setShowModal({ show: true })}
+                onKeyDown={(e) => e.key === 'Escape' && setShowModal({ show: false })}
+                className="btn-logout"
+              >
                 Logout
               </button>
             </a>

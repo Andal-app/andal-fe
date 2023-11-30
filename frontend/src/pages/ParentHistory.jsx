@@ -1,17 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import axios from 'axios';
 import moment from 'moment';
 import { getMeParent } from '../features/parentSlice';
 import Layout from './Layout';
 import Modal from '../components/Modal';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import L from 'leaflet';
+
+import 'leaflet/dist/leaflet.css';
+
+const markerIcon = new L.icon({
+  iconUrl: icon,
+  iconSize: [30, 48],
+  iconAnchor: [17, 45],
+  popupAnchor: [0, -46]
+});
 
 function ParentHistory() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isError } = useSelector((state) => state.parent);
 
+  const [userLocation, setUserLocation] = useState(null);
+  const [map, setMap] = useState();
   const [childHistory, setChildHistory] = useState([]);
   const [showModal, setShowModal] = useState({
     id: null,
@@ -46,7 +60,6 @@ function ParentHistory() {
             startTime: item.start_time,
             endTime: item.end_time,
             date: item.createdAt
-            // address: getGeocodingData(item.latitude, item.longitude)
           }));
           setChildHistory(childHistoryData);
         } else {
@@ -60,51 +73,9 @@ function ParentHistory() {
     getChildHistory();
   }, []);
 
-  useEffect(() => {
-    // Use a dictionary to store addresses for child histories
-    const addressDictionary = {};
-
-    const getPlacemarkFromCoordinates = async (history) => {
-      const { latitude, longitude } = history;
-
-      if (!addressDictionary[`${latitude}_${longitude}`]) {
-        console.log(latitude);
-        console.log(longitude);
-        try {
-          const response = await axios.get(
-            `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
-          );
-          const addressData = response.data;
-
-          if (addressData) {
-            const address = `${addressData.address.road}, ${addressData.address.city}`;
-            addressDictionary[`${latitude}_${longitude}`] = address;
-            // Update the address for this history object
-            setChildHistory((prevChildHistory) => {
-              return prevChildHistory.map((item) => {
-                if (item === history) {
-                  return { ...item, address };
-                }
-                return item;
-              });
-            });
-          }
-        } catch (e) {
-          console.error('Error getting address:', e);
-        }
-      }
-    };
-
-    // Fetch addresses for child histories
-    // childHistory.forEach((history) => {
-    //   getPlacemarkFromCoordinates(history);
-    // });
-  }, [childHistory]);
-
   function convertToIndonesianTime(time) {
     const [hour, minute] = time.split(':');
     let formattedHour = parseInt(hour);
-    formattedHour += 7;
     if (formattedHour >= 24) {
       formattedHour -= 24;
     }
@@ -122,21 +93,7 @@ function ParentHistory() {
     }
   }
 
-  // const getAddress = async (data) => {
-  //   axios
-  //     .get(`https://nominatim.openstreetmap.org/reverse?lat=${data.latitude}&lon=${data.longitude}&format=json`)
-  //     .then((response) => {
-  //       console.log(response.data.display_name);
-  //       console.log(response.data.address);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error:', error);
-  //     });
-  // };
-
   const getGeocodingData = (latitude, longitude) => {
-    // const latitude = 38.748;
-    // const longitude = -9.103;
     const API_URL = 'https://nominatim.openstreetmap.org/reverse';
     axios
       .get(API_URL, {
@@ -155,8 +112,6 @@ function ParentHistory() {
       .catch((error) => {
         console.log(error);
       });
-    // console.log(response.data.display_name);
-    // console.log(response.data.address);
   };
 
   useEffect(() => {
@@ -177,8 +132,15 @@ function ParentHistory() {
                 <br />
                 Lokasi: {historyData.latitude}, {historyData.longitude}
                 <br />
-                <button onClick={() => setShowModal({ show: true, id: index })} className="button is-info is-small">
-                  Lihat Lokasi
+                <button
+                  onClick={() => {
+                    setShowModal({ show: true, id: index });
+                    setUserLocation([historyData.latitude, historyData.longitude]);
+                  }}
+                  onKeyDown={(e) => e.key === 'Escape' && setShowModal({ show: false })}
+                  className="button is-info is-small"
+                >
+                  Lihat History Lokasi
                 </button>
                 <Modal
                   id={index}
@@ -186,11 +148,21 @@ function ParentHistory() {
                   onClose={() => setShowModal({ show: false })}
                   title={`Lokasi ${historyData.childName}`}
                 >
-                  Test
+                  <MapContainer
+                    center={userLocation || [-7.772635, 110.378682]}
+                    zoom={16}
+                    style={{ height: '400px', width: '100%' }}
+                    ref={setMap}
+                    className="z-index-1"
+                  >
+                    <TileLayer
+                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    {userLocation && <Marker position={userLocation} icon={markerIcon} />}
+                  </MapContainer>
                 </Modal>
                 <span className="to-the-right">{displayDateFormat(historyData.date)}</span>
-                {/* {historyData.address} */}
-                {/* {console.log(getAddress(historyData))} */}
               </div>
             </div>
           ))}

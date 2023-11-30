@@ -34,7 +34,6 @@ const FormRegister = ({ roleTitle, urlRole, urlRoleLogin }) => {
           <div className="columns is-centered">
             <div className="column is-4">
               <form onSubmit={saveUser} className="box">
-                {/* <p className="has-text-centered">{msg}</p> */}
                 <h1 className="title is-2 has-text-centered">{roleTitle} Register</h1>
                 {roleTitle === 'Parent' && (
                   <div className="field">

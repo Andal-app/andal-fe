@@ -43,30 +43,13 @@ tbody td {
   /* max-width: 4rem; */
 }
 
-.cuti-app {
+.andal-app {
   margin: 0 auto;
   /* padding: 16px; */
   min-width: 300px;
   /* display: flex;
   flex-direction: column;
   align-items: center; */
-}
-
-.cuti-input label input {
-  width: 100%;
-}
-
-.cuti-input label > textarea {
-  width: 100%;
-  height: 6rem;
-}
-
-.cuti-input > .cuti-duration {
-  margin-bottom: 0.4rem;
-}
-
-.cuti-input .datepicker-item {
-  width: 100%;
 }
 
 .react-datepicker__input-container input {

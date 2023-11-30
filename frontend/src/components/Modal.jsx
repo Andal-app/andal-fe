@@ -1,17 +1,6 @@
 import React from 'react';
 
-const Modal = ({
-  id,
-  show,
-  buttonShow,
-  onClose,
-  title,
-  children,
-  buttonMessage,
-  buttonColor,
-  updateCutiData,
-  activateFunction
-}) => {
+const Modal = ({ id, show, buttonShow, onClose, title, children, buttonMessage, buttonColor, activateFunction }) => {
   if (!show.show || id !== show.id) {
     return null;
   }
@@ -27,7 +16,7 @@ const Modal = ({
           {children}
           {buttonShow && (
             <footer>
-              <form onSubmit={updateCutiData}>
+              <form>
                 <button type="submit" onClick={activateFunction} className={`button mt-5 ${buttonColor}`}>
                   {buttonMessage}
                 </button>

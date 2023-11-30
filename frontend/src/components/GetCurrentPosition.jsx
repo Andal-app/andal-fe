@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { MapContainer, TileLayer, FeatureGroup, Marker, Popup, useMap } from 'react-leaflet';
-import { EditControl } from 'react-leaflet-draw';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { useGlobalState } from '../state';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import L from 'leaflet';
@@ -27,7 +26,8 @@ const GetCurrentPosition = ({
   isShowSearch,
   latitude,
   longitude,
-  searchResult
+  searchResult,
+  scrollToBottom
 }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [map, setMap] = useState();
@@ -37,33 +37,10 @@ const GetCurrentPosition = ({
   const navigate = useNavigate();
   const zoom_level = 18;
   const radius = 100;
-  const _created = (e) => console.log(e);
 
   useEffect(() => {
     setUserLocation([latitude, longitude]);
   }, [latitude, longitude]);
-
-  // useEffect(() => {
-  //   const options = {
-  //     enableHighAccuracy: true, // Request high accuracy for location
-  //     timeout: 10000, // Maximum time (in milliseconds) for obtaining location
-  //     maximumAge: 0 // Maximum age (in milliseconds) for a cached position
-  //   };
-
-  //   if ('geolocation' in navigator) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         setUserLocation([latitude || position.coords.latitude, longitude || position.coords.longitude]);
-  //       },
-  //       (err) => {
-  //         setError(err.message);
-  //       },
-  //       options // Pass the options for geolocation
-  //     );
-  //   } else {
-  //     setError('Geolocation is not available in this browser.');
-  //   }
-  // }, [latitude, longitude]);
 
   function LeafletGeoSearch() {
     const map = useMap(); //here use useMap hook
@@ -107,6 +84,7 @@ const GetCurrentPosition = ({
       map.removeLayer(circle);
     }
     circle = L.circle([result.location.y, result.location.x], radius).addTo(map);
+    scrollToBottom();
   }
   if (map) {
     map.on('geosearch/showlocation', searchEventHandler);
@@ -137,6 +115,7 @@ const GetCurrentPosition = ({
               <div>
                 Lokasi &emsp;&emsp;: {child.latitude}, {child.longitude}
               </div>
+
               {geofenceData !== null &&
               geofenceData.filter((geofencedChild) => geofencedChild['username'] === childname).length > 0 ? (
                 geofenceData
@@ -160,13 +139,6 @@ const GetCurrentPosition = ({
         ref={setMap}
         className="z-index-1"
       >
-        <FeatureGroup>
-          <EditControl
-            position="topright"
-            onCreated={_created}
-            draw={{ polyline: false, polygon: false, rectangle: false, circlemarker: false, marker: false }}
-          />
-        </FeatureGroup>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
