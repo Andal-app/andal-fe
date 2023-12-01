@@ -190,7 +190,7 @@ h1 {
 }
 
 .to-the-right {
-  float: right;
+  text-align: right;
 }
 
 .z-index-1 {

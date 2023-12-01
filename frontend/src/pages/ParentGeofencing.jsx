@@ -1,24 +1,38 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import Layout from './Layout';
 import TimePickerComponent from '../components/TimePickerComponent';
 import GetCurrentPosition from '../components/GetCurrentPosition';
 import { useGlobalState } from '../state';
+import { getMeParent } from '../features/parentSlice';
 
 const ParentSchedule = () => {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [searchResult] = useState(null);
-
-  const navigate = useNavigate();
-  const { childname } = useParams();
-  const divRef = useRef(null);
-  const [latitude] = useGlobalState('latitude');
-  const [longitude] = useGlobalState('longitude');
   const [geofenceLat, setGeofenceLat] = useState(0.0);
   const [geofenceLng, setGeofenceLng] = useState(0.0);
+  const [latitude] = useGlobalState('latitude');
+  const [longitude] = useGlobalState('longitude');
   const [allChildren] = useGlobalState('allChildren');
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { parent } = useSelector((state) => state.parent);
+  const { childname } = useParams();
+  const divRef = useRef(null);
+
+  useEffect(() => {
+    dispatch(getMeParent());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!parent) {
+      navigate('/');
+    }
+  }, [parent, navigate]);
 
   const updateGeofenceData = async () => {
     const newStartTime = getHoursMinutes(startTime);
@@ -74,7 +88,6 @@ const ParentSchedule = () => {
 
   const scrollToBottom = () => {
     divRef.current.scrollIntoView({ behavior: 'smooth' });
-    console.log('test');
   };
 
   return (

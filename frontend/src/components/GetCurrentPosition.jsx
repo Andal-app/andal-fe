@@ -33,6 +33,7 @@ const GetCurrentPosition = ({
   const [map, setMap] = useState();
   const [geofenceData] = useGlobalState('geofenceData');
   const [allChildren] = useGlobalState('allChildren');
+
   const { childname } = useParams();
   const navigate = useNavigate();
   const zoom_level = 18;
