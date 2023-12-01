@@ -8,10 +8,6 @@ import Layout from './Layout';
 import GetCurrentPosition from '../components/GetCurrentPosition';
 
 function LokasiAnak() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { isError } = useSelector((state) => state.parent);
-  const { childname } = useParams();
   const [children, setChildren] = useState([]);
   const [child, setChild] = useGlobalState('child');
   const [latitude, setLatitude] = useGlobalState('latitude');
@@ -19,6 +15,11 @@ function LokasiAnak() {
   const [, setAllChildren] = useGlobalState('allChildren');
   const [, setSpecificChild] = useGlobalState('specificChild');
   const [, setGeofenceData] = useGlobalState('geofenceData');
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isError } = useSelector((state) => state.parent);
+  const { childname } = useParams();
 
   useEffect(() => {
     dispatch(getMeParent());

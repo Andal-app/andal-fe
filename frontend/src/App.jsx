@@ -8,6 +8,7 @@ import ChildRegister from './pages/ChildRegister';
 import ParentHome from './pages/ParentHome';
 import ChildHome from './pages/ChildHome';
 import ParentHistory from './pages/ParentHistory';
+import ParentNotificationHistory from './pages/ParentNotificationHistory';
 import ParentChildLocation from './pages/ParentChildLocation';
 import ParentGeofencing from './pages/ParentGeofencing';
 import PrivateRoute from './routes/PrivateRoute';
@@ -28,6 +29,7 @@ function App() {
           <Route path="/child/home" element={<ChildHome />} />
           <Route path="/parent/home" element={<ParentHome />} />
           <Route path="/parent/history" element={<ParentHistory />} />
+          <Route path="/parent/notification_history" element={<ParentNotificationHistory />} />
           <Route path="/parent/lokasianak/:childname" element={<ParentChildLocation />} />
           <Route path="/parent/geofencing/:childname" element={<ParentGeofencing />} />
         </Route>

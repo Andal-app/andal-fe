@@ -15,6 +15,7 @@ const ParentHome = () => {
     id: null,
     show: false
   });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { parent } = useSelector((state) => state.parent);

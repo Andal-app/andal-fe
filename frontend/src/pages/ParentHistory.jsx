@@ -20,10 +20,6 @@ const markerIcon = new L.icon({
 });
 
 function ParentHistory() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { isError } = useSelector((state) => state.parent);
-
   const [userLocation, setUserLocation] = useState(null);
   const [map, setMap] = useState();
   const [childHistory, setChildHistory] = useState([]);
@@ -31,6 +27,10 @@ function ParentHistory() {
     id: null,
     show: false
   });
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isError } = useSelector((state) => state.parent);
 
   useEffect(() => {
     dispatch(getMeParent());
@@ -87,7 +87,7 @@ function ParentHistory() {
 
   function displayDateFormat(date) {
     if (moment(date).format('DD MMMM YYYY') !== 'Invalid date') {
-      return moment(date).utcOffset(-600).format('DD MMMM YYYY HH:mm');
+      return moment(date).format('DD MMMM YYYY HH:mm');
     } else {
       return null;
     }
@@ -162,7 +162,7 @@ function ParentHistory() {
                     {userLocation && <Marker position={userLocation} icon={markerIcon} />}
                   </MapContainer>
                 </Modal>
-                <span className="to-the-right">{displayDateFormat(historyData.date)}</span>
+                <div className="to-the-right">{displayDateFormat(historyData.date)}</div>
               </div>
             </div>
           ))}

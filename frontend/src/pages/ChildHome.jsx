@@ -61,8 +61,6 @@ function ChildHome() {
       response.data
         .filter((item) => item['username'] === localStorage.getItem('username'))
         .map((item) => {
-          console.log(latitude);
-          console.log(longitude);
           setLatitude(item['latitude']);
           setLongitude(item['longitude']);
         });

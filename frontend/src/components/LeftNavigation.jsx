@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaHome, FaHistory, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaHistory, FaSignOutAlt, FaBell } from 'react-icons/fa';
 
 function LeftNavigation({ setShowModal, roleTitle }) {
   return (
@@ -30,7 +30,13 @@ function LeftNavigation({ setShowModal, roleTitle }) {
                   <div className="sb-nav-link-icon">
                     <FaHistory />
                   </div>
-                  History
+                  Geofence History
+                </NavLink>
+                <NavLink to="/parent/notification_history" className="nav-link">
+                  <div className="sb-nav-link-icon">
+                    <FaBell />
+                  </div>
+                  Notification History
                 </NavLink>
               </>
             )}
@@ -40,7 +46,9 @@ function LeftNavigation({ setShowModal, roleTitle }) {
                 <FaSignOutAlt />
               </div>
               <button
-                onClick={() => setShowModal({ show: true })}
+                onClick={() => {
+                  setShowModal({ show: true });
+                }}
                 onKeyDown={(e) => e.key === 'Escape' && setShowModal({ show: false })}
                 className="btn-logout"
               >
