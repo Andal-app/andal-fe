@@ -136,7 +136,7 @@ const GetCurrentPosition = ({
       <MapContainer
         center={userLocation || [-7.772635, 110.378682]}
         zoom={14}
-        style={{ height: '480px', width: '100%' }}
+        style={{ height: '480px', width: '96%' }}
         ref={setMap}
         className="z-index-1"
       >

@@ -48,6 +48,7 @@ function LeftNavigation({ setShowModal, roleTitle }) {
               <button
                 onClick={() => {
                   setShowModal({ show: true });
+                  document.body.classList.toggle('sb-sidenav-toggled');
                 }}
                 onKeyDown={(e) => e.key === 'Escape' && setShowModal({ show: false })}
                 className="btn-logout"

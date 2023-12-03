@@ -12,7 +12,7 @@ header {
 
 form {
   width: 100%;
-  min-width: 300px;
+  /* min-width: 300px; */
   /* margin: 0 auto; */
   padding: 0 15px 15px 0;
 }
@@ -203,4 +203,10 @@ h1 {
 
 .leaflet-geosearch-bar form {
   border: 0.15rem solid #ed1c24 !important;
+}
+
+@media screen and (max-width: 576px) {
+  .timepicker {
+    margin-bottom: 1.25rem !important;
+  }
 }

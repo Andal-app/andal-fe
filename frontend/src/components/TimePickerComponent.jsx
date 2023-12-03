@@ -11,7 +11,7 @@ const TimePickerComponent = ({ startTime, setStartTime, endTime, setEndTime }) =
         value={startTime}
         onChange={(time) => setStartTime(time)}
         ampm={false}
-        className="mr-4"
+        className="mr-4 timepicker"
       />
       <DesktopTimePicker label="End time" value={endTime} onChange={(time) => setEndTime(time)} ampm={false} />
     </LocalizationProvider>

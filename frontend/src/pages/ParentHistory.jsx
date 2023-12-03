@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import axios from 'axios';
@@ -31,6 +31,7 @@ function ParentHistory() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isError } = useSelector((state) => state.parent);
+  const { childname } = useParams();
 
   useEffect(() => {
     dispatch(getMeParent());
@@ -73,6 +74,10 @@ function ParentHistory() {
     getChildHistory();
   }, []);
 
+  useEffect(() => {
+    console.log(childHistory);
+  }, [childHistory]);
+
   function convertToIndonesianTime(time) {
     const [hour, minute] = time.split(':');
     let formattedHour = parseInt(hour);
@@ -93,79 +98,56 @@ function ParentHistory() {
     }
   }
 
-  const getGeocodingData = (latitude, longitude) => {
-    const API_URL = 'https://nominatim.openstreetmap.org/reverse';
-    axios
-      .get(API_URL, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        params: {
-          lat: latitude,
-          lon: longitude,
-          format: 'json'
-        }
-      })
-      .then((response) => {
-        return response.display_name;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  useEffect(() => {
-    getGeocodingData();
-  }, []);
-
   return (
     <Layout roleTitle="Parent">
       <div className="column">
-        <h1 className="title mt-4 is-2">History</h1>
+        <h1 className="title mt-4 is-2">Geofence History {childname}</h1>
         <div className="row">
-          {childHistory.map((historyData, index) => (
-            <div className="box modified ml-3" key={index}>
-              <div>
-                {historyData.childName}
-                <br />
-                Pukul: {convertToIndonesianTime(historyData.startTime)} - {convertToIndonesianTime(historyData.endTime)}{' '}
-                <br />
-                Lokasi: {historyData.latitude}, {historyData.longitude}
-                <br />
-                <button
-                  onClick={() => {
-                    setShowModal({ show: true, id: index });
-                    setUserLocation([historyData.latitude, historyData.longitude]);
-                  }}
-                  onKeyDown={(e) => e.key === 'Escape' && setShowModal({ show: false })}
-                  className="button is-info is-small"
-                >
-                  Lihat History Lokasi
-                </button>
-                <Modal
-                  id={index}
-                  show={showModal}
-                  onClose={() => setShowModal({ show: false })}
-                  title={`Lokasi ${historyData.childName}`}
-                >
-                  <MapContainer
-                    center={userLocation || [-7.772635, 110.378682]}
-                    zoom={16}
-                    style={{ height: '400px', width: '100%' }}
-                    ref={setMap}
-                    className="z-index-1"
+          {childHistory
+            .filter((filteredChildren) => filteredChildren['childName'] === childname)
+            .map((historyData, index) => (
+              <div className="box modified ml-3" key={index}>
+                <div>
+                  {historyData.childName}
+                  <br />
+                  Pukul: {convertToIndonesianTime(historyData.startTime)} -{' '}
+                  {convertToIndonesianTime(historyData.endTime)} <br />
+                  Lokasi: {historyData.latitude}, {historyData.longitude}
+                  <br />
+                  <button
+                    onClick={() => {
+                      setShowModal({ show: true, id: index });
+                      setUserLocation([historyData.latitude, historyData.longitude]);
+                    }}
+                    onKeyDown={(e) => e.key === 'Escape' && setShowModal({ show: false })}
+                    className="button is-info is-small"
                   >
-                    <TileLayer
-                      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    {userLocation && <Marker position={userLocation} icon={markerIcon} />}
-                  </MapContainer>
-                </Modal>
-                <div className="to-the-right">{displayDateFormat(historyData.date)}</div>
+                    Lihat History Lokasi
+                  </button>
+                  <Modal
+                    id={index}
+                    show={showModal}
+                    onClose={() => setShowModal({ show: false })}
+                    title={`Lokasi ${historyData.childName}`}
+                  >
+                    <MapContainer
+                      center={userLocation || [-7.772635, 110.378682]}
+                      zoom={16}
+                      style={{ height: '400px', width: '100%' }}
+                      ref={setMap}
+                      className="z-index-1"
+                    >
+                      <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      />
+                      {userLocation && <Marker position={userLocation} icon={markerIcon} />}
+                    </MapContainer>
+                  </Modal>
+                  <div className="to-the-right">{displayDateFormat(historyData.date)}</div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </Layout>

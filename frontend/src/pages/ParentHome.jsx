@@ -5,12 +5,13 @@ import { getMeParent } from '../features/parentSlice';
 import axios from 'axios';
 import Layout from './Layout';
 import Modal from '../components/Modal';
+import DisplayChildren from '../components/DisplayChildren';
 
 const ParentHome = () => {
   const [childUsername, setChildUsername] = useState('');
   const [latitude, setLatitude] = useState(0.0);
   const [longitude, setLongitude] = useState(0.0);
-  const [children, setChildren] = useState([]);
+  const [, setChildren] = useState([]);
   const [showModal, setShowModal] = useState({
     id: null,
     show: false
@@ -29,37 +30,6 @@ const ParentHome = () => {
       navigate('/');
     }
   }, [parent, navigate]);
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  const getUsers = async () => {
-    await axios
-      .get(process.env.REACT_APP_linkNgrok + '/user/userProfiles', {
-        headers: {
-          'ngrok-skip-browser-warning': true,
-          Authorization: `${localStorage.getItem('token')}`
-        }
-      })
-      .then((response) => {
-        // Handle successful response
-        setChildren(response.data);
-      })
-      .catch((error) => {
-        // Handle errors
-        if (error.response) {
-          // The request was made and the server responded with a status code
-          console.log('Response Error:', error.response.status);
-        } else if (error.request) {
-          // The request was made but no response was received
-          console.log('Request Error:', error.request);
-        } else {
-          // Something else happened while setting up the request
-          console.log('Error:', error.message);
-        }
-      });
-  };
 
   const getChildProfilesInformation = async () => {
     try {
@@ -92,57 +62,29 @@ const ParentHome = () => {
       latitude: latitude,
       longitude: longitude
     };
-    if (newProfile.latitude === 0 && newProfile.longitude === 0) {
-      try {
-        const response = await axios.post(
-          process.env.REACT_APP_linkNgrok + '/user/addProfile',
-          {
-            username: newProfile.username,
-            name: newProfile.name,
-            latitude: newProfile.latitude.toString(),
-            longitude: newProfile.longitude.toString()
-          },
-          {
-            Authorization: `${localStorage.getItem('token')}`
-          }
-        );
-
-        if (response.status === 200) {
-          // Handle success
-          alert('Profil berhasil dibuat');
-          setShowModal({ show: false });
-        } else {
-          // Handle error
-          alert('Gagal menyimpan profil');
+    try {
+      const response = await axios.put(
+        process.env.REACT_APP_linkNgrok + `/child/findCoordinates/${newProfile.name}`,
+        {
+          username: newProfile.name,
+          latitude: newProfile.latitude.toString(),
+          longitude: newProfile.longitude.toString()
+        },
+        {
+          Authorization: `${localStorage.getItem('token')}`
         }
-      } catch (error) {
-        console.error('Error:', error.message);
-      }
-    } else {
-      try {
-        const response = await axios.put(
-          process.env.REACT_APP_linkNgrok + `/child/findCoordinates/${newProfile.name}`,
-          {
-            username: newProfile.name,
-            latitude: newProfile.latitude.toString(),
-            longitude: newProfile.longitude.toString()
-          },
-          {
-            Authorization: `${localStorage.getItem('token')}`
-          }
-        );
+      );
 
-        if (response.status === 200) {
-          // Handle success
-          alert('Akun anak berhasil terhubung');
-          setShowModal({ show: false });
-        } else {
-          // Handle error
-          alert('Gagal update profil');
-        }
-      } catch (error) {
-        console.error('Error:', error.message);
+      if (response.status === 200) {
+        // Handle success
+        alert('Akun anak berhasil terhubung');
+        setShowModal({ show: false });
+      } else {
+        // Handle error
+        alert('Gagal update profil');
       }
+    } catch (error) {
+      console.error('Error:', error.message);
     }
   };
 
@@ -191,7 +133,8 @@ const ParentHome = () => {
             Simpan
           </button>
         </Modal>
-        <h2 className="has-text-weight-semibold is-size-4 mb-3">Daftar Anak</h2>
+        <DisplayChildren urlPath="/parent/lokasianak/" />
+        {/* <h2 className="has-text-weight-semibold is-size-4 mb-3">Daftar Anak</h2>
         <div className="row">
           {children
             .filter((filteredchildren) => filteredchildren['username'] === parent)
@@ -200,7 +143,7 @@ const ParentHome = () => {
                 <div>{child.name}</div>
               </NavLink>
             ))}
-        </div>
+        </div> */}
       </div>
     </Layout>
   );

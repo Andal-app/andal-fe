@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMeParent } from '../features/parentSlice';
 import DisplayChildren from '../components/DisplayChildren';
 import Layout from './Layout';
+import { getMeParent } from '../features/parentSlice';
 
-const ParentNotificationHistory = () => {
-  const navigate = useNavigate();
+const ParentGeofencingHistory = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { parent } = useSelector((state) => state.parent);
 
   useEffect(() => {
@@ -21,11 +21,11 @@ const ParentNotificationHistory = () => {
   return (
     <Layout roleTitle="Parent">
       <div className="column">
-        <h1 className="title mt-4 is-2">Notification History</h1>
-        <DisplayChildren urlPath="/parent/notification_history/" />
+        <h1 className="title mt-4 is-2">Geofence History</h1>
+        <DisplayChildren urlPath="/parent/history/" />
       </div>
     </Layout>
   );
 };
 
-export default ParentNotificationHistory;
+export default ParentGeofencingHistory;

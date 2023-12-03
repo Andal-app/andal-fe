@@ -8,11 +8,11 @@ const Modal = ({ id, show, buttonShow, onClose, title, children, buttonMessage, 
     <div className="modal is-active" onClick={onClose}>
       <div className="modal-background"></div>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <header className="modal-card-head neon-blue">
+        <header className="modal-card-head neon-blue mx-4">
           <h4 className="modal-card-title text-magnolia">{title}</h4>
           <button onClick={onClose} className="delete is-large" aria-label="close"></button>
         </header>
-        <section className="modal-card-body magnolia">
+        <section className="modal-card-body magnolia mx-4">
           {children}
           {buttonShow && (
             <footer>
