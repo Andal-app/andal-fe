@@ -62,29 +62,33 @@ const ParentHome = () => {
       latitude: latitude,
       longitude: longitude
     };
-    try {
-      const response = await axios.put(
-        process.env.REACT_APP_linkNgrok + `/child/findCoordinates/${newProfile.name}`,
-        {
-          username: newProfile.name,
-          latitude: newProfile.latitude.toString(),
-          longitude: newProfile.longitude.toString()
-        },
-        {
-          Authorization: `${localStorage.getItem('token')}`
-        }
-      );
+    if (newProfile.latitude === 0 && newProfile.longitude === 0) {
+      alert('Akun anak tidak ditemukan');
+    } else {
+      try {
+        const response = await axios.put(
+          process.env.REACT_APP_linkNgrok + `/child/findCoordinates/${newProfile.name}`,
+          {
+            username: newProfile.name,
+            latitude: newProfile.latitude.toString(),
+            longitude: newProfile.longitude.toString()
+          },
+          {
+            Authorization: `${localStorage.getItem('token')}`
+          }
+        );
 
-      if (response.status === 200) {
-        // Handle success
-        alert('Akun anak berhasil terhubung');
-        setShowModal({ show: false });
-      } else {
-        // Handle error
-        alert('Gagal update profil');
+        if (response.status === 200) {
+          // Handle success
+          alert('Akun anak berhasil terhubung');
+          setShowModal({ show: false });
+        } else {
+          // Handle error
+          alert('Gagal update profil');
+        }
+      } catch (error) {
+        console.error('Error:', error.message);
       }
-    } catch (error) {
-      console.error('Error:', error.message);
     }
   };
 
