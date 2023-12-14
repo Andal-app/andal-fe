@@ -7,6 +7,16 @@
       name="description"
       content="An application that monitors children's safety and location through the use of Global Positioning System and Location-Based Services."
     />
+    <script>
+      export default {
+        script: [
+          { src: '/head.js' },
+          // Supported since 1.0
+          { src: '/body.js', body: true },
+          { src: '/defer.js', defer: '' }
+        ]
+      };
+    </script>
     <link rel="icon" href="%PUBLIC_URL%/logo.ico" />
     <title>Andal: Anak dalam Lindungan</title>
   </head>
