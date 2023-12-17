@@ -60,6 +60,7 @@ function ParentHistory() {
             longitude: item.longitude,
             startTime: item.start_time,
             endTime: item.end_time,
+            address_name: item.address_name,
             date: item.createdAt
           }));
           setChildHistory(childHistoryData);
@@ -111,9 +112,10 @@ function ParentHistory() {
                   {historyData.childName}
                   <br />
                   Pukul: {convertToIndonesianTime(historyData.startTime)} -{' '}
-                  {convertToIndonesianTime(historyData.endTime)} <br />
-                  Lokasi: {historyData.latitude}, {historyData.longitude}
+                  {convertToIndonesianTime(historyData.endTime)}
                   <br />
+                  Lokasi: {historyData.address_name} <br />
+                  Koordinat: {historyData.latitude}, {historyData.longitude} <br />
                   <button
                     onClick={() => {
                       setShowModal({ show: true, id: index });

@@ -14,6 +14,7 @@ const ParentSchedule = () => {
   const [searchResult] = useState(null);
   const [geofenceLat, setGeofenceLat] = useState(0.0);
   const [geofenceLng, setGeofenceLng] = useState(0.0);
+  const [addressName, setAddressName] = useState('');
   const [latitude] = useGlobalState('latitude');
   const [longitude] = useGlobalState('longitude');
   const [allChildren] = useGlobalState('allChildren');
@@ -45,7 +46,8 @@ const ParentSchedule = () => {
           longitude: geofenceLng,
           radius: '100',
           start_time: newStartTime,
-          end_time: newEndTime
+          end_time: newEndTime,
+          address_name: addressName
         });
       } catch (error) {
         console.log(error);
@@ -58,7 +60,8 @@ const ParentSchedule = () => {
           longitude: geofenceLng,
           radius: '100',
           start_time: newStartTime,
-          end_time: newEndTime
+          end_time: newEndTime,
+          address_name: addressName
         });
         await axios.post(process.env.REACT_APP_linkNgrok + '/history/data', {
           username: childname,
@@ -66,7 +69,8 @@ const ParentSchedule = () => {
           longitude: geofenceLng,
           radius: '100',
           start_time: newStartTime,
-          end_time: newEndTime
+          end_time: newEndTime,
+          address_name: addressName
         });
       } catch (error) {
         console.log(error);
@@ -105,6 +109,7 @@ const ParentSchedule = () => {
       </div>
       <div className="row mt-5">
         <GetCurrentPosition
+          setAddressName={setAddressName}
           setGeofenceLat={setGeofenceLat}
           setGeofenceLng={setGeofenceLng}
           isShowButton={false}

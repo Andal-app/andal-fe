@@ -9,6 +9,7 @@ const GeofencingLocation = ({ map, geofenceData }) => {
   const [geofenceStartTime, setGeofenceStartTime] = useState({ hour: 0, minute: 0 }); // Assuming structure similar to Dart TimeOfDay
   const [geofenceEndTime, setGeofenceEndTime] = useState({ hour: 0, minute: 0 });
   const [isInsideGeofence, setIsInsideGeofence] = useState(false);
+  const [distanceToGeofence, setDistanceToGeofence] = useState(null);
 
   const { childname } = useParams();
 
@@ -96,6 +97,7 @@ const GeofencingLocation = ({ map, geofenceData }) => {
   const checkGeofence = () => {
     if (geofenceLocation && currentLocation) {
       const distance = calculateDistance(currentLocation, geofenceLocation);
+      setDistanceToGeofence(distance);
       const radius = geofenceRadius;
       const isInside = distance <= radius && isWithinGeofenceTime(); // Update condition
       setIsInsideGeofence(isInside); // Assuming setIsInsideGeofence is a state setter
@@ -118,7 +120,11 @@ const GeofencingLocation = ({ map, geofenceData }) => {
       </div>
     ) : (
       <div>
-        Status Lokasi: <span style={{ color: '#ED1C24' }}>Di luar area geofence</span>
+        Status Lokasi:{' '}
+        <span style={{ color: '#ED1C24' }}>
+          Di luar area geofence{' '}
+          {distanceToGeofence && `(${Math.round(distanceToGeofence) - 100} meter ke radius geofence)`}
+        </span>
       </div>
     );
   } else {

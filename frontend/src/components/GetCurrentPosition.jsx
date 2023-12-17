@@ -20,6 +20,7 @@ const markerIcon = new L.icon({
 
 const GetCurrentPosition = ({
   error,
+  setAddressName,
   setGeofenceLat,
   setGeofenceLng,
   isShowButton,
@@ -81,6 +82,7 @@ const GetCurrentPosition = ({
   function searchEventHandler(result) {
     setGeofenceLat(result.location.y); // latitude
     setGeofenceLng(result.location.x); // longitude
+    setAddressName(result.location.label.match(/^([^,])+/)[0]);
     if (circle !== undefined) {
       map.removeLayer(circle);
     }
@@ -123,7 +125,10 @@ const GetCurrentPosition = ({
                   .filter((geofencedChild) => geofencedChild['username'] === childname)
                   .map((geofencedChildData, index) => (
                     <div key={index}>
-                      Jadwal &emsp;&nbsp;&ensp;: {geofencedChildData.start_time} - {geofencedChildData.end_time}
+                      <div>
+                        Jadwal &emsp;&nbsp;&ensp;: {geofencedChildData.start_time} - {geofencedChildData.end_time}
+                      </div>
+                      <div>Lokasi Geofence: {geofencedChildData.address_name}</div>
                     </div>
                   ))
               ) : (
