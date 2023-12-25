@@ -11,7 +11,7 @@ const ParentHome = () => {
   const [childUsername, setChildUsername] = useState('');
   const [latitude, setLatitude] = useState(0.0);
   const [longitude, setLongitude] = useState(0.0);
-  const [, setChildren] = useState([]);
+  const [children, setChildren] = useState([]);
   const [showModal, setShowModal] = useState({
     id: null,
     show: false
@@ -65,29 +65,47 @@ const ParentHome = () => {
     if (newProfile.latitude === 0 && newProfile.longitude === 0) {
       alert('Akun anak tidak ditemukan');
     } else {
-      try {
-        const response = await axios.put(
-          process.env.REACT_APP_linkNgrok + `/child/findCoordinates/${newProfile.name}`,
-          {
-            username: newProfile.name,
-            latitude: newProfile.latitude.toString(),
-            longitude: newProfile.longitude.toString()
-          },
-          {
-            Authorization: `${localStorage.getItem('token')}`
-          }
-        );
+      const newChildren = children.filter((filteredchildren) => filteredchildren['username'] === parent);
+      if (newChildren.filter((filteredname) => filteredname['name'] === newProfile.name).length > 0) {
+        alert('Akun anak sudah ada di daftar anak');
+      } else {
+        try {
+          const response = await axios.put(
+            process.env.REACT_APP_linkNgrok + `/child/findCoordinates/${newProfile.name}`,
+            {
+              username: newProfile.name,
+              latitude: newProfile.latitude.toString(),
+              longitude: newProfile.longitude.toString()
+            },
+            {
+              Authorization: `${localStorage.getItem('token')}`
+            }
+          );
 
-        if (response.status === 200) {
-          // Handle success
-          alert('Akun anak berhasil terhubung');
-          setShowModal({ show: false });
-        } else {
-          // Handle error
-          alert('Gagal update profil');
+          await axios.post(
+            process.env.REACT_APP_linkNgrok + '/user/addProfile',
+            {
+              username: newProfile.username,
+              name: newProfile.name,
+              latitude: newProfile.latitude.toString(),
+              longitude: newProfile.longitude.toString()
+            },
+            {
+              Authorization: `${localStorage.getItem('token')}`
+            }
+          );
+
+          if (response.status === 200) {
+            // Handle success
+            alert('Akun anak berhasil terhubung');
+            setShowModal({ show: false });
+          } else {
+            // Handle error
+            alert('Gagal update profil');
+          }
+        } catch (error) {
+          console.error('Error:', error.message);
         }
-      } catch (error) {
-        console.error('Error:', error.message);
       }
     }
   };
@@ -137,7 +155,7 @@ const ParentHome = () => {
             Simpan
           </button>
         </Modal>
-        <DisplayChildren urlPath="/parent/lokasianak/" />
+        <DisplayChildren children={children} setChildren={setChildren} urlPath="/parent/lokasianak/" />
         {/* <h2 className="has-text-weight-semibold is-size-4 mb-3">Daftar Anak</h2>
         <div className="row">
           {children

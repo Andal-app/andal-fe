@@ -3,14 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
-const DisplayChildren = ({ urlPath }) => {
-  const [children, setChildren] = useState([]);
-
+const DisplayChildren = ({ children, setChildren, urlPath }) => {
   const { parent } = useSelector((state) => state.parent);
 
   useEffect(() => {
     getChildren();
-  }, []);
+  }, [children]);
 
   const getChildren = async () => {
     await axios
