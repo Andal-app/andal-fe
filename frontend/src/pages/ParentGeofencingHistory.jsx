@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import DisplayChildren from '../components/DisplayChildren';
@@ -9,6 +9,7 @@ const ParentGeofencingHistory = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { parent } = useSelector((state) => state.parent);
+  const [children, setChildren] = useState([]);
 
   useEffect(() => {
     dispatch(getMeParent());
@@ -22,7 +23,7 @@ const ParentGeofencingHistory = () => {
     <Layout roleTitle="Parent">
       <div className="column">
         <h1 className="title mt-4 is-2">Geofence History</h1>
-        <DisplayChildren urlPath="/parent/history/" />
+        <DisplayChildren children={children} setChildren={setChildren} urlPath="/parent/history/" />
       </div>
     </Layout>
   );
