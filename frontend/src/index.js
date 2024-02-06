@@ -5,9 +5,9 @@ import { store } from './app/store';
 import App from './App';
 
 // styling
-import 'bulma/css/bulma.css';
-import './styles/style2.css';
-import './styles/style.css';
+// import 'bulma/css/bulma.css';
+// import './styles/style2.css';
+// import './styles/style.css';
 
 // axios.defaults.withCredentials = true;
 

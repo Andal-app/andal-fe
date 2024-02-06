@@ -1,4 +1,5 @@
 import React from 'react';
+import './../node_modules/tailwindcss/tailwind.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import ParentLogin from './pages/ParentLogin';
