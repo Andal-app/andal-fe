@@ -15,31 +15,15 @@ function LandingPage() {
 
   return (
     <>
-      <section className="hero has-background-grey-light is-fullheight is-fullwidth">
-        <div className="hero-body">
-          <div className="container">
-            <div className="columns is-centered">
-              <div className="column is-4">
-                <div className="box columns is-flex-direction-column">
-                  <h1 className="title is-2 has-text-centered">Welcome to Andal</h1>
-                  <div className="box column magnolia is-8 is-flex is-flex-direction-column is-align-items-center">
-                    <Link to="/parent/login">
-                      <MdPersonOutline size={160} />
-                      <h2 className="has-text-centered">Parent</h2>
-                    </Link>
-                  </div>
-                  <div className="box column magnolia is-8 is-flex is-flex-direction-column is-align-items-center">
-                    <Link to="/child/childlogin">
-                      <MdChildCare size={160} />
-                      <h2 className="has-text-centered">Child</h2>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div id="role__container">
+        <div id="role__title">
+          <h3>Pilih Peran</h3>
         </div>
-      </section>
+        <main id="role__content">
+          <div id="box__parents">Orang Tua</div>
+          <div id="box__child">Anak</div>
+        </main>
+      </div>
     </>
   );
 }
