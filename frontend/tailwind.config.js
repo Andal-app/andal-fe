@@ -13,7 +13,8 @@ module.exports = {
       'b-xl': ['1.125rem', '2rem'], // 18px
       'b-lg': ['1rem', '1.75rem'], // 16px
       'b-md': ['0.875rem', '1.5rem'], // 14px
-      'b-sm': ['0.75rem', '1.3rem'] // 12px
+      'b-sm': ['0.75rem', '1.3rem'], // 12px
+      'b-xsm': ['0.625rem', '1rem'] // 10px
     },
     colors: {
       transparent: 'transparent',
@@ -33,16 +34,16 @@ module.exports = {
         900: '#1C1F1F'
       },
       violet: {
-        50: '#f5f3ff',
-        100: '#E8EBEB',
-        200: '#D2D6D7',
-        300: '#BBC2C3',
-        400: '#A5ADAF',
-        500: '#8E999B',
+        50: '#F5F3FF',
+        100: '#EDE9FE',
+        200: '#DDD6FE',
+        300: '#C4B5FD',
+        400: '#A78BFA',
+        500: '#8B5CF6',
         600: '#7C3AED',
-        700: '#555C5D',
-        800: '#393D3E',
-        900: '#1C1F1F'
+        700: '#6D28D9',
+        800: '#5B21B6',
+        900: '#4C1D95'
       },
       yellow: {
         50: '#fefce8',
