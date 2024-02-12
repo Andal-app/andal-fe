@@ -7,6 +7,7 @@ import Blob2 from '../assets/shapes/blob_2.svg';
 import RingDouble from '../assets/shapes/ring_double.svg';
 import VectorZigzag from '../assets/vectors/vector_zigzag.svg';
 import VectorPlus from '../assets/vectors/vector_plus.svg';
+import TopWave1 from '../assets/waves/wave_top_1.svg';
 
 const ParentLogin = () => {
   return (
@@ -21,14 +22,20 @@ const ParentLogin = () => {
         `}
         </style>
 
-        <div className="absolute z-10 flex w-full h-screen">
+        <div className="hidden absolute z-10 lg:flex w-full h-screen">
           <div className="basis-1/2 bg-violet-400"></div>
           <div className="basis-1/2 bg-white"></div>
         </div>
         {/* background end */}
 
         {/* decorations start */}
-        <div>
+        {/* top wave decoration start */}
+        <div className="z-50 lg:hidden fixed top-0 left-0 right-0 w-full">
+          <img src={TopWave1} className="w-full" />
+        </div>
+        {/* top wave decoration end */}
+
+        <div className="hidden lg:block">
           <div className="absolute z-20 left-[-50px] bottom-[-110px]">
             <img src={Blob1} className="w-80" />
           </div>
@@ -47,8 +54,11 @@ const ParentLogin = () => {
         </div>
         {/* decorations end */}
 
-        <div id="main__box" className="z-30 flex bg-white w-[85%] h-[80%] p-14 rounded-3xl drop-shadow-2xl">
-          <div id="left__pane__container" className="basis-1/2 flex justify-center items-center px-16">
+        <div
+          id="main__box"
+          className="z-30 flex w-screen h-screen lg:w-[85%] lg:h-[80%] px-6 py-20 lg:p-14 lg:rounded-3xl lg:drop-shadow-2xl"
+        >
+          <div id="left__pane__container" className="hidden lg:basis-1/2 lg:flex justify-center items-center px-16">
             {/* tutorial start */}
             <div id="tutorial__container" className="py-8 px-20 flex flex-col gap-8">
               <div id="tutorial__image" className="flex items-center justify-center">
@@ -71,67 +81,71 @@ const ParentLogin = () => {
             {/* tutorial end */}
           </div>
 
-          <div id="right__pane__container" className="basis-1/2 flex justify-center">
+          <div id="right__pane__container" className="w-full lg:basis-1/2 flex justify-center items-end">
             {/* login start */}
-            <div className="w-full lg:w-[60%] h-full flex flex-col items-center justify-center">
+            <div className="w-full lg:w-[60%] lg:h-full flex flex-col items-center justify-center">
               {/* logo start */}
-              <a href="#" className="flex items-center mb-6">
-                <div className="bg-violet-300 h-32 w-32 rounded-full"></div>
+              <a href="#" className="hidden lg:flex items-center mb-6">
+                <div className="h-32 w-32 rounded-full"></div>
               </a>
               {/* logo end */}
 
               {/* greetings and form start */}
               <div className="w-full bg-white">
                 <div className="">
-                  <h1 className="text-b-lg mb-5">
+                  <h1 className="text-b-lg mb-12 lg:mb-5">
                     Halo, <br /> Selamat datang kembali
                   </h1>
 
-                  <form className="space-y-4" action="#">
-                    {/* email start */}
-                    <div>
-                      <label for="email" className="block mb-2 text-b-lg">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        className="h-14 px-2.5 border-2 border-neutral-400 text-gray-900 sm:text-sm rounded-lg focus:border-neutral-500 w-full"
-                        placeholder="fiorenza@xmail.com"
-                        required=""
-                      />
-                    </div>
-                    {/* email end */}
-
-                    {/* password start */}
-                    <div className="space-y-1">
+                  <form className="w-full" action="#">
+                    <div id="form__inputs" className="space-y-4 my-4">
+                      {/* email start */}
                       <div>
-                        <label for="password" className="block mb-2 text-b-lg">
-                          Password
+                        <label for="email" className="block mb-2 text-b-lg">
+                          Email
                         </label>
                         <input
-                          type="password"
-                          name="password"
-                          id="password"
-                          placeholder="••••••••"
+                          type="email"
+                          name="email"
+                          id="email"
                           className="h-14 px-2.5 border-2 border-neutral-400 text-gray-900 sm:text-sm rounded-lg focus:border-neutral-500 w-full"
+                          placeholder="fiorenza@xmail.com"
                           required=""
                         />
                       </div>
-                      {/* lupa password start */}
-                      <div className="bg-white text-b-md text-end">Lupa password?</div>
-                      {/* lupa password end */}
+                      {/* email end */}
+
+                      {/* password start */}
+                      <div className="space-y-1">
+                        <div>
+                          <label for="password" className="block mb-2 text-b-lg">
+                            Password
+                          </label>
+                          <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="••••••••"
+                            className="h-14 px-2.5 border-2 border-neutral-400 text-gray-900 sm:text-sm rounded-lg focus:border-neutral-500 w-full"
+                            required=""
+                          />
+                        </div>
+                        {/* lupa password start */}
+                        <div className="bg-white text-b-md text-end">Lupa password?</div>
+                        {/* lupa password end */}
+                      </div>
+                      {/* password end */}
                     </div>
-                    {/* password end */}
 
                     {/* submit button start */}
-                    <button
-                      type="submit"
-                      className="h-14 w-full text-white bg-violet-700 hover:bg-violet-800 focus:ring-2 focus:outline-none focus:ring-violet-300 font-bold rounded-lg text-b-lg px-5 py-2.5 text-center"
-                    >
-                      Masuk
-                    </button>
+                    <div className="my-4 mt-10">
+                      <button
+                        type="submit"
+                        className="h-14 w-full text-white bg-violet-700 hover:bg-violet-800 focus:ring-2 focus:outline-none focus:ring-violet-300 font-bold rounded-lg text-b-lg px-5 py-2.5 text-center"
+                      >
+                        Masuk
+                      </button>
+                    </div>
                     {/* submit button end */}
 
                     {/* sign up? start */}
