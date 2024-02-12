@@ -1,13 +1,19 @@
 import React from 'react';
-import FormLogin from '../components/FormLogin';
 
-import Tutorial from '../assets/images/tutorial.svg';
+import TutorialImg from '../assets/images/tutorial.svg';
 import Blob1 from '../assets/shapes/blob_1.svg';
 import Blob2 from '../assets/shapes/blob_2.svg';
 import RingDouble from '../assets/shapes/ring_double.svg';
 import VectorZigzag from '../assets/vectors/vector_zigzag.svg';
 import VectorPlus from '../assets/vectors/vector_plus.svg';
 import TopWave1 from '../assets/waves/wave_top_1.svg';
+import TextInput from '../components/inputs/TextInput';
+import InputLabel from '../components/inputs/InputLabel';
+import PasswordInput from '../components/inputs/PasswordInput';
+import ForgotPass from '../components/buttons/ForgotPass';
+import SubmitBtn from '../components/buttons/SubmitBtn';
+import RegisterNowBtn from '../components/buttons/RegisterNowBtn';
+import Tutorial from '../components/tutorial/Tutorial';
 
 const ParentLogin = () => {
   return (
@@ -56,28 +62,11 @@ const ParentLogin = () => {
 
         <div
           id="main__box"
-          className="z-30 flex w-screen h-screen lg:w-[85%] lg:h-[80%] px-6 py-20 lg:p-14 lg:rounded-3xl lg:drop-shadow-2xl"
+          className="z-30 bg-white flex w-screen h-screen lg:w-[85%] lg:h-[80%] px-6 py-20 lg:p-14 lg:rounded-3xl lg:drop-shadow-2xl"
         >
           <div id="left__pane__container" className="hidden lg:basis-1/2 lg:flex justify-center items-center px-16">
             {/* tutorial start */}
-            <div id="tutorial__container" className="py-8 px-20 flex flex-col gap-8">
-              <div id="tutorial__image" className="flex items-center justify-center">
-                <img src={Tutorial}></img>
-              </div>
-              <div id="tutorial__text" className="text-center flex flex-col gap-4">
-                <h4 className="text-h-md font-semibold text-violet-900">Heading tutorial satu tutorial satu</h4>
-                <p className="text-b-md text-neutral-800">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam
-                </p>
-              </div>
-              <div id="tutorial__progress" className="flex items-center justify-center">
-                progress
-              </div>
-              <div id="tutorial__next__btn" className="flex items-center justify-end">
-                <p className="text-b-md font-semibold text-violet-500">Lanjut</p>
-              </div>
-            </div>
+            <Tutorial imgSrc={TutorialImg} />
             {/* tutorial end */}
           </div>
 
@@ -85,7 +74,7 @@ const ParentLogin = () => {
             {/* login start */}
             <div className="w-full lg:w-[60%] lg:h-full flex flex-col items-center justify-center">
               {/* logo start */}
-              <a href="#" className="hidden lg:flex items-center mb-6">
+              <a href="#" className="hidden lg:flex items-center mb-6 bg-violet-300 rounded-full">
                 <div className="h-32 w-32 rounded-full"></div>
               </a>
               {/* logo end */}
@@ -101,16 +90,13 @@ const ParentLogin = () => {
                     <div id="form__inputs" className="space-y-4 my-4">
                       {/* email start */}
                       <div>
-                        <label for="email" className="block mb-2 text-b-lg">
-                          Email
-                        </label>
-                        <input
+                        <InputLabel labelFor="email" content="Email" />
+                        <TextInput
                           type="email"
                           name="email"
                           id="email"
-                          className="h-14 px-2.5 border-2 border-neutral-400 text-gray-900 sm:text-sm rounded-lg focus:border-neutral-500 w-full"
                           placeholder="fiorenza@xmail.com"
-                          required=""
+                          required="true"
                         />
                       </div>
                       {/* email end */}
@@ -118,20 +104,13 @@ const ParentLogin = () => {
                       {/* password start */}
                       <div className="space-y-1">
                         <div>
-                          <label for="password" className="block mb-2 text-b-lg">
-                            Password
-                          </label>
-                          <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            placeholder="••••••••"
-                            className="h-14 px-2.5 border-2 border-neutral-400 text-gray-900 sm:text-sm rounded-lg focus:border-neutral-500 w-full"
-                            required=""
-                          />
+                          <InputLabel labelFor="password" content="Password" />
+                          <PasswordInput />
                         </div>
                         {/* lupa password start */}
-                        <div className="bg-white text-b-md text-end">Lupa password?</div>
+                        <div>
+                          <ForgotPass />
+                        </div>
                         {/* lupa password end */}
                       </div>
                       {/* password end */}
@@ -139,22 +118,14 @@ const ParentLogin = () => {
 
                     {/* submit button start */}
                     <div className="my-4 mt-10">
-                      <button
-                        type="submit"
-                        className="h-14 w-full text-white bg-violet-700 hover:bg-violet-800 focus:ring-2 focus:outline-none focus:ring-violet-300 font-bold rounded-lg text-b-lg px-5 py-2.5 text-center"
-                      >
-                        Masuk
-                      </button>
+                      <SubmitBtn />
                     </div>
                     {/* submit button end */}
 
                     {/* sign up? start */}
-                    <p className="text-b-lg text-center">
-                      Belum memiliki akun?{' '}
-                      <a href="#" className="font-bold hover:underline">
-                        Daftar sekarang
-                      </a>
-                    </p>
+                    <div>
+                      <RegisterNowBtn />
+                    </div>
                     {/* sign up? end */}
                   </form>
                 </div>
