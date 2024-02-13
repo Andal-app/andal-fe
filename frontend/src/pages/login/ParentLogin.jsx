@@ -1,16 +1,16 @@
 import React from 'react';
 
-import TextInput from '../components/inputs/TextInput';
-import InputLabel from '../components/inputs/InputLabel';
-import PasswordInput from '../components/inputs/PasswordInput';
-import ForgotPass from '../components/buttons/ForgotPass';
-import SubmitBtn from '../components/buttons/SubmitBtn';
-import RegisterNowBtn from '../components/buttons/RegisterNowBtn';
-import RegisterLayout from '../layouts/auth/RegisterLayout';
+import TextInput from '../../components/inputs/TextInput';
+import InputLabel from '../../components/inputs/InputLabel';
+import PasswordInput from '../../components/inputs/PasswordInput';
+import ForgotPass from '../../components/buttons/ForgotPass';
+import SubmitBtn from '../../components/buttons/SubmitBtn';
+import RegisterNowBtn from '../../components/buttons/RegisterNowBtn';
+import LoginLayout from '../../layouts/LoginLayout';
 
-const ParentRegister = () => {
+const ParentLogin = () => {
   return (
-    <RegisterLayout>
+    <LoginLayout>
       {/* right pane content start */}
       <div className="w-full lg:w-[60%] lg:h-full flex flex-col items-center justify-center">
         {/* logo start */}
@@ -22,18 +22,12 @@ const ParentRegister = () => {
         {/* greetings and form start */}
         <div className="w-full bg-white">
           <div className="">
-            <h1 className="text-b-lg mb-8 lg:mb-5">Daftarkan diri Anda</h1>
+            <h1 className="text-b-lg mb-12 lg:mb-5">
+              Halo, <br /> Selamat datang kembali
+            </h1>
 
             <form className="w-full" action="#">
-              {/* form inputs start */}
               <div id="form__inputs" className="space-y-4 my-4">
-                {/* full name start */}
-                <div>
-                  <InputLabel labelFor="fullName" content="Nama Lengkap" />
-                  <TextInput type="text" name="email" id="fullName" placeholder="Fiorenza Celestyn" required="true" />
-                </div>
-                {/* full name end */}
-
                 {/* email start */}
                 <div>
                   <InputLabel labelFor="email" content="Email" />
@@ -43,20 +37,18 @@ const ParentRegister = () => {
 
                 {/* password start */}
                 <div className="space-y-1">
-                  <InputLabel labelFor="password" content="Password" />
-                  <PasswordInput />
+                  <div>
+                    <InputLabel labelFor="password" content="Password" />
+                    <PasswordInput />
+                  </div>
+                  {/* lupa password start */}
+                  <div>
+                    <ForgotPass />
+                  </div>
+                  {/* lupa password end */}
                 </div>
                 {/* password end */}
-
-                {/* confirm password start */}
-                <div className="space-y-1">
-                  <InputLabel labelFor="password" content="Konfirmasi password" />
-                  <PasswordInput />
-                </div>
-                {/* confirm password end */}
               </div>
-
-              {/* form inputs start */}
 
               {/* submit button start */}
               <div className="my-4 mt-10">
@@ -74,8 +66,8 @@ const ParentRegister = () => {
         </div>
       </div>
       {/* right pane content end */}
-    </RegisterLayout>
+    </LoginLayout>
   );
 };
 
-export default ParentRegister;
+export default ParentLogin;
