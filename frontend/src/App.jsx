@@ -17,6 +17,7 @@ import ParentGeofencing from './pages/ParentGeofencing';
 import PrivateRoute from './routes/PrivateRoute';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Profile from './pages/profile/Profile';
+import Trial from './pages/Trial';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/parent/register" element={<ParentRegister />} />
             <Route path="/child/register" element={<ChildRegister />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/trial" element={<Trial />} />
           </Route>
           <Route element={<PrivateRoute />}>
             <Route path="/child/home" element={<ChildHome />} />

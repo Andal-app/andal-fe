@@ -7,6 +7,7 @@ import ProfPic from '../../assets/images/profile_picture.jpeg';
 import { BiEdit } from 'react-icons/bi';
 import { FaChevronRight } from 'react-icons/fa6';
 import ProfSetItem from './ProfSetItem';
+import BottomNavbar from '../../components/navigation/BottonNavbar';
 
 function Profile() {
   const ParentSettingItems = [
@@ -46,6 +47,10 @@ function Profile() {
         </div>
         {/* user setting list end*/}
       </main>
+      {/* 
+      <div>
+        <BottomNavbar className="h-screen flex justify-center items-center bg-gray-900" />
+      </div> */}
     </div>
   );
 }
