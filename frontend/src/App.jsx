@@ -18,6 +18,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Profile from './pages/profile/Profile';
 import Trial from './pages/Trial';
+import EditProfile from './pages/profile/EditProfile';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/parent/register" element={<ParentRegister />} />
             <Route path="/child/register" element={<ChildRegister />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/editprofile" element={<EditProfile />} />
             <Route path="/trial" element={<Trial />} />
           </Route>
           <Route element={<PrivateRoute />}>
