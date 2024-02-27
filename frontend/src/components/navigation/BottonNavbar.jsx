@@ -11,8 +11,8 @@ const BottomNavbar = () => {
   ];
   const [active, setActive] = useState(0);
   return (
-    <div className="bg-violet-400 max-h-[4.4rem] px-6 rounded-t-xl">
-      <ul className="flex relative">
+    <div className="bg-violet-400 max-h-[4.4rem] w-full px-6 rounded-t-xl">
+      <ul className="flex relative w-full bg-red-100">
         <span
           className={`bg-violet-600 duration-500 ${Menus[active].dis} border-4 border-neutral-900 h-16 w-16 absolute
          -top-7 rounded-full`}
@@ -33,14 +33,18 @@ const BottomNavbar = () => {
               onClick={() => setActive(i)}
             >
               <span
-                className={`text-xl cursor-pointer duration-300 text-white ${
-                  i === active && '-mt-5 -ml-6 text-white absolute'
+                className={`text-xl cursor-pointer duration-300 text-black ${
+                  i === active && 'text-neutral-50 -mt-5 -ml-6 absolute'
                 }`}
               >
                 {/* <ion-icon name={menu.icon}></ion-icon> */}
                 <Icon icon={'bx:edit'} className={`w-6 h-6 ${i === active && 'z-10 absolute'}`} />
               </span>
-              <span className={`duration-0 text-white text-b-sm  ${active === i ? 'translate-y-5 mt-1' : ''} `}>
+              <span
+                className={`duration-0 text-black text-b-sm  ${
+                  active === i ? 'translate-y-5 mt-1 text-neutral-50' : ''
+                } `}
+              >
                 {menu.name}
               </span>
             </a>
