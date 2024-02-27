@@ -60,7 +60,7 @@ const ParentRegister = () => {
 
               {/* submit button start */}
               <div className="my-4 mt-10">
-                <SubmitBtn />
+                <SubmitBtn text="Masuk" />
               </div>
               {/* submit button end */}
 
