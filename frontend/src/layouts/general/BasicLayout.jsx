@@ -5,7 +5,7 @@ import Blob2 from '../../assets/shapes/blob_2.svg';
 import RingDouble from '../../assets/shapes/ring_double.svg';
 import VectorZigzag from '../../assets/vectors/vector_zigzag.svg';
 import VectorPlus from '../../assets/vectors/vector_plus.svg';
-import TopWave1 from '../../assets/waves/wave_top_1.svg';
+import BottomWave1 from '../../assets/waves/wave_bottom_1.svg';
 
 function BasicLayout({ children }) {
   return (
@@ -26,11 +26,11 @@ function BasicLayout({ children }) {
       {/* background end */}
 
       {/* decorations start */}
-      {/* top wave decoration start */}
-      <div className="z-50 lg:hidden fixed top-0 left-0 right-0 w-full">
-        <img src={TopWave1} className="w-full" />
-      </div>
-      {/* top wave decoration end */}
+      {/* bottom wave decoration start */}
+      {/* <div className="z-50 lg:hidden fixed bottom-0 left-0 right-0 w-full">
+        <img src={BottomWave1} className="w-full" />
+      </div> */}
+      {/* bottom wave decoration end */}
 
       <div className="hidden lg:block">
         <div className="absolute z-20 left-[-50px] bottom-[-110px]">
