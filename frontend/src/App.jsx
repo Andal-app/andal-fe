@@ -19,6 +19,7 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import Profile from './pages/profile/Profile';
 import Trial from './pages/Trial';
 import EditProfile from './pages/profile/EditProfile';
+import ConfirmDelete from './pages/alert/ConfirmDelete';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/editprofile" element={<EditProfile />} />
             <Route path="/trial" element={<Trial />} />
+            <Route path="/deleteaccount" element={<ConfirmDelete />} />
           </Route>
           <Route element={<PrivateRoute />}>
             <Route path="/child/home" element={<ChildHome />} />
