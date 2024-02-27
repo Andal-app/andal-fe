@@ -81,6 +81,11 @@ module.exports = {
         800: '#991B1B',
         900: '#7F1D1D'
       }
+    },
+    extend: {
+      backgroundImage: {
+        map: "url('/src/assets/images/map_bg.svg')"
+      }
     }
   },
   plugins: []

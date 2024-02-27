@@ -8,7 +8,7 @@ function Tutorial({ imgSrc }) {
       </div>
       <div id="tutorial__text" className="text-center flex flex-col gap-4">
         <h4 className="text-h-md font-semibold text-violet-900">Heading tutorial satu tutorial satu</h4>
-        <p className="text-b-md text-neutral-800">
+        <p className="text-b-md text-neutral-800 max-w-[420px]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Ut enim ad minim veniam
         </p>

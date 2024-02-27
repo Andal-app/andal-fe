@@ -1,7 +1,6 @@
 import React from 'react';
 import './../node_modules/tailwindcss/tailwind.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
 import ParentLogin from './pages/login/ParentLogin';
 import ChildLogin from './pages/login/ChildLogin';
 import ParentRegister from './pages/ParentRegister';
@@ -20,6 +19,9 @@ import Profile from './pages/profile/Profile';
 import Trial from './pages/Trial';
 import EditProfile from './pages/profile/EditProfile';
 import ConfirmDelete from './pages/alert/ConfirmDelete';
+import SelectRole from './pages/SelectRole';
+import LandingPage from './pages/general/LandingPage';
+import TutorialPage from './pages/general/TutorialPage';
 
 function App() {
   return (
@@ -27,7 +29,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/app" element={<LandingPage />} />
+            <Route path="/app/tutorial" element={<TutorialPage />} />
+            <Route path="/selectrole" element={<SelectRole />} />
             <Route path="/parent/login" element={<ParentLogin />} />
             <Route path="/child/childlogin" element={<ChildLogin />} />
             <Route path="/parent/register" element={<ParentRegister />} />
@@ -36,8 +40,7 @@ function App() {
             <Route path="/editprofile" element={<EditProfile />} />
             <Route path="/trial" element={<Trial />} />
             <Route path="/deleteaccount" element={<ConfirmDelete />} />
-          </Route>
-          <Route element={<PrivateRoute />}>
+
             <Route path="/child/home" element={<ChildHome />} />
             <Route path="/parent/home" element={<ParentHome />} />
             <Route path="/parent/history" element={<ParentGeofencingHistory />} />
@@ -47,6 +50,7 @@ function App() {
             <Route path="/parent/lokasianak/:childname" element={<ParentChildLocation />} />
             <Route path="/parent/geofencing/:childname" element={<ParentGeofencing />} />
           </Route>
+          <Route element={<PrivateRoute />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

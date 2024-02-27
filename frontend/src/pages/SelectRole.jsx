@@ -10,7 +10,7 @@ import RoleOrangtua from '../assets/images/role_orangtua.svg';
 import RoleAnak from '../assets/images/role_anak.svg';
 import BottomWave from '../assets/waves/wave_bottom_1.svg';
 
-function LandingPage() {
+function SelectRole() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,4 +61,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;
+export default SelectRole;
