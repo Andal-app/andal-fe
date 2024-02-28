@@ -30,21 +30,18 @@ function SelectRole() {
         {/* tutorial end */}
       </div>
 
-      <div
-        id="right__pane__container"
-        className="bg-red-300 w-full lg:basis-1/2 h-screen lg:h-min flex justify-center items-end"
-      >
+      <div id="right__pane__container" className="w-full lg:basis-1/2 h-screen lg:h-min flex justify-center items-end">
         {/* right pane content start */}
         {/* role__container start */}
-        <div id="role__container" className="bg-red-200 my-24 flex flex-col items-center gap-y-6 w-10/12">
+        <div id="role__container" className="my-24 h-[80%] flex flex-col items-center gap-y-6 w-[85%]">
           {/* role__title start */}
-          <div id="role__title">
+          <div id="role__title" className="w-full">
             <h3 className="text-h-lg font-bold text-violet-900 text-start lg:text-center">Pilih Peran</h3>
           </div>
           {/* role__title end */}
 
           {/* role__content start */}
-          <main id="role__content" className="bg-violet-50 flex flex-col gap-8 w-full lg:w-[70%]">
+          <main id="role__content" className="flex flex-col gap-8 w-full lg:w-[70%]">
             <RoleBox
               link="/parent/login"
               id="box__parents"
@@ -67,6 +64,12 @@ function SelectRole() {
         </div>
         {/* role__container end */}
         {/* right pane content end */}
+
+        {/* wave footer start */}
+        <div className="fixed bottom-0 left-0 w-full lg:hidden">
+          <img src={BottomWave} className="w-full" />
+        </div>
+        {/* wave footer end */}
       </div>
     </BasicLayout>
   );

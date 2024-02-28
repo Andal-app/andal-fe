@@ -54,7 +54,7 @@ function BasicLayout({ children }) {
       {/* main box start */}
       <main
         id="main__box"
-        className="z-30 flex justify-center items-center w-screen h-screen lg:w-[85%] lg:h-[80%] lg:rounded-3xl lg:drop-shadow-2xl overflow-hidden bg-red-400"
+        className="z-30 flex justify-center items-center w-screen h-screen lg:w-[85%] lg:h-[80%] lg:rounded-3xl lg:drop-shadow-2xl overflow-hidden bg-white"
       >
         {children}
       </main>
