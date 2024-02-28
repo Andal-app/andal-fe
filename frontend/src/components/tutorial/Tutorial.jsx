@@ -2,7 +2,10 @@ import React from 'react';
 
 function Tutorial({ imgSrc }) {
   return (
-    <div id="tutorial__container" className="py-8 px-20 flex flex-col gap-8">
+    <div
+      id="tutorial__container"
+      className="w-[85%] lg:w-max h-[75%] lg:h-min py-10 lg:py-0 px-6 lg:px-0 rounded-xl shadow-2xl lg:shadow-none flex flex-col gap-8"
+    >
       <div id="tutorial__image" className="flex items-center justify-center">
         <img src={imgSrc}></img>
       </div>
