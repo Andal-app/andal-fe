@@ -11,13 +11,13 @@ function ParentHomeV2() {
     <div className="flex">
       <Sidebar />
 
-      <main className="m-10 w-full lg:w-fit">
+      <main className="m-10 w-full lg:w-fit bg-red-200">
         {/* page title start */}
         <h5 className="text-h-sm font-bold py-6 text-violet-900">Daftar Anak</h5>
         {/* page title end */}
 
         {/* children list start */}
-        <div className="flex flex-col w-full">
+        <div className="bg-red-300 flex lg:flex-col flex-wrap lg:flex-nowrap w-full justify-between gap-0 lg:gap-4">
           {ChildrenList.map(({ fullName, profPic, index }) => (
             <ChildBox fullName={fullName} profPic={profPic} index={index} />
           ))}
