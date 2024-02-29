@@ -22,6 +22,7 @@ import ConfirmDelete from './pages/alert/ConfirmDelete';
 import SelectRole from './pages/SelectRole';
 import LandingPage from './pages/general/LandingPage';
 import TutorialPage from './pages/general/TutorialPage';
+import ParentHomeV2 from './pages/home/ParentHomeV2';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
 
             <Route path="/child/home" element={<ChildHome />} />
             <Route path="/parent/home" element={<ParentHome />} />
+            <Route path="/parent/home/v2" element={<ParentHomeV2 />} />
             <Route path="/parent/history" element={<ParentGeofencingHistory />} />
             <Route path="/parent/history/:childname" element={<ParentHistory />} />
             <Route path="/parent/notification_history" element={<ParentNotificationHistory />} />
