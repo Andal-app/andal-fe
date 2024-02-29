@@ -23,6 +23,7 @@ import SelectRole from './pages/SelectRole';
 import LandingPage from './pages/general/LandingPage';
 import TutorialPage from './pages/general/TutorialPage';
 import ParentHomeV2 from './pages/home/ParentHomeV2';
+import ChildHomeV2 from './pages/home/ChildHomeV2';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path="/deleteaccount" element={<ConfirmDelete />} />
 
             <Route path="/child/home" element={<ChildHome />} />
+            <Route path="/child/home/v2" element={<ChildHomeV2 />} />
             <Route path="/parent/home" element={<ParentHome />} />
             <Route path="/parent/home/v2" element={<ParentHomeV2 />} />
             <Route path="/parent/history" element={<ParentGeofencingHistory />} />
