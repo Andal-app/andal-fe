@@ -1,4 +1,5 @@
 import React from 'react';
+import PositionDetailBox from '../../components/box/PositionDetailBox';
 import HomeLayout from '../../layouts/home/HomeLayout';
 
 function ChildHomeV2() {
@@ -15,32 +16,11 @@ function ChildHomeV2() {
         <div className="lg:z-0 bg-neutral-400 h-72 lg:h-screen">MAP MAP MAP MAP MAP MAP</div>
         {/* map end */}
 
-        {/* location detail start */}
-        <div className="bg-white lg:absolute lg:top-20 lg:left-8 lg:z-10 lg:rounded-xl lg:drop-shadow-xl lg:p-5 lg">
-          <p className="text-b-lg font-bold text-violet-900">Detail Posisi</p>
-          <div className="container mx-auto text-b-sm">
-            <table className="table-auto">
-              <tbody>
-                <tr>
-                  <td className="pr-8">Alamat</td>
-                  <td className="pr-2">:</td>
-                  <td className=" ">Jalan Grafika No. 2, Sleman</td>
-                </tr>
-                <tr>
-                  <td className="">Longitude</td>
-                  <td className="">:</td>
-                  <td className="">B-7.767722745243223</td>
-                </tr>
-                <tr>
-                  <td className="">Latitude</td>
-                  <td className="">:</td>
-                  <td className="">110.37243623854161</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        {/* position detail start */}
+        <div className="bg-white lg:absolute lg:top-20 lg:left-8 lg:z-10 lg:rounded-xl lg:drop-shadow-xl lg:p-5">
+          <PositionDetailBox />
         </div>
-        {/* location detail end */}
+        {/* position detail end */}
       </div>
     </HomeLayout>
   );
