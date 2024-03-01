@@ -15,8 +15,9 @@ function Sidebar() {
     <nav className={` ${open ? 'w-72' : 'w-20 '}  hidden lg:block h-screen  py-8 relative duration-300 shadow-2xl`}>
       {/* open close button start */}
       <div
-        className={`bg-violet-200 h-10 w-10 p-2 absolute cursor-pointer -right-3 top-9
-     rounded-full drop-shadow-md  ${!open && 'rotate-180'}`}
+        className={`z-50 bg-violet-200 h-10 w-10 p-2 absolute cursor-pointer -right-3 top-9 rounded-full drop-shadow-md  ${
+          !open && 'rotate-180'
+        }`}
         onClick={() => setOpen(!open)}
       >
         <FaAngleLeft className="w-full h-full" />

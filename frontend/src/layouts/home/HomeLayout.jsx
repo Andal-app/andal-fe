@@ -23,7 +23,7 @@ function HomeLayout({ children }) {
       {/* profile end */}
 
       {/* main start */}
-      <main className="mt-16 lg:mt-0 w-full lg:w-fit">{children}</main>
+      <main className="mt-16 lg:mt-0 w-full">{children}</main>
       {/* main end */}
 
       {/* 

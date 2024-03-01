@@ -15,6 +15,7 @@ function ParentHomeV2() {
         {/* page title start */}
         <h5 className="text-h-sm font-bold py-6 text-violet-900">Daftar Anak</h5>
         {/* page title end */}
+
         {/* children list start */}
         <div className="flex lg:flex-col flex-wrap lg:flex-nowrap w-full justify-between gap-2 lg:gap-4">
           {ChildrenList.map(({ fullName, profPic, index }) => (
