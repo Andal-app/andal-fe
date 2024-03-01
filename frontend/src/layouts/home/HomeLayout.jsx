@@ -1,11 +1,9 @@
 import Sidebar from '../../components/navigation/Sidebar';
-import ChildBox from '../../components/box/ChildBox';
-
 import TopWave3 from '../../assets/waves/wave_top_3.svg';
 
 function HomeLayout({ children }) {
   return (
-    <div className="flex flex-col mx-6">
+    <div className="flex flex-col lg:flex-row">
       <Sidebar />
 
       {/* top wave start */}
@@ -15,7 +13,7 @@ function HomeLayout({ children }) {
       {/* top wave end */}
 
       {/* profile start */}
-      <div className="z-10 mt-10 text-white flex gap-4">
+      <div className="lg:hidden z-10 mt-10 mx-6 text-white flex gap-4">
         <img className="w-16 h-16 rounded-full bg-white"></img>
         <div>
           <p className="text-b-xl font-bold">Halo, Raisa!</p>
