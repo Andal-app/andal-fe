@@ -13,7 +13,7 @@ function BottomSheetTrial() {
   };
 
   return (
-    <div>
+    <div className="bg-red-300">
       <button onClick={handleOpenBottomSheet}>Buka Bottom Sheet</button>
 
       <BottomSheetModal isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>

@@ -25,16 +25,19 @@ const BottomSheetModal = ({ isOpen, onClose, children }) => {
   }, []); // useEffect akan dijalankan sekali saat komponen dimuat
 
   return (
-    <BottomSheet
-      open={isOpen || initiallyOpened} // Gunakan nilai initiallyOpened
-      onDismiss={onClose}
-      blocking={false}
-      snapPoints={({ maxHeight }) => [150, 400]} // Menyesuaikan snapPoints
-      defaultSnap={({ maxHeight }) => 400} // Menyesuaikan defaultSnap (tinggi awal saat page di-load)
-    >
+    <div className="">
       {/* Konten bottom sheet */}
-      <animated.div style={springProps}>{children}</animated.div>
-    </BottomSheet>
+      <BottomSheet
+        open={isOpen || initiallyOpened} // Gunakan nilai initiallyOpened
+        onDismiss={onClose}
+        blocking={false}
+        snapPoints={({ maxHeight }) => [150, 440]} // Menyesuaikan snapPoints
+        defaultSnap={({ maxHeight }) => 440} // Menyesuaikan defaultSnap (tinggi awal saat page di-load)
+        className="block lg:hidden"
+      >
+        <animated.div style={springProps}>{children}</animated.div>
+      </BottomSheet>
+    </div>
   );
 };
 
