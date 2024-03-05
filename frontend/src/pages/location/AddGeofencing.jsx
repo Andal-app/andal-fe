@@ -3,8 +3,11 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import BottomSheetModal from '../../components/modals/BottomSheetModal';
 import ChildInfoBox from '../../components/box/ChildInfoBox';
 import GeofencePageLayout from '../../layouts/geofencing/GeofencePageLayout';
+import InputLabel from '../../components/inputs/InputLabel';
+import TextInput from '../../components/inputs/TextInput';
+import SubmitBtn from '../../components/buttons/SubmitBtn';
 
-function PositionDetailV2() {
+function AddGeofencing() {
   const [open, setOpen] = useState(false);
 
   const ScheduleData = [
@@ -24,10 +27,23 @@ function PositionDetailV2() {
   };
 
   return (
-    <GeofencePageLayout pageTitle="Detail Posisi">
+    <GeofencePageLayout pageTitle="Tambah Geofence">
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
-        <ChildInfoBox ScheduleData={ScheduleData} />
+        <form id="add__geofence__inputs" className="mx-8 my-4 flex flex-col gap-4">
+          <div id="geonfece__name">
+            <InputLabel labelFor="geonfenceName" content="Nama Geofence" />
+            <TextInput type="text" name="geofenceName" id="geofenceName" placeholder="SD Nusantara" required="true" />
+          </div>
+
+          <div>
+            <InputLabel labelFor="geonfenceTime" content="Waktu" />
+          </div>
+
+          <div>
+            <SubmitBtn type="submit" text="Tambah" />
+          </div>
+        </form>
       </BottomSheetModal>
 
       {/* for large screen: show floating box */}
@@ -38,4 +54,4 @@ function PositionDetailV2() {
   );
 }
 
-export default PositionDetailV2;
+export default AddGeofencing;

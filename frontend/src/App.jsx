@@ -26,6 +26,7 @@ import ParentHomeV2 from './pages/home/ParentHomeV2';
 import ChildHomeV2 from './pages/home/ChildHomeV2';
 import PositionDetailV2 from './pages/location/PositionDetailV2';
 import BottomSheetTrial from './pages/BottomSheetTrial';
+import AddGeofencing from './pages/location/AddGeofencing';
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
             <Route path="/parent/notification_history" element={<ParentNotificationHistory />} />
             <Route path="/parent/notification_history/:childname" element={<ParentNotification />} />
             <Route path="/parent/lokasianak/:childname" element={<ParentChildLocation />} />
+            <Route path="/tambahlokasi/v2" element={<AddGeofencing />} />
             <Route path="/parent/positiondetail/v2" element={<PositionDetailV2 />} />
             <Route path="/parent/geofencing/:childname" element={<ParentGeofencing />} />
           </Route>

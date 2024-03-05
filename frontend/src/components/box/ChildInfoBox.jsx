@@ -4,14 +4,14 @@ import ScheduleItem from './ScheduleItem';
 
 function ChildInfoBox({ ScheduleData }) {
   return (
-    <div className="bg-red-200 m-4 flex flex-col gap-2">
+    <div className="m-4 flex flex-col gap-2">
       <div className="bg-violet-300 p-3 text-violet-900 rounded-xl border border-violet-500">
-        <div id="latest__location" className="flex">
-          <p className="text-b-xl font-medium">Maura berada di &nbsp;</p>
-          <p className="text-b-xl font-medium">Fakultas Teknik</p>
+        <div id="latest__location" className="flex text-b-lg font-medium">
+          <p>Maura berada di &nbsp;</p>
+          <p>Fakultas Teknik</p>
         </div>
 
-        <div id="latest__time" className="flex gap-2">
+        <div id="latest__time" className="flex gap-2 text-b-md">
           <p>08.00</p>
           <p>WIB</p>
         </div>
