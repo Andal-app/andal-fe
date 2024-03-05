@@ -6,6 +6,7 @@ import GeofencePageLayout from '../../layouts/geofencing/GeofencePageLayout';
 import InputLabel from '../../components/inputs/InputLabel';
 import TextInput from '../../components/inputs/TextInput';
 import SubmitBtn from '../../components/buttons/SubmitBtn';
+import ResponsiveTimePicker from '../../components/inputs/ResponsiveTimePicker';
 
 function AddGeofencing() {
   const [open, setOpen] = useState(false);
@@ -32,15 +33,16 @@ function AddGeofencing() {
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
         <form id="add__geofence__inputs" className="mx-8 my-4 flex flex-col gap-4">
           <div id="geonfece__name">
-            <InputLabel labelFor="geonfenceName" content="Nama Geofence" />
+            <InputLabel labelFor="geonfenceName" content="Nama Geofence" className="font-bold" />
             <TextInput type="text" name="geofenceName" id="geofenceName" placeholder="SD Nusantara" required="true" />
           </div>
 
           <div>
-            <InputLabel labelFor="geonfenceTime" content="Waktu" />
+            <InputLabel labelFor="geonfenceTime" content="Waktu" className="font-bold" />
+            <ResponsiveTimePicker />
           </div>
 
-          <div>
+          <div className="mt-6">
             <SubmitBtn type="submit" text="Tambah" />
           </div>
         </form>
