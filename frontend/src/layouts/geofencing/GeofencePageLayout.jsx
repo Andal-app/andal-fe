@@ -24,7 +24,7 @@ function GeofencePageLayout({ children, pageTitle = 'Page Title' }) {
 
           <div
             id="page__title"
-            className="min-w-32 max-w-fit px-2 h-9 text-b-lg font-bold bg-violet-300 rounded-full flex justify-center items-center"
+            className="min-w-32 max-w-fit px-4 h-9 text-b-lg font-bold bg-violet-300 rounded-full flex justify-center items-center"
           >
             <p>{pageTitle}</p>
           </div>
