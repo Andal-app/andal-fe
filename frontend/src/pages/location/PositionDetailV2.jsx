@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { BottomSheet } from 'react-spring-bottom-sheet';
+import { useSpring, animated } from 'react-spring';
+import { useBottomSheet } from 'react-spring-bottom-sheet';
+import 'react-spring-bottom-sheet/dist/style.css';
 import { Icon } from '@iconify/react';
 import Sidebar from '../../components/navigation/Sidebar';
 import PositionDetailBox from '../../components/box/PositionDetailBox';

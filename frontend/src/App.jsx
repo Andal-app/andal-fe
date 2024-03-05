@@ -25,6 +25,7 @@ import TutorialPage from './pages/general/TutorialPage';
 import ParentHomeV2 from './pages/home/ParentHomeV2';
 import ChildHomeV2 from './pages/home/ChildHomeV2';
 import PositionDetailV2 from './pages/location/PositionDetailV2';
+import BottomSheetTrial from './pages/BottomSheetTrial';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/editprofile" element={<EditProfile />} />
             <Route path="/trial" element={<Trial />} />
+            <Route path="/sheettrial" element={<BottomSheetTrial />} />
             <Route path="/deleteaccount" element={<ConfirmDelete />} />
 
             <Route path="/child/home" element={<ChildHome />} />
