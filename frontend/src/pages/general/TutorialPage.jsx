@@ -9,9 +9,9 @@ import OvalNextBtn from '../../components/buttons/OvalNextBtn';
 function TutorialPage() {
   return (
     <BasicLayout>
-      <div className="h-full flex flex-col justify-center items-center">
+      <div className="h-full mt-10 lg:mt-0 flex flex-col lg:justify-center items-center">
         {/* lewati button start*/}
-        <div className="block lg:hidden text-h-sm font-semibold text-violet-500 text-end w-[85%] mb-4 mr-4">Lewati</div>
+        <div className="block lg:hidden text-b-md font-semibold text-violet-500 text-end w-[85%] mb-4 mr-4">Lewati</div>
         {/* lewati button end*/}
 
         <Tutorial imgSrc={TutorialImg} />
