@@ -27,6 +27,7 @@ import ChildHomeV2 from './pages/home/ChildHomeV2';
 import PositionDetailV2 from './pages/location/PositionDetailV2';
 import BottomSheetTrial from './pages/BottomSheetTrial';
 import AddGeofencing from './pages/location/AddGeofencing';
+import PopUpTrial from './pages/PopUpTrial';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             <Route path="/trial" element={<Trial />} />
             <Route path="/sheettrial" element={<BottomSheetTrial />} />
             <Route path="/deleteaccount" element={<ConfirmDelete />} />
+            <Route path="/popuptrial" element={<PopUpTrial />} />
 
             <Route path="/child/home" element={<ChildHome />} />
             <Route path="/child/home/v2" element={<ChildHomeV2 />} />
