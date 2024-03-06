@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from '@iconify/react';
 
 const BasicModal = ({ children, toggleModal, handlePropagation }) => {
   return (
@@ -9,7 +10,15 @@ const BasicModal = ({ children, toggleModal, handlePropagation }) => {
       onClick={toggleModal}
     >
       {/* modal box start */}
-      <div id="modal__box" onClick={handlePropagation} className="bg-white w-[360px] rounded-xl p-4">
+      <div id="modal__box" onClick={handlePropagation} className="bg-white w-[360px] rounded-xl p-4 min-h-56">
+        {/* close button start */}
+        <div className="flex justify-end mb-2">
+          <button id="close__button" onClick={toggleModal} className="w-6 h-6">
+            <Icon icon="mingcute:close-line" className={`w-5 h-5 text-neutral-600 `} />
+          </button>
+        </div>
+        {/* close button end */}
+
         {children}
       </div>
       {/* modal box end */}
