@@ -1,13 +1,6 @@
-import { Link } from 'react-router-dom';
-import { Icon } from '@iconify/react';
-
 import Sidebar from '../../components/navigation/Sidebar';
 import ProfPic from '../../assets/images/profile_picture.jpeg';
-
-import { BiEdit } from 'react-icons/bi';
-import { FaChevronRight } from 'react-icons/fa6';
 import ProfSetItem from './ProfSetItem';
-import BottomNavbar from '../../components/navigation/BottonNavbar';
 
 function Profile() {
   const ParentSettingItems = [
@@ -24,15 +17,15 @@ function Profile() {
 
       <main className="w-full lg:w-1/2 lg:border-r lg:border-neutral-300">
         {/* page title start */}
-        <h1 className="hidden lg:block text-b-xl font-bold bg-violet-200 text-center py-6">Profil Pengguna</h1>
+        <h1 className="hidden lg:block text-b-lg font-bold text-center py-6">Profil Pengguna</h1>
         {/* page title end */}
 
         {/* user profile start */}
-        <div id="user__profile" className={`flex flex-col items-center gap-6 py-12`}>
+        <div id="user__profile" className={`flex flex-col items-center gap-4 py-6`}>
           <img id="user__profile__picture" src={ProfPic} className={`w-36 h-36 rounded-full`}></img>
           <div className="text-center">
-            <p className={`text-b-xl font-bold`}>Raisa Salsabil Yusriyya</p>
-            <p className={`text-b-lg`}>Orang tua</p>
+            <p className={`text-b-md font-bold`}>Raisa Salsabil Yusriyya</p>
+            <p className={`text-b-sm`}>Orang tua</p>
           </div>
         </div>
         {/* user profile end */}

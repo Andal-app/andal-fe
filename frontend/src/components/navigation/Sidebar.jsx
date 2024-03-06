@@ -12,7 +12,7 @@ function Sidebar() {
   ];
 
   return (
-    <nav className={` ${open ? 'w-72' : 'w-20 '}  hidden lg:block h-screen  py-8 relative duration-300 shadow-2xl`}>
+    <nav className={` ${open ? 'w-60' : 'w-20 '}  hidden lg:block h-screen  py-8 relative duration-300 shadow-2xl`}>
       {/* open close button start */}
       <div
         className={`z-50 bg-violet-200 h-10 w-10 p-2 absolute cursor-pointer -right-3 top-9 rounded-full drop-shadow-md  ${
@@ -28,7 +28,7 @@ function Sidebar() {
       <div className="px-6 flex gap-x-4 items-center">
         {/* <img src="./src/assets/logo.png" className={`cursor-pointer duration-500 ${open && 'rotate-[360deg]'}`} /> */}
         <div className="w-10 h-10 bg-violet-500 rounded-full"></div>
-        <h1 className={`text-violet-700 origin-left font-semibold text-h-md duration-200 ${!open && 'scale-0'}`}>
+        <h1 className={`text-violet-700 origin-left font-semibold text-h-sm duration-200 ${!open && 'scale-0'}`}>
           Andal
         </h1>
       </div>
@@ -37,16 +37,16 @@ function Sidebar() {
       {/* user profile start */}
       <div className={`flex gap-4 px-6 my-4 py-4 ${!open && 'hidden'}`}>
         <div id="profile__picture" className="w-14 h-14 rounded-full bg-black"></div>
-        <div>
-          <p className="text-b-lg font-semibold">Raisa Salsabil Y</p>
-          <p className="text-b-md">Orang tua</p>
+        <div className="flex flex-col justify-center">
+          <p className="text-b-sm font-semibold">Raisa Salsabil Y</p>
+          <p className="text-b-xsm">Orang tua</p>
         </div>
       </div>
       {/* user profile end */}
 
       {/* unordered list start */}
       <div>
-        <p id="menu__title" className={`px-6 uppercase text-b-lg font-semibold ${!open && 'hidden'}`}>
+        <p id="menu__title" className={`px-6 uppercase text-b-sm font-semibold ${!open && 'hidden'}`}>
           menu utama
         </p>
 
@@ -54,7 +54,7 @@ function Sidebar() {
           {Menus.map((Menu, index) => (
             <li
               key={index}
-              className={`flex px-6 py-3 cursor-pointer hover:bg-violet-50 text-neutral-700 text-b-lg items-center gap-x-4 ${
+              className={`flex px-6 py-3 cursor-pointer hover:bg-violet-50 text-neutral-700 text-b-sm items-center gap-x-4 ${
                 !open && 'py-6'
               }`}
             >

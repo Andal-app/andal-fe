@@ -16,13 +16,13 @@ function EditProfile() {
         <TopBackNav title="Ubah Profil" />
         {/* top back nav end */}
 
-        <main className="w-[90%] lg:w-[80%] h-[80%] flex flex-col items-center">
+        <main className="w-[85%] lg:w-[80%] h-[80%] flex flex-col items-center">
           {/* edit profile picture start */}
           <InputProfPic src={ProfPic} />
           {/* edit profile picture end */}
 
           {/* edit form start */}
-          <form className="w-full h-full flex flex-col justify-between">
+          <form className="w-full h-full flex flex-col">
             <div id="edit__inputs" className="flex flex-col gap-4">
               <div id="edit__fullname">
                 <InputLabel labelFor="fullname" content="Nama lengkap" />
@@ -35,7 +35,7 @@ function EditProfile() {
               </div>
             </div>
 
-            <div id="edit__save__btn">
+            <div id="edit__save__btn" className="mt-14">
               <SubmitBtn text="Simpan" />
             </div>
           </form>

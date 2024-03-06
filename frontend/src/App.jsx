@@ -52,7 +52,7 @@ function App() {
             <Route path="/app/notifikasi" element={<NotificationPage />} />
 
             <Route path="/anak/beranda" element={<ChildHome />} />
-            <Route path="/anak/beranda/v2" element={<ChildHomeV2 />} />
+            <Route path="/app/anak/beranda/v2" element={<ChildHomeV2 />} />
             <Route path="/orangtua/beranda" element={<ParentHome />} />
             <Route path="/orangtua/beranda/v2" element={<ParentHomeV2 />} />
             <Route path="/orangtua/riwayat" element={<ParentGeofencingHistory />} />

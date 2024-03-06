@@ -24,10 +24,10 @@ function ConfirmDelete() {
         </div>
         {/* top wave end */}
 
-        <main className="mt-[700px] h-full px-8 text-center flex flex-col gap-48">
-          <div className="px-8 ">
-            <h5 className="font-bold text-b-xl mb-6">Yakin ingin menghapus akun Anda secara permanen?</h5>
-            <p className="text-b-lg">Anda tidak dapat mengembalikan data yang telah dihapus.</p>
+        <main className="mt-[100px] lg:mt-0 h-full px-8 text-center flex flex-col justify-center gap-48">
+          <div className="px-8">
+            <h5 className="font-bold text-b-md mb-4">Yakin ingin menghapus akun Anda secara permanen?</h5>
+            <p className="text-b-sm">Anda tidak dapat mengembalikan data yang telah dihapus.</p>
           </div>
 
           <div className="flex flex-col gap-3">
