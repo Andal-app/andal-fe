@@ -3,12 +3,15 @@ import BasicModal from '../modals/BasicModal';
 import TextInput from '../inputs/TextInput';
 import SubmitBtn from '../buttons/SubmitBtn';
 
-function InputChildUname({ toggleModal, handlePropagation }) {
+function InputConnectCode({ toggleModal, handlePropagation }) {
   return (
     <BasicModal toggleModal={toggleModal} handlePropagation={handlePropagation}>
       <form className="flex flex-col gap-4">
         {/* modal title start */}
-        <p className="font-bold text-violet-900 text-b-xl text-center">Masukkan Username Anak</p>
+        <div className="text-violet-900 text-center">
+          <p className="font-bold text-h-md">MASUKKAN KODE</p>
+          <p className="text-b-md">dari Ponsel Orang Tua</p>
+        </div>
         {/* modal title end */}
 
         <TextInput type="text" name="username" id="username" placeholder="" required />
@@ -17,10 +20,10 @@ function InputChildUname({ toggleModal, handlePropagation }) {
           Username tidak ditemukan
         </p>
 
-        <SubmitBtn type="submit" text="Selanjutnya" />
+        <SubmitBtn type="submit" text="Hubungkan" />
       </form>
     </BasicModal>
   );
 }
 
-export default InputChildUname;
+export default InputConnectCode;
