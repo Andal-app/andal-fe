@@ -12,7 +12,7 @@ function Sidebar() {
   ];
 
   return (
-    <nav className={` ${open ? 'w-60' : 'w-20 '}  hidden lg:block h-screen  py-8 relative duration-300 shadow-2xl`}>
+    <nav className={` ${open ? 'min-w-60' : 'w-20 '}  hidden lg:block h-screen  py-8 relative duration-300 shadow-2xl`}>
       {/* open close button start */}
       <div
         className={`z-50 bg-violet-200 h-10 w-10 p-2 absolute cursor-pointer -right-3 top-9 rounded-full drop-shadow-md  ${

@@ -54,7 +54,7 @@ function App() {
             <Route path="/anak/beranda" element={<ChildHome />} />
             <Route path="/app/anak/beranda/v2" element={<ChildHomeV2 />} />
             <Route path="/orangtua/beranda" element={<ParentHome />} />
-            <Route path="/orangtua/beranda/v2" element={<ParentHomeV2 />} />
+            <Route path="/app/orangtua/beranda/v2" element={<ParentHomeV2 />} />
             <Route path="/orangtua/riwayat" element={<ParentGeofencingHistory />} />
             <Route path="/orangtua/history/:childname" element={<ParentHistory />} />
             <Route path="/parent/notification_history" element={<ParentNotificationHistory />} />

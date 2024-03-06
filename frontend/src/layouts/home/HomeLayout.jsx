@@ -13,17 +13,17 @@ function HomeLayout({ children }) {
       {/* top wave end */}
 
       {/* profile start */}
-      <div className="lg:hidden z-10 mt-10 mx-6 text-white flex gap-4">
-        <img className="w-16 h-16 rounded-full bg-white"></img>
+      <div className="lg:hidden z-10 mt-10 mx-4 text-white flex gap-2">
+        <img className="w-12 h-12 rounded-full bg-white"></img>
         <div>
-          <p className="text-b-xl font-bold">Halo, Raisa!</p>
-          <p className="text-b-md">Orang Tua</p>
+          <p className="text-b-md font-bold">Halo, Raisa!</p>
+          <p className="text-b-sm">Orang Tua</p>
         </div>
       </div>
       {/* profile end */}
 
       {/* main start */}
-      <main className="mt-16 lg:mt-0 w-full">{children}</main>
+      <main className="mt-14 lg:mt-0 w-full">{children}</main>
       {/* main end */}
 
       {/* 
