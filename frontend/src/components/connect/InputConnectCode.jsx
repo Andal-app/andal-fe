@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactCodeInput from 'react-code-input';
 import BasicModal from '../modals/BasicModal';
 import SubmitBtn from '../buttons/SubmitBtn';
 import CodeInput from '../inputs/CodeInput';
