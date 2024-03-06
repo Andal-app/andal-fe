@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import InputChildUname from '../components/connect/InputChildUname';
 import BasicModal from '../components/modals/BasicModal';
 
 function PopUpTrial() {
@@ -19,11 +20,9 @@ function PopUpTrial() {
         open modal
       </button>
 
-      {/* transparent layer start */}
       {isConnectModalOpen && (
-        <BasicModal toggleConnectModal={toggleConnectModal} handlePropagation={handlePropagation} />
+        <InputChildUname toggleConnectModal={toggleConnectModal} handlePropagation={handlePropagation} />
       )}
-      {/* transparent layer end */}
     </div>
   );
 }
