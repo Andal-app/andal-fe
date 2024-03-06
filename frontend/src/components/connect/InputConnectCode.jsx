@@ -2,6 +2,7 @@ import React from 'react';
 import ReactCodeInput from 'react-code-input';
 import BasicModal from '../modals/BasicModal';
 import SubmitBtn from '../buttons/SubmitBtn';
+import CodeInput from '../inputs/CodeInput';
 
 function InputConnectCode({ toggleModal }) {
   return (
@@ -15,25 +16,7 @@ function InputConnectCode({ toggleModal }) {
         {/* modal title end */}
 
         <div className="flex justify-center">
-          <ReactCodeInput
-            id="connect__code"
-            name="connect__code"
-            type="text"
-            fields={5}
-            inputStyle={{
-              width: '46px',
-              height: '60px',
-              marginLeft: '5px',
-              marginRight: '5px',
-              borderRadius: '0.6rem',
-              border: '1px solid #4C1D95',
-              textAlign: 'center',
-              fontSize: '40px',
-              color: '#4C1D95',
-              fontWeight: '600',
-              textTransform: 'uppercase'
-            }}
-          />
+          <CodeInput />
         </div>
 
         <p id="error__message" className="hidden text-red-600 text-b-sm">
