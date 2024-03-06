@@ -38,30 +38,30 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/app" element={<LandingPage />} />
             <Route path="/app/tutorial" element={<TutorialPage />} />
-            <Route path="/selectrole" element={<SelectRole />} />
-            <Route path="/parent/login" element={<ParentLogin />} />
-            <Route path="/child/childlogin" element={<ChildLogin />} />
-            <Route path="/parent/register" element={<ParentRegister />} />
-            <Route path="/child/register" element={<ChildRegister />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/editprofile" element={<EditProfile />} />
+            <Route path="/app/pilihperan" element={<SelectRole />} />
+            <Route path="/app/orangtua/masuk" element={<ParentLogin />} />
+            <Route path="/app/anak/masuk" element={<ChildLogin />} />
+            <Route path="/app/orangtua/daftar" element={<ParentRegister />} />
+            <Route path="/app/anak/daftar" element={<ChildRegister />} />
+            <Route path="/app/profil" element={<Profile />} />
+            <Route path="/app/editprofil" element={<EditProfile />} />
             <Route path="/trial" element={<Trial />} />
             <Route path="/sheettrial" element={<BottomSheetTrial />} />
-            <Route path="/deleteaccount" element={<ConfirmDelete />} />
+            <Route path="/app/hapusakun" element={<ConfirmDelete />} />
             <Route path="/popuptrial" element={<PopUpTrial />} />
-            <Route path="/app/notification" element={<NotificationPage />} />
+            <Route path="/app/notifikasi" element={<NotificationPage />} />
 
-            <Route path="/child/home" element={<ChildHome />} />
-            <Route path="/child/home/v2" element={<ChildHomeV2 />} />
-            <Route path="/parent/home" element={<ParentHome />} />
-            <Route path="/parent/home/v2" element={<ParentHomeV2 />} />
-            <Route path="/parent/history" element={<ParentGeofencingHistory />} />
-            <Route path="/parent/history/:childname" element={<ParentHistory />} />
+            <Route path="/anak/beranda" element={<ChildHome />} />
+            <Route path="/anak/beranda/v2" element={<ChildHomeV2 />} />
+            <Route path="/orangtua/beranda" element={<ParentHome />} />
+            <Route path="/orangtua/beranda/v2" element={<ParentHomeV2 />} />
+            <Route path="/orangtua/riwayat" element={<ParentGeofencingHistory />} />
+            <Route path="/orangtua/history/:childname" element={<ParentHistory />} />
             <Route path="/parent/notification_history" element={<ParentNotificationHistory />} />
             <Route path="/parent/notification_history/:childname" element={<ParentNotification />} />
             <Route path="/parent/lokasianak/:childname" element={<ParentChildLocation />} />
             <Route path="/tambahlokasi/v2" element={<AddGeofencing />} />
-            <Route path="/parent/positiondetail/v2" element={<PositionDetailV2 />} />
+            <Route path="/orangtua/detailposisi/v2" element={<PositionDetailV2 />} />
             <Route path="/parent/geofencing/:childname" element={<ParentGeofencing />} />
           </Route>
           <Route element={<PrivateRoute />}></Route>

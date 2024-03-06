@@ -33,7 +33,7 @@ function BasicLayout({ children }) {
       {/* bottom wave decoration end */}
 
       <div className="hidden lg:block">
-        <div className="absolute z-20 left-[-50px] bottom-[-110px]">
+        <div className="absolute z-20 left-[-80px] bottom-[-130px]">
           <img src={Blob1} className="w-80" />
         </div>
         <div className="absolute z-20 right-[-50px] top-[-110px]">
@@ -42,11 +42,11 @@ function BasicLayout({ children }) {
         <div className="absolute z-20 right-[-120px] bottom-[-200px]">
           <img src={RingDouble} className="w-[450px]" />
         </div>
-        <div className="absolute z-40 left-14 top-32">
-          <img src={VectorZigzag} className="w-32" />
+        <div className="absolute z-40 left-14 top-24">
+          <img src={VectorZigzag} className="w-24" />
         </div>
-        <div className="absolute z-40 left-[800px] top-10">
-          <img src={VectorPlus} className="w-24" />
+        <div className="absolute z-40 left-[640px] top-8">
+          <img src={VectorPlus} className="w-20" />
         </div>
       </div>
       {/* decorations end */}
