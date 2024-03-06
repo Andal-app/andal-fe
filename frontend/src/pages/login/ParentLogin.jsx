@@ -15,19 +15,19 @@ const ParentLogin = () => {
       <div className="w-full lg:w-[60%] lg:h-full flex flex-col items-center justify-center">
         {/* logo start */}
         <a href="#" className="hidden lg:flex items-center mb-6 bg-violet-300 rounded-full">
-          <div className="h-32 w-32 rounded-full"></div>
+          <div className="h-28 w-28 rounded-full"></div>
         </a>
         {/* logo end */}
 
         {/* greetings and form start */}
         <div className="w-full bg-white">
           <div className="">
-            <h1 className="text-b-lg mb-12 lg:mb-5">
+            <h1 className="text-b-md mb-12 lg:mb-5">
               Halo, <br /> Selamat datang kembali
             </h1>
 
             <form className="w-full" action="#">
-              <div id="form__inputs" className="space-y-4 my-4">
+              <div id="form__inputs" className="space-y-2">
                 {/* email start */}
                 <div>
                   <InputLabel labelFor="email" content="Email" />
@@ -51,7 +51,7 @@ const ParentLogin = () => {
               </div>
 
               {/* submit button start */}
-              <div className="my-4 mt-10">
+              <div className="mt-4 mb-2">
                 <SubmitBtn text="Masuk" />
               </div>
               {/* submit button end */}
