@@ -3,9 +3,9 @@ import BasicModal from '../modals/BasicModal';
 import TextInput from '../inputs/TextInput';
 import SubmitBtn from '../buttons/SubmitBtn';
 
-function InputChildUname({ toggleModal, handlePropagation }) {
+function InputChildUname({ toggleModal }) {
   return (
-    <BasicModal toggleModal={toggleModal} handlePropagation={handlePropagation}>
+    <BasicModal toggleModal={toggleModal}>
       <form className="flex flex-col gap-4">
         {/* modal title start */}
         <p className="font-bold text-violet-900 text-b-xl text-center">Masukkan Username Anak</p>

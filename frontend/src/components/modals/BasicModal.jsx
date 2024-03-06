@@ -1,7 +1,12 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 
-const BasicModal = ({ children, toggleModal, handlePropagation }) => {
+const BasicModal = ({ children, toggleModal }) => {
+  // Menghentikan penyebaran event ke div yang ditunjuk
+  const handlePropagation = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     // transparent layer start
     <div

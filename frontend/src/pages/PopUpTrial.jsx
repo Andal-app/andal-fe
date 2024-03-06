@@ -18,10 +18,6 @@ function PopUpTrial() {
   const toggleInputCodeModal = () => {
     setIsInputCodeModalOpen(!isInputCodeModalOpen);
   };
-  const handlePropagation = (e) => {
-    // Menghentikan penyebaran event ke atas
-    e.stopPropagation();
-  };
 
   return (
     <div>
@@ -37,15 +33,13 @@ function PopUpTrial() {
         open input connect code
       </button>
 
-      {isConnectModalOpen && <InputChildUname toggleModal={toggleConnectModal} handlePropagation={handlePropagation} />}
+      {isConnectModalOpen && <InputChildUname toggleModal={toggleConnectModal} />}
 
       {/* <InputConnectCode /> */}
 
-      {isInputCodeModalOpen && (
-        <InputConnectCode toggleModal={toggleInputCodeModal} handlePropagation={handlePropagation} />
-      )}
+      {isInputCodeModalOpen && <InputConnectCode toggleModal={toggleInputCodeModal} />}
 
-      {isCodeModalOpen && <ShowConnectCode toggleModal={toggleCodeModal} handlePropagation={handlePropagation} />}
+      {isCodeModalOpen && <ShowConnectCode toggleModal={toggleCodeModal} />}
     </div>
   );
 }

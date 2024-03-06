@@ -1,9 +1,9 @@
 import React from 'react';
 import BasicModal from '../modals/BasicModal';
 
-function ShowConnectCode({ toggleModal, handlePropagation }) {
+function ShowConnectCode({ toggleModal }) {
   return (
-    <BasicModal toggleModal={toggleModal} handlePropagation={handlePropagation}>
+    <BasicModal toggleModal={toggleModal}>
       <div className="flex flex-col items-center gap-6">
         <p className="text-yellow-900 text-h-md font-bold">KODE ANDA</p>
 
