@@ -6,7 +6,7 @@ import SubmitBtn from '../buttons/SubmitBtn';
 
 function AddGeoForm() {
   return (
-    <form id="add__geofence__inputs" className="mx-8 lg:mx-4 my-4 flex flex-col gap-4">
+    <form id="add__geofence__inputs" className="lg:w-72 mx-6 my-4 lg:m-3 flex flex-col gap-4">
       <div id="geonfece__name">
         <InputLabel labelFor="geonfenceName" content="Nama Geofence" className="font-bold" />
         <TextInput type="text" name="geofenceName" id="geofenceName" placeholder="SD Nusantara" required="true" />

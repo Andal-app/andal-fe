@@ -1,6 +1,5 @@
 import ChildBox from '../../components/box/ChildBox';
 import HomeLayout from '../../layouts/home/HomeLayout';
-import Sidebar from '../../components/navigation/Sidebar';
 
 function ParentHomeV2() {
   const ChildrenList = [
@@ -11,9 +10,9 @@ function ParentHomeV2() {
 
   return (
     <HomeLayout>
-      <div className="mx-6">
+      <div className="mx-6 lg:mx-12 lg:mt-4">
         {/* page title start */}
-        <h5 className="text-h-sm font-bold py-6 text-violet-900">Daftar Anak</h5>
+        <h5 className="text-h-sm font-bold pb-6 text-violet-900">Daftar Anak</h5>
         {/* page title end */}
 
         {/* children list start */}

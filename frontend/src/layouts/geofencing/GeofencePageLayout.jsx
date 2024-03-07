@@ -15,7 +15,7 @@ function GeofencePageLayout({ children, pageTitle = 'Page Title' }) {
 
       <main className="relative mx-0 flex flex-col gap-4 w-full">
         {/* top  nav start */}
-        <nav className="absolute z-10 w-full lg:w-[360px] lg:left-6 top-4 lg:top-8 flex items-center justify-center">
+        <nav className="absolute z-10 w-full lg:w-[310px] lg:left-6 top-4 lg:top-8 flex items-center justify-center">
           {/* circular back button start */}
           <div className="absolute left-3 flex justify-center items-center w-8 h-8 bg-violet-300 rounded-full text-black">
             <Icon icon={'ion:arrow-back'} className="w-6 h-6" />
@@ -24,7 +24,7 @@ function GeofencePageLayout({ children, pageTitle = 'Page Title' }) {
 
           <div
             id="page__title"
-            className="min-w-32 max-w-fit px-4 h-9 text-b-lg font-bold bg-violet-300 rounded-full flex justify-center items-center"
+            className="min-w-32 max-w-fit px-4 h-9 text-b-md font-bold bg-violet-300 rounded-full flex justify-center items-center"
           >
             <p>{pageTitle}</p>
           </div>

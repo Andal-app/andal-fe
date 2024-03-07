@@ -3,7 +3,7 @@ import React from 'react';
 function PositionDetailBox() {
   return (
     <div className="">
-      <p className="text-b-md font-bold text-violet-900">Detail Posisi</p>
+      <p className="text-b-sm font-bold text-violet-900">Detail Posisi</p>
       <div className="container mx-auto text-b-sm">
         <table className="table-auto">
           <tbody>

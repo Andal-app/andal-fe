@@ -4,7 +4,7 @@ function ScheduleItem({ location, time, index }) {
   return (
     <li
       key={index}
-      className="flex justify-between py-1 px-2 bg-yellow-50 rounded-xl border border-yellow-300 text-yellow-900 text-b-lg drop-shadow-md"
+      className="flex justify-between py-1 px-2 bg-yellow-50 rounded-xl border border-yellow-300 text-yellow-900 text-b-sm drop-shadow-md"
     >
       <p>{location}</p>
       <p>{time}</p>

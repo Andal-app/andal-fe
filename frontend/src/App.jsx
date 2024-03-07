@@ -60,8 +60,8 @@ function App() {
             <Route path="/parent/notification_history" element={<ParentNotificationHistory />} />
             <Route path="/parent/notification_history/:childname" element={<ParentNotification />} />
             <Route path="/parent/lokasianak/:childname" element={<ParentChildLocation />} />
-            <Route path="/tambahlokasi/v2" element={<AddGeofencing />} />
-            <Route path="/orangtua/detailposisi/v2" element={<PositionDetailV2 />} />
+            <Route path="/app/tambahlokasi/v2" element={<AddGeofencing />} />
+            <Route path="/app/orangtua/detailposisi/v2" element={<PositionDetailV2 />} />
             <Route path="/parent/geofencing/:childname" element={<ParentGeofencing />} />
           </Route>
           <Route element={<PrivateRoute />}></Route>

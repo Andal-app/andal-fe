@@ -4,25 +4,25 @@ import ScheduleItem from './ScheduleItem';
 
 function ChildInfoBox({ ScheduleData }) {
   return (
-    <div className="m-4 flex flex-col gap-2">
-      <div className="bg-violet-300 p-3 text-violet-900 rounded-xl border border-violet-500">
-        <div id="latest__location" className="flex text-b-lg font-medium">
+    <div className="lg:w-72 mx-6 my-3 lg:m-3 flex flex-col gap-2">
+      <div className="bg-violet-300 px-4 py-2 text-violet-900 rounded-xl border border-violet-500">
+        <div id="latest__location" className="flex text-b-md font-medium">
           <p>Maura berada di &nbsp;</p>
           <p>Fakultas Teknik</p>
         </div>
 
-        <div id="latest__time" className="flex gap-2 text-b-md">
+        <div id="latest__time" className="flex gap-2 text-b-sm">
           <p>08.00</p>
           <p>WIB</p>
         </div>
       </div>
 
-      <div id="location__detail">
+      <div id="location__detail" className="text-b-sm">
         <PositionDetailBox />
       </div>
 
       {/* status start */}
-      <div id="status" className="text-b-md">
+      <div id="status" className="text-b-sm">
         <div id="location__status" className="flex gap-2">
           <p className="font-bold text-violet-900">Status:</p>
           <p>Berada dalam geofence sesuai jadwal</p>
@@ -31,7 +31,7 @@ function ChildInfoBox({ ScheduleData }) {
         {/* battery and gps status start */}
         <div id="battery__gps__status" className="flex gap-4">
           {/* battery status start */}
-          <div id="battery__status" className="flex gap-2 text-b-lg">
+          <div id="battery__status" className="flex gap-2">
             <p className="text-violet-900 font-bold">kotak</p>
             <p>
               100<span>%</span>
@@ -40,7 +40,7 @@ function ChildInfoBox({ ScheduleData }) {
           {/* battery status end */}
 
           {/* gps status start */}
-          <div id="gps__status" className="flex gap-2 text-b-lg">
+          <div id="gps__status" className="flex gap-2">
             <p className="text-violet-900 font-bold">GPS</p>
             <p>Aktif</p>
           </div>
@@ -52,7 +52,7 @@ function ChildInfoBox({ ScheduleData }) {
 
       {/* schedule box start */}
       <div className="flex flex-col gap-2">
-        <p className="text-b-lg font-bold text-violet-900">Jadwal</p>
+        <p className="font-bold text-violet-900 text-b-sm">Jadwal</p>
 
         {/* schedule items start */}
         <ul className="flex flex-col gap-2">

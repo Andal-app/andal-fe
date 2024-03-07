@@ -31,8 +31,8 @@ const BottomSheetModal = ({ isOpen, onClose, children }) => {
         open={isOpen || initiallyOpened} // Gunakan nilai initiallyOpened
         onDismiss={onClose}
         blocking={false}
-        snapPoints={({ maxHeight }) => [150, 440]} // Menyesuaikan snapPoints
-        defaultSnap={({ maxHeight }) => 440} // Menyesuaikan defaultSnap (tinggi awal saat page di-load)
+        snapPoints={({ maxHeight }) => [105, (maxHeight / 10) * 5.5]} // Menyesuaikan snapPoints
+        defaultSnap={({ maxHeight }) => (maxHeight / 10) * 5.5} // Menyesuaikan defaultSnap (tinggi awal saat page di-load)
         className="block lg:hidden"
       >
         <animated.div style={springProps}>{children}</animated.div>
