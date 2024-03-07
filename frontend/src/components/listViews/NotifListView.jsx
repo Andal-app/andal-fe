@@ -5,7 +5,7 @@ function NotifListView({ index, title, detail, dateTime }) {
   return (
     <li
       key={index}
-      className="flex items-start gap-5 px-6 py-4 border-b border-neutral-300 hover:bg-violet-50 duration-300"
+      className="flex items-start gap-5 px-6 lg:px-10 py-4 border-b border-neutral-300 hover:bg-neutral-50 duration-300"
     >
       <div className="pt-1">
         <div

@@ -29,6 +29,7 @@ import BottomSheetTrial from './pages/BottomSheetTrial';
 import AddGeofencing from './pages/location/AddGeofencing';
 import PopUpTrial from './pages/PopUpTrial';
 import NotificationPage from './pages/general/NotificationPage';
+import GeofSchedule from './pages/location/GeofSchedule';
 
 function App() {
   return (
@@ -50,13 +51,14 @@ function App() {
             <Route path="/app/hapusakun" element={<ConfirmDelete />} />
             <Route path="/popuptrial" element={<PopUpTrial />} />
             <Route path="/app/notifikasi" element={<NotificationPage />} />
+            <Route path="/app/orangtua/riwayat" element={<GeofSchedule />} />
 
             <Route path="/anak/beranda" element={<ChildHome />} />
             <Route path="/app/anak/beranda/v2" element={<ChildHomeV2 />} />
             <Route path="/orangtua/beranda" element={<ParentHome />} />
             <Route path="/app/orangtua/beranda/v2" element={<ParentHomeV2 />} />
-            <Route path="/orangtua/riwayat" element={<ParentGeofencingHistory />} />
-            <Route path="/orangtua/history/:childname" element={<ParentHistory />} />
+            <Route path="/parent/riwayat" element={<ParentGeofencingHistory />} />
+            <Route path="/parent/history/:childname" element={<ParentHistory />} />
             <Route path="/parent/notification_history" element={<ParentNotificationHistory />} />
             <Route path="/parent/notification_history/:childname" element={<ParentNotification />} />
             <Route path="/parent/lokasianak/:childname" element={<ParentChildLocation />} />

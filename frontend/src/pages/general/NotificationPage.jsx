@@ -21,7 +21,7 @@ function NotificationPage() {
     <div className="flex">
       <Sidebar />
 
-      <div className="w-full lg:w-1/2 h-screen flex flex-col items-center">
+      <div className="w-full lg:w-1/2 h-screen flex flex-col items-center lg:border-r lg:border-neutral-300">
         {/* top back nav start */}
         <TopBackNav title="Riwayat Notifikasi" />
         {/* top back nav end */}
