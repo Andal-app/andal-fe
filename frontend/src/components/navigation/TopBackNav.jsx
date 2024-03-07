@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function TopBackNav({ title }) {
   return (
-    <nav className="w-full lg:w-[80%] relative h-24 flex justify-center items-center">
+    <nav className="w-full lg:w-[80%] relative h-20 lg:24 flex justify-center items-center">
       {/* back button start */}
 
       <Link className="absolute left-2 top-0 w-14 h-full flex items-center justify-center">
