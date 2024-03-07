@@ -57,7 +57,7 @@ const ChildLogin = () => {
 
               {/* sign up? start */}
               <div>
-                <RegisterNowBtn />
+                <RegisterNowBtn link="/daftar/anak" />
               </div>
               {/* sign up? end */}
             </form>

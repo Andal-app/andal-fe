@@ -57,7 +57,7 @@ const ParentLogin = () => {
 
               {/* sign up? start */}
               <div>
-                <RegisterNowBtn />
+                <RegisterNowBtn link="/daftar/orangtua" />
               </div>
               {/* sign up? end */}
             </form>

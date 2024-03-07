@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function RegisterNowBtn({ link }) {
+function LoginNowBtn({ link }) {
   return (
     <p className="text-b-sm text-center">
-      Belum memiliki akun?{' '}
+      Sudah memiliki akun?{' '}
       <Link to={link} href="#" className="font-bold hover:underline">
-        Daftar sekarang
+        Masuk
       </Link>
     </p>
   );
 }
 
-export default RegisterNowBtn;
+export default LoginNowBtn;

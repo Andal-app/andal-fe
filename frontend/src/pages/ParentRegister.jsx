@@ -5,6 +5,7 @@ import PasswordInput from '../components/inputs/PasswordInput';
 import SubmitBtn from '../components/buttons/SubmitBtn';
 import RegisterNowBtn from '../components/buttons/RegisterNowBtn';
 import RegisterLayout from '../layouts/auth/RegisterLayout';
+import LoginNowBtn from '../components/buttons/LoginNowBtn';
 
 const ParentRegister = () => {
   return (
@@ -58,7 +59,7 @@ const ParentRegister = () => {
 
             {/* sign up? start */}
             <div>
-              <RegisterNowBtn />
+              <LoginNowBtn link="/masuk/orangtua" />
             </div>
             {/* sign up? end */}
           </form>
