@@ -13,7 +13,7 @@ function EditProfile() {
 
       <div className="w-full lg:w-1/2 h-screen flex flex-col items-center">
         {/* top back nav start */}
-        <TopBackNav title="Ubah Profil" />
+        <TopBackNav title="Ubah Profil" link="/profil" />
         {/* top back nav end */}
 
         <main className="w-[85%] lg:w-[80%] h-[80%] flex flex-col items-center">

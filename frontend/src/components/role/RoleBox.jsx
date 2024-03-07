@@ -6,7 +6,7 @@ function RoleBox({ link, id, imgSrc, imgAlt, title, detail }) {
     <Link to={link}>
       <div
         id={id}
-        className="py-3 px-4 flex flex-row w-full min-h-32 rounded-lg border border-violet-500  bg-violet-300"
+        className="py-3 px-4 flex flex-row w-full min-h-32 rounded-lg border border-violet-500  bg-violet-300 hover:bg-violet-200 duration-700"
       >
         <div className="basis-1/3 flex items-center justify-center">
           <img src={imgSrc} alt={imgAlt} className="h-full" />

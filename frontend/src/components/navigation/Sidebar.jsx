@@ -1,26 +1,32 @@
 import { useState } from 'react';
+import { Icon } from '@iconify/react';
 import { FaAngleLeft } from 'react-icons/fa6';
 
 function Sidebar() {
   const [open, setOpen] = useState(true);
-  const Menus = [
-    { title: 'Beranda', src: 'Chart_fill', cat: 'menu_utama' },
-    { title: 'Riwayat Geofencing', src: 'Chat', cat: 'menu_utama' },
-    { title: 'Notifikasi', src: 'Chat', cat: 'menu_utama' },
-    { title: 'Profil Pengguna', src: 'User', gap: true, cat: 'pengaturan' },
-    { title: 'Keluar ', src: 'Calendar', cat: 'pengaturan' }
+  const MenuUtamaItems = [
+    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama' },
+    { title: 'Riwayat Geofencing', icon: 'tdesign:location', cat: 'menu_utama' },
+    { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama' }
+  ];
+
+  const PengaturanItems = [
+    { title: 'Profil Pengguna', icon: 'healthicons:ui-user-profile', cat: 'pengaturan' },
+    { title: 'Keluar ', icon: 'Calendar', cat: 'pengaturan' }
   ];
 
   return (
-    <nav className={` ${open ? 'min-w-60' : 'w-20 '}  hidden lg:block h-screen  py-8 relative duration-300 shadow-2xl`}>
+    <nav
+      className={` ${
+        open ? 'min-w-60 duration-700' : 'w-20 duration-700'
+      }  hidden lg:block h-screen  py-8 relative duration-300 shadow-2xl`}
+    >
       {/* open close button start */}
       <div
-        className={`z-50 bg-violet-200 h-10 w-10 p-2 absolute cursor-pointer -right-3 top-9 rounded-full drop-shadow-md  ${
-          !open && 'rotate-180'
-        }`}
+        className={`z-50 bg-violet-200 h-10 w-10 p-2 absolute cursor-pointer -right-3 top-9 rounded-full shadow-md shadow-neutral-700/80  `}
         onClick={() => setOpen(!open)}
       >
-        <FaAngleLeft className="w-full h-full" />
+        <FaAngleLeft className={`w-full h-full ${!open && 'rotate-180'}`} />
       </div>
       {/* open close button end */}
 
@@ -46,12 +52,35 @@ function Sidebar() {
 
       {/* unordered list start */}
       <div>
+        {/* menu utama start */}
         <p id="menu__title" className={`px-6 uppercase text-b-sm font-semibold ${!open && 'hidden'}`}>
           menu utama
         </p>
 
         <ul id="menu__list" className="pt-1">
-          {Menus.map((Menu, index) => (
+          {MenuUtamaItems.map((Menu, index) => (
+            <li
+              key={index}
+              className={`flex px-6 py-3 cursor-pointer hover:bg-violet-50 text-neutral-700 text-b-sm items-center gap-x-4 ${
+                !open && 'py-6'
+              }`}
+            >
+              <div className="w-7 h-7 rounded-lg bg-neutral-50 flex items-center justify-center">
+                <Icon icon={Menu.icon} className="w-4 h-4 text-neutral-700" />
+              </div>
+              <span className={`${!open && 'hidden'} origin-left duration-200`}>{Menu.title}</span>
+            </li>
+          ))}
+        </ul>
+        {/* menu utama end */}
+
+        {/* pengaturan start */}
+        <p id="menu__title" className={`px-6 uppercase text-b-sm font-semibold ${!open && 'hidden'}`}>
+          pengaturan
+        </p>
+
+        <ul id="menu__list" className="pt-1">
+          {PengaturanItems.map((Menu, index) => (
             <li
               key={index}
               className={`flex px-6 py-3 cursor-pointer hover:bg-violet-50 text-neutral-700 text-b-sm items-center gap-x-4 ${
@@ -63,6 +92,7 @@ function Sidebar() {
             </li>
           ))}
         </ul>
+        {/* pengaturan end */}
       </div>
       {/* unordered list start */}
     </nav>

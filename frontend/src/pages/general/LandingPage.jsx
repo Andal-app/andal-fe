@@ -33,7 +33,7 @@ function LandingPage() {
         </div>
 
         {/* desktop next button start */}
-        <OvalNextBtn text="Lanjut" linkTo="" />
+        <OvalNextBtn text="Lanjut" linkTo="/tutorial" />
         {/* desktop next button end*/}
       </div>
     </BasicLayout>

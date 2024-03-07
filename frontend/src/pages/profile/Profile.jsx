@@ -4,11 +4,11 @@ import ProfPic from '../../assets/images/profile_picture.jpeg';
 
 function Profile() {
   const ParentSettingItems = [
-    { link: '', icon: 'bx:edit', text: 'Edit profil' },
+    { link: '/editprofil', icon: 'bx:edit', text: 'Edit profil' },
     { link: '', icon: 'mingcute:question-line', text: 'Bantuan penggunaan' },
     { link: '', icon: 'material-symbols:lock-outline', text: ' Ganti pasword' },
     { link: '', icon: 'tabler:logout', text: 'Keluar' },
-    { link: '', icon: 'typcn:delete-outline', text: 'Hapus akun', redText: true }
+    { link: '/profil/hapusakun', icon: 'typcn:delete-outline', text: 'Hapus akun', redText: true }
   ];
 
   return (

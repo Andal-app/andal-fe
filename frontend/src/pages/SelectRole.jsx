@@ -41,7 +41,7 @@ function SelectRole() {
           {/* role__content start */}
           <main id="role__content" className="flex flex-col gap-8 w-full lg:w-[70%]">
             <RoleBox
-              link="/parent/login"
+              link="/masuk/orangtua"
               id="box__parents"
               imgSrc={RoleOrangtua}
               imgAlt="Role Orang Tua"
@@ -49,7 +49,7 @@ function SelectRole() {
               detail="Pantau posisi anak untuk menjaga keamanan anak"
             />
             <RoleBox
-              link="/child/childlogin"
+              link="/masuk/anak"
               id="box__child"
               imgSrc={RoleAnak}
               imgAlt="Role Anak"
