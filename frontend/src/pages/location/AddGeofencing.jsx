@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import 'react-spring-bottom-sheet/dist/style.css';
 import BottomSheetModal from '../../components/modals/BottomSheetModal';
 import GeofencePageLayout from '../../layouts/geofencing/GeofencePageLayout';
@@ -10,10 +9,6 @@ function AddGeofencing() {
 
   // control for bottom sheet modal
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-
-  // const handleOpenBottomSheet = () => {
-  //   setIsBottomSheetOpen(true);
-  // };
 
   const handleCloseBottomSheet = () => {
     setIsBottomSheetOpen(false);

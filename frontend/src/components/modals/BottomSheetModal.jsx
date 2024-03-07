@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import 'react-spring-bottom-sheet/dist/style.css';
 import { useSpring, animated } from 'react-spring';
 import { BottomSheet } from 'react-spring-bottom-sheet';
-import 'react-spring-bottom-sheet/dist/style.css';
 
 const BottomSheetModal = ({ isOpen, onClose, children }) => {
   const [initiallyOpened, setInitiallyOpened] = useState(false);

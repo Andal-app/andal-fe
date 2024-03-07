@@ -1,5 +1,4 @@
 import React from 'react';
-
 import TextInput from '../components/inputs/TextInput';
 import InputLabel from '../components/inputs/InputLabel';
 import PasswordInput from '../components/inputs/PasswordInput';
@@ -54,7 +53,8 @@ const ParentRegister = () => {
             <div className="mt-4 lg:mt-8 mb-2">
               <SubmitBtn text="Masuk" />
             </div>
-            {/* submit button end */}
+            {/* submit button
+             end */}
 
             {/* sign up? start */}
             <div>

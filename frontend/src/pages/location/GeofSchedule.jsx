@@ -1,7 +1,6 @@
 import React from 'react';
 import Sidebar from '../../components/navigation/Sidebar';
 import TopBackNav from '../../components/navigation/TopBackNav';
-import NotifListView from '../../components/listViews/NotifListView';
 import LocationListView from '../../components/listViews/LocationListView';
 
 function GeofSchedule() {

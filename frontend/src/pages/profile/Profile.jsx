@@ -1,6 +1,6 @@
 import Sidebar from '../../components/navigation/Sidebar';
-import ProfPic from '../../assets/images/profile_picture.jpeg';
 import ProfSetItem from './ProfSetItem';
+import ProfPic from '../../assets/images/profile_picture.jpeg';
 
 function Profile() {
   const ParentSettingItems = [

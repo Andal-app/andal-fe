@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import BasicLayout from '../../layouts/general/BasicLayout';
 import BottomWave1 from '../../assets/waves/wave_bottom_1.svg';
-import { Link } from 'react-router-dom';
 import OvalNextBtn from '../../components/buttons/OvalNextBtn';
 
 function LandingPage() {

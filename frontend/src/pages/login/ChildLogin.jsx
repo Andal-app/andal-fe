@@ -1,5 +1,4 @@
 import React from 'react';
-
 import TextInput from '../../components/inputs/TextInput';
 import InputLabel from '../../components/inputs/InputLabel';
 import PasswordInput from '../../components/inputs/PasswordInput';

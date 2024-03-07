@@ -1,8 +1,8 @@
 import React from 'react';
-import TopWave1Red from '../../assets/waves/wave_top_1_red.svg';
 import CancelBtn from '../../components/buttons/CancelBtn';
 import DeleteBtn from '../../components/buttons/DeleteBtn';
 import Sidebar from '../../components/navigation/Sidebar';
+import TopWave1Red from '../../assets/waves/wave_top_1_red.svg';
 
 function ConfirmDelete() {
   return (
