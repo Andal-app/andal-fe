@@ -1,18 +1,19 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { FaAngleLeft } from 'react-icons/fa6';
 
 function Sidebar() {
   const [open, setOpen] = useState(true);
   const MenuUtamaItems = [
-    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama' },
-    { title: 'Riwayat Geofencing', icon: 'tdesign:location', cat: 'menu_utama' },
-    { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama' }
+    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: '/' },
+    { title: 'Riwayat Geofencing', icon: 'tdesign:location', cat: 'menu_utama', link: '/' },
+    { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama', link: '/notifikasi' }
   ];
 
   const PengaturanItems = [
-    { title: 'Profil Pengguna', icon: 'healthicons:ui-user-profile', cat: 'pengaturan' },
-    { title: 'Keluar ', icon: 'Calendar', cat: 'pengaturan' }
+    { title: 'Profil Pengguna', icon: 'gg:profile', cat: 'pengaturan', link: '/profil' },
+    { title: 'Keluar ', icon: 'humbleicons:logout', cat: 'pengaturan', redText: true, link: '/keluar' }
   ];
 
   return (
@@ -58,18 +59,19 @@ function Sidebar() {
         </p>
 
         <ul id="menu__list" className="pt-1">
-          {MenuUtamaItems.map((Menu, index) => (
-            <li
+          {MenuUtamaItems.map((Item, index) => (
+            <Link
+              to={Item.link}
               key={index}
               className={`flex px-6 py-3 cursor-pointer hover:bg-violet-50 text-neutral-700 text-b-sm items-center gap-x-4 ${
                 !open && 'py-6'
               }`}
             >
               <div className="w-7 h-7 rounded-lg bg-neutral-50 flex items-center justify-center">
-                <Icon icon={Menu.icon} className="w-4 h-4 text-neutral-700" />
+                <Icon icon={Item.icon} className="w-4 h-4 text-neutral-700" />
               </div>
-              <span className={`${!open && 'hidden'} origin-left duration-200`}>{Menu.title}</span>
-            </li>
+              <span className={`${!open && 'hidden'} origin-left duration-200`}>{Item.title}</span>
+            </Link>
           ))}
         </ul>
         {/* menu utama end */}
@@ -80,16 +82,18 @@ function Sidebar() {
         </p>
 
         <ul id="menu__list" className="pt-1">
-          {PengaturanItems.map((Menu, index) => (
-            <li
+          {PengaturanItems.map((Item, index) => (
+            <Link
+              to={Item.link}
               key={index}
-              className={`flex px-6 py-3 cursor-pointer hover:bg-violet-50 text-neutral-700 text-b-sm items-center gap-x-4 ${
-                !open && 'py-6'
-              }`}
+              className={`flex px-6 py-3 cursor-pointer hover:bg-violet-50 text-b-sm items-center gap-x-4 
+              ${!open && 'py-6'} ${Item.redText ? 'text-red-500' : 'text-neutral-700'}`}
             >
-              <img src={`./src/assets/${Menu.src}.png`} />
-              <span className={`${!open && 'hidden'} origin-left duration-200`}>{Menu.title}</span>
-            </li>
+              <div className="w-7 h-7 rounded-lg bg-neutral-50 flex items-center justify-center">
+                <Icon icon={Item.icon} className={`w-4 h-4 `} />
+              </div>
+              <span className={`${!open && 'hidden'} origin-left duration-200`}>{Item.title}</span>
+            </Link>
           ))}
         </ul>
         {/* pengaturan end */}
