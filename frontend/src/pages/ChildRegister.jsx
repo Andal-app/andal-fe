@@ -11,7 +11,7 @@ const ChildRegister = () => {
   return (
     <RegisterLayout>
       {/* right pane content start */}
-      <div className="w-full lg:w-[60%] lg:h-full flex flex-col items-center justify-center">
+      <div className="-mb-28 lg:mb-0 w-[85%] lg:w-[60%] h-screen lg:h-full flex flex-col items-center justify-center">
         {/* greetings and form start */}
         <div className="w-full bg-white">
           <h1 className="text-b-md mb-6 lg:mb-5">Daftarkan diri Anda</h1>

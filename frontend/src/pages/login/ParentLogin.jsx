@@ -11,7 +11,7 @@ const ParentLogin = () => {
   return (
     <LoginLayout>
       {/* right pane content start */}
-      <div className="w-full lg:w-[60%] lg:h-full flex flex-col items-center justify-center">
+      <div className="-mb-40 lg:mb-0 w-[85%] lg:w-[60%] h-screen lg:h-full flex flex-col items-center justify-center">
         {/* logo start */}
         <a href="#" className="hidden lg:flex items-center mb-6 bg-violet-300 rounded-full">
           <div className="h-28 w-28 rounded-full"></div>
@@ -19,7 +19,7 @@ const ParentLogin = () => {
         {/* logo end */}
 
         {/* greetings and form start */}
-        <div className="w-full bg-white">
+        <div className="w-full">
           <div className="">
             <h1 className="text-b-md mb-12 lg:mb-5">
               Halo, <br /> Selamat datang kembali
@@ -50,7 +50,7 @@ const ParentLogin = () => {
               </div>
 
               {/* submit button start */}
-              <div className="mt-4 mb-2">
+              <div className="mt-10 lg:mt-4 mb-2">
                 <SubmitBtn text="Masuk" />
               </div>
               {/* submit button end */}
