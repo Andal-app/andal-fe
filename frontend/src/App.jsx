@@ -30,6 +30,7 @@ import AddGeofencing from './pages/location/AddGeofencing';
 import PopUpTrial from './pages/PopUpTrial';
 import NotificationPage from './pages/general/NotificationPage';
 import GeofSchedule from './pages/location/GeofSchedule';
+import ParentLoginV2 from './pages/login/ParentLoginV2';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             <Route path="/tutorial" element={<TutorialPage />} />
             <Route path="/pilihperan" element={<SelectRole />} />
             <Route path="/masuk/orangtua" element={<ParentLogin />} />
+            <Route path="/masuk/orangtua/v2" element={<ParentLoginV2 />} />
             <Route path="/masuk/anak" element={<ChildLogin />} />
             <Route path="/daftar/orangtua" element={<ParentRegister />} />
             <Route path="/daftar/anak" element={<ChildRegister />} />
