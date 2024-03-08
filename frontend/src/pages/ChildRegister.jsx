@@ -3,7 +3,6 @@ import TextInput from '../components/inputs/TextInput';
 import InputLabel from '../components/inputs/InputLabel';
 import PasswordInput from '../components/inputs/PasswordInput';
 import SubmitBtn from '../components/buttons/SubmitBtn';
-import RegisterNowBtn from '../components/buttons/RegisterNowBtn';
 import RegisterLayout from '../layouts/auth/RegisterLayout';
 import LoginNowBtn from '../components/buttons/LoginNowBtn';
 
