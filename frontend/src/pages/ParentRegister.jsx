@@ -10,7 +10,7 @@ const ParentRegister = () => {
   return (
     <RegisterLayout>
       {/* right pane content start */}
-      <div className="-mb-28 lg:mb-0 w-[85%] lg:w-[60%] h-screen lg:h-full flex flex-col items-center justify-center">
+      <div className="w-[85%] lg:w-[60%] h-[78%] lg:h-full flex flex-col items-center justify-end lg:justify-center">
         {/* greetings and form start */}
         <div className="w-full bg-white">
           <h1 className="text-b-md mb-6 lg:mb-5">Daftarkan diri Anda</h1>
