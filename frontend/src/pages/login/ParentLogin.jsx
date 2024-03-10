@@ -11,7 +11,7 @@ const ParentLogin = () => {
   return (
     <LoginLayout>
       {/* right pane content start */}
-      <div className="-mb-40 lg:mb-0 w-[85%] lg:w-[60%] h-screen lg:h-full flex flex-col items-center justify-center">
+      <div className="w-[85%] lg:w-[60%] h-[75%] lg:h-full flex flex-col items-center justify-end">
         {/* logo start */}
         <a href="#" className="hidden lg:flex items-center mb-6 bg-violet-300 rounded-full">
           <div className="h-28 w-28 rounded-full"></div>
