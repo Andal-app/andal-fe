@@ -30,7 +30,7 @@ const ChildLogin = () => {
                 {/* email start */}
                 <div>
                   <InputLabel labelFor="username" content="Username" />
-                  <TextInput type="username" name="username" id="username" placeholder="FioCyber13#" required="true" />
+                  <TextInput type="username" name="username" id="username" placeholder="FioCyber13#" required />
                 </div>
                 {/* email end */}
 

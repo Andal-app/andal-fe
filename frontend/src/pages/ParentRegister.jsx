@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextInput from '../components/inputs/TextInput';
 import InputLabel from '../components/inputs/InputLabel';
 import PasswordInput from '../components/inputs/PasswordInput';
@@ -7,6 +7,25 @@ import RegisterLayout from '../layouts/auth/RegisterLayout';
 import LoginNowBtn from '../components/buttons/LoginNowBtn';
 
 const ParentRegister = () => {
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    password: ''
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <RegisterLayout>
       {/* right pane content start */}
@@ -15,34 +34,50 @@ const ParentRegister = () => {
         <div className="w-full bg-white">
           <h1 className="text-b-md mb-6 lg:mb-5">Daftarkan diri Anda</h1>
 
-          <form className="w-full" action="#">
+          <form className="w-full" onSubmit={handleSubmit}>
             {/* form inputs start */}
             <div id="form__inputs" className="space-y-1 lg:space-y-2">
               {/* full name start */}
               <div>
                 <InputLabel labelFor="fullName" content="Nama Lengkap" />
-                <TextInput type="text" name="email" id="fullName" placeholder="Fiorenza Celestyn" required="true" />
+                <TextInput
+                  type="text"
+                  name="fullName"
+                  id="fullName"
+                  placeholder="Fiorenza Celestyn"
+                  required
+                  onChange={handleInputChange}
+                  value={formData.fullName}
+                />
               </div>
               {/* full name end */}
 
               {/* email start */}
               <div>
                 <InputLabel labelFor="email" content="Email" />
-                <TextInput type="email" name="email" id="email" placeholder="fiorenza@xmail.com" required="true" />
+                <TextInput
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="fiorenza@xmail.com"
+                  required
+                  onChange={handleInputChange}
+                  value={formData.email}
+                />
               </div>
               {/* email end */}
 
               {/* password start */}
               <div>
                 <InputLabel labelFor="password" content="Password" />
-                <PasswordInput />
+                <PasswordInput name="password" id="password" onChange={handleInputChange} value={formData.password} />
               </div>
               {/* password end */}
 
               {/* confirm password start */}
               <div>
                 <InputLabel labelFor="password" content="Konfirmasi password" />
-                <PasswordInput />
+                <PasswordInput name="confirmPassword" id="confirmPassword" />
               </div>
               {/* confirm password end */}
             </div>

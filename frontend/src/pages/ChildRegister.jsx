@@ -21,14 +21,14 @@ const ChildRegister = () => {
               {/* full name start */}
               <div>
                 <InputLabel labelFor="fullName" content="Nama Lengkap" />
-                <TextInput type="text" name="email" id="fullName" placeholder="Fiorenza Celestyn" required="true" />
+                <TextInput type="text" name="email" id="fullName" placeholder="Fiorenza Celestyn" required />
               </div>
               {/* full name end */}
 
               {/* email start */}
               <div>
                 <InputLabel labelFor="username" content="Username" />
-                <TextInput type="text" name="username" id="username" placeholder="FioCyber123#" required="true" />
+                <TextInput type="text" name="username" id="username" placeholder="FioCyber123#" required />
               </div>
               {/* email end */}
 

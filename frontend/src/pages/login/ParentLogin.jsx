@@ -30,7 +30,7 @@ const ParentLogin = () => {
                 {/* email start */}
                 <div>
                   <InputLabel labelFor="email" content="Email" />
-                  <TextInput type="email" name="email" id="email" placeholder="fiorenza@xmail.com" required="true" />
+                  <TextInput type="email" name="email" id="email" placeholder="fiorenza@xmail.com" required />
                 </div>
                 {/* email end */}
 
