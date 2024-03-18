@@ -46,28 +46,22 @@ const ParentRegister = () => {
     // cek eror sebelum submit
     if (Object.values(errors).every((error) => error === '')) {
       try {
-        const filteredData = {
-          fullname: formData.fullname,
-          email: formData.email,
-          password: formData.password
-        };
-
-        // Jika tidak ada kesalahan, lakukan pengiriman data
-        console.log('Form submitted successfully!');
-        console.log(formData);
-
-        // Mengirim data langsung dengan Axios ke endpoint yang diinginkan
-        const response = await axios.post('http://34.86.158.248:8080/auth/parent/signup', filteredData);
-
-        // Menangani respons sesuai kebutuhan
-        console.log('Response:', response);
+        // console.log(filteredData);
+        await axios
+          .post(process.env.REACT_APP_API_URL + 'auth/parent/signup', {
+            fullname: formData.fullname,
+            email: formData.email,
+            username: formData.username,
+            password: formData.password
+          })
+          .then(function (response) {
+            console.log('Response:', response);
+          });
       } catch (error) {
         console.error('Error:', error);
-        // Menangani kesalahan jika terjadi
       }
     } else {
-      alert('Form contains errors. Please fix them.');
-      console.log('Form contains errors. Please fix them.');
+      console.log('Form memiliki kesalahan. Lakukan perbaikan');
     }
   };
 
