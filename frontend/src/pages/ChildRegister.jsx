@@ -43,25 +43,24 @@ const ChildRegister = () => {
     e.preventDefault();
     // cek eror sebelum submit
     if (Object.values(errors).every((error) => error === '')) {
+      // try catch post data start
       try {
-        const filteredData = {
-          fullname: formData.fullname,
-          username: formData.username,
-          password: formData.password
-        };
-
-        console.log('Form submitted successfully!');
-        console.log(filteredData);
-
-        const response = await axios.post(process.env.REACT_APP_API_URL + 'auth/child/signup', filteredData);
-
-        console.log('Response:', response);
+        // console.log(filteredData);
+        await axios
+          .post(process.env.REACT_APP_API_URL + 'auth/child/signup', {
+            fullname: formData.fullname,
+            username: formData.username,
+            password: formData.password
+          })
+          .then(function (response) {
+            console.log('Response:', response);
+          });
       } catch (error) {
         console.error('Error:', error);
       }
+      // try catch post data end
     } else {
-      alert('Form contains errors. Please fix them.');
-      console.log('Form contains errors. Please fix them.');
+      console.log('Form memiliki kesalahan. Lakukan perbaikan');
     }
   };
 
