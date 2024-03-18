@@ -1,26 +1,27 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import TextInput from '../components/inputs/TextInput';
 import InputLabel from '../components/inputs/InputLabel';
 import PasswordInput from '../components/inputs/PasswordInput';
 import SubmitBtn from '../components/buttons/SubmitBtn';
 import RegisterLayout from '../layouts/auth/RegisterLayout';
 import LoginNowBtn from '../components/buttons/LoginNowBtn';
-import axios from 'axios'; // Import axios directly
-
-import validateInput from '../helpers/validateInput';
 import InputError from '../components/inputs/InputError';
+import validateInput from '../helpers/validateInput';
 
 const ParentRegister = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
+    fullname: '',
     email: '',
+    username: '',
     password: '',
     confirmPassword: ''
   });
 
   const [errors, setErrors] = useState({
-    fullName: '',
+    fullname: '',
     email: '',
+    username: '',
     password: '',
     confirmPassword: ''
   });
@@ -45,12 +46,18 @@ const ParentRegister = () => {
     // cek eror sebelum submit
     if (Object.values(errors).every((error) => error === '')) {
       try {
+        const filteredData = {
+          fullname: formData.fullname,
+          email: formData.email,
+          password: formData.password
+        };
+
         // Jika tidak ada kesalahan, lakukan pengiriman data
         console.log('Form submitted successfully!');
         console.log(formData);
 
         // Mengirim data langsung dengan Axios ke endpoint yang diinginkan
-        const response = await axios.post('http://34.86.158.248:8080/auth/parent/signup', formData);
+        const response = await axios.post('http://34.86.158.248:8080/auth/parent/signup', filteredData);
 
         // Menangani respons sesuai kebutuhan
         console.log('Response:', response);
@@ -74,20 +81,20 @@ const ParentRegister = () => {
 
           <form className="w-full" onSubmit={handleSubmit}>
             {/* form inputs start */}
-            <div id="form__inputs" className="space-y-1 lg:space-y-1">
+            <div id="form__inputs" className="space-y-1">
               {/* full name start */}
               <div>
-                <InputLabel labelFor="fullName" content="Nama Lengkap" />
+                <InputLabel labelFor="fullname" content="Nama Lengkap" />
                 <TextInput
                   type="text"
-                  name="fullName"
-                  id="fullName"
+                  name="fullname"
+                  id="fullname"
                   placeholder="Fiorenza Celestyn"
                   required
                   onChange={handleInputChange}
-                  value={formData.fullName}
+                  value={formData.fullname}
                 />
-                {errors.fullName && <InputError error={errors.fullName} />}
+                {errors.fullname && <InputError error={errors.fullname} />}
               </div>
               {/* full name end */}
 
@@ -106,6 +113,22 @@ const ParentRegister = () => {
                 {errors.email && <InputError error={errors.email} />}
               </div>
               {/* email end */}
+
+              {/* username start */}
+              <div>
+                <InputLabel labelFor="username" content="Username" />
+                <TextInput
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="fiorenza99"
+                  required
+                  onChange={handleInputChange}
+                  value={formData.username}
+                />
+                {errors.username && <InputError error={errors.username} />}
+              </div>
+              {/* username end */}
 
               {/* password start */}
               <div>
