@@ -1,5 +1,3 @@
-// source: https://dev.to/hey_yogini/useaxios-a-simple-custom-hook-for-calling-apis-using-axios-2dkj
-
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -10,20 +8,21 @@ const useAxios = ({ url, method, body = null, headers = null }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const fetchData = () => {
-    axios[method](url, JSON.parse(headers), JSON.parse(body))
-      .then((res) => {
-        setResponse(res.data);
-      })
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const config = { headers: headers ? JSON.parse(headers) : {} };
+        const requestBody = body ? JSON.parse(body) : null;
+        const res = await axios[method](url, requestBody, config);
+        setResponse(res.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchData();
   }, [method, url, body, headers]);
 

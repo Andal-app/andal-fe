@@ -5,12 +5,24 @@ import PasswordInput from '../components/inputs/PasswordInput';
 import SubmitBtn from '../components/buttons/SubmitBtn';
 import RegisterLayout from '../layouts/auth/RegisterLayout';
 import LoginNowBtn from '../components/buttons/LoginNowBtn';
+import axios from 'axios'; // Import axios directly
+
+import validateInput from '../helpers/validateInput';
+import InputError from '../components/inputs/InputError';
 
 const ParentRegister = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
+  });
+
+  const [errors, setErrors] = useState({
+    fullName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
   });
 
   const handleInputChange = (e) => {
@@ -19,11 +31,37 @@ const ParentRegister = () => {
       ...prevFormData,
       [name]: value
     }));
+
+    // Validate input on change
+    const newErrors = validateInput(name, value, formData);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      ...newErrors
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    // cek eror sebelum submit
+    if (Object.values(errors).every((error) => error === '')) {
+      try {
+        // Jika tidak ada kesalahan, lakukan pengiriman data
+        console.log('Form submitted successfully!');
+        console.log(formData);
+
+        // Mengirim data langsung dengan Axios ke endpoint yang diinginkan
+        const response = await axios.post('http://34.86.158.248:8080/auth/parent/signup', formData);
+
+        // Menangani respons sesuai kebutuhan
+        console.log('Response:', response);
+      } catch (error) {
+        console.error('Error:', error);
+        // Menangani kesalahan jika terjadi
+      }
+    } else {
+      alert('Form contains errors. Please fix them.');
+      console.log('Form contains errors. Please fix them.');
+    }
   };
 
   return (
@@ -32,11 +70,11 @@ const ParentRegister = () => {
       <div className="w-[85%] lg:w-[60%] h-[78%] lg:h-full flex flex-col items-center justify-end lg:justify-center">
         {/* greetings and form start */}
         <div className="w-full bg-white">
-          <h1 className="text-b-md mb-6 lg:mb-5">Daftarkan diri Anda</h1>
+          <h1 className="text-b-md mb-5">Daftarkan diri Anda</h1>
 
           <form className="w-full" onSubmit={handleSubmit}>
             {/* form inputs start */}
-            <div id="form__inputs" className="space-y-1 lg:space-y-2">
+            <div id="form__inputs" className="space-y-1 lg:space-y-1">
               {/* full name start */}
               <div>
                 <InputLabel labelFor="fullName" content="Nama Lengkap" />
@@ -49,6 +87,7 @@ const ParentRegister = () => {
                   onChange={handleInputChange}
                   value={formData.fullName}
                 />
+                {errors.fullName && <InputError error={errors.fullName} />}
               </div>
               {/* full name end */}
 
@@ -64,6 +103,7 @@ const ParentRegister = () => {
                   onChange={handleInputChange}
                   value={formData.email}
                 />
+                {errors.email && <InputError error={errors.email} />}
               </div>
               {/* email end */}
 
@@ -71,13 +111,20 @@ const ParentRegister = () => {
               <div>
                 <InputLabel labelFor="password" content="Password" />
                 <PasswordInput name="password" id="password" onChange={handleInputChange} value={formData.password} />
+                {errors.password && <InputError error={errors.password} />}
               </div>
               {/* password end */}
 
               {/* confirm password start */}
               <div>
                 <InputLabel labelFor="password" content="Konfirmasi password" />
-                <PasswordInput name="confirmPassword" id="confirmPassword" />
+                <PasswordInput
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  onChange={handleInputChange}
+                  value={formData.confirmPassword}
+                />
+                {errors.confirmPassword && <InputError error={errors.confirmPassword} />}
               </div>
               {/* confirm password end */}
             </div>
@@ -85,8 +132,8 @@ const ParentRegister = () => {
             {/* form inputs start */}
 
             {/* submit button start */}
-            <div className="mt-4 lg:mt-8 mb-2">
-              <SubmitBtn text="Masuk" />
+            <div className="mt-4 lg:mt-4 mb-2">
+              <SubmitBtn text="Daftar" />
             </div>
             {/* submit button
              end */}
