@@ -30,8 +30,18 @@ import AddGeofencing from './pages/location/AddGeofencing';
 import PopUpTrial from './pages/PopUpTrial';
 import NotificationPage from './pages/general/NotificationPage';
 import GeofSchedule from './pages/location/GeofSchedule';
+import NotFound from './components/routes/NotFound';
+import PrivateRouter from './components/routes/PrivateRouter';
+import NoAccess from './components/routes/NoAccess';
+import ParentRouter from './components/routes/ParentRouter';
+import ForceRedirect from './components/routes/ForceRedirect';
 
 function App() {
+  const user = {
+    isConnected: false,
+    role: 'parent'
+  };
+
   return (
     <div className="font-poppins">
       <BrowserRouter>
@@ -40,8 +50,6 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/tutorial" element={<TutorialPage />} />
             <Route path="/pilihperan" element={<SelectRole />} />
-            <Route path="/masuk/orangtua" element={<ParentLogin />} />
-            <Route path="/masuk/anak" element={<ChildLogin />} />
             <Route path="/daftar/orangtua" element={<ParentRegister />} />
             <Route path="/daftar/anak" element={<ChildRegister />} />
             <Route path="/profil" element={<Profile />} />
@@ -52,11 +60,8 @@ function App() {
             <Route path="/popuptrial" element={<PopUpTrial />} />
             <Route path="/notifikasi" element={<NotificationPage />} />
             <Route path="/riwayat" element={<GeofSchedule />} />
-
             <Route path="/anak/beranda" element={<ChildHome />} />
-            <Route path="/beranda/anak/v2" element={<ChildHomeV2 />} />
             <Route path="/orangtua/beranda" element={<ParentHome />} />
-            <Route path="/beranda/orangtua/v2" element={<ParentHomeV2 />} />
             <Route path="/parent/history" element={<ParentGeofencingHistory />} />
             <Route path="/parent/history/:childname" element={<ParentHistory />} />
             <Route path="/parent/notification_history" element={<ParentNotificationHistory />} />
@@ -65,7 +70,53 @@ function App() {
             <Route path="/tambahlokasi/v2" element={<AddGeofencing />} />
             <Route path="/posisianak/v2" element={<PositionDetailV2 />} />
             <Route path="/parent/geofencing/:childname" element={<ParentGeofencing />} />
+
+            <Route path="*" element={<NotFound />} />
+            <Route path="/noaccess" element={<NoAccess />} />
+
+            <Route
+              path="/beranda/orangtua/v2"
+              element={
+                <ParentRouter user={user}>
+                  <ParentHomeV2 />
+                </ParentRouter>
+              }
+            />
+            <Route
+              path="/beranda/anak/v2"
+              element={
+                <PrivateRouter user={user}>
+                  <ChildHomeV2 />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/masuk/orangtua"
+              element={
+                <ForceRedirect user={user}>
+                  <ParentLogin />
+                </ForceRedirect>
+              }
+            />
+            <Route
+              path="/masuk/anak"
+              element={
+                <ForceRedirect user={user}>
+                  <ChildLogin />
+                </ForceRedirect>
+              }
+            />
           </Route>
+
+          {/* <Route
+            path="/beranda/anak/v2"
+            element={
+              <PrivateRouter user={user}>
+                <ChildHomeV2 />
+              </PrivateRouter>
+            }
+          /> */}
+
           <Route element={<PrivateRoute />}></Route>
         </Routes>
       </BrowserRouter>

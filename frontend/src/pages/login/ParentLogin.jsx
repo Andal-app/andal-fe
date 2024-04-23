@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextInput from '../../components/inputs/TextInput';
 import InputLabel from '../../components/inputs/InputLabel';
 import PasswordInput from '../../components/inputs/PasswordInput';
@@ -8,6 +8,20 @@ import RegisterNowBtn from '../../components/buttons/RegisterNowBtn';
 import LoginLayout from '../../layouts/LoginLayout';
 
 const ParentLogin = () => {
+  const [form, setForm] = useState({});
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(form);
+  };
+
   return (
     <LoginLayout>
       {/* right pane content start */}
@@ -25,12 +39,19 @@ const ParentLogin = () => {
               Halo, <br /> Selamat datang kembali
             </h1>
 
-            <form className="w-full" action="#">
+            <form className="w-full" onSubmit={handleSubmit}>
               <div id="form__inputs" className="space-y-2">
                 {/* email start */}
                 <div>
                   <InputLabel labelFor="email" content="Email" />
-                  <TextInput type="email" name="email" id="email" placeholder="fiorenza@xmail.com" required />
+                  <TextInput
+                    type="email"
+                    name="emailOrUsername"
+                    id="email"
+                    placeholder="fiorenza@xmail.com"
+                    required
+                    onChange={handleChange}
+                  />
                 </div>
                 {/* email end */}
 
@@ -38,7 +59,7 @@ const ParentLogin = () => {
                 <div className="space-y-1">
                   <div>
                     <InputLabel labelFor="password" content="Password" />
-                    <PasswordInput />
+                    <PasswordInput name="password" onChange={handleChange} />
                   </div>
                   {/* lupa password start */}
                   <div className="text-end">
