@@ -1,4 +1,5 @@
 import { SET_USER } from '../types';
+import isEmpty from '../../utils/isEmpty';
 
 const initialState = {
   isConnected: false,

@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { ERRORS } from '../types';
+import jwt_decode from 'jwt-decode';
+import { ERRORS, SET_USER } from '../types';
+import { setAuth } from '../../utils/setAuth';
 
 export const LoginAction = (form, navigate) => (dispatch) => {
   axios
@@ -8,6 +10,9 @@ export const LoginAction = (form, navigate) => (dispatch) => {
       console.log(res);
       const { token } = res.data;
       localStorage.setItem('jwt', token);
+      const decode = jwt_decode(token);
+      console.log(decode);
+      dispatch(setUser(decode));
     })
     .catch((err) => {
       dispatch({
@@ -16,3 +21,16 @@ export const LoginAction = (form, navigate) => (dispatch) => {
       });
     });
 };
+
+export const LogoutAction = () => (dispatch) => {
+  localStorage.removeItem('jwt');
+  dispatch({
+    type: SET_USER,
+    payload: {}
+  });
+};
+
+export const setUser = (decode) => ({
+  type: SET_USER,
+  payload: decode
+});

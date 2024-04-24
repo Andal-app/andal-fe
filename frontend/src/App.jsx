@@ -36,11 +36,25 @@ import NoAccess from './components/routes/NoAccess';
 import ParentRouter from './components/routes/ParentRouter';
 import ForceRedirect from './components/routes/ForceRedirect';
 
+import jwt_decode from 'jwt-decode';
+import store from './redux/store';
+import { setUser } from './redux/actions/authActions';
+import { useSelector } from 'react-redux';
+
+if (localStorage.jwt) {
+  const decode = jwt_decode(localStorage.jwt);
+  store.dispatch(setUser(decode));
+}
+
 function App() {
+  const auth = useSelector((state) => state.auth);
+
   const user = {
-    isConnected: false,
-    role: 'parent'
+    isConnected: auth.isConnected,
+    role: auth.user.role
   };
+
+  // console.log('Role: ' + user.role);
 
   return (
     <div className="font-poppins">
