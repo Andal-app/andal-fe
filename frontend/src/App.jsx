@@ -42,6 +42,8 @@ import { setUser } from './redux/actions/authActions';
 import { useSelector } from 'react-redux';
 import ConnectAccount from './pages/connect/ConnectAccount';
 
+import { Toaster } from 'react-hot-toast';
+
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt);
   store.dispatch(setUser(decode));
@@ -60,9 +62,18 @@ function App() {
   return (
     <div className="font-poppins">
       <BrowserRouter>
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            style: {
+              // background: 'white',
+              // color: '#555c5d',
+              fontSize: '1.1rem'
+            }
+          }}
+        />
         <Routes>
           <Route element={<ProtectedRoute />}>
-            <Route path="/trial" element={<Trial />} />
             <Route path="/sheettrial" element={<BottomSheetTrial />} />
             <Route path="/profil/hapusakun" element={<ConfirmDelete />} />
             <Route path="/popuptrial" element={<PopUpTrial />} />
@@ -90,6 +101,7 @@ function App() {
           <Route path="/pilihperan" element={<SelectRole />} />
           <Route path="/daftar/orangtua" element={<ParentRegister />} />
           <Route path="/daftar/anak" element={<ChildRegister />} />
+          <Route path="/trial" element={<Trial />} />
 
           {/* ------ errors routes (unprotected)*/}
           <Route path="*" element={<NotFound />} />

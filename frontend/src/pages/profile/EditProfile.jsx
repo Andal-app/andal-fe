@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import ProfPic from '../../assets/images/profile_picture.jpeg';
 import InputLabel from '../../components/inputs/InputLabel';
 import TextInput from '../../components/inputs/TextInput';
@@ -37,20 +38,19 @@ function EditProfile({ user }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Cek error sebelum submit
-    if (Object.values(errors).every((error) => error === '')) {
-      try {
-        const response = await axios.patch(`${process.env.REACT_APP_API_URL}auth/update-account`, {
+    try {
+      await axios
+        .patch(`${process.env.REACT_APP_API_URL}auth/update-account`, {
           fullname: formData.fullname,
           username: formData.username
+        })
+        .then((res) => {
+          // console.log('Response:', res);
+          toast.success('Berhasil memperbarui profil');
         });
-
-        console.log('Response:', response);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    } else {
-      console.log('Form memiliki kesalahan. Lakukan perbaikan');
+    } catch (error) {
+      // console.error('Error:', error);
+      toast.error(error.message);
     }
   };
 
