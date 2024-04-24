@@ -14,15 +14,14 @@ function Sidebar({ user }) {
     dispatch(LogoutAction());
   };
 
-  const role = translateUserRole(user.role ? user.role : null);
-
-  const roleURL = translateUserRoleURL(user.role ? user.role : null);
+  const role = translateUserRole(user?.role ? user.role : null);
+  const roleURL = translateUserRoleURL(user?.role ? user.role : null);
 
   const [open, setOpen] = useState(true);
   const MenuUtamaItems = [
-    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/${roleURL}/v2` },
-    { title: 'Riwayat Geofencing', icon: 'tdesign:location', cat: 'menu_utama', link: '/' },
-    { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama', link: '/' }
+    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/orangtua/v2` },
+    { title: 'Riwayat Geofencing', icon: 'tdesign:location', cat: 'menu_utama', link: '' },
+    { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama', link: '' }
   ];
 
   const PengaturanItems = [

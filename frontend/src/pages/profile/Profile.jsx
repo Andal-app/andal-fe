@@ -2,7 +2,7 @@ import Sidebar from '../../components/navigation/Sidebar';
 import ProfSetItem from './ProfSetItem';
 import ProfPic from '../../assets/images/profile_picture.jpeg';
 
-function Profile() {
+function Profile({ user }) {
   const ParentSettingItems = [
     { link: '/editprofil', icon: 'bx:edit', text: 'Edit profil' },
     { link: '', icon: 'mingcute:question-line', text: 'Bantuan penggunaan' },

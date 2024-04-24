@@ -90,7 +90,6 @@ function App() {
           <Route path="/daftar/orangtua" element={<ParentRegister />} />
           <Route path="/daftar/anak" element={<ChildRegister />} />
 
-          <Route path="/profil" element={<Profile />} />
           <Route path="/editprofil" element={<EditProfile />} />
 
           {/* ------ errors routes (unprotected)*/}
@@ -114,6 +113,15 @@ function App() {
               </ParentRouter>
             }
           />
+          <Route
+            path="/profil"
+            element={
+              <ParentRouter user={user}>
+                <Profile user={user} />
+              </ParentRouter>
+            }
+          />
+
           {/* ------parent routes end */}
 
           {/* ------ child routes start (protected)*/}
