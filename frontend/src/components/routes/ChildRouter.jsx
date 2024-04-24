@@ -1,13 +1,13 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-// route hanya untuk user yang isConnected == true & role == parent
+// route hanya untuk user yang isConnected == true & role == child
 
-const ParentRouter = ({ user, children }) => {
+const ChildRouter = ({ user, children }) => {
   if (!user.isConnected) {
-    return <Navigate to="/masuk/orangtua" replace />;
+    return <Navigate to="/masuk/anak" replace />;
   } else {
-    if (user.role !== 'parent') {
+    if (user.role !== 'child') {
       // return <Navigate to="/noaccess" replace />;
       return <Navigate to="/" replace />;
     }
@@ -15,4 +15,4 @@ const ParentRouter = ({ user, children }) => {
   return children; // masuk ke route children
 };
 
-export default ParentRouter;
+export default ChildRouter;

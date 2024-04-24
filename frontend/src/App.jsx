@@ -31,9 +31,9 @@ import PopUpTrial from './pages/PopUpTrial';
 import NotificationPage from './pages/general/NotificationPage';
 import GeofSchedule from './pages/location/GeofSchedule';
 import NotFound from './components/routes/NotFound';
-import PrivateRouter from './components/routes/PrivateRouter';
 import NoAccess from './components/routes/NoAccess';
 import ParentRouter from './components/routes/ParentRouter';
+import ChildRouter from './components/routes/ChildRouter';
 import ForceRedirect from './components/routes/ForceRedirect';
 
 import jwt_decode from 'jwt-decode';
@@ -61,11 +61,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/tutorial" element={<TutorialPage />} />
-            <Route path="/pilihperan" element={<SelectRole />} />
-            <Route path="/daftar/orangtua" element={<ParentRegister />} />
-            <Route path="/daftar/anak" element={<ChildRegister />} />
             <Route path="/profil" element={<Profile />} />
             <Route path="/editprofil" element={<EditProfile />} />
             <Route path="/trial" element={<Trial />} />
@@ -84,54 +79,63 @@ function App() {
             <Route path="/tambahlokasi/v2" element={<AddGeofencing />} />
             <Route path="/posisianak/v2" element={<PositionDetailV2 />} />
             <Route path="/parent/geofencing/:childname" element={<ParentGeofencing />} />
-
-            <Route path="*" element={<NotFound />} />
-            <Route path="/noaccess" element={<NoAccess />} />
-
-            <Route
-              path="/beranda/orangtua/v2"
-              element={
-                <ParentRouter user={user}>
-                  <ParentHomeV2 />
-                </ParentRouter>
-              }
-            />
-            <Route
-              path="/beranda/anak/v2"
-              element={
-                <PrivateRouter user={user}>
-                  <ChildHomeV2 />
-                </PrivateRouter>
-              }
-            />
-            <Route
-              path="/masuk/orangtua"
-              element={
-                <ForceRedirect user={user}>
-                  <ParentLogin />
-                </ForceRedirect>
-              }
-            />
-            <Route
-              path="/masuk/anak"
-              element={
-                <ForceRedirect user={user}>
-                  <ChildLogin />
-                </ForceRedirect>
-              }
-            />
           </Route>
 
-          {/* <Route
+          <Route element={<PrivateRoute />}></Route>
+
+          {/* -------------- routes baru start -------------- */}
+
+          {/* ------ general routes (unprotected)*/}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/tutorial" element={<TutorialPage />} />
+          <Route path="/pilihperan" element={<SelectRole />} />
+          <Route path="/daftar/orangtua" element={<ParentRegister />} />
+          <Route path="/daftar/anak" element={<ChildRegister />} />
+
+          {/* ------ errors routes (unprotected)*/}
+          <Route path="*" element={<NotFound />} />
+          <Route path="/noaccess" element={<NoAccess />} />
+
+          {/* ------ parent routes start (protected) */}
+          <Route
+            path="/masuk/orangtua"
+            element={
+              <ForceRedirect user={user}>
+                <ParentLogin />
+              </ForceRedirect>
+            }
+          />
+          <Route
+            path="/beranda/orangtua/v2"
+            element={
+              <ParentRouter user={user}>
+                <ParentHomeV2 />
+              </ParentRouter>
+            }
+          />
+          {/* ------parent routes end */}
+
+          {/* ------ child routes start (protected)*/}
+          <Route
+            path="/masuk/anak"
+            element={
+              <ForceRedirect user={user}>
+                <ChildLogin />
+              </ForceRedirect>
+            }
+          />
+          <Route
             path="/beranda/anak/v2"
             element={
-              <PrivateRouter user={user}>
+              <ChildRouter user={user}>
                 <ChildHomeV2 />
-              </PrivateRouter>
+              </ChildRouter>
             }
-          /> */}
+          />
 
-          <Route element={<PrivateRoute />}></Route>
+          {/* ------ child routes end */}
+
+          {/* -------------- routes baru end -------------- */}
         </Routes>
       </BrowserRouter>
     </div>
