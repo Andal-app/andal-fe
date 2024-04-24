@@ -40,6 +40,7 @@ import jwt_decode from 'jwt-decode';
 import store from './redux/store';
 import { setUser } from './redux/actions/authActions';
 import { useSelector } from 'react-redux';
+import ConnectAccount from './pages/connect/ConnectAccount';
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt);
@@ -90,8 +91,6 @@ function App() {
           <Route path="/daftar/orangtua" element={<ParentRegister />} />
           <Route path="/daftar/anak" element={<ChildRegister />} />
 
-          <Route path="/editprofil" element={<EditProfile />} />
-
           {/* ------ errors routes (unprotected)*/}
           <Route path="*" element={<NotFound />} />
           <Route path="/noaccess" element={<NoAccess />} />
@@ -118,6 +117,22 @@ function App() {
             element={
               <ParentRouter user={user}>
                 <Profile user={user} />
+              </ParentRouter>
+            }
+          />
+          <Route
+            path="/editprofil"
+            element={
+              <ParentRouter user={user}>
+                <EditProfile user={user} />
+              </ParentRouter>
+            }
+          />
+          <Route
+            path="/hubungkan"
+            element={
+              <ParentRouter user={user}>
+                <ConnectAccount user={user} />
               </ParentRouter>
             }
           />

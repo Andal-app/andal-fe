@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import axios from 'axios';
 import ProfPic from '../../assets/images/profile_picture.jpeg';
 import InputLabel from '../../components/inputs/InputLabel';
 import TextInput from '../../components/inputs/TextInput';
@@ -5,33 +7,91 @@ import SubmitBtn from '../../components/buttons/SubmitBtn';
 import TopBackNav from '../../components/navigation/TopBackNav';
 import Sidebar from '../../components/navigation/Sidebar';
 import InputProfPic from '../../components/inputs/InputProfPic';
+import validateInput from '../../helpers/validateInput';
 
-function EditProfile() {
+function EditProfile({ user }) {
+  const [formData, setFormData] = useState({
+    fullname: user?.fullname || '',
+    username: user?.username || ''
+  });
+
+  const [errors, setErrors] = useState({
+    fullname: '',
+    username: ''
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value
+    }));
+
+    // Validate input on change
+    const newErrors = validateInput(name, value, formData);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      ...newErrors
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Cek error sebelum submit
+    if (Object.values(errors).every((error) => error === '')) {
+      try {
+        const response = await axios.patch(`${process.env.REACT_APP_API_URL}auth/update-account`, {
+          fullname: formData.fullname,
+          username: formData.username
+        });
+
+        console.log('Response:', response);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    } else {
+      console.log('Form memiliki kesalahan. Lakukan perbaikan');
+    }
+  };
+
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar user={user} />
 
       <div className="w-full lg:w-1/2 h-screen flex flex-col items-center">
-        {/* top back nav start */}
         <TopBackNav title="Ubah Profil" link="/profil" />
-        {/* top back nav end */}
 
         <main className="w-[85%] lg:w-[80%] h-[80%] flex flex-col items-center">
-          {/* edit profile picture start */}
           <InputProfPic src={ProfPic} />
-          {/* edit profile picture end */}
 
-          {/* edit form start */}
-          <form className="w-full h-full flex flex-col">
+          <form onSubmit={handleSubmit} className="w-full h-full flex flex-col">
             <div id="edit__inputs" className="flex flex-col gap-4">
               <div id="edit__fullname">
                 <InputLabel labelFor="fullname" content="Nama lengkap" />
-                <TextInput type="text" name="fullname" id="fullname" placeholder="" required />
+                <TextInput
+                  type="text"
+                  name="fullname"
+                  id="fullname"
+                  placeholder=""
+                  required
+                  value={formData.fullname}
+                  onChange={handleInputChange}
+                  errors={errors?.fullname}
+                />
               </div>
 
-              <div id="edit__email">
-                <InputLabel labelFor="email" content="Email" />
-                <TextInput type="text" name="email" id="email" placeholder="" required />
+              <div id="edit__username">
+                <InputLabel labelFor="username" content="Username" />
+                <TextInput
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder=""
+                  required
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  errors={errors?.username}
+                />
               </div>
             </div>
 
@@ -39,7 +99,6 @@ function EditProfile() {
               <SubmitBtn text="Simpan" />
             </div>
           </form>
-          {/* edit form end */}
         </main>
       </div>
     </div>
