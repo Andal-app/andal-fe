@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react';
 import { FaAngleLeft } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
 import { LogoutAction } from '../../redux/actions/authActions';
+import translateUserRole from '../../helpers/translateUserRole';
 
 function Sidebar({ user }) {
   // authentication
@@ -11,6 +12,8 @@ function Sidebar({ user }) {
   const handleLogout = () => {
     dispatch(LogoutAction());
   };
+
+  const role = translateUserRole(user.role ? user.role : null);
 
   const [open, setOpen] = useState(true);
   const MenuUtamaItems = [
@@ -53,8 +56,8 @@ function Sidebar({ user }) {
       <div className={`flex gap-4 px-6 my-4 py-4 ${!open && 'hidden'}`}>
         <div id="profile__picture" className="w-14 h-14 rounded-full bg-black"></div>
         <div className="flex flex-col justify-center">
-          <p className="text-b-sm font-semibold">Raisa Salsabil Y</p>
-          <p className="text-b-xsm">Orang tua</p>
+          <p className="text-b-sm font-semibold">{user ? user.fullname : 'Nama Lengkap'}</p>
+          <p className="text-b-xsm">{role}</p>
         </div>
       </div>
       {/* user profile end */}

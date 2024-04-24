@@ -1,7 +1,7 @@
 import ChildBox from '../../components/box/ChildBox';
 import HomeLayout from '../../layouts/home/HomeLayout';
 
-function ParentHomeV2() {
+function ParentHomeV2({ user }) {
   const ChildrenList = [
     { fullName: 'Fiorenza Celestyn', profPic: '' },
     { fullName: 'Maura Yufi Septania', profPic: '' },
@@ -9,7 +9,7 @@ function ParentHomeV2() {
   ];
 
   return (
-    <HomeLayout>
+    <HomeLayout user={user}>
       <div className="mx-6 lg:mx-12 lg:mt-4">
         {/* page title start */}
         <h5 className="text-h-sm font-bold pb-6 text-violet-900">Daftar Anak</h5>

@@ -50,8 +50,10 @@ function App() {
   const auth = useSelector((state) => state.auth);
 
   const user = {
-    isConnected: auth.isConnected,
-    role: auth.user.role
+    isConnected: auth?.isConnected || false,
+    role: auth?.user?.role || '',
+    username: auth?.user?.user?.username || '',
+    fullname: auth?.user?.user?.fullname || ''
   };
 
   // console.log('Role: ' + user.role);
@@ -110,7 +112,7 @@ function App() {
             path="/beranda/orangtua/v2"
             element={
               <ParentRouter user={user}>
-                <ParentHomeV2 />
+                <ParentHomeV2 user={user} />
               </ParentRouter>
             }
           />
