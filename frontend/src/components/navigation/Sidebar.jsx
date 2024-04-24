@@ -19,7 +19,7 @@ function Sidebar({ user }) {
 
   const [open, setOpen] = useState(true);
   const MenuUtamaItems = [
-    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/orangtua/v2` },
+    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/${roleURL}/v2` },
     { title: 'Riwayat Geofencing', icon: 'tdesign:location', cat: 'menu_utama', link: '' },
     { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama', link: '' }
   ];
@@ -59,7 +59,7 @@ function Sidebar({ user }) {
         <div id="profile__picture" className="w-14 h-14 rounded-full bg-black"></div>
         <div className="flex flex-col justify-center">
           <p className="text-b-sm font-semibold">{user ? user.fullname : 'Nama Lengkap'}</p>
-          <p className="text-b-xsm">{role}</p>
+          <p className="text-b-xsm">{role ? role : 'Peran'}</p>
         </div>
       </div>
       {/* user profile end */}

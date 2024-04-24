@@ -1,8 +1,12 @@
 import Sidebar from '../../components/navigation/Sidebar';
 import ProfSetItem from './ProfSetItem';
 import ProfPic from '../../assets/images/profile_picture.jpeg';
+import translateUserRole from '../../helpers/translateUserRole';
 
 function Profile({ user }) {
+  //autentikasi
+  const role = translateUserRole(user?.role ? user.role : null);
+
   const ParentSettingItems = [
     { link: '/editprofil', icon: 'bx:edit', text: 'Edit profil' },
     { link: '', icon: 'mingcute:question-line', text: 'Bantuan penggunaan' },
@@ -13,7 +17,7 @@ function Profile({ user }) {
 
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar user={user} />
 
       <main className="w-full lg:w-1/2 lg:border-r lg:border-neutral-300">
         {/* page title start */}
@@ -24,8 +28,8 @@ function Profile({ user }) {
         <div id="user__profile" className={`flex flex-col items-center gap-4 py-6`}>
           <img id="user__profile__picture" src={ProfPic} className={`w-36 h-36 rounded-full`}></img>
           <div className="text-center">
-            <p className={`text-b-md font-bold`}>Raisa Salsabil Yusriyya</p>
-            <p className={`text-b-sm`}>Orang tua</p>
+            <p className={`text-b-md font-bold`}>{user ? user.fullname : 'Nama Lengkap'}</p>
+            <p className={`text-b-sm`}>{role ? role : 'Peran'}</p>
           </div>
         </div>
         {/* user profile end */}
