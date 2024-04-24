@@ -16,6 +16,7 @@
     "axios": "^1.4.0",
     "bulma-extensions": "^6.2.7",
     "dayjs": "^1.11.10",
+    "jwt-decode": "^3.1.2",
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
     "leaflet-geosearch": "^3.10.2",

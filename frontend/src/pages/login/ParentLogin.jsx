@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+
 import TextInput from '../../components/inputs/TextInput';
 import InputLabel from '../../components/inputs/InputLabel';
 import PasswordInput from '../../components/inputs/PasswordInput';
@@ -7,8 +11,14 @@ import SubmitBtn from '../../components/buttons/SubmitBtn';
 import RegisterNowBtn from '../../components/buttons/RegisterNowBtn';
 import LoginLayout from '../../layouts/LoginLayout';
 
+import { LoginAction } from '../../redux/actions/authActions';
+
 const ParentLogin = () => {
   const [form, setForm] = useState({});
+
+  const dispatch = useDispatch();
+  const errors = useSelector((state) => state.errors);
+  const navigate = useNavigate;
 
   const handleChange = (e) => {
     setForm({
@@ -20,6 +30,7 @@ const ParentLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
+    dispatch(LoginAction(form, navigate));
   };
 
   return (
@@ -45,12 +56,13 @@ const ParentLogin = () => {
                 <div>
                   <InputLabel labelFor="email" content="Email" />
                   <TextInput
-                    type="email"
+                    type="text"
                     name="emailOrUsername"
-                    id="email"
-                    placeholder="fiorenza@xmail.com"
+                    id="emailOrUsername"
+                    placeholder="email atau username"
                     required
                     onChange={handleChange}
+                    errors={errors.emailOrUsername}
                   />
                 </div>
                 {/* email end */}
@@ -59,7 +71,7 @@ const ParentLogin = () => {
                 <div className="space-y-1">
                   <div>
                     <InputLabel labelFor="password" content="Password" />
-                    <PasswordInput name="password" onChange={handleChange} />
+                    <PasswordInput name="password" onChange={handleChange} errors={errors.password} />
                   </div>
                   {/* lupa password start */}
                   <div className="text-end">
