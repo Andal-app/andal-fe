@@ -56,8 +56,6 @@ function App() {
     fullname: auth?.user?.user?.fullname || ''
   };
 
-  // console.log('Role: ' + user.role);
-
   return (
     <div className="font-poppins">
       <BrowserRouter>

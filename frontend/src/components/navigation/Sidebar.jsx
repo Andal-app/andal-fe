@@ -5,6 +5,7 @@ import { FaAngleLeft } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
 import { LogoutAction } from '../../redux/actions/authActions';
 import translateUserRole from '../../helpers/translateUserRole';
+import translateUserRoleURL from '../../helpers/translateUserRoleURL';
 
 function Sidebar({ user }) {
   // authentication
@@ -15,11 +16,13 @@ function Sidebar({ user }) {
 
   const role = translateUserRole(user.role ? user.role : null);
 
+  const roleURL = translateUserRoleURL(user.role ? user.role : null);
+
   const [open, setOpen] = useState(true);
   const MenuUtamaItems = [
-    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: '/' },
+    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/${roleURL}/v2` },
     { title: 'Riwayat Geofencing', icon: 'tdesign:location', cat: 'menu_utama', link: '/' },
-    { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama', link: '/notifikasi' }
+    { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama', link: '/' }
   ];
 
   const PengaturanItems = [

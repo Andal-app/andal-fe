@@ -7,12 +7,14 @@ export const LoginAction = (form, navigate) => (dispatch) => {
   axios
     .post('http://34.86.158.248:8080/auth/parent/signin', form)
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       const { token } = res.data;
       localStorage.setItem('jwt', token);
       const decode = jwt_decode(token);
-      console.log(decode);
+      // console.log(decode);
       dispatch(setUser(decode));
+      // navigate('/beranda/orangtua/v2');
+      window.location.href = '/beranda/orangtua/v2';
     })
     .catch((err) => {
       dispatch({

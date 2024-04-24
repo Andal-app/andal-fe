@@ -18,7 +18,7 @@ const ParentLogin = () => {
 
   const dispatch = useDispatch();
   const errors = useSelector((state) => state.errors);
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({
