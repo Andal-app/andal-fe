@@ -51,10 +51,7 @@ function App() {
 
   const user = {
     isConnected: auth.isConnected,
-    role: auth.user.role,
-    exp: auth.user.exp,
-    username: auth.user.user.username,
-    fullname: auth.user.user.fullname
+    role: auth.user.role
   };
 
   // console.log('Role: ' + user.role);
@@ -113,7 +110,7 @@ function App() {
             path="/beranda/orangtua/v2"
             element={
               <ParentRouter user={user}>
-                <ParentHomeV2 user={user} />
+                <ParentHomeV2 />
               </ParentRouter>
             }
           />
