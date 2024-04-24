@@ -2,8 +2,16 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { FaAngleLeft } from 'react-icons/fa6';
+import { useDispatch } from 'react-redux';
+import { LogoutAction } from '../../redux/actions/authActions';
 
-function Sidebar() {
+function Sidebar({ user }) {
+  // authentication
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(LogoutAction());
+  };
+
   const [open, setOpen] = useState(true);
   const MenuUtamaItems = [
     { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: '/' },
@@ -12,8 +20,8 @@ function Sidebar() {
   ];
 
   const PengaturanItems = [
-    { title: 'Profil Pengguna', icon: 'gg:profile', cat: 'pengaturan', link: '/profil' },
-    { title: 'Keluar ', icon: 'humbleicons:logout', cat: 'pengaturan', redText: true, link: '/keluar' }
+    { title: 'Profil Pengguna', icon: 'gg:profile', cat: 'pengaturan', link: '/profil' }
+    // { title: 'Keluar', icon: 'humbleicons:logout', cat: 'pengaturan', redText: true, link: '/keluar' }
   ];
 
   return (
@@ -51,7 +59,7 @@ function Sidebar() {
       </div>
       {/* user profile end */}
 
-      {/* unordered list start */}
+      {/* menu list start */}
       <div>
         {/* menu utama start */}
         <p id="menu__title" className={`px-6 uppercase text-b-sm font-semibold ${!open && 'hidden'}`}>
@@ -87,7 +95,7 @@ function Sidebar() {
               to={Item.link}
               key={index}
               className={`flex px-6 py-3 cursor-pointer hover:bg-violet-50 text-b-sm items-center gap-x-4 
-              ${!open && 'py-6'} ${Item.redText ? 'text-red-500' : 'text-neutral-700'}`}
+              ${!open && 'py-6'}  ${Item.redText ? 'text-red-500' : 'text-neutral-700'}`}
             >
               <div className="w-7 h-7 rounded-lg bg-neutral-50 flex items-center justify-center">
                 <Icon icon={Item.icon} className={`w-4 h-4 `} />
@@ -97,8 +105,23 @@ function Sidebar() {
           ))}
         </ul>
         {/* pengaturan end */}
+
+        {/* logout start */}
+        <div id="sidebar__logout">
+          <Link
+            onClick={handleLogout}
+            className={`text-red-500 flex px-6 py-3 cursor-pointer hover:bg-violet-50 text-b-sm items-center gap-x-4 
+              ${!open && 'py-6'}`}
+          >
+            <div className="w-7 h-7 rounded-lg bg-neutral-50 flex items-center justify-center">
+              <Icon icon="humbleicons:logout" className={`w-4 h-4 `} />
+            </div>
+            <span className={`${!open && 'hidden'} origin-left duration-200`}>Keluar</span>
+          </Link>
+        </div>
+        {/* logout end */}
       </div>
-      {/* unordered list start */}
+      {/* menu list end */}
     </nav>
   );
 }

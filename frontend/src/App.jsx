@@ -61,8 +61,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute />}>
-            <Route path="/profil" element={<Profile />} />
-            <Route path="/editprofil" element={<EditProfile />} />
             <Route path="/trial" element={<Trial />} />
             <Route path="/sheettrial" element={<BottomSheetTrial />} />
             <Route path="/profil/hapusakun" element={<ConfirmDelete />} />
@@ -91,6 +89,9 @@ function App() {
           <Route path="/pilihperan" element={<SelectRole />} />
           <Route path="/daftar/orangtua" element={<ParentRegister />} />
           <Route path="/daftar/anak" element={<ChildRegister />} />
+
+          <Route path="/profil" element={<Profile />} />
+          <Route path="/editprofil" element={<EditProfile />} />
 
           {/* ------ errors routes (unprotected)*/}
           <Route path="*" element={<NotFound />} />
