@@ -16,6 +16,7 @@
     "axios": "^1.4.0",
     "bulma-extensions": "^6.2.7",
     "dayjs": "^1.11.10",
+    "jwt-decode": "^3.1.2",
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
     "leaflet-geosearch": "^3.10.2",
@@ -33,7 +34,9 @@
     "react-router-dom": "^6.11.2",
     "react-scripts": "^5.0.1",
     "react-spring-bottom-sheet": "^3.4.1",
-    "react-time-picker": "^6.5.2"
+    "react-time-picker": "^6.5.2",
+    "redux": "^4.2.1",
+    "redux-devtools-extension": "^2.13.9"
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",

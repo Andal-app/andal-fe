@@ -30,20 +30,37 @@ import AddGeofencing from './pages/location/AddGeofencing';
 import PopUpTrial from './pages/PopUpTrial';
 import NotificationPage from './pages/general/NotificationPage';
 import GeofSchedule from './pages/location/GeofSchedule';
+import NotFound from './components/routes/NotFound';
+import NoAccess from './components/routes/NoAccess';
+import ParentRouter from './components/routes/ParentRouter';
+import ChildRouter from './components/routes/ChildRouter';
+import ForceRedirect from './components/routes/ForceRedirect';
+
+import jwt_decode from 'jwt-decode';
+import store from './redux/store';
+import { setUser } from './redux/actions/authActions';
+import { useSelector } from 'react-redux';
+
+if (localStorage.jwt) {
+  const decode = jwt_decode(localStorage.jwt);
+  store.dispatch(setUser(decode));
+}
 
 function App() {
+  const auth = useSelector((state) => state.auth);
+
+  const user = {
+    isConnected: auth.isConnected,
+    role: auth.user.role
+  };
+
+  // console.log('Role: ' + user.role);
+
   return (
     <div className="font-poppins">
       <BrowserRouter>
         <Routes>
           <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/tutorial" element={<TutorialPage />} />
-            <Route path="/pilihperan" element={<SelectRole />} />
-            <Route path="/masuk/orangtua" element={<ParentLogin />} />
-            <Route path="/masuk/anak" element={<ChildLogin />} />
-            <Route path="/daftar/orangtua" element={<ParentRegister />} />
-            <Route path="/daftar/anak" element={<ChildRegister />} />
             <Route path="/profil" element={<Profile />} />
             <Route path="/editprofil" element={<EditProfile />} />
             <Route path="/trial" element={<Trial />} />
@@ -52,11 +69,8 @@ function App() {
             <Route path="/popuptrial" element={<PopUpTrial />} />
             <Route path="/notifikasi" element={<NotificationPage />} />
             <Route path="/riwayat" element={<GeofSchedule />} />
-
             <Route path="/anak/beranda" element={<ChildHome />} />
-            <Route path="/beranda/anak/v2" element={<ChildHomeV2 />} />
             <Route path="/orangtua/beranda" element={<ParentHome />} />
-            <Route path="/beranda/orangtua/v2" element={<ParentHomeV2 />} />
             <Route path="/parent/history" element={<ParentGeofencingHistory />} />
             <Route path="/parent/history/:childname" element={<ParentHistory />} />
             <Route path="/parent/notification_history" element={<ParentNotificationHistory />} />
@@ -66,7 +80,62 @@ function App() {
             <Route path="/posisianak/v2" element={<PositionDetailV2 />} />
             <Route path="/parent/geofencing/:childname" element={<ParentGeofencing />} />
           </Route>
+
           <Route element={<PrivateRoute />}></Route>
+
+          {/* -------------- routes baru start -------------- */}
+
+          {/* ------ general routes (unprotected)*/}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/tutorial" element={<TutorialPage />} />
+          <Route path="/pilihperan" element={<SelectRole />} />
+          <Route path="/daftar/orangtua" element={<ParentRegister />} />
+          <Route path="/daftar/anak" element={<ChildRegister />} />
+
+          {/* ------ errors routes (unprotected)*/}
+          <Route path="*" element={<NotFound />} />
+          <Route path="/noaccess" element={<NoAccess />} />
+
+          {/* ------ parent routes start (protected) */}
+          <Route
+            path="/masuk/orangtua"
+            element={
+              <ForceRedirect user={user}>
+                <ParentLogin />
+              </ForceRedirect>
+            }
+          />
+          <Route
+            path="/beranda/orangtua/v2"
+            element={
+              <ParentRouter user={user}>
+                <ParentHomeV2 />
+              </ParentRouter>
+            }
+          />
+          {/* ------parent routes end */}
+
+          {/* ------ child routes start (protected)*/}
+          <Route
+            path="/masuk/anak"
+            element={
+              <ForceRedirect user={user}>
+                <ChildLogin />
+              </ForceRedirect>
+            }
+          />
+          <Route
+            path="/beranda/anak/v2"
+            element={
+              <ChildRouter user={user}>
+                <ChildHomeV2 />
+              </ChildRouter>
+            }
+          />
+
+          {/* ------ child routes end */}
+
+          {/* -------------- routes baru end -------------- */}
         </Routes>
       </BrowserRouter>
     </div>

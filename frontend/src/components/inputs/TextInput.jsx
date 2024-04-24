@@ -1,6 +1,10 @@
 import React from 'react';
 
-function TextInput({ type, name, id, placeholder, required, onChange, value }) {
+function TextInput({ type, name, id, placeholder, required, onChange, value, errors }) {
+  if (errors) {
+    return <p className="bg-red-500 text-black">{errors}</p>;
+  }
+
   return (
     <input
       type={type}
