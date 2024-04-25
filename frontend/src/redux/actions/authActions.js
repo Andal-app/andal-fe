@@ -4,9 +4,9 @@ import toast from 'react-hot-toast';
 import { ERRORS, SET_USER } from '../types';
 import { setAuth } from '../../utils/setAuth';
 
-export const LoginAction = (form, navigate) => (dispatch) => {
+export const LoginAction = (form, navigate, role) => (dispatch) => {
   axios
-    .post('http://34.86.158.248:8080/auth/parent/signin', form)
+    .post(`${process.env.REACT_APP_API_URL}auth/${role}/signin`, form)
     .then((res) => {
       // console.log(res);
       const { token } = res.data;
@@ -15,7 +15,15 @@ export const LoginAction = (form, navigate) => (dispatch) => {
       // console.log(decode);
       dispatch(setUser(decode));
       // navigate('/beranda/orangtua/v2');
-      window.location.href = '/beranda/orangtua/v2';
+
+      let newRole = '';
+      if (role === 'parent') {
+        newRole = 'orangtua';
+      } else if (role === 'child') {
+        newRole = 'anak';
+      }
+
+      window.location.href = `/beranda/${newRole}/v2`;
     })
     .catch((err) => {
       // dispatch({

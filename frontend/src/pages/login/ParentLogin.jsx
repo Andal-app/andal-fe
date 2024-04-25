@@ -16,6 +16,7 @@ const ParentLogin = () => {
   const dispatch = useDispatch();
   const errors = useSelector((state) => state.errors);
   const navigate = useNavigate();
+  const role = 'parent';
 
   const handleChange = (e) => {
     setForm({
@@ -27,7 +28,7 @@ const ParentLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    dispatch(LoginAction(form, navigate));
+    dispatch(LoginAction(form, navigate, role));
   };
 
   return (
@@ -59,7 +60,6 @@ const ParentLogin = () => {
                     placeholder="email atau username"
                     required
                     onChange={handleChange}
-                    errors={errors.emailOrUsername}
                   />
                 </div>
                 {/* email end */}
@@ -68,7 +68,7 @@ const ParentLogin = () => {
                 <div className="space-y-1">
                   <div>
                     <InputLabel labelFor="password" content="Password" />
-                    <PasswordInput name="password" onChange={handleChange} errors={errors.password} />
+                    <PasswordInput name="password" onChange={handleChange} />
                   </div>
                   {/* lupa password start */}
                   <div className="text-end">

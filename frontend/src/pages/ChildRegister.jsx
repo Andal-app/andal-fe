@@ -9,6 +9,8 @@ import RegisterLayout from '../layouts/auth/RegisterLayout';
 import LoginNowBtn from '../components/buttons/LoginNowBtn';
 import InputError from '../components/inputs/InputError';
 import validateInput from '../helpers/validateInput';
+import { useDispatch } from 'react-redux';
+import { LoginAction } from '../redux/actions/authActions';
 
 const ChildRegister = () => {
   const [formData, setFormData] = useState({
@@ -40,6 +42,12 @@ const ChildRegister = () => {
     }));
   };
 
+  const dispatch = useDispatch();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -64,6 +72,7 @@ const ChildRegister = () => {
             password: ''
           });
           toast.success(res.data.message);
+          // auto login
         });
     } catch (err) {
       if (err.response) {
