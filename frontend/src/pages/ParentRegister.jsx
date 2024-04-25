@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import TextInput from '../components/inputs/TextInput';
 import InputLabel from '../components/inputs/InputLabel';
 import PasswordInput from '../components/inputs/PasswordInput';
@@ -43,25 +44,30 @@ const ParentRegister = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // cek eror sebelum submit
-    if (Object.values(errors).every((error) => error === '')) {
-      try {
-        // console.log(filteredData);
-        await axios
-          .post(process.env.REACT_APP_API_URL + 'auth/parent/signup', {
-            fullname: formData.fullname,
-            email: formData.email,
-            username: formData.username,
-            password: formData.password
-          })
-          .then(function (response) {
-            console.log('Response:', response);
-          });
-      } catch (error) {
-        console.error('Error:', error);
+    try {
+      await axios
+        .post(process.env.REACT_APP_API_URL + 'auth/parent/signup', {
+          fullname: formData.fullname,
+          email: formData.email,
+          username: formData.username,
+          password: formData.password
+        })
+        .then((res) => {
+          // console.log('Response:', res);
+          toast.success('Registrasi berhasil. Cek email Anda untuk aktivasi akun.');
+        });
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 400) {
+          toast.error(error.response.data.message); // validation error
+        } else if (error.response.status === 500) {
+          toast.error(error.response.data.message); // server error
+        } else {
+          toast.error(error.response.data.message);
+        }
+      } else {
+        toast.error(error.message); // other errors
       }
-    } else {
-      console.log('Form memiliki kesalahan. Lakukan perbaikan');
     }
   };
 

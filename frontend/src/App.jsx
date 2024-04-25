@@ -65,10 +65,11 @@ function App() {
         <Toaster
           position="top-center"
           toastOptions={{
+            duration: 5000,
             style: {
               // background: 'white',
               // color: '#555c5d',
-              fontSize: '1.1rem'
+              // fontSize: '1rem'
             }
           }}
         />

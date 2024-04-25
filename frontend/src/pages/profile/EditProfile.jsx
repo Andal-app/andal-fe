@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import ProfPic from '../../assets/images/profile_picture.jpeg';
