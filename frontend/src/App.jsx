@@ -64,10 +64,18 @@ function App() {
       <BrowserRouter>
         <Toaster
           position="top-center"
+          containerStyle={
+            {
+              // top: '40px'
+            }
+          }
           toastOptions={{
             duration: 5000,
             style: {
-              // background: 'white',
+              minHeight: '60px',
+              minWidth: '300px',
+              background: '#F5F3FF',
+              fontWeight: '600'
               // color: '#555c5d',
               // fontSize: '1rem'
             }

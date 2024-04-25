@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
-
 import TextInput from '../../components/inputs/TextInput';
 import InputLabel from '../../components/inputs/InputLabel';
 import PasswordInput from '../../components/inputs/PasswordInput';
@@ -10,7 +8,6 @@ import ForgotPass from '../../components/buttons/ForgotPass';
 import SubmitBtn from '../../components/buttons/SubmitBtn';
 import RegisterNowBtn from '../../components/buttons/RegisterNowBtn';
 import LoginLayout from '../../layouts/LoginLayout';
-
 import { LoginAction } from '../../redux/actions/authActions';
 
 const ParentLogin = () => {

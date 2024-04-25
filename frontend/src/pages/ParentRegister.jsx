@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { toast } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import TextInput from '../components/inputs/TextInput';
 import InputLabel from '../components/inputs/InputLabel';
 import PasswordInput from '../components/inputs/PasswordInput';
 import SubmitBtn from '../components/buttons/SubmitBtn';
 import RegisterLayout from '../layouts/auth/RegisterLayout';
 import LoginNowBtn from '../components/buttons/LoginNowBtn';
-import InputError from '../components/inputs/InputError';
 import validateInput from '../helpers/validateInput';
 
 const ParentRegister = () => {
@@ -54,19 +53,30 @@ const ParentRegister = () => {
         })
         .then((res) => {
           // console.log('Response:', res);
-          toast.success('Registrasi berhasil. Cek email Anda untuk aktivasi akun.');
+
+          // reset form
+          setFormData({
+            fullname: '',
+            email: '',
+            username: '',
+            password: '',
+            confirmPassword: ''
+          });
+
+          setErrors({
+            fullname: '',
+            email: '',
+            username: '',
+            password: '',
+            confirmPassword: ''
+          });
+          toast.success(res.data.message);
         });
-    } catch (error) {
-      if (error.response) {
-        if (error.response.status === 400) {
-          toast.error(error.response.data.message); // validation error
-        } else if (error.response.status === 500) {
-          toast.error(error.response.data.message); // server error
-        } else {
-          toast.error(error.response.data.message);
-        }
+    } catch (err) {
+      if (err.response) {
+        toast.error(err.response.data.message);
       } else {
-        toast.error(error.message); // other errors
+        toast.error(err.message);
       }
     }
   };
@@ -93,8 +103,8 @@ const ParentRegister = () => {
                   required
                   onChange={handleInputChange}
                   value={formData.fullname}
+                  errors={errors?.fullname}
                 />
-                {errors.fullname && <InputError error={errors.fullname} />}
               </div>
               {/* full name end */}
 
@@ -109,8 +119,8 @@ const ParentRegister = () => {
                   required
                   onChange={handleInputChange}
                   value={formData.email}
+                  errors={errors?.email}
                 />
-                {errors.email && <InputError error={errors.email} />}
               </div>
               {/* email end */}
 
@@ -125,16 +135,21 @@ const ParentRegister = () => {
                   required
                   onChange={handleInputChange}
                   value={formData.username}
+                  errors={errors?.username}
                 />
-                {errors.username && <InputError error={errors.username} />}
               </div>
               {/* username end */}
 
               {/* password start */}
               <div>
                 <InputLabel labelFor="password" content="Password" />
-                <PasswordInput name="password" id="password" onChange={handleInputChange} value={formData.password} />
-                {errors.password && <InputError error={errors.password} />}
+                <PasswordInput
+                  name="password"
+                  id="password"
+                  onChange={handleInputChange}
+                  value={formData.password}
+                  errors={errors?.password}
+                />
               </div>
               {/* password end */}
 
@@ -146,8 +161,8 @@ const ParentRegister = () => {
                   id="confirmPassword"
                   onChange={handleInputChange}
                   value={formData.confirmPassword}
+                  errors={errors?.confirmPassword}
                 />
-                {errors.confirmPassword && <InputError error={errors.confirmPassword} />}
               </div>
               {/* confirm password end */}
             </div>

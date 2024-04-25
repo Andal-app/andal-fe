@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import TextInput from '../components/inputs/TextInput';
 import InputLabel from '../components/inputs/InputLabel';
 import PasswordInput from '../components/inputs/PasswordInput';
@@ -41,26 +42,35 @@ const ChildRegister = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // cek eror sebelum submit
-    if (Object.values(errors).every((error) => error === '')) {
-      // try catch post data start
-      try {
-        // console.log(filteredData);
-        await axios
-          .post(process.env.REACT_APP_API_URL + 'auth/child/signup', {
-            fullname: formData.fullname,
-            username: formData.username,
-            password: formData.password
-          })
-          .then(function (response) {
-            console.log('Response:', response);
+    try {
+      await axios
+        .post(process.env.REACT_APP_API_URL + 'auth/child/signup', {
+          fullname: formData.fullname,
+          username: formData.username,
+          password: formData.password
+        })
+        .then((res) => {
+          // console.log('Response:', response);
+          // reset form
+          setFormData({
+            fullname: '',
+            username: '',
+            password: ''
           });
-      } catch (error) {
-        console.error('Error:', error);
+
+          setErrors({
+            fullname: '',
+            username: '',
+            password: ''
+          });
+          toast.success(res.data.message);
+        });
+    } catch (err) {
+      if (err.response) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error(err.message);
       }
-      // try catch post data end
-    } else {
-      console.log('Form memiliki kesalahan. Lakukan perbaikan');
     }
   };
 
@@ -86,8 +96,8 @@ const ChildRegister = () => {
                   required
                   onChange={handleInputChange}
                   value={formData.fullname}
+                  errors={errors?.fullname}
                 />
-                {errors.fullname && <InputError error={errors.fullname} />}
               </div>
               {/* full name end */}
 
@@ -102,16 +112,21 @@ const ChildRegister = () => {
                   required
                   onChange={handleInputChange}
                   value={formData.username}
+                  errors={errors?.username}
                 />
-                {errors.username && <InputError error={errors.username} />}
               </div>
               {/* username end */}
 
               {/* password start */}
               <div>
                 <InputLabel labelFor="password" content="Password" />
-                <PasswordInput name="password" id="password" onChange={handleInputChange} value={formData.password} />
-                {errors.password && <InputError error={errors.password} />}
+                <PasswordInput
+                  name="password"
+                  id="password"
+                  onChange={handleInputChange}
+                  value={formData.password}
+                  errors={errors?.password}
+                />
               </div>
               {/* password end */}
 
@@ -123,8 +138,8 @@ const ChildRegister = () => {
                   id="confirmPassword"
                   onChange={handleInputChange}
                   value={formData.confirmPassword}
+                  errors={errors?.confirmPassword}
                 />
-                {errors.confirmPassword && <InputError error={errors.confirmPassword} />}
               </div>
               {/* confirm password end */}
             </div>

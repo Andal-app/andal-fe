@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import toast from 'react-hot-toast';
 import { ERRORS, SET_USER } from '../types';
 import { setAuth } from '../../utils/setAuth';
 
@@ -17,10 +18,15 @@ export const LoginAction = (form, navigate) => (dispatch) => {
       window.location.href = '/beranda/orangtua/v2';
     })
     .catch((err) => {
-      dispatch({
-        type: ERRORS,
-        payload: err.response.data
-      });
+      // dispatch({
+      //   type: ERRORS,
+      //   payload: err.response.data
+      // });
+      if (err.response) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error(err.message);
+      }
     });
 };
 
