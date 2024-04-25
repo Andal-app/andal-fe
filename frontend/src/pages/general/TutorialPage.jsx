@@ -16,7 +16,7 @@ function TutorialPage() {
 
         {/* lewati button start */}
         <div className="hidden lg:block">
-          <OvalNextBtn text="Lewati" linkTo="/pilihperan" />
+          <OvalNextBtn text={'Lewati'} linkTo="/pilihperan" />
         </div>
         {/* lewati button end */}
       </div>

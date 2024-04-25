@@ -1,10 +1,40 @@
 import React from 'react';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import CancelBtn from '../../components/buttons/CancelBtn';
 import DeleteBtn from '../../components/buttons/DeleteBtn';
 import Sidebar from '../../components/navigation/Sidebar';
 import TopWave1Red from '../../assets/waves/wave_top_1_red.svg';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { LogoutAction } from '../../redux/actions/authActions';
 
-function ConfirmDelete() {
+function ConfirmDelete({ user }) {
+  const navigate = useNavigate();
+
+  // logout action
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(LogoutAction());
+  };
+
+  // delete button
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .delete(`${process.env.REACT_APP_API_URL}auth/delete-account`)
+        .then(() => {
+          toast.success('Akun berhasil dihapus');
+          handleLogout();
+          navigate('/');
+        })
+        .finally();
+    } catch (error) {
+      toast.error(`Gagal menghapus akun. ${error.message}`);
+    }
+  };
+
   return (
     <div className="flex ">
       <style>
@@ -15,7 +45,7 @@ function ConfirmDelete() {
     `}
       </style>
 
-      <Sidebar />
+      <Sidebar user={user} />
 
       <div id="main__container" className="w-full lg:w-1/2 bg-white h-screen flex items-center justify-center">
         {/* top wave start */}
@@ -31,9 +61,8 @@ function ConfirmDelete() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <DeleteBtn />
-
-            <CancelBtn />
+            <DeleteBtn onClick={handleDelete} />
+            <CancelBtn link="/profil" />
           </div>
         </main>
       </div>

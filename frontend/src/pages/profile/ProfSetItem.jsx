@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 
-function ProfSetItem({ link, icon, text, redText, index }) {
+function ProfSetItem({ link, icon, text, redText, index, passValue }) {
   return (
     <Link
       to={link}

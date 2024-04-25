@@ -9,7 +9,12 @@ function Profile({ user }) {
 
   const ParentSettingItems = [
     { link: '/editprofil', icon: 'bx:edit', text: 'Edit profil' },
-    { link: '', icon: 'mingcute:question-line', text: 'Bantuan penggunaan' },
+    {
+      link: '/tutorial',
+      icon: 'mingcute:question-line',
+      text: 'Bantuan penggunaan',
+      pass_value: 'Kembali'
+    },
     { link: '', icon: 'material-symbols:lock-outline', text: ' Ganti pasword' },
     { link: '', icon: 'tabler:logout', text: 'Keluar' },
     { link: '/profil/hapusakun', icon: 'typcn:delete-outline', text: 'Hapus akun', redText: true }
@@ -37,8 +42,8 @@ function Profile({ user }) {
         {/* user setting list start */}
         <div id="user__setting__list">
           <ul>
-            {ParentSettingItems.map(({ link, icon, text, redText, index }) => (
-              <ProfSetItem link={link} icon={icon} text={text} redText={redText} index={index} />
+            {ParentSettingItems.map(({ link, icon, text, redText, index, pass_value }) => (
+              <ProfSetItem link={link} icon={icon} text={text} redText={redText} index={index} passValue={pass_value} />
             ))}
           </ul>
         </div>

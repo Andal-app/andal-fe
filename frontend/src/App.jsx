@@ -75,7 +75,7 @@ function App() {
         <Routes>
           <Route element={<ProtectedRoute />}>
             <Route path="/sheettrial" element={<BottomSheetTrial />} />
-            <Route path="/profil/hapusakun" element={<ConfirmDelete />} />
+
             <Route path="/popuptrial" element={<PopUpTrial />} />
             <Route path="/notifikasi" element={<NotificationPage />} />
             <Route path="/riwayat" element={<GeofSchedule />} />
@@ -148,7 +148,7 @@ function App() {
               </ParentRouter>
             }
           />
-
+          <Route path="/profil/hapusakun" element={<ConfirmDelete user={user} />} />
           {/* ------parent routes end */}
 
           {/* ------ child routes start (protected)*/}
