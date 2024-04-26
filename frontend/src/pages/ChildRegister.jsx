@@ -7,7 +7,6 @@ import PasswordInput from '../components/inputs/PasswordInput';
 import SubmitBtn from '../components/buttons/SubmitBtn';
 import RegisterLayout from '../layouts/auth/RegisterLayout';
 import LoginNowBtn from '../components/buttons/LoginNowBtn';
-import InputError from '../components/inputs/InputError';
 import validateInput from '../helpers/validateInput';
 import { useDispatch } from 'react-redux';
 import { LoginAction } from '../redux/actions/authActions';
@@ -46,6 +45,12 @@ const ChildRegister = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    const { username, password } = formData;
+    const loginData = {
+      username,
+      password
+    };
+    dispatch(LoginAction({ form: loginData, role: 'child' }));
   };
 
   const handleSubmit = async (e) => {
@@ -72,7 +77,11 @@ const ChildRegister = () => {
             password: ''
           });
           toast.success(res.data.message);
-          // auto login
+
+          // auto login if registration success
+          if (res && res.data) {
+            handleLogin();
+          }
         });
     } catch (err) {
       if (err.response) {

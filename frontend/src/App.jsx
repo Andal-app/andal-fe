@@ -43,6 +43,7 @@ import { useSelector } from 'react-redux';
 import ConnectAccount from './pages/connect/ConnectAccount';
 
 import { Toaster } from 'react-hot-toast';
+import PrivateRouter from './components/routes/PrivateRouter';
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt);
@@ -116,6 +117,33 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/noaccess" element={<NoAccess />} />
 
+          {/* ------ private (parent & child) routes start (protected) */}
+          <Route
+            path="/profil"
+            element={
+              <PrivateRouter user={user}>
+                <Profile user={user} />
+              </PrivateRouter>
+            }
+          />
+          <Route
+            path="/editprofil"
+            element={
+              <PrivateRouter user={user}>
+                <EditProfile user={user} />
+              </PrivateRouter>
+            }
+          />
+          <Route
+            path="/profil/hapusakun"
+            element={
+              <PrivateRouter user={user}>
+                <ConfirmDelete user={user} />
+              </PrivateRouter>
+            }
+          />
+          {/* ------private routes end */}
+
           {/* ------ parent routes start (protected) */}
           <Route
             path="/masuk/orangtua"
@@ -134,22 +162,6 @@ function App() {
             }
           />
           <Route
-            path="/profil"
-            element={
-              <ParentRouter user={user}>
-                <Profile user={user} />
-              </ParentRouter>
-            }
-          />
-          <Route
-            path="/editprofil"
-            element={
-              <ParentRouter user={user}>
-                <EditProfile user={user} />
-              </ParentRouter>
-            }
-          />
-          <Route
             path="/hubungkan"
             element={
               <ParentRouter user={user}>
@@ -157,7 +169,6 @@ function App() {
               </ParentRouter>
             }
           />
-          <Route path="/profil/hapusakun" element={<ConfirmDelete user={user} />} />
           {/* ------parent routes end */}
 
           {/* ------ child routes start (protected)*/}
@@ -173,7 +184,7 @@ function App() {
             path="/beranda/anak/v2"
             element={
               <ChildRouter user={user}>
-                <ChildHomeV2 />
+                <ChildHomeV2 user={user} />
               </ChildRouter>
             }
           />

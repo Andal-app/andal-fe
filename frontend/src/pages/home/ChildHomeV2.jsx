@@ -2,9 +2,9 @@ import React from 'react';
 import PositionDetailBox from '../../components/box/PositionDetailBox';
 import HomeLayout from '../../layouts/home/HomeLayout';
 
-function ChildHomeV2() {
+function ChildHomeV2({ user }) {
   return (
-    <HomeLayout>
+    <HomeLayout user={user}>
       <div className="relative mx-6 lg:mx-0 flex flex-col gap-3 lg:gap-4">
         {/* page title start */}
         <div className="lg:absolute lg:top-8 lg:left-8 lg:z-10 bg-violet-700 w-fit px-5 py-0.5 text-b-md font-bold rounded-md text-white">
