@@ -86,7 +86,6 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/sheettrial" element={<BottomSheetTrial />} />
 
-            <Route path="/popuptrial" element={<PopUpTrial />} />
             <Route path="/notifikasi" element={<NotificationPage />} />
             <Route path="/riwayat" element={<GeofSchedule />} />
             <Route path="/anak/beranda" element={<ChildHome />} />
@@ -112,6 +111,7 @@ function App() {
           <Route path="/daftar/orangtua" element={<ParentRegister />} />
           <Route path="/daftar/anak" element={<ChildRegister />} />
           <Route path="/trial" element={<Trial />} />
+          <Route path="/popuptrial" element={<PopUpTrial />} />
 
           {/* ------ errors routes (unprotected)*/}
           <Route path="*" element={<NotFound />} />
@@ -164,9 +164,9 @@ function App() {
           <Route
             path="/hubungkan"
             element={
-              <ParentRouter user={user}>
-                <ConnectAccount user={user} />
-              </ParentRouter>
+              // <ParentRouter user={user}>
+              <ConnectAccount user={user} />
+              // </ParentRouter>
             }
           />
           {/* ------parent routes end */}

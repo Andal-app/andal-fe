@@ -43,6 +43,7 @@ const ParentRegister = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       await axios
         .post(process.env.REACT_APP_API_URL + 'auth/parent/signup', {
@@ -149,6 +150,7 @@ const ParentRegister = () => {
                   onChange={handleInputChange}
                   value={formData.password}
                   errors={errors?.password}
+                  required
                 />
               </div>
               {/* password end */}
@@ -162,6 +164,7 @@ const ParentRegister = () => {
                   onChange={handleInputChange}
                   value={formData.confirmPassword}
                   errors={errors?.confirmPassword}
+                  required
                 />
               </div>
               {/* confirm password end */}

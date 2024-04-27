@@ -14,7 +14,8 @@ module.exports = {
       'b-lg': ['1rem', '1.75rem'], // 16px
       'b-md': ['0.875rem', '1.5rem'], // 14px
       'b-sm': ['0.75rem', '1.3rem'], // 12px
-      'b-xsm': ['0.625rem', '1rem'] // 10px
+      'b-xsm': ['0.625rem', '1rem'], // 10px
+      'b-xxsm': ['0.5rem', '0.8rem'] // 8px, 12px
     },
     colors: {
       transparent: 'transparent',
@@ -80,6 +81,9 @@ module.exports = {
         700: '#B91C1C',
         800: '#991B1B',
         900: '#7F1D1D'
+      },
+      emerald: {
+        600: '#059669'
       }
     },
     extend: {

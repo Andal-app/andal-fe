@@ -141,6 +141,7 @@ const ChildRegister = () => {
                 <PasswordInput
                   name="password"
                   id="password"
+                  required
                   onChange={handleInputChange}
                   value={formData.password}
                   errors={errors?.password}
@@ -154,6 +155,7 @@ const ChildRegister = () => {
                 <PasswordInput
                   name="confirmPassword"
                   id="confirmPassword"
+                  required
                   onChange={handleInputChange}
                   value={formData.confirmPassword}
                   errors={errors?.confirmPassword}
