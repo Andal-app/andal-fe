@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import SubmitBtn from '../../components/buttons/SubmitBtn';
 import TextInput from '../../components/inputs/TextInput';
 import Sidebar from '../../components/navigation/Sidebar';
@@ -8,10 +9,53 @@ import ShowConnectCode from '../../components/connect/ShowConnectCode';
 
 const ConnectAccount = ({ user }) => {
   const [isCodeModalOpen, setCodeModalOpen] = useState(false);
+  const [childStatus, setChildStatus] = useState('');
+  const [isChildFound, setIsChildFound] = useState(false);
+  const [childUsername, setChildUsername] = useState('');
 
   const toggleCodeModal = () => {
     setCodeModalOpen(!isCodeModalOpen);
   };
+
+  const [formData, setFormData] = useState({
+    username: ''
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios
+        .post(process.env.REACT_APP_API_URL + 'parent/check-child-username', {
+          username: formData.username
+        })
+        .then((res) => {
+          console.log('Response:', res);
+          setIsChildFound(true);
+          setChildStatus(res.data.message);
+          setChildUsername(res.data.child.username);
+        });
+    } catch (err) {
+      setIsChildFound(false);
+
+      if (err.response) {
+        console.log(err.response.data.message);
+        setChildStatus(err.response.data.message);
+      } else {
+        console.log(err.message);
+        setChildStatus('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+      }
+    }
+  };
+
   return (
     <div className="flex">
       <Sidebar user={user} />
@@ -22,32 +66,46 @@ const ConnectAccount = ({ user }) => {
         {/* page title end */}
 
         {/* hubungkan start */}
-        <div id="user__profile" className={`w-[85%] h-screen bg-red-200 flex flex-col items-center gap-4 py-6`}>
+        <div id="user__profile" className={`w-[85%] h-screen flex flex-col items-center gap-4 py-6`}>
           {/* masukkan username anak start */}
-          <div id="insert__child__username" className="w-full bg-red-400 flex flex-col gap-6">
+          <form id="insert__child__username" onSubmit={handleSubmit} className="w-full flex flex-col gap-6">
             <p className="text-center text-violet-900 text-b-md font-semibold">Masukkan Username Anak</p>
 
-            <TextInput type="text" name="username" id="username" placeholder="Username Anak" required />
+            <TextInput
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Username Anak"
+              required
+              onChange={handleInputChange}
+              value={formData.username}
+            />
 
             <div>
               <SubmitBtn text="Cek Username" />
-              <p id="check_username_error" className="text-left text-b-xsm text-emerald-600 mt-1">
-                Username ditemukan
+              <p
+                id="check_username_error"
+                className={`text-left text-b-sm mt-1 ${isChildFound ? 'text-emerald-600' : 'text-red-500'}`}
+              >
+                {childStatus}
               </p>
             </div>
-
-            {isCodeModalOpen && <ShowConnectCode toggleModal={toggleCodeModal} />}
-          </div>
+          </form>
           {/* masukkan username anak end*/}
 
           {/* username anak ditemukan start */}
-          <div id="child__found" className="w-full bg-red-300 flex flex-col items-center gap-3">
-            <img id="child__profile__picture" src={ProfPic} className={`w-20 h-20 rounded-full`} />
 
-            <p className="text-b-md font-bold mb-4">Nama Anak</p>
+          {isChildFound && (
+            <div id="child__found" className="w-full flex flex-col items-center gap-3">
+              <img id="child__profile__picture" src={ProfPic} className={`w-20 h-20 rounded-full`} />
 
-            <SubmitBtn text="Selanjutnya" onClick={toggleCodeModal} />
-          </div>
+              <p className="text-b-md font-bold mb-4">{childUsername}</p>
+
+              <SubmitBtn text="Selanjutnya" onClick={toggleCodeModal} />
+
+              {isCodeModalOpen && <ShowConnectCode toggleModal={toggleCodeModal} />}
+            </div>
+          )}
           {/* username anak ditemukan end */}
         </div>
         {/* hubungkan end */}
