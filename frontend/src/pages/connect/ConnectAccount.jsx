@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import SubmitBtn from '../../components/buttons/SubmitBtn';
 import TextInput from '../../components/inputs/TextInput';
 import Sidebar from '../../components/navigation/Sidebar';
@@ -12,10 +13,8 @@ const ConnectAccount = ({ user }) => {
   const [childStatus, setChildStatus] = useState('');
   const [isChildFound, setIsChildFound] = useState(false);
   const [childUsername, setChildUsername] = useState('');
-
-  const toggleCodeModal = () => {
-    setCodeModalOpen(!isCodeModalOpen);
-  };
+  const [childId, setChildId] = useState('');
+  const [verifCode, setVerifCode] = useState('');
 
   const [formData, setFormData] = useState({
     username: ''
@@ -29,6 +28,11 @@ const ConnectAccount = ({ user }) => {
     }));
   };
 
+  // open modal & generate verification code
+  const toggleCodeModal = () => {
+    setCodeModalOpen(!isCodeModalOpen);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,23 +42,54 @@ const ConnectAccount = ({ user }) => {
           username: formData.username
         })
         .then((res) => {
-          console.log('Response:', res);
+          // console.log('Response:', res);
           setIsChildFound(true);
           setChildStatus(res.data.message);
           setChildUsername(res.data.child.username);
+          setChildId(res.data.child.childId);
         });
     } catch (err) {
       setIsChildFound(false);
 
       if (err.response) {
-        console.log(err.response.data.message);
+        // console.log(err.response.data.message);
         setChildStatus(err.response.data.message);
       } else {
-        console.log(err.message);
+        // console.log(err.message);
         setChildStatus('Terjadi kesalahan. Coba cek koneksi internet Anda.');
       }
     }
   };
+
+  // generate verification code
+  const handleGenerateCode = async (childId) => {
+    try {
+      await axios
+        .post(process.env.REACT_APP_API_URL + `parent/add-child/${childId}`, {
+          role: 'parent'
+        })
+        .then((res) => {
+          // console.log('Response:', res);
+          setVerifCode(res.data.code);
+        });
+    } catch (err) {
+      // setIsChildFound(false);
+      if (err.response) {
+        // console.log(err.response.data.message);
+        toast.error(err.response.data.message);
+      } else {
+        // console.log(err.message);
+        toast.error(err.message);
+      }
+    }
+  };
+
+  // Call handleGenerateCode when the modal is opened
+  useEffect(() => {
+    if (isCodeModalOpen) {
+      handleGenerateCode(childId);
+    }
+  }, [isCodeModalOpen, childId]);
 
   return (
     <div className="flex">
@@ -103,7 +138,9 @@ const ConnectAccount = ({ user }) => {
 
               <SubmitBtn text="Selanjutnya" onClick={toggleCodeModal} />
 
-              {isCodeModalOpen && <ShowConnectCode toggleModal={toggleCodeModal} />}
+              {isCodeModalOpen && (
+                <ShowConnectCode toggleModal={toggleCodeModal} verifCode={verifCode ? verifCode : '-----'} />
+              )}
             </div>
           )}
           {/* username anak ditemukan end */}
