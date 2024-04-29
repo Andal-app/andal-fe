@@ -44,6 +44,7 @@ import ConnectAccount from './pages/connect/ConnectAccount';
 
 import { Toaster } from 'react-hot-toast';
 import PrivateRouter from './components/routes/PrivateRouter';
+import InsertConnectCode from './pages/connect/InsertConnectCode';
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt);
@@ -162,7 +163,7 @@ function App() {
             }
           />
           <Route
-            path="/hubungkan"
+            path="/orangtua/hubungkan"
             element={
               // <ParentRouter user={user}>
               <ConnectAccount user={user} />
@@ -186,6 +187,14 @@ function App() {
               <ChildRouter user={user}>
                 <ChildHomeV2 user={user} />
               </ChildRouter>
+            }
+          />
+          <Route
+            path="/anak/hubungkan"
+            element={
+              // <ParentRouter user={user}>
+              <InsertConnectCode user={user} />
+              // </ParentRouter>
             }
           />
 

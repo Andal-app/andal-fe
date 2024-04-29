@@ -22,7 +22,7 @@ function Sidebar({ user }) {
     { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/${roleURL}/v2` },
     { title: 'Riwayat Geofencing', icon: 'tdesign:location', cat: 'menu_utama', link: '' },
     { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama', link: '' },
-    { title: 'Hubungkan', icon: 'mingcute:notification-line', cat: 'menu_utama', link: '/hubungkan' }
+    { title: 'Hubungkan', icon: 'mingcute:notification-line', cat: 'menu_utama', link: `/${roleURL}/hubungkan` }
   ];
 
   const PengaturanItems = [
