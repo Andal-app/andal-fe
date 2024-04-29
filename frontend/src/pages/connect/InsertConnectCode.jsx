@@ -2,21 +2,22 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import SubmitBtn from '../../components/buttons/SubmitBtn';
-import TextInput from '../../components/inputs/TextInput';
 import Sidebar from '../../components/navigation/Sidebar';
 import TopBackNav from '../../components/navigation/TopBackNav';
 import CodeInput from '../../components/inputs/CodeInput';
+import TutorialImg from '../../assets/images/tutorial.svg';
 
 const ConnectAccount = ({ user }) => {
+  const [isConnectSuccess, setIsConnectSuccess] = useState(false);
+
   const [formData, setFormData] = useState({
     code: ''
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleCodeChange = (value) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value
+      code: value // Memperbarui state formData dengan nilai kode baru
     }));
   };
 
@@ -30,15 +31,17 @@ const ConnectAccount = ({ user }) => {
           code: formData.code
         })
         .then((res) => {
-          console.log('Response:', res);
+          // console.log('Response:', res);
+          toast.success(res.data.message);
+          setIsConnectSuccess(true);
         });
     } catch (err) {
       if (err.response) {
         // console.log(err.response.data.message);
-        setChildStatus(err.response.data.message);
+        toast.error(err.response.data.message);
       } else {
         // console.log(err.message);
-        setChildStatus('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+        toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
       }
     }
   };
@@ -53,26 +56,38 @@ const ConnectAccount = ({ user }) => {
         {/* page title end */}
 
         {/* hubungkan start */}
-        <div id="user__profile" className={`mt-10 w-[85%] h-screen flex flex-col items-center gap-4 py-6`}>
-          {/* modal title start */}
-          <div className="text-violet-900 text-center">
-            <p className="font-bold text-h-md">MASUKKAN KODE</p>
-            <p className="text-b-md">dari Ponsel Orang Tua</p>
-          </div>
-          {/* modal title end */}
+        {isConnectSuccess ? (
+          <div className="mt-10 w-[85%] flex flex-col justify-center items-center text-center gap-10 py-6">
+            <p className="font-semibold text-violet-800 text-h-sm">Akun berhasil dihubungkan dengan akun orang tua</p>
 
-          <div className="flex justify-center">
-            <CodeInput />
+            <img src={TutorialImg} alt="Akun berhasil dihubungkan" className="w-[80%] lg:w-[50%]" />
           </div>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            id="user__profile"
+            className={`mt-10 w-[85%] h-screen flex flex-col items-center gap-4 py-6`}
+          >
+            {/* modal title start */}
+            <div className="text-violet-900 text-center">
+              <p className="font-bold text-h-md">MASUKKAN KODE</p>
+              <p className="text-b-md">dari Ponsel Orang Tua</p>
+            </div>
+            {/* modal title end */}
 
-          <p id="error__message" className="hidden text-red-600 text-b-sm">
-            Username tidak ditemukan
-          </p>
+            <div className="flex justify-center">
+              <CodeInput onChange={handleCodeChange} />
+            </div>
 
-          <div className="w-full lg:w-[50%] mt-10">
-            <SubmitBtn type="submit" text="Hubungkan" />
-          </div>
-        </div>
+            <p id="error__message" className="hidden text-red-600 text-b-sm">
+              Username tidak ditemukan
+            </p>
+
+            <div className="w-full lg:w-[50%] mt-10">
+              <SubmitBtn type="submit" text="Hubungkan" />
+            </div>
+          </form>
+        )}
         {/* hubungkan end */}
       </div>
       {/* 
