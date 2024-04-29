@@ -1,12 +1,34 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import ChildBox from '../../components/box/ChildBox';
 import HomeLayout from '../../layouts/home/HomeLayout';
 
 function ParentHomeV2({ user }) {
+  const [childrenData, setChildrenData] = useState([]);
+
   const ChildrenList = [
     { fullName: 'Fiorenza Celestyn', profPic: '' },
     { fullName: 'Maura Yufi Septania', profPic: '' },
     { fullName: 'Isyana Sarawati', profPic: '' }
   ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(process.env.REACT_APP_API_URL + 'parent/get-my-child');
+        // console.log('Children list:', response.data.children);
+        // console.log('Children msg:', response.data.message);
+        setChildrenData(response.data.children);
+        // console.log(childrenData);
+      } catch (err) {
+        console.error('Error fetching children list:', err);
+      }
+    };
+
+    fetchData();
+
+    return () => {};
+  }, []);
 
   return (
     <HomeLayout user={user}>
@@ -17,8 +39,8 @@ function ParentHomeV2({ user }) {
 
         {/* children list start */}
         <div className="flex lg:flex-col flex-wrap lg:flex-nowrap w-full justify-between gap-2 lg:gap-4">
-          {ChildrenList.map(({ fullName, profPic, index }) => (
-            <ChildBox fullName={fullName} profPic={profPic} index={index} />
+          {childrenData?.map(({ id, username, fullname }) => (
+            <ChildBox key={id} fullname={fullname} />
           ))}
         </div>
       </div>
