@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import 'react-spring-bottom-sheet/dist/style.css';
 import BottomSheetModal from '../../components/modals/BottomSheetModal';
 import GeofencePageLayout from '../../layouts/geofencing/GeofencePageLayout';
@@ -6,14 +9,88 @@ import AddGeoForm from '../../components/inputs/AddGeoForm';
 import MapsSearchBox from '../../components/maps/MapsSearchBox';
 
 function AddGeofencing({ user }) {
-  // const [open, setOpen] = useState(false);
-  const [selectPosition, setSelectPosition] = useState(null);
+  const { childUsername } = useParams();
 
-  // control for bottom sheet modal
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const [selectPosition, setSelectPosition] = useState(null); // dapatkan koordinat [lintang, bujur]
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false); // control for bottom sheet modal
+  const [formData, setFormData] = useState({
+    geofenceName: '',
+    startTime: '',
+    endTime: ''
+  });
 
   const handleCloseBottomSheet = () => {
     setIsBottomSheetOpen(false);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value
+    }));
+  };
+
+  // handle input change untuk time picker pada AddGeoForm
+  const formatTime = (date) => {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
+
+  const setStartTime = (time) => {
+    if (time) {
+      const formattedTime = formatTime(time);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        startTime: formattedTime
+      }));
+    }
+  };
+
+  const setEndTime = (time) => {
+    if (time) {
+      const formattedTime = formatTime(time);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        endTime: formattedTime
+      }));
+    }
+  };
+
+  // post data titik dan informasi geofencing
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!selectPosition) {
+      toast.error('Tambahkan titik lokasi terlebih dahulu');
+      return;
+    }
+
+    try {
+      await axios
+        .post(process.env.REACT_APP_API_URL + 'geofence-schedule', {
+          geofenceName: formData.geofenceName,
+          latitude: selectPosition?.lat,
+          longitude: selectPosition?.lon,
+          startTime: formData.startTime,
+          endTime: formData.endTime,
+          radius: 100,
+          childId: '6629fd314ae9825471967cca'
+        })
+        .then((res) => {
+          // console.log('Response:', res);
+          toast.success(res.data.message);
+        });
+    } catch (err) {
+      if (err.response) {
+        // console.log(err.response.data.message);
+        toast.error(err.response.data.message);
+      } else {
+        // console.log(err.message);
+        toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+      }
+    }
   };
 
   return (
@@ -25,7 +102,13 @@ function AddGeofencing({ user }) {
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
-        <AddGeoForm />
+        <AddGeoForm
+          formData={formData}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          setStartTime={setStartTime}
+          setEndTime={setEndTime}
+        />
       </BottomSheetModal>
 
       {/* for large screen: show floating box */}
@@ -38,9 +121,22 @@ function AddGeofencing({ user }) {
 
         {/* add geofencing form start */}
         <div className="bg-white rounded-xl py-0.5">
-          <AddGeoForm />
+          <AddGeoForm
+            formData={formData}
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
+            setStartTime={setStartTime}
+            setEndTime={setEndTime}
+          />
         </div>
         {/* add geofencing form end */}
+
+        {/* lang and long start (temporary)*/}
+        <div className="bg-red-200">
+          <p>lat: {selectPosition?.lat}</p>
+          <p>lon: {selectPosition?.lon}</p>
+        </div>
+        {/* lang and long end */}
       </div>
     </GeofencePageLayout>
   );

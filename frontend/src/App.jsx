@@ -172,7 +172,7 @@ function App() {
             }
           />
           <Route
-            path="/tambahlokasi/v2"
+            path="/tambahtitik/:childUsername"
             element={
               <ParentRouter user={user}>
                 <AddGeofencing user={user} />

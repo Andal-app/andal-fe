@@ -46,10 +46,10 @@ function GeofencePageLayout({ children, pageTitle = 'Page Title', user, selectPo
         {/* information detail modal end */}
 
         {/* lang and long start (temporary)*/}
-        <div className="bg-red-200 absolute z-10 top-10 right-10">
+        {/* <div className="bg-red-200 absolute z-10 top-10 right-10">
           <p>lat: {selectPosition?.lat}</p>
           <p>lon: {selectPosition?.lon}</p>
-        </div>
+        </div> */}
         {/* lang and long end */}
       </main>
     </div>
