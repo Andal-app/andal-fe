@@ -1,17 +1,28 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import L from 'leaflet';
+import { OpenStreetMapProvider, GeoSearchControl } from 'leaflet-geosearch';
+// import GeofencingLocation from './GeofencingLocation';
+
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-draw/dist/leaflet.draw.css';
+import 'leaflet-geosearch/dist/geosearch.css';
+
 import { Icon } from '@iconify/react';
 import 'react-spring-bottom-sheet/dist/style.css';
 
 import Sidebar from '../../components/navigation/Sidebar';
-import BottomSheetModal from '../../components/modals/BottomSheetModal';
-import ChildInfoBox from '../../components/box/ChildInfoBox';
+import Maps from '../../components/maps/Maps';
+import MapsSearchBox from '../../components/maps/MapsSearchBox';
 
-function GeofencePageLayout({ children, pageTitle = 'Page Title' }) {
-  const [open, setOpen] = useState(false);
+function GeofencePageLayout({ children, pageTitle = 'Page Title', user }) {
+  // const [open, setOpen] = useState(false);
 
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebar user={user} />
 
       <main className="relative mx-0 flex flex-col gap-4 w-full">
         {/* top  nav start */}
@@ -31,11 +42,23 @@ function GeofencePageLayout({ children, pageTitle = 'Page Title' }) {
         </nav>
         {/* top  nav end */}
 
-        {/* map start */}
-        <div className="z-0 bg-neutral-400 h-screen w-full  flex justify-center items-center">
-          MAP MAP MAP MAP MAP MAP
+        {/* map section start */}
+        <div className="z-0 h-screen w-full  flex justify-center items-center">
+          <div id="maps__container" className="flex flex-row">
+            {/* maps start */}
+            <div className="w-[60vw] h-[100vh]">
+              <Maps />
+            </div>
+            {/* maps end */}
+
+            {/* maps searchbox start */}
+            <div className="">
+              <MapsSearchBox />
+            </div>
+            {/* maps searchbox end */}
+          </div>
         </div>
-        {/* map end */}
+        {/* map section end */}
 
         {/* information detail modal start */}
         <div id="information__detail">{children}</div>

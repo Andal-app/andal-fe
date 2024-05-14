@@ -45,6 +45,7 @@ import ConnectAccount from './pages/connect/ConnectAccount';
 import { Toaster } from 'react-hot-toast';
 import PrivateRouter from './components/routes/PrivateRouter';
 import InsertConnectCode from './pages/connect/InsertConnectCode';
+import CobaLeaflet from './pages/CobaLeaflet';
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt);
@@ -96,7 +97,7 @@ function App() {
             <Route path="/parent/notification_history" element={<ParentNotificationHistory />} />
             <Route path="/parent/notification_history/:childname" element={<ParentNotification />} />
             <Route path="/parent/lokasianak/:childname" element={<ParentChildLocation />} />
-            <Route path="/tambahlokasi/v2" element={<AddGeofencing />} />
+
             <Route path="/posisianak/v2" element={<PositionDetailV2 />} />
             <Route path="/parent/geofencing/:childname" element={<ParentGeofencing />} />
           </Route>
@@ -170,6 +171,15 @@ function App() {
               // </ParentRouter>
             }
           />
+          <Route
+            path="/tambahlokasi/v2"
+            element={
+              <ParentRouter user={user}>
+                <AddGeofencing user={user} />
+              </ParentRouter>
+            }
+          />
+          <Route path="/cobaleaflet" element={<CobaLeaflet />} />
           {/* ------parent routes end */}
 
           {/* ------ child routes start (protected)*/}

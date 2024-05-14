@@ -4,7 +4,7 @@ import BottomSheetModal from '../../components/modals/BottomSheetModal';
 import GeofencePageLayout from '../../layouts/geofencing/GeofencePageLayout';
 import AddGeoForm from '../../components/inputs/AddGeoForm';
 
-function AddGeofencing() {
+function AddGeofencing({ user }) {
   const [open, setOpen] = useState(false);
 
   // control for bottom sheet modal
@@ -15,7 +15,7 @@ function AddGeofencing() {
   };
 
   return (
-    <GeofencePageLayout pageTitle="Tambah Geofence">
+    <GeofencePageLayout pageTitle="Tambah Geofence" user={user}>
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
         <AddGeoForm />
