@@ -1,24 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import icon from 'leaflet/dist/images/marker-icon.png';
-import L from 'leaflet';
-import { OpenStreetMapProvider, GeoSearchControl } from 'leaflet-geosearch';
-// import GeofencingLocation from './GeofencingLocation';
-
+import React from 'react';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import 'leaflet-geosearch/dist/geosearch.css';
-
 import { Icon } from '@iconify/react';
 import 'react-spring-bottom-sheet/dist/style.css';
-
 import Sidebar from '../../components/navigation/Sidebar';
 import Maps from '../../components/maps/Maps';
-import MapsSearchBox from '../../components/maps/MapsSearchBox';
 
-function GeofencePageLayout({ children, pageTitle = 'Page Title', user }) {
-  const [selectPosition, setSelectPosition] = useState(null);
+function GeofencePageLayout({ children, pageTitle = 'Page Title', user, selectPosition, setSelectPosition }) {
+  // const [selectPosition, setSelectPosition] = useState(null);
   // console.log(selectPosition);
 
   return (
@@ -42,12 +32,6 @@ function GeofencePageLayout({ children, pageTitle = 'Page Title', user }) {
           </div>
         </nav>
         {/* top  nav end */}
-
-        {/* maps searchbox start */}
-        <div className="absolute z-10 w-full lg:w-[310px] lg:left-6 top-4 lg:top-20 flex items-center justify-center">
-          <MapsSearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
-        </div>
-        {/* maps searchbox end */}
 
         {/* map section start */}
         <div className="z-0 h-screen w-full flex justify-center items-center">
