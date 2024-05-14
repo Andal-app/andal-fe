@@ -22,7 +22,7 @@ function AddGeofencing({ user }) {
       </BottomSheetModal>
 
       {/* for large screen: show floating box */}
-      <div className="hidden lg:block absolute top-20 left-6 bg-white rounded-xl">
+      <div className="hidden lg:block absolute top-32 left-6 bg-white rounded-xl">
         <AddGeoForm />
       </div>
     </GeofencePageLayout>

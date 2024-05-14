@@ -1,4 +1,5 @@
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import React, { useEffect } from 'react';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import MapPinImg from '../../assets/images/map_pin.png';
@@ -10,7 +11,25 @@ const icon = L.icon({
 
 const position = [51.505, -0.09];
 
-export default function Maps() {
+function ResetCenterView(props) {
+  const { selectPosition } = props;
+  const map = useMap();
+
+  useEffect(() => {
+    if (selectPosition) {
+      map.setView(L.latLng(selectPosition?.lat, selectPosition?.lon), map.getZoom(), {
+        animate: true
+      });
+    }
+  }, [selectPosition]);
+
+  return null;
+}
+
+export default function Maps(props) {
+  const { selectPosition } = props;
+  const locationSelection = [selectPosition?.lat, selectPosition?.lon];
+
   return (
     <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{ width: '100%', height: '100%' }}>
       <TileLayer
@@ -19,11 +38,15 @@ export default function Maps() {
         // url="https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=fpDlF5YXcAYQ19hRzNed"
       />
 
-      <Marker position={position} icon={icon}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
+      {selectPosition && (
+        <Marker position={locationSelection} icon={icon}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      )}
+
+      <ResetCenterView selectPosition={selectPosition} />
     </MapContainer>
   );
 }

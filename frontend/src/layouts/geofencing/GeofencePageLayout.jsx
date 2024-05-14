@@ -20,6 +20,9 @@ import MapsSearchBox from '../../components/maps/MapsSearchBox';
 function GeofencePageLayout({ children, pageTitle = 'Page Title', user }) {
   // const [open, setOpen] = useState(false);
 
+  const [selectPosition, setSelectPosition] = useState(null);
+  // console.log(selectPosition);
+
   return (
     <div className="flex">
       <Sidebar user={user} />
@@ -42,20 +45,16 @@ function GeofencePageLayout({ children, pageTitle = 'Page Title', user }) {
         </nav>
         {/* top  nav end */}
 
-        {/* map section start */}
-        <div className="z-0 h-screen w-full  flex justify-center items-center">
-          <div id="maps__container" className="flex flex-row">
-            {/* maps start */}
-            <div className="w-[60vw] h-[100vh]">
-              <Maps />
-            </div>
-            {/* maps end */}
+        {/* maps searchbox start */}
+        <div className="absolute z-10 w-full lg:w-[310px] lg:left-6 top-4 lg:top-20 flex items-center justify-center">
+          <MapsSearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
+        </div>
+        {/* maps searchbox end */}
 
-            {/* maps searchbox start */}
-            <div className="">
-              <MapsSearchBox />
-            </div>
-            {/* maps searchbox end */}
+        {/* map section start */}
+        <div className="z-0 h-screen w-full flex justify-center items-center">
+          <div className="w-full h-[100vh]">
+            <Maps selectPosition={selectPosition} />
           </div>
         </div>
         {/* map section end */}
