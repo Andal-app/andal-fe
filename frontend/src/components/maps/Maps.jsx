@@ -9,7 +9,7 @@ const icon = L.icon({
   iconSize: [38, 38]
 });
 
-const position = [51.505, -0.09];
+const centerPosition = [-7.7761951, 110.3762101];
 
 function ResetCenterView(props) {
   const { selectPosition } = props;
@@ -31,7 +31,7 @@ export default function Maps(props) {
   const locationSelection = [selectPosition?.lat, selectPosition?.lon];
 
   return (
-    <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{ width: '100%', height: '100%' }}>
+    <MapContainer center={centerPosition} zoom={13} scrollWheelZoom={true} style={{ width: '100%', height: '100%' }}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
