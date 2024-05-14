@@ -1,11 +1,18 @@
 import { useState } from 'react';
 import 'react-spring-bottom-sheet/dist/style.css';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-draw/dist/leaflet.draw.css';
+import 'leaflet-geosearch/dist/geosearch.css';
+import { Icon } from '@iconify/react';
+import 'react-spring-bottom-sheet/dist/style.css';
 import BottomSheetModal from '../../components/modals/BottomSheetModal';
 import ChildInfoBox from '../../components/box/ChildInfoBox';
-import GeofencePageLayout from '../../layouts/geofencing/GeofencePageLayout';
+import Sidebar from '../../components/navigation/Sidebar';
+import Maps from '../../components/maps/Maps';
+import IconBtn from '../../components/buttons/IconBtn';
 
-function PositionDetailV2() {
-  const [open, setOpen] = useState(false);
+function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
+  // const [open, setOpen] = useState(false);
 
   const ScheduleData = [
     { location: 'SMPN 2 Temanggung', time: '8.00 - 13.00' },
@@ -24,17 +31,74 @@ function PositionDetailV2() {
   };
 
   return (
-    <GeofencePageLayout pageTitle="Detail Posisi">
-      {/* for small screen: show bottom sheet modal */}
-      <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
-        <ChildInfoBox ScheduleData={ScheduleData} />
-      </BottomSheetModal>
+    <div className="flex">
+      <Sidebar user={user} />
 
-      {/* for large screen: show floating box */}
-      <div className="hidden lg:block absolute top-20 left-6 bg-white rounded-xl">
-        <ChildInfoBox ScheduleData={ScheduleData} />
-      </div>
-    </GeofencePageLayout>
+      <main className="relative mx-0 flex flex-col gap-4 w-full">
+        {/* top  nav start */}
+        <nav className="absolute z-10 w-full lg:w-[310px] lg:left-6 top-4 lg:top-8 flex items-center justify-center">
+          {/* circular back button start */}
+          <div className="absolute left-3 flex justify-center items-center w-8 h-8 bg-violet-300 rounded-full text-black">
+            <Icon icon={'ion:arrow-back'} className="w-6 h-6" />
+          </div>
+          {/* circular back button end */}
+
+          <div
+            id="page__title"
+            className="min-w-32 max-w-fit px-4 h-9 text-b-md font-bold bg-violet-300 rounded-full flex justify-center items-center"
+          >
+            <p>Detail Posisi</p>
+          </div>
+        </nav>
+        {/* top  nav end */}
+
+        {/* map section start */}
+        <div className="z-0 h-screen w-full flex justify-center items-center">
+          <div className="w-full h-[100vh]">
+            <Maps
+              selectPosition={selectPosition ? selectPosition : null}
+              setSelectPosition={setSelectPosition ? setSelectPosition : null}
+            />
+          </div>
+        </div>
+        {/* map section end */}
+
+        {/* information detail modal start */}
+        <div id="information__detail">
+          {/* for small screen: show bottom sheet modal */}
+          <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
+            <ChildInfoBox ScheduleData={ScheduleData} />
+          </BottomSheetModal>
+
+          {/* for LARGE screen: show floating box start*/}
+          <div className=" hidden lg:flex lg:flex-col lg:gap-2 lg:w-80 absolute top-20 left-6">
+            <div className=" bg-white rounded-xl">
+              <ChildInfoBox ScheduleData={ScheduleData} />
+            </div>
+
+            {/* add and manage buttons start */}
+            <div className="lg:flex gap-2">
+              <div className="w-1/2 h-[40px]">
+                <IconBtn icon="tabler:plus" text="Tambah jadwal" />
+              </div>
+              <div className="w-1/2 h-[40px]">
+                <IconBtn icon="bx:edit" text="Kelola jadwal" />
+              </div>
+            </div>
+            {/*  add and manage buttons end */}
+          </div>
+          {/* for LARGE screen: show floating box end*/}
+        </div>
+        {/* information detail modal end */}
+
+        {/* lang and long start (temporary)*/}
+        {/* <div className="bg-red-200 absolute z-10 top-10 right-10">
+          <p>lat: {selectPosition?.lat}</p>
+          <p>lon: {selectPosition?.lon}</p>
+        </div> */}
+        {/* lang and long end */}
+      </main>
+    </div>
   );
 }
 

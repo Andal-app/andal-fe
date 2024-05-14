@@ -4,7 +4,7 @@ import ScheduleItem from './ScheduleItem';
 
 function ChildInfoBox({ ScheduleData }) {
   return (
-    <div className="lg:w-72 mx-6 my-3 lg:m-3 flex flex-col gap-2">
+    <div className="py-2 px-4 lg:p-3 flex flex-col gap-2">
       <div className="bg-violet-300 px-4 py-2 text-violet-900 rounded-xl border border-violet-500">
         <div id="latest__location" className="flex text-b-md font-medium">
           <p>Maura berada di &nbsp;</p>

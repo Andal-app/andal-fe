@@ -98,7 +98,6 @@ function App() {
             <Route path="/parent/notification_history/:childname" element={<ParentNotification />} />
             <Route path="/parent/lokasianak/:childname" element={<ParentChildLocation />} />
 
-            <Route path="/posisianak/v2" element={<PositionDetailV2 />} />
             <Route path="/parent/geofencing/:childname" element={<ParentGeofencing />} />
           </Route>
 
@@ -176,6 +175,14 @@ function App() {
             element={
               <ParentRouter user={user}>
                 <AddGeofencing user={user} />
+              </ParentRouter>
+            }
+          />
+          <Route
+            path="/detailposisi"
+            element={
+              <ParentRouter user={user}>
+                <PositionDetailV2 user={user} />
               </ParentRouter>
             }
           />
