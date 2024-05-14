@@ -11,8 +11,7 @@ const icon = L.icon({
 
 const centerPosition = [-7.7761951, 110.3762101];
 
-function ResetCenterView(props) {
-  const { selectPosition } = props;
+function ResetCenterView({ selectPosition }) {
   const map = useMap();
 
   useEffect(() => {
@@ -21,14 +20,22 @@ function ResetCenterView(props) {
         animate: true
       });
     }
-  }, [selectPosition]);
+  }, [selectPosition, map]);
 
   return null;
 }
 
-export default function Maps(props) {
-  const { selectPosition } = props;
-  const locationSelection = [selectPosition?.lat, selectPosition?.lon];
+export default function Maps({ selectPosition, setSelectPosition }) {
+  const locationSelection = selectPosition ? [selectPosition.lat, selectPosition.lon] : centerPosition;
+
+  const handleMarkerDragEnd = (event) => {
+    const marker = event.target;
+    const newPosition = marker.getLatLng();
+    setSelectPosition({
+      lat: newPosition.lat,
+      lon: newPosition.lng
+    });
+  };
 
   return (
     <MapContainer center={centerPosition} zoom={13} scrollWheelZoom={true} style={{ width: '100%', height: '100%' }}>
@@ -39,7 +46,14 @@ export default function Maps(props) {
       />
 
       {selectPosition && (
-        <Marker position={locationSelection} icon={icon}>
+        <Marker
+          position={locationSelection}
+          icon={icon}
+          draggable={true}
+          eventHandlers={{
+            dragend: handleMarkerDragEnd
+          }}
+        >
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
