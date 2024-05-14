@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, Marker, Popup, TileLayer, useMap, ZoomControl, useMapEvents } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer, useMap, ZoomControl, useMapEvents, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import MapPinImg from '../../assets/images/map_pin.png';
@@ -71,21 +71,6 @@ export default function Maps({ selectPosition, setSelectPosition }) {
 
       <ZoomControl position="bottomright" />
 
-      {/* {selectPosition && (
-        <Marker
-          position={locationSelection}
-          icon={icon}
-          draggable={true}
-          eventHandlers={{
-            dragend: handleMarkerDragEnd
-          }}
-        >
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-      )} */}
-
       <Marker
         position={selectPosition ? locationSelection : markerPosition}
         icon={icon}
@@ -94,10 +79,12 @@ export default function Maps({ selectPosition, setSelectPosition }) {
           dragend: handleMarkerDragEnd
         }}
       >
-        <Popup>
+        {/* <Popup>
           Marker added here! <br /> Lat: {markerPosition[0].toFixed(6)}, Lon: {markerPosition[1].toFixed(6)}
-        </Popup>
+        </Popup> */}
       </Marker>
+
+      <Circle center={selectPosition ? locationSelection : markerPosition} radius={100} />
 
       <MapEvents />
 
