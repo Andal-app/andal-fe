@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 
-function LocationListView({ index, location, time }) {
+function LocationListView({ location, time }, index) {
   return (
     <li
       key={index}
@@ -26,9 +26,13 @@ function LocationListView({ index, location, time }) {
       {/* content end */}
 
       {/* button start */}
-      <div className="">
-        <button className="w-20 h-7 text-violet-900 text-b-xsm border border-violet-900 rounded-lg">
-          lihat detail
+      <div className="flex gap-2">
+        <button className="px-2 lg:w-20 h-7 text-red-600 text-b-xsm border border-red-600 hover:bg-red-400 hover:text-white hover:border-none rounded-lg transition-all duration-300">
+          Hapus
+        </button>
+
+        <button className="w-20 h-7 text-violet-900 text-b-xsm border border-violet-900 hover:bg-violet-500 hover:text-white hover:border-none rounded-lg transition-all duration-300">
+          Lihat detail
         </button>
       </div>
       {/* button end */}

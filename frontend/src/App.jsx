@@ -89,7 +89,6 @@ function App() {
             <Route path="/sheettrial" element={<BottomSheetTrial />} />
 
             <Route path="/notifikasi" element={<NotificationPage />} />
-            <Route path="/riwayat" element={<GeofSchedule />} />
             <Route path="/anak/beranda" element={<ChildHome />} />
             <Route path="/orangtua/beranda" element={<ParentHome />} />
             <Route path="/parent/history" element={<ParentGeofencingHistory />} />
@@ -183,6 +182,14 @@ function App() {
             element={
               <ParentRouter user={user}>
                 <PositionDetailV2 user={user} />
+              </ParentRouter>
+            }
+          />
+          <Route
+            path="/riwayat"
+            element={
+              <ParentRouter user={user}>
+                <GeofSchedule user={user} />
               </ParentRouter>
             }
           />
