@@ -179,7 +179,7 @@ function App() {
             }
           />
           <Route
-            path="/detailposisi"
+            path="/detailposisi/:childUsername"
             element={
               <ParentRouter user={user}>
                 <PositionDetailV2 user={user} />

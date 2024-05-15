@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ChildBox from '../../components/box/ChildBox';
 import HomeLayout from '../../layouts/home/HomeLayout';
 
 function ParentHomeV2({ user }) {
+  const navigate = useNavigate();
   const [childrenData, setChildrenData] = useState([]);
 
-  const ChildrenList = [
-    { fullName: 'Fiorenza Celestyn', profPic: '' },
-    { fullName: 'Maura Yufi Septania', profPic: '' },
-    { fullName: 'Isyana Sarawati', profPic: '' }
-  ];
+  // const ChildrenList = [
+  //   { fullName: 'Fiorenza Celestyn', profPic: '' },
+  //   { fullName: 'Maura Yufi Septania', profPic: '' },
+  //   { fullName: 'Isyana Sarawati', profPic: '' }
+  // ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +42,19 @@ function ParentHomeV2({ user }) {
         {/* children list start */}
         <div className="flex lg:flex-col flex-wrap lg:flex-nowrap w-full justify-between gap-2 lg:gap-4">
           {childrenData?.map(({ id, username, fullname }) => (
-            <ChildBox key={id} fullname={fullname} />
+            <ChildBox
+              key={id}
+              fullname={fullname}
+              onClick={() => [
+                navigate(`/detailposisi/${username}`, {
+                  state: { childId: id, childUsername: username, childFullname: fullname }
+                })
+              ]}
+              // to={{
+              //   pathname: `/detailposisi/${username}`,
+              //   state: { childId: id, childUsername: username, childFullname: fullname }
+              // }}
+            />
           ))}
         </div>
       </div>

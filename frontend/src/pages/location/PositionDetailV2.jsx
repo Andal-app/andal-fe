@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import 'react-spring-bottom-sheet/dist/style.css';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
@@ -12,9 +13,14 @@ import Maps from '../../components/maps/Maps';
 import IconBtn from '../../components/buttons/IconBtn';
 
 function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
-  // const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const { childId, childUsername, childFullname } = location?.state || {}; // get current child info
 
   const ScheduleData = [
+    { location: 'SMPN 2 Temanggung', time: '8.00 - 13.00' },
+    { location: 'TPA Nurul Amin', time: '18.00 - 19.00' },
     { location: 'SMPN 2 Temanggung', time: '8.00 - 13.00' },
     { location: 'TPA Nurul Amin', time: '18.00 - 19.00' }
   ];
@@ -79,7 +85,15 @@ function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
             {/* add and manage buttons start */}
             <div className="lg:flex gap-2">
               <div className="w-1/2 h-[40px]">
-                <IconBtn icon="tabler:plus" text="Tambah jadwal" />
+                <IconBtn
+                  icon="tabler:plus"
+                  text="Tambah jadwal"
+                  onClick={() => [
+                    navigate(`/tambahtitik/${childUsername}`, {
+                      state: { childId: childId, childUsername: childUsername, childFullname: childFullname }
+                    })
+                  ]}
+                />
               </div>
               <div className="w-1/2 h-[40px]">
                 <IconBtn icon="bx:edit" text="Kelola jadwal" />

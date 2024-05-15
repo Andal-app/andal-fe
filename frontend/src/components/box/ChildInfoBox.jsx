@@ -55,9 +55,9 @@ function ChildInfoBox({ ScheduleData }) {
         <p className="font-bold text-violet-900 text-b-sm">Jadwal</p>
 
         {/* schedule items start */}
-        <ul className="flex flex-col gap-2">
-          {ScheduleData.map(({ location, time, index }) => (
-            <ScheduleItem location={location} time={time} index={index} />
+        <ul className="min-h-min max-h-[110px] flex flex-col gap-2 overflow-auto scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-track-neutral-100 scrollbar-thumb-rounded-full">
+          {ScheduleData.map(({ location, time }, index) => (
+            <ScheduleItem location={location} time={time} key={index} />
           ))}
         </ul>
         {/* schedule items end */}

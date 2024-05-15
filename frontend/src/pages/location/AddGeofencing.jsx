@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import 'react-spring-bottom-sheet/dist/style.css';
@@ -9,6 +9,9 @@ import AddGeoForm from '../../components/inputs/AddGeoForm';
 import MapsSearchBox from '../../components/maps/MapsSearchBox';
 
 function AddGeofencing({ user }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { childId, childFullname } = location?.state || {}; // get current child info
   const { childUsername } = useParams();
 
   const [selectPosition, setSelectPosition] = useState(null); // dapatkan koordinat [lintang, bujur]
@@ -76,11 +79,12 @@ function AddGeofencing({ user }) {
           startTime: formData.startTime,
           endTime: formData.endTime,
           radius: 100,
-          childId: '6629fd314ae9825471967cca'
+          childId: childId
         })
         .then((res) => {
           // console.log('Response:', res);
           toast.success(res.data.message);
+          navigate(`/detailposisi/${childUsername}`);
         });
     } catch (err) {
       if (err.response) {
