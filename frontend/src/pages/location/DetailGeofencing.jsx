@@ -58,6 +58,7 @@ function DetailGeofencing({ user }) {
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
         <DetailGeoForm
+          geofenceId={geofenceData?._id}
           geofenceName={geofenceData?.geofenceName}
           startTime={geofenceData?.startTime}
           endTime={geofenceData?.endTime}
@@ -69,6 +70,7 @@ function DetailGeofencing({ user }) {
         {/* add geofencing form start */}
         <div className="bg-white rounded-xl py-0.5">
           <DetailGeoForm
+            geofenceId={geofenceData?._id}
             geofenceName={geofenceData?.geofenceName}
             startTime={geofenceData?.startTime}
             endTime={geofenceData?.endTime}

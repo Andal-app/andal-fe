@@ -1,9 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import InputLabel from './InputLabel';
 import TextInput from './TextInput';
 import SubmitBtn from '../buttons/SubmitBtn';
 
-function DetailGeoForm({ geofenceName, startTime, endTime }) {
+function DetailGeoForm({ geofenceId, geofenceName, startTime, endTime }) {
+  const navigate = useNavigate();
+
   return (
     <div id="add__geofence__inputs" className="lg:w-72 mx-6 my-4 lg:m-3 flex flex-col gap-4">
       <div id="geonfece__name">
@@ -31,7 +34,7 @@ function DetailGeoForm({ geofenceName, startTime, endTime }) {
       </div>
 
       <div className="mt-6 lg:mt-2">
-        <SubmitBtn type="button" text="Edit" />
+        <SubmitBtn type="button" text="Edit" onClick={() => [navigate(`/editgeofence/${geofenceId}`)]} />
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import TextInput from './TextInput';
 import ResponsiveTimePicker from './ResponsiveTimePicker';
 import SubmitBtn from '../buttons/SubmitBtn';
 
-function AddGeoForm({ formData, handleInputChange, handleSubmit, setStartTime, setEndTime }) {
+function AddGeoForm({ formData, handleInputChange, handleSubmit, setStartTime, setEndTime, btnText }) {
   return (
     <form id="add__geofence__inputs" onSubmit={handleSubmit} className="lg:w-72 mx-6 my-4 lg:m-3 flex flex-col gap-4">
       <div id="geonfece__name">
@@ -31,7 +31,7 @@ function AddGeoForm({ formData, handleInputChange, handleSubmit, setStartTime, s
       </div>
 
       <div className="mt-6 lg:mt-2">
-        <SubmitBtn type="submit" text="Tambah" />
+        <SubmitBtn type="submit" text={btnText} />
       </div>
     </form>
   );
