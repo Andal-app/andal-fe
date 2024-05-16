@@ -25,7 +25,7 @@ function ResetCenterView({ selectPosition }) {
   return null;
 }
 
-export default function Maps({ selectPosition, setSelectPosition }) {
+export default function Maps({ selectPosition, setSelectPosition, isMarkerDraggable = true }) {
   const locationSelection = selectPosition ? [selectPosition.lat, selectPosition.lon] : centerPosition;
 
   const [markerPosition, setMarkerPosition] = useState(centerPosition);
@@ -35,24 +35,28 @@ export default function Maps({ selectPosition, setSelectPosition }) {
 
     useMapEvents({
       click(e) {
-        const { lat, lng } = e.latlng;
-        setMarkerPosition([lat, lng]);
-        setSelectPosition({ lat, lon: lng });
-        map.flyTo([lat, lng], map.getZoom(), {
-          duration: 500
-        });
+        if (isMarkerDraggable) {
+          const { lat, lng } = e.latlng;
+          setMarkerPosition([lat, lng]);
+          setSelectPosition({ lat, lon: lng });
+          map.flyTo([lat, lng], map.getZoom(), {
+            duration: 500
+          });
+        }
       }
     });
     return null;
   };
 
   const handleMarkerDragEnd = (event) => {
-    const marker = event.target;
-    const newPosition = marker.getLatLng();
-    setSelectPosition({
-      lat: newPosition.lat,
-      lon: newPosition.lng
-    });
+    if (isMarkerDraggable) {
+      const marker = event.target;
+      const newPosition = marker.getLatLng();
+      setSelectPosition({
+        lat: newPosition.lat,
+        lon: newPosition.lng
+      });
+    }
   };
 
   return (
@@ -74,7 +78,7 @@ export default function Maps({ selectPosition, setSelectPosition }) {
       <Marker
         position={selectPosition ? locationSelection : markerPosition}
         icon={icon}
-        draggable={true}
+        draggable={isMarkerDraggable}
         eventHandlers={{
           dragend: handleMarkerDragEnd
         }}
@@ -88,7 +92,7 @@ export default function Maps({ selectPosition, setSelectPosition }) {
 
       <MapEvents />
 
-      <ResetCenterView selectPosition={selectPosition} />
+      <ResetCenterView selectPosition={selectPosition ? selectPosition : null} />
     </MapContainer>
   );
 }

@@ -2,13 +2,12 @@ import React from 'react';
 import PositionDetailBox from './PositionDetailBox';
 import ScheduleItem from './ScheduleItem';
 
-function ChildInfoBox({ ScheduleData }) {
+function ChildInfoBox({ data }) {
   return (
     <div className="py-2 px-4 lg:p-3 flex flex-col gap-2">
       <div className="bg-violet-300 px-4 py-2 text-violet-900 rounded-xl border border-violet-500">
         <div id="latest__location" className="flex text-b-md font-medium">
-          <p>Maura berada di &nbsp;</p>
-          <p>Fakultas Teknik</p>
+          <p>{`${data?.child?.fullname?.split(' ')[0]} berada di ${'Fakultas Teknik'}`} </p>
         </div>
 
         <div id="latest__time" className="flex gap-2 text-b-sm">
@@ -56,8 +55,8 @@ function ChildInfoBox({ ScheduleData }) {
 
         {/* schedule items start */}
         <ul className="min-h-min max-h-[110px] flex flex-col gap-2 overflow-auto scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-track-neutral-100 scrollbar-thumb-rounded-full">
-          {ScheduleData.map(({ location, time }, index) => (
-            <ScheduleItem location={location} time={time} key={index} />
+          {data?.geofences?.map(({ _id, geofenceName, startTime, endTime }) => (
+            <ScheduleItem key={_id} _id={_id} geofenceName={geofenceName} startTime={startTime} endTime={endTime} />
           ))}
         </ul>
         {/* schedule items end */}

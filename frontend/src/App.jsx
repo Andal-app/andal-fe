@@ -46,6 +46,7 @@ import { Toaster } from 'react-hot-toast';
 import PrivateRouter from './components/routes/PrivateRouter';
 import InsertConnectCode from './pages/connect/InsertConnectCode';
 import CobaLeaflet from './pages/CobaLeaflet';
+import DetailGeofencing from './pages/location/DetailGeofencing';
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt);
@@ -170,10 +171,18 @@ function App() {
             }
           />
           <Route
-            path="/tambahtitik/:childUsername"
+            path="/tambahgeofence/:childUsername"
             element={
               <ParentRouter user={user}>
                 <AddGeofencing user={user} />
+              </ParentRouter>
+            }
+          />
+          <Route
+            path="/detailgeofence/:childUsername"
+            element={
+              <ParentRouter user={user}>
+                <DetailGeofencing user={user} />
               </ParentRouter>
             }
           />
@@ -186,7 +195,7 @@ function App() {
             }
           />
           <Route
-            path="/riwayat"
+            path="/kelolajadwal/:childUsername"
             element={
               <ParentRouter user={user}>
                 <GeofSchedule user={user} />

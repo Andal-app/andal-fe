@@ -7,7 +7,14 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import Sidebar from '../../components/navigation/Sidebar';
 import Maps from '../../components/maps/Maps';
 
-function GeofencePageLayout({ children, pageTitle = 'Page Title', user, selectPosition, setSelectPosition }) {
+function GeofencePageLayout({
+  children,
+  pageTitle = 'Page Title',
+  user,
+  selectPosition,
+  setSelectPosition,
+  isMarkerDraggable = true
+}) {
   // const [selectPosition, setSelectPosition] = useState(null);
   // console.log(selectPosition);
 
@@ -36,7 +43,11 @@ function GeofencePageLayout({ children, pageTitle = 'Page Title', user, selectPo
         {/* map section start */}
         <div className="z-0 h-screen w-full flex justify-center items-center">
           <div className="w-full h-[100vh]">
-            <Maps selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
+            <Maps
+              selectPosition={selectPosition}
+              setSelectPosition={setSelectPosition}
+              isMarkerDraggable={isMarkerDraggable}
+            />
           </div>
         </div>
         {/* map section end */}

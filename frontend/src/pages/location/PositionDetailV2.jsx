@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import 'react-spring-bottom-sheet/dist/style.css';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
@@ -11,19 +13,40 @@ import ChildInfoBox from '../../components/box/ChildInfoBox';
 import Sidebar from '../../components/navigation/Sidebar';
 import Maps from '../../components/maps/Maps';
 import IconBtn from '../../components/buttons/IconBtn';
+import ScheduleData from '../../assets/dummy_data/schedule_geofence_yeji.json';
 
 function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const [childData, setChildData] = useState([]);
 
-  const { childId, childUsername, childFullname } = location?.state || {}; // get current child info
+  const { childId } = location?.state || {}; // get current child info
 
-  const ScheduleData = [
-    { location: 'SMPN 2 Temanggung', time: '8.00 - 13.00' },
-    { location: 'TPA Nurul Amin', time: '18.00 - 19.00' },
-    { location: 'SMPN 2 Temanggung', time: '8.00 - 13.00' },
-    { location: 'TPA Nurul Amin', time: '18.00 - 19.00' }
-  ];
+  // const ScheduleData = [
+  //   { location: 'SMPN 2 Temanggung', time: '8.00 - 13.00' },
+  //   { location: 'TPA Nurul Amin', time: '18.00 - 19.00' },
+  //   { location: 'SMPN 2 Temanggung', time: '8.00 - 13.00' },
+  //   { location: 'TPA Nurul Amin', time: '18.00 - 19.00' }
+  // ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(process.env.REACT_APP_API_URL + `child/${childId}`);
+        setChildData(response.data);
+      } catch (err) {
+        if (err.response) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+        }
+      }
+    };
+
+    fetchData();
+
+    return () => {};
+  }, []);
 
   // control for bottom sheet modal
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
@@ -73,13 +96,13 @@ function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
         <div id="information__detail">
           {/* for small screen: show bottom sheet modal */}
           <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
-            <ChildInfoBox ScheduleData={ScheduleData} />
+            <ChildInfoBox data={childData} />
           </BottomSheetModal>
 
           {/* for LARGE screen: show floating box start*/}
           <div className=" hidden lg:flex lg:flex-col lg:gap-2 lg:w-80 absolute top-20 left-6">
             <div className=" bg-white rounded-xl">
-              <ChildInfoBox ScheduleData={ScheduleData} />
+              <ChildInfoBox data={childData} />
             </div>
 
             {/* add and manage buttons start */}
@@ -89,14 +112,30 @@ function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
                   icon="tabler:plus"
                   text="Tambah jadwal"
                   onClick={() => [
-                    navigate(`/tambahtitik/${childUsername}`, {
-                      state: { childId: childId, childUsername: childUsername, childFullname: childFullname }
+                    navigate(`/tambahgeofence/${childData?.child?.username}`, {
+                      state: {
+                        childId: childData?.child?._id,
+                        childUsername: childData?.child?.username,
+                        childFullname: childData?.child?.fullname
+                      }
                     })
                   ]}
                 />
               </div>
               <div className="w-1/2 h-[40px]">
-                <IconBtn icon="bx:edit" text="Kelola jadwal" />
+                <IconBtn
+                  icon="bx:edit"
+                  text="Kelola jadwal"
+                  onClick={() => [
+                    navigate(`/kelolajadwal/${childData?.child?.username}`, {
+                      state: {
+                        childId: childData?.child._id,
+                        childUsername: childData?.child?.username,
+                        childFullname: childData?.child?.fullname
+                      }
+                    })
+                  ]}
+                />
               </div>
             </div>
             {/*  add and manage buttons end */}

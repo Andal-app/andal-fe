@@ -1,0 +1,75 @@
+{
+  "message": "Berhasil mendapatkan data geofence",
+  "geofences": [
+    {
+      "location": {
+        "type": "Point",
+        "coordinates": [110.33516615052721, -7.741099898015209]
+      },
+      "_id": "66436c264ae9825471968069",
+      "geofenceName": "TPA1",
+      "startTime": "14:00",
+      "endTime": "16:00",
+      "radius": 100,
+      "parentId": "6629cf2f4ae9825471967c8d",
+      "childId": "6629fd314ae9825471967cca",
+      "__v": 0
+    },
+    {
+      "location": {
+        "type": "Point",
+        "coordinates": [110.34847632934745, -7.7425457200190975]
+      },
+      "_id": "66436e5c4ae982547196806d",
+      "geofenceName": "Sekolah",
+      "startTime": "08:00",
+      "endTime": "13:00",
+      "radius": 100,
+      "parentId": "6629cf2f4ae9825471967c8d",
+      "childId": "6629fd314ae9825471967cca",
+      "__v": 0
+    },
+    {
+      "location": {
+        "type": "Point",
+        "coordinates": [110.3236653, 7.7997052]
+      },
+      "_id": "66436e9c4ae9825471968071",
+      "geofenceName": "Les",
+      "startTime": "19:00",
+      "endTime": "20:00",
+      "radius": 100,
+      "parentId": "6629cf2f4ae9825471967c8d",
+      "childId": "6629fd314ae9825471967cca",
+      "__v": 0
+    },
+    {
+      "location": {
+        "type": "Point",
+        "coordinates": [110.34049225813146, -7.727151713524285]
+      },
+      "_id": "66436ee94ae9825471968074",
+      "geofenceName": "Les GO",
+      "startTime": "21:00",
+      "endTime": "22:00",
+      "radius": 100,
+      "parentId": "6629cf2f4ae9825471967c8d",
+      "childId": "6629fd314ae9825471967cca",
+      "__v": 0
+    },
+    {
+      "location": {
+        "type": "Point",
+        "coordinates": [110.32864380289766, -7.807092351960118]
+      },
+      "_id": "66436f574ae982547196807d",
+      "geofenceName": "Les Inten",
+      "startTime": "22:05",
+      "endTime": "23:00",
+      "radius": 100,
+      "parentId": "6629cf2f4ae9825471967c8d",
+      "childId": "6629fd314ae9825471967cca",
+      "__v": 0
+    }
+  ]
+}
