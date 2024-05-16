@@ -75,7 +75,7 @@ function LocationListView({ geofenceId, geofenceName, startTime, endTime, childI
 
         <button
           onClick={() => [
-            navigate(`/detailgeofence/${childUsername}`, {
+            navigate(`/detailgeofence/${geofenceId}`, {
               state: { childId: childId, childUsername: childUsername, geofenceId: geofenceId }
             })
           ]}

@@ -11,7 +11,14 @@ function DetailGeoForm({ geofenceId, geofenceName, startTime, endTime }) {
     <div id="add__geofence__inputs" className="lg:w-72 mx-6 my-4 lg:m-3 flex flex-col gap-4">
       <div id="geonfece__name">
         <InputLabel labelFor="geonfenceName" content="Nama Geofence" className="font-bold" />
-        <TextInput type="text" name="geofenceName" id="geofenceName" value={geofenceName} className="bg-violet-100" />
+        <TextInput
+          type="text"
+          name="geofenceName"
+          id="geofenceName"
+          value={geofenceName}
+          readOnly
+          className="bg-violet-100"
+        />
       </div>
 
       <div>
@@ -22,6 +29,7 @@ function DetailGeoForm({ geofenceId, geofenceName, startTime, endTime }) {
             name="startTime"
             id="startTime"
             value={startTime}
+            readOnly
             className="bg-violet-100 text-center"
           />
 
@@ -29,7 +37,14 @@ function DetailGeoForm({ geofenceId, geofenceName, startTime, endTime }) {
             <div className="bg-violet-300 h-1 w-10 mx-4 rounded-full"></div>
           </div>
 
-          <TextInput type="text" name="endTime" id="endTime" value={endTime} className="bg-violet-100 text-center" />
+          <TextInput
+            type="text"
+            name="endTime"
+            id="endTime"
+            value={endTime}
+            readOnly
+            className="bg-violet-100 text-center"
+          />
         </div>
       </div>
 

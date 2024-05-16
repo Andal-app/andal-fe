@@ -22,13 +22,6 @@ function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
 
   const { childId } = location?.state || {}; // get current child info
 
-  // const ScheduleData = [
-  //   { location: 'SMPN 2 Temanggung', time: '8.00 - 13.00' },
-  //   { location: 'TPA Nurul Amin', time: '18.00 - 19.00' },
-  //   { location: 'SMPN 2 Temanggung', time: '8.00 - 13.00' },
-  //   { location: 'TPA Nurul Amin', time: '18.00 - 19.00' }
-  // ];
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -87,6 +80,7 @@ function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
             <Maps
               selectPosition={selectPosition ? selectPosition : null}
               setSelectPosition={setSelectPosition ? setSelectPosition : null}
+              isMarkerDraggable={false}
             />
           </div>
         </div>

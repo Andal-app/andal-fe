@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMap, ZoomControl, useMapEvents, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import MapPinImg from '../../assets/images/map_pin.png';
+import MapPinImg from '../../assets/images/map_marker_purple.png';
 
 const icon = L.icon({
   iconUrl: MapPinImg,

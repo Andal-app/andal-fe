@@ -180,7 +180,7 @@ function App() {
             }
           />
           <Route
-            path="/detailgeofence/:childUsername"
+            path="/detailgeofence/:geofenceId"
             element={
               <ParentRouter user={user}>
                 <DetailGeofencing user={user} />
