@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import 'react-spring-bottom-sheet/dist/style.css';
@@ -60,9 +60,12 @@ function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
         {/* top  nav start */}
         <nav className="absolute z-10 w-full lg:w-[310px] lg:left-6 top-4 lg:top-8 flex items-center justify-center">
           {/* circular back button start */}
-          <div className="absolute left-3 flex justify-center items-center w-8 h-8 bg-violet-300 rounded-full text-black">
+          <Link
+            to="/beranda/orangtua"
+            className="absolute left-3 flex justify-center items-center w-8 h-8 bg-violet-300 rounded-full text-black"
+          >
             <Icon icon={'ion:arrow-back'} className="w-6 h-6" />
-          </div>
+          </Link>
           {/* circular back button end */}
 
           <div
@@ -123,7 +126,7 @@ function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
                   onClick={() => [
                     navigate(`/kelolajadwal/${childData?.child?.username}`, {
                       state: {
-                        childId: childData?.child._id,
+                        childId: childData?.child?._id,
                         childUsername: childData?.child?.username,
                         childFullname: childData?.child?.fullname
                       }

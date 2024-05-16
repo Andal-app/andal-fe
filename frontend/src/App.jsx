@@ -48,6 +48,7 @@ import InsertConnectCode from './pages/connect/InsertConnectCode';
 import CobaLeaflet from './pages/CobaLeaflet';
 import DetailGeofencing from './pages/location/DetailGeofencing';
 import EditGeofencing from './pages/location/EditGeofencing';
+import SelectChildSchedule from './pages/location/SelectChildSchedule';
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt);
@@ -156,7 +157,7 @@ function App() {
             }
           />
           <Route
-            path="/beranda/orangtua/v2"
+            path="/beranda/orangtua"
             element={
               <ParentRouter user={user}>
                 <ParentHomeV2 user={user} />
@@ -169,6 +170,15 @@ function App() {
               // <ParentRouter user={user}>
               <ConnectAccount user={user} />
               // </ParentRouter>
+            }
+          />
+
+          <Route
+            path="/jadwalgeofence"
+            element={
+              <ParentRouter user={user}>
+                <SelectChildSchedule user={user} />
+              </ParentRouter>
             }
           />
           <Route
@@ -224,7 +234,7 @@ function App() {
             }
           />
           <Route
-            path="/beranda/anak/v2"
+            path="/beranda/anak"
             element={
               <ChildRouter user={user}>
                 <ChildHomeV2 user={user} />

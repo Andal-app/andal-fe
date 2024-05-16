@@ -19,8 +19,8 @@ function Sidebar({ user }) {
 
   const [open, setOpen] = useState(true);
   const MenuUtamaItems = [
-    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/${roleURL}/v2` },
-    { title: 'Riwayat Geofencing', icon: 'tdesign:location', cat: 'menu_utama', link: '' },
+    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/${roleURL}` },
+    { title: 'Jadwal Geofencing', icon: 'akar-icons:schedule', cat: 'menu_utama', link: '/jadwalgeofence' },
     { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama', link: '' },
     { title: 'Hubungkan', icon: 'mingcute:notification-line', cat: 'menu_utama', link: `/${roleURL}/hubungkan` }
   ];
