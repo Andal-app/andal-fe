@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import { Icon } from '@iconify/react';
+import DeleteConfirmModal from '../modals/DeleteConfirmModal';
 
 function LocationListView({ geofenceId, geofenceName, startTime, endTime, childId, childUsername }) {
   const navigate = useNavigate();
+
+  const [isDeleteConfirmModalOpen, setIsDeleteConfirmModalOpen] = useState(false);
+
+  const toggleDeleteConfirmModal = () => {
+    setIsDeleteConfirmModalOpen(!isDeleteConfirmModalOpen);
+  };
+
+  const handleCancelDelete = (e) => {
+    e.preventDefault();
+    setIsDeleteConfirmModalOpen(false);
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.delete(process.env.REACT_APP_API_URL + `geofence-schedule/${geofenceId}`).then((res) => {
+        toggleDeleteConfirmModal();
+        toast.success(res.data.message);
+      });
+    } catch (err) {
+      if (err.response) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+      }
+    }
+  };
 
   return (
     <li className="flex items-center gap-5 px-6 lg:px-10 py-4 border-b border-neutral-300 hover:bg-neutral-50 duration-300">
@@ -27,9 +58,20 @@ function LocationListView({ geofenceId, geofenceName, startTime, endTime, childI
 
       {/* button start */}
       <div className="flex gap-2">
-        <button className="px-2 lg:w-20 h-7 text-red-600 text-b-xsm border border-red-600 hover:bg-red-400 hover:text-white hover:border-none rounded-lg transition-all duration-300">
+        <button
+          onClick={toggleDeleteConfirmModal}
+          className="px-2 lg:w-20 h-7 text-red-600 text-b-xsm border border-red-600 hover:bg-red-400 hover:text-white hover:border-none rounded-lg transition-all duration-300"
+        >
           Hapus
         </button>
+
+        {isDeleteConfirmModalOpen && (
+          <DeleteConfirmModal
+            toggleModal={toggleDeleteConfirmModal}
+            onDeleteClick={handleDelete}
+            onCancelClick={handleCancelDelete}
+          />
+        )}
 
         <button
           onClick={() => [

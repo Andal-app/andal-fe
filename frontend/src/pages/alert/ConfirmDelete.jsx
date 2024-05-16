@@ -62,7 +62,7 @@ function ConfirmDelete({ user }) {
 
           <div className="flex flex-col gap-3">
             <DeleteBtn onClick={handleDelete} />
-            <CancelBtn link="/profil" />
+            <CancelBtn onClick={() => [navigate(`/profil`)]} />
           </div>
         </main>
       </div>

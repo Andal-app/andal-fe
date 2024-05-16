@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Icon } from '@iconify/react';
@@ -9,6 +9,7 @@ import LocationListView from '../../components/listViews/LocationListView';
 
 function GeofSchedule({ user }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const { childId } = location?.state || {}; // get current child info
   const [childData, setChildData] = useState([]);
 
@@ -30,6 +31,7 @@ function GeofSchedule({ user }) {
 
     return () => {};
   }, []);
+
   return (
     <div className="flex">
       <Sidebar user={user} />
