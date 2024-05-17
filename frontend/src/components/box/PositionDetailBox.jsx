@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PositionDetailBox() {
+function PositionDetailBox({ address, lat, lng }) {
   return (
     <div className="">
       <p className="text-b-sm font-bold text-violet-900">Detail Posisi</p>
@@ -13,14 +13,14 @@ function PositionDetailBox() {
               <td className=" ">Jalan Grafika No. 2, Sleman</td>
             </tr>
             <tr>
-              <td className="">Longitude</td>
-              <td className="">:</td>
-              <td className="">B-7.767722745243223</td>
-            </tr>
-            <tr>
               <td className="">Latitude</td>
               <td className="">:</td>
-              <td className="">110.37243623854161</td>
+              <td className="">{lat}</td>
+            </tr>
+            <tr>
+              <td className="">Longitude</td>
+              <td className="">:</td>
+              <td className="">{lng}</td>
             </tr>
           </tbody>
         </table>

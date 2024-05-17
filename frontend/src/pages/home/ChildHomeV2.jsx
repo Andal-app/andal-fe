@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PositionDetailBox from '../../components/box/PositionDetailBox';
+import useGeoLocation from '../../hooks/useGeoLocation';
 import HomeLayout from '../../layouts/home/HomeLayout';
 
 function ChildHomeV2({ user }) {
+  const location = useGeoLocation();
+
+  if (location?.loaded) {
+    const { lat, lng } = location.coordinates;
+  }
+
   return (
     <HomeLayout user={user}>
       <div className="relative mx-6 lg:mx-0 flex flex-col gap-3 lg:gap-4">
@@ -18,9 +25,15 @@ function ChildHomeV2({ user }) {
 
         {/* position detail start */}
         <div className="bg-white lg:absolute lg:top-20 lg:left-8 lg:z-10 lg:rounded-xl lg:drop-shadow-xl lg:p-5">
-          <PositionDetailBox />
+          {location?.loaded ? (
+            <PositionDetailBox lat={location.coordinates.lat} lng={location.coordinates.lng} />
+          ) : (
+            <p>Lokasi belum tersedia</p>
+          )}
         </div>
         {/* position detail end */}
+
+        {/*  */}
       </div>
     </HomeLayout>
   );
