@@ -4,12 +4,12 @@ import axios from 'axios';
 const useGeoLocation = () => {
   const [location, setLocation] = useState({
     loaded: false,
-    coordinates: { lat: '', lng: '' }
+    coordinates: { lat: '', lng: '' },
+    error: null
   });
 
-  const onSuccess = (location) => {
-    const { latitude, longitude } = location.coords;
-    // Tambahkan variasi acak pada koordinat untuk simulasi
+  const onSuccess = (position) => {
+    const { latitude, longitude } = position.coords;
     const newLocation = {
       loaded: true,
       coordinates: {
@@ -18,12 +18,10 @@ const useGeoLocation = () => {
       }
     };
     setLocation(newLocation);
-    // Log perubahan koordinat
     console.log('Coordinates updated:', newLocation.coordinates);
 
-    // Kirim data lokasi ke server
     axios
-      .post(process.env.REACT_APP_API_URL + 'location/send-location', {
+      .post(`${process.env.REACT_APP_API_URL}location/send-location`, {
         latitude: newLocation.coordinates.lat,
         longitude: newLocation.coordinates.lng
       })
@@ -40,6 +38,7 @@ const useGeoLocation = () => {
       loaded: true,
       error
     });
+    console.error('Error getting location:', error);
   };
 
   useEffect(() => {
@@ -51,12 +50,20 @@ const useGeoLocation = () => {
       return;
     }
 
-    // Ambil lokasi segera saat pertama kali di-mount
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    const geoOptions = {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    };
 
-    const intervalId = setInterval(() => {
-      navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    }, 5000); // Interval 10 detik
+    const fetchLocation = () => {
+      navigator.geolocation.getCurrentPosition(onSuccess, onError, geoOptions);
+    };
+
+    // Ambil lokasi segera saat pertama kali di-mount
+    fetchLocation();
+
+    const intervalId = setInterval(fetchLocation, 10000); // Interval 10 detik
 
     // Membersihkan interval saat komponen di-unmount
     return () => clearInterval(intervalId);

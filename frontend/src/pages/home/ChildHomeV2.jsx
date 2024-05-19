@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PositionDetailBox from '../../components/box/PositionDetailBox';
+import Maps from '../../components/maps/Maps';
 import useGeoLocation from '../../hooks/useGeoLocation';
 import HomeLayout from '../../layouts/home/HomeLayout';
 
-function LocationDetail() {
+function LocationDetail({ setSelectPosition }) {
   const location = useGeoLocation();
+
+  useEffect(() => {
+    if (location.loaded && location.coordinates) {
+      setSelectPosition({
+        lat: location.coordinates.lat,
+        lon: location.coordinates.lng
+      });
+    }
+  }, [location, setSelectPosition]);
 
   return (
     <div className="bg-white lg:absolute lg:top-20 lg:left-8 lg:z-10 lg:rounded-xl lg:drop-shadow-xl lg:p-5">
@@ -18,6 +28,8 @@ function LocationDetail() {
 }
 
 function ChildHomeV2({ user }) {
+  const [selectPosition, setSelectPosition] = useState(null);
+
   return (
     <HomeLayout user={user}>
       <div className="relative mx-6 lg:mx-0 flex flex-col gap-3 lg:gap-4">
@@ -28,11 +40,15 @@ function ChildHomeV2({ user }) {
         {/* page title end */}
 
         {/* map start */}
-        <div className="lg:z-0 bg-neutral-400 h-72 lg:h-screen">MAP MAP MAP MAP MAP MAP</div>
+        <div className="lg:z-0 bg-neutral-400 h-72 lg:h-screen">
+          <div className="w-full h-[100vh]">
+            <Maps selectPosition={selectPosition} setSelectPosition={setSelectPosition} isMarkerDraggable={false} />
+          </div>
+        </div>
         {/* map end */}
 
         {/* position detail start */}
-        <LocationDetail />
+        <LocationDetail setSelectPosition={setSelectPosition} />
         {/* position detail end */}
       </div>
     </HomeLayout>
