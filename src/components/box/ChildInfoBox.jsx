@@ -17,7 +17,7 @@ function ChildInfoBox({ data }) {
       </div>
 
       <div id="location__detail" className="text-b-sm">
-        <PositionDetailBox />
+        <PositionDetailBox address="" lat={data?.child?.latestLat} lng={data?.child?.latestLong} />
       </div>
 
       {/* status start */}

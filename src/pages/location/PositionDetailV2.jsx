@@ -13,12 +13,12 @@ import ChildInfoBox from '../../components/box/ChildInfoBox';
 import Sidebar from '../../components/navigation/Sidebar';
 import Maps from '../../components/maps/Maps';
 import IconBtn from '../../components/buttons/IconBtn';
-import ScheduleData from '../../assets/dummy_data/schedule_geofence_yeji.json';
 
-function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
+function PositionDetailV2({ user }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [childData, setChildData] = useState([]);
+  const [selectPosition, setSelectPosition] = useState(null);
 
   const { childId } = location?.state || {}; // get current child info
 
@@ -27,6 +27,8 @@ function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
       try {
         const response = await axios.get(process.env.REACT_APP_API_URL + `child/${childId}`);
         setChildData(response.data);
+        const { latestLat, latestLong } = response.data.child;
+        setSelectPosition({ lat: latestLat, lon: latestLong });
       } catch (err) {
         if (err.response) {
           toast.error(err.response.data.message);
@@ -84,6 +86,7 @@ function PositionDetailV2({ user, selectPosition, setSelectPosition }) {
               selectPosition={selectPosition ? selectPosition : null}
               setSelectPosition={setSelectPosition ? setSelectPosition : null}
               isMarkerDraggable={false}
+              showCircle={false}
             />
           </div>
         </div>

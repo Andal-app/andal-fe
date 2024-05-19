@@ -52,7 +52,7 @@ const ParentLogin = () => {
               <div id="form__inputs" className="space-y-2">
                 {/* email start */}
                 <div>
-                  <InputLabel labelFor="email" content="Email" />
+                  <InputLabel labelFor="emailOrUsername" content="Email atau Username" />
                   <TextInput
                     type="text"
                     name="emailOrUsername"

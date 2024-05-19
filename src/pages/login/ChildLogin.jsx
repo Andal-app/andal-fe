@@ -57,7 +57,7 @@ const ChildLogin = () => {
                     type="username"
                     name="username"
                     id="username"
-                    placeholder="FioCyber13#"
+                    placeholder="username anak"
                     required
                     onChange={handleChange}
                   />

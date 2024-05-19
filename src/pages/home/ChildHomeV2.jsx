@@ -42,7 +42,12 @@ function ChildHomeV2({ user }) {
         {/* map start */}
         <div className="lg:z-0 bg-neutral-400 h-72 lg:h-screen">
           <div className="w-full h-[100vh]">
-            <Maps selectPosition={selectPosition} setSelectPosition={setSelectPosition} isMarkerDraggable={false} />
+            <Maps
+              selectPosition={selectPosition}
+              setSelectPosition={setSelectPosition}
+              isMarkerDraggable={false}
+              showCircle={false}
+            />
           </div>
         </div>
         {/* map end */}

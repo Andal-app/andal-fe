@@ -10,17 +10,17 @@ function PositionDetailBox({ address, lat, lng }) {
             <tr>
               <td className="pr-8">Alamat</td>
               <td className="pr-2">:</td>
-              <td className=" ">Jalan Grafika No. 2, Sleman</td>
+              <td className=" ">{address ? address : '-'}</td>
             </tr>
             <tr>
               <td className="">Latitude</td>
               <td className="">:</td>
-              <td className="">{lat}</td>
+              <td className="">{lat ? lat : '-'}</td>
             </tr>
             <tr>
               <td className="">Longitude</td>
               <td className="">:</td>
-              <td className="">{lng}</td>
+              <td className="">{lng ? lng : '-'}</td>
             </tr>
           </tbody>
         </table>
