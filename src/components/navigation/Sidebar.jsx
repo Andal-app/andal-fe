@@ -21,7 +21,7 @@ function Sidebar({ user }) {
   const ParentMenuUtamaItems = [
     { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/${roleURL}` },
     { title: 'Jadwal Geofencing', icon: 'akar-icons:schedule', cat: 'menu_utama', link: '/jadwalgeofence' },
-    { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama', link: '' },
+    { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama', link: '/notifikasi' },
     { title: 'Hubungkan', icon: 'fluent:link-multiple-20-filled', cat: 'menu_utama', link: `/${roleURL}/hubungkan` }
   ];
 

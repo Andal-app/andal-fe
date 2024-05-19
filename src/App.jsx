@@ -65,7 +65,7 @@ function App() {
     fullname: auth?.user?.user?.fullname || ''
   };
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className="font-poppins">
@@ -93,7 +93,6 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/sheettrial" element={<BottomSheetTrial />} />
 
-            <Route path="/notifikasi" element={<NotificationPage />} />
             <Route path="/anak/beranda" element={<ChildHome />} />
             <Route path="/orangtua/beranda" element={<ParentHome />} />
             <Route path="/parent/history" element={<ParentGeofencingHistory />} />
@@ -174,12 +173,19 @@ function App() {
               // </ParentRouter>
             }
           />
-
           <Route
             path="/jadwalgeofence"
             element={
               <ParentRouter user={user}>
                 <SelectChildSchedule user={user} />
+              </ParentRouter>
+            }
+          />
+          <Route
+            path="/notifikasi"
+            element={
+              <ParentRouter user={user}>
+                <NotificationPage user={user} />
               </ParentRouter>
             }
           />
