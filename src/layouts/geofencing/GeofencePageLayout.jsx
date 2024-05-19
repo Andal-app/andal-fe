@@ -6,6 +6,7 @@ import { Icon } from '@iconify/react';
 import 'react-spring-bottom-sheet/dist/style.css';
 import Sidebar from '../../components/navigation/Sidebar';
 import Maps from '../../components/maps/Maps';
+import { Link } from 'react-router-dom';
 
 function GeofencePageLayout({
   children,
@@ -13,7 +14,8 @@ function GeofencePageLayout({
   user,
   selectPosition,
   setSelectPosition,
-  isMarkerDraggable = true
+  isMarkerDraggable = true,
+  backBtnNavTo
 }) {
   // const [selectPosition, setSelectPosition] = useState(null);
   // console.log(selectPosition);
@@ -26,9 +28,12 @@ function GeofencePageLayout({
         {/* top  nav start */}
         <nav className="absolute z-10 w-full lg:w-[310px] lg:left-6 top-4 lg:top-8 flex items-center justify-center">
           {/* circular back button start */}
-          <div className="absolute left-3 flex justify-center items-center w-8 h-8 bg-violet-300 rounded-full text-black">
+          <Link
+            to={backBtnNavTo}
+            className="absolute left-3 flex justify-center items-center w-8 h-8 bg-violet-300 rounded-full text-black"
+          >
             <Icon icon={'ion:arrow-back'} className="w-6 h-6" />
-          </div>
+          </Link>
           {/* circular back button end */}
 
           <div

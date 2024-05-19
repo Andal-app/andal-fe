@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from '@iconify/react';
 import PositionDetailBox from './PositionDetailBox';
 import ScheduleItem from './ScheduleItem';
 
@@ -31,7 +32,10 @@ function ChildInfoBox({ data }) {
         <div id="battery__gps__status" className="flex gap-4">
           {/* battery status start */}
           <div id="battery__status" className="flex gap-2">
-            <p className="text-violet-900 font-bold">kotak</p>
+            <p className="text-violet-900 font-bold">
+              {' '}
+              <Icon icon="fluent:battery-6-24-regular" className="w-5 h-5" />
+            </p>
             <p>
               100<span>%</span>
             </p>

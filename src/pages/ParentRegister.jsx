@@ -100,7 +100,7 @@ const ParentRegister = () => {
                   type="text"
                   name="fullname"
                   id="fullname"
-                  placeholder="Fiorenza Celestyn"
+                  placeholder="Jane Doe"
                   required
                   onChange={handleInputChange}
                   value={formData.fullname}
@@ -116,7 +116,7 @@ const ParentRegister = () => {
                   type="email"
                   name="email"
                   id="email"
-                  placeholder="fiorenza@xmail.com"
+                  placeholder="janedoe@xmail.com"
                   required
                   onChange={handleInputChange}
                   value={formData.email}
@@ -132,7 +132,7 @@ const ParentRegister = () => {
                   type="text"
                   name="username"
                   id="username"
-                  placeholder="fiorenza99"
+                  placeholder="janedoe"
                   required
                   onChange={handleInputChange}
                   value={formData.username}

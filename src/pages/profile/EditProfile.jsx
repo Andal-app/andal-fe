@@ -59,7 +59,7 @@ function EditProfile({ user }) {
       <Sidebar user={user} />
 
       <div className="w-full lg:w-1/2 h-screen flex flex-col items-center lg:border-r lg:border-neutral-300">
-        <TopBackNav title="Ubah Profil" link="/profil" />
+        <TopBackNav navigateTo="/profil" title="Ubah Profil" link="/profil" />
 
         <main className="w-[85%] lg:w-[80%] h-[80%] flex flex-col items-center">
           <InputProfPic src={ProfPic} />

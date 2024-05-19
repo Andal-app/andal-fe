@@ -10,7 +10,7 @@ function LandingPage() {
     <BasicLayout>
       <div className="relative w-full h-full bg-map flex justify-center items-center">
         <div className="z-10 flex flex-col items-center gap-8 text-center -mt-36 lg:mt-0">
-          <div className="bg-violet-300 w-32 h-32 rounded-full">logo</div>
+          <div id="logo" className="bg-violet-300 w-32 h-32 rounded-full"></div>
           <h1 className="text-h-lg font-bold text-violet-900">Selamat Datang</h1>
           <p className="text-b-sm lg:text-b-md text-neutral-900 max-w-[85%] lg:max-w-[420px]">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et

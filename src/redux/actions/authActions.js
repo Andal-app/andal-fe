@@ -23,7 +23,9 @@ export const LoginAction = (form, navigate, role) => (dispatch) => {
         newRole = 'anak';
       }
 
-      window.location.href = `/beranda/${newRole}/v2`;
+      // navigate(`/beranda/orangtua`);
+
+      window.location.href = `/beranda/${newRole}`;
     })
     .catch((err) => {
       // dispatch({
@@ -44,6 +46,7 @@ export const LogoutAction = () => (dispatch) => {
     type: SET_USER,
     payload: {}
   });
+  window.location.href = `/`;
 };
 
 export const setUser = (decode) => ({

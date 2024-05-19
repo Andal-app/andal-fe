@@ -110,7 +110,7 @@ const ChildRegister = () => {
                   type="text"
                   name="fullname"
                   id="fullname"
-                  placeholder="Fiorenza Celestyn"
+                  placeholder="Jane Doe"
                   required
                   onChange={handleInputChange}
                   value={formData.fullname}
@@ -126,7 +126,7 @@ const ChildRegister = () => {
                   type="text"
                   name="username"
                   id="username"
-                  placeholder="fiorenza99"
+                  placeholder="janedoe"
                   required
                   onChange={handleInputChange}
                   value={formData.username}

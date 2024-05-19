@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { FaAngleLeft } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
@@ -18,12 +18,19 @@ function Sidebar({ user }) {
   const roleURL = translateUserRoleURL(user?.role ? user.role : null);
 
   const [open, setOpen] = useState(true);
-  const MenuUtamaItems = [
+  const ParentMenuUtamaItems = [
     { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/${roleURL}` },
     { title: 'Jadwal Geofencing', icon: 'akar-icons:schedule', cat: 'menu_utama', link: '/jadwalgeofence' },
     { title: 'Notifikasi', icon: 'mingcute:notification-line', cat: 'menu_utama', link: '' },
-    { title: 'Hubungkan', icon: 'mingcute:notification-line', cat: 'menu_utama', link: `/${roleURL}/hubungkan` }
+    { title: 'Hubungkan', icon: 'fluent:link-multiple-20-filled', cat: 'menu_utama', link: `/${roleURL}/hubungkan` }
   ];
+
+  const ChildMenuUtamaItems = [
+    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/${roleURL}` }
+  ];
+
+  const MenuUtamaItems =
+    user?.role === 'parent' ? ParentMenuUtamaItems : user?.role === 'child' ? ChildMenuUtamaItems : [];
 
   const PengaturanItems = [
     { title: 'Profil Pengguna', icon: 'gg:profile', cat: 'pengaturan', link: '/profil' }
@@ -57,7 +64,7 @@ function Sidebar({ user }) {
 
       {/* user profile start */}
       <div className={`flex gap-4 px-6 my-4 py-4 ${!open && 'hidden'}`}>
-        <div id="profile__picture" className="w-14 h-14 rounded-full bg-black"></div>
+        <img id="profile__picture" src="https://via.placeholder.com/150" className="w-14 h-14 rounded-full"></img>
         <div className="flex flex-col justify-center">
           <p className="text-b-sm font-semibold">{user ? user.fullname : 'Nama Lengkap'}</p>
           <p className="text-b-xsm">{role ? role : 'Peran'}</p>

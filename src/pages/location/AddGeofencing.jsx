@@ -103,6 +103,7 @@ function AddGeofencing({ user }) {
       user={user}
       selectPosition={selectPosition}
       setSelectPosition={setSelectPosition}
+      backBtnNavTo="/beranda/orangtua"
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>

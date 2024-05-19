@@ -97,7 +97,7 @@ const ConnectAccount = ({ user }) => {
 
       <div className="w-full lg:w-1/2 h-screen flex flex-col items-center lg:border-r lg:border-neutral-300">
         {/* page title start */}
-        <TopBackNav title="Hubungkan Akun Anak" link="/beranda/orangtua" />
+        <TopBackNav title="Hubungkan Akun Anak" navigateTo="/beranda/orangtua" />
         {/* page title end */}
 
         {/* hubungkan start */}

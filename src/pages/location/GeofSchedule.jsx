@@ -38,7 +38,7 @@ function GeofSchedule({ user }) {
 
       <div className="relative w-full lg:w-1/2 h-screen flex flex-col items-center lg:border-r lg:border-neutral-300">
         {/* top back nav start */}
-        <TopBackNav title="Jadwal dan Titik Geofencing" />
+        <TopBackNav navigateTo={`/detailposisi/${childData?.child?.username}`} title="Jadwal dan Titik Geofencing" />
         {/* top back nav end */}
 
         <main className="w-full">
