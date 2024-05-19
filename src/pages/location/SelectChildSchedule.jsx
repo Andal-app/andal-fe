@@ -10,14 +10,26 @@ function SelectChildSchedule({ user }) {
   const navigate = useNavigate();
   const { childId } = location?.state || {}; // get current child info
   const [childrenData, setChildrenData] = useState([]);
+  const [isLoading, setIsLoading] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
         const response = await axios.get(process.env.REACT_APP_API_URL + 'parent/get-my-child');
         setChildrenData(response.data.children);
       } catch (err) {
-        console.error('Error fetching children list:', err);
+        if (err.response) {
+          setError(err.response.data.message);
+          // toast.error(err.response.data.message);
+        } else {
+          setError('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+          // toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+        }
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -36,21 +48,28 @@ function SelectChildSchedule({ user }) {
         {/* top back nav end */}
 
         <main className="w-full  px-10 py-4">
-          {childrenData?.map(({ id, username, fullname }) => (
-            <ChildBox
-              key={id}
-              fullname={fullname}
-              onClick={() => [
-                navigate(`/kelolajadwal/${username}`, {
-                  state: { childId: id, childUsername: username, childFullname: fullname }
-                })
-              ]}
-              // to={{
-              //   pathname: `/detailposisi/${username}`,
-              //   state: { childId: id, childUsername: username, childFullname: fullname }
-              // }}
-            />
-          ))}
+          {error ? (
+            <p className="text-black text-center text-b-md">{error}</p>
+          ) : isLoading ? (
+            <div className="space-y-2">
+              <div className="h-36 lg:h-24 w-[48%] lg:w-fit lg:min-w-72 animate-pulse bg-neutral-100 rounded-xl"></div>
+              <div className="h-36 lg:h-24 w-[48%] lg:w-fit lg:min-w-72 animate-pulse bg-neutral-100 rounded-xl"></div>
+            </div>
+          ) : childrenData === 0 ? (
+            <p className="text-black text-center text-b-md">Tambahkan data baru</p>
+          ) : (
+            childrenData?.map(({ id, username, fullname }) => (
+              <ChildBox
+                key={id}
+                fullname={fullname}
+                onClick={() => [
+                  navigate(`/kelolajadwal/${username}`, {
+                    state: { childId: id, childUsername: username, childFullname: fullname }
+                  })
+                ]}
+              />
+            ))
+          )}
         </main>
       </div>
     </div>

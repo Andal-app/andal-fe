@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import PositionDetailBox from './PositionDetailBox';
 import ScheduleItem from './ScheduleItem';
 
-function ChildInfoBox({ data }) {
+function ChildInfoBox({ data, error, isLoading }) {
   return (
     <div className="py-2 px-4 lg:p-3 flex flex-col gap-2">
       <div className="bg-violet-300 px-4 py-2 text-violet-900 rounded-xl border border-violet-500">
@@ -18,7 +18,13 @@ function ChildInfoBox({ data }) {
       </div>
 
       <div id="location__detail" className="text-b-sm">
-        <PositionDetailBox address="" lat={data?.child?.latestLat} lng={data?.child?.latestLong} />
+        <PositionDetailBox
+          address=""
+          lat={data?.child?.latestLat}
+          lng={data?.child?.latestLong}
+          error={error}
+          isLoading={isLoading}
+        />
       </div>
 
       {/* status start */}
@@ -59,9 +65,20 @@ function ChildInfoBox({ data }) {
 
         {/* schedule items start */}
         <ul className="min-h-min max-h-[110px] flex flex-col gap-2 overflow-auto scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-track-neutral-100 scrollbar-thumb-rounded-full">
-          {data?.geofences?.map(({ _id, geofenceName, startTime, endTime }) => (
-            <ScheduleItem key={_id} _id={_id} geofenceName={geofenceName} startTime={startTime} endTime={endTime} />
-          ))}
+          {error ? (
+            <p className="text-black text-center text-b-sm">{error}</p>
+          ) : isLoading ? (
+            <div className="space-y-1">
+              <div className="h-4 w-full animate-pulse bg-neutral-100"></div>
+              <div className="h-4 w-full animate-pulse bg-neutral-100"></div>
+            </div>
+          ) : data?.geofences?.length === 0 ? (
+            <p className="text-black text-center text-b-sm">Tambahkan data baru</p>
+          ) : (
+            data?.geofences?.map(({ _id, geofenceName, startTime, endTime }) => (
+              <ScheduleItem key={_id} _id={_id} geofenceName={geofenceName} startTime={startTime} endTime={endTime} />
+            ))
+          )}
         </ul>
         {/* schedule items end */}
       </div>

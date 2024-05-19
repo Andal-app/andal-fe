@@ -7,23 +7,21 @@ import HomeLayout from '../../layouts/home/HomeLayout';
 function ParentHomeV2({ user }) {
   const navigate = useNavigate();
   const [childrenData, setChildrenData] = useState([]);
-
-  // const ChildrenList = [
-  //   { fullName: 'Fiorenza Celestyn', profPic: '' },
-  //   { fullName: 'Maura Yufi Septania', profPic: '' },
-  //   { fullName: 'Isyana Sarawati', profPic: '' }
-  // ];
+  const [isLoading, setIsLoading] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
         const response = await axios.get(process.env.REACT_APP_API_URL + 'parent/get-my-child');
-        // console.log('Children list:', response.data.children);
-        // console.log('Children msg:', response.data.message);
         setChildrenData(response.data.children);
         // console.log(childrenData);
       } catch (err) {
-        console.error('Error fetching children list:', err);
+        setError(err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -41,21 +39,28 @@ function ParentHomeV2({ user }) {
 
         {/* children list start */}
         <div className="flex lg:flex-col flex-wrap lg:flex-nowrap w-full justify-between gap-2 lg:gap-4">
-          {childrenData?.map(({ id, username, fullname }) => (
-            <ChildBox
-              key={id}
-              fullname={fullname}
-              onClick={() => [
-                navigate(`/detailposisi/${username}`, {
-                  state: { childId: id, childUsername: username, childFullname: fullname }
-                })
-              ]}
-              // to={{
-              //   pathname: `/detailposisi/${username}`,
-              //   state: { childId: id, childUsername: username, childFullname: fullname }
-              // }}
-            />
-          ))}
+          {error ? (
+            <p className="text-black text-center text-b-md">{error}</p>
+          ) : isLoading ? (
+            <div className="space-y-2">
+              <div className="h-36 lg:h-24 w-[48%] lg:w-fit lg:min-w-72 animate-pulse bg-neutral-100 rounded-xl"></div>
+              <div className="h-36 lg:h-24 w-[48%] lg:w-fit lg:min-w-72 animate-pulse bg-neutral-100 rounded-xl"></div>
+            </div>
+          ) : childrenData === 0 ? (
+            <p className="text-black text-center text-b-md">Tambahkan data baru</p>
+          ) : (
+            childrenData?.map(({ id, username, fullname }) => (
+              <ChildBox
+                key={id}
+                fullname={fullname}
+                onClick={() => [
+                  navigate(`/detailposisi/${username}`, {
+                    state: { childId: id, childUsername: username, childFullname: fullname }
+                  })
+                ]}
+              />
+            ))
+          )}
         </div>
       </div>
       {/* children list end */}

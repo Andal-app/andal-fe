@@ -18,12 +18,16 @@ function PositionDetailV2({ user }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [childData, setChildData] = useState([]);
+  const [isLoading, setIsLoading] = useState(null);
+  const [error, setError] = useState(null);
   const [selectPosition, setSelectPosition] = useState(null);
 
   const { childId } = location?.state || {}; // get current child info
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
         const response = await axios.get(process.env.REACT_APP_API_URL + `child/${childId}`);
         setChildData(response.data);
@@ -31,17 +35,23 @@ function PositionDetailV2({ user }) {
         setSelectPosition({ lat: latestLat, lon: latestLong });
       } catch (err) {
         if (err.response) {
-          toast.error(err.response.data.message);
+          setError(err.response.data.message);
+          // toast.error(err.response.data.message);
         } else {
-          toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+          setError('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+          // toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
         }
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchData();
+    if (childId) {
+      fetchData();
+    }
 
     return () => {};
-  }, []);
+  }, [childId]);
 
   // control for bottom sheet modal
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
@@ -96,13 +106,19 @@ function PositionDetailV2({ user }) {
         <div id="information__detail">
           {/* for small screen: show bottom sheet modal */}
           <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
-            <ChildInfoBox data={childData} />
+            <ChildInfoBox data={childData} error={error} isLoading={isLoading} />
           </BottomSheetModal>
 
           {/* for LARGE screen: show floating box start*/}
-          <div className=" hidden lg:flex lg:flex-col lg:gap-2 lg:w-80 absolute top-20 left-6">
+          <div className="hidden lg:flex lg:flex-col lg:gap-2 lg:w-80 absolute top-20 left-6">
             <div className=" bg-white rounded-xl">
-              <ChildInfoBox data={childData} />
+              {error ? (
+                <p className="text-black text-center text-b-sm">{error}</p>
+              ) : isLoading ? (
+                <div className="h-96 w-full animate-pulse bg-neutral-50 rounded-xl"></div>
+              ) : (
+                <ChildInfoBox data={childData} />
+              )}
             </div>
 
             {/* add and manage buttons start */}

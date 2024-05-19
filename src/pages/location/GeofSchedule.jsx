@@ -12,25 +12,35 @@ function GeofSchedule({ user }) {
   const navigate = useNavigate();
   const { childId } = location?.state || {}; // get current child info
   const [childData, setChildData] = useState([]);
+  const [isLoading, setIsLoading] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
         const response = await axios.get(process.env.REACT_APP_API_URL + `child/${childId}`);
         setChildData(response.data);
       } catch (err) {
         if (err.response) {
-          toast.error(err.response.data.message);
+          setError(err.response.data.message);
+          // toast.error(err.response.data.message);
         } else {
-          toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+          setError('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+          // toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
         }
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchData();
+    if (childId) {
+      fetchData();
+    }
 
     return () => {};
-  }, []);
+  }, [childId]);
 
   return (
     <div className="flex">
@@ -43,17 +53,29 @@ function GeofSchedule({ user }) {
 
         <main className="w-full">
           <ul id="notification__list__container">
-            {childData?.geofences?.map(({ geofenceName, startTime, endTime, _id }) => (
-              <LocationListView
-                key={_id}
-                geofenceId={_id}
-                geofenceName={geofenceName}
-                startTime={startTime}
-                endTime={endTime}
-                childId={childData?.child?._id}
-                childUsername={childData?.child?.username}
-              />
-            ))}
+            {error ? (
+              <p className="text-black text-center text-b-md">{error}</p>
+            ) : isLoading ? (
+              <div className="space-y-1">
+                <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
+                <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
+                <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
+              </div>
+            ) : childData?.geofences?.length === 0 ? (
+              <p className="text-black text-center text-b-md">Tambahkan data baru</p>
+            ) : (
+              childData?.geofences?.map(({ geofenceName, startTime, endTime, _id }) => (
+                <LocationListView
+                  key={_id}
+                  geofenceId={_id}
+                  geofenceName={geofenceName}
+                  startTime={startTime}
+                  endTime={endTime}
+                  childId={childData?.child?._id}
+                  childUsername={childData?.child?.username}
+                />
+              ))
+            )}
           </ul>
         </main>
 

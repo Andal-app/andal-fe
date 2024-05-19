@@ -78,13 +78,16 @@ function AddGeofencing({ user }) {
           longitude: selectPosition?.lon,
           startTime: formData.startTime,
           endTime: formData.endTime,
+          shape: 'circle',
           radius: 100,
           childId: childId
         })
         .then((res) => {
           // console.log('Response:', res);
           toast.success(res.data.message);
-          navigate(`/detailposisi/${childUsername}`);
+          navigate(`/detailposisi/${childUsername}`, {
+            state: { childId: childId }
+          });
         });
     } catch (err) {
       if (err.response) {
