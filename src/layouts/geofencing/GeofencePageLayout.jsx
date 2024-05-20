@@ -5,7 +5,7 @@ import 'leaflet-geosearch/dist/geosearch.css';
 import { Icon } from '@iconify/react';
 import 'react-spring-bottom-sheet/dist/style.css';
 import Sidebar from '../../components/navigation/Sidebar';
-import Maps from '../../components/maps/Maps';
+import GoogleMapsComponent from '../../components/maps/GoogleMapsComponent';
 import { Link } from 'react-router-dom';
 
 function GeofencePageLayout({
@@ -48,7 +48,7 @@ function GeofencePageLayout({
         {/* map section start */}
         <div className="z-0 h-screen w-full flex justify-center items-center">
           <div className="w-full h-[100vh]">
-            <Maps
+            <GoogleMapsComponent
               selectPosition={selectPosition}
               setSelectPosition={setSelectPosition}
               isMarkerDraggable={isMarkerDraggable}

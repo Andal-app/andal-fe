@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PositionDetailBox from '../../components/box/PositionDetailBox';
-import Maps from '../../components/maps/Maps';
+import GoogleMapsComponent from '../../components/maps/GoogleMapsComponent';
 import useGeoLocation from '../../hooks/useGeoLocation';
 import HomeLayout from '../../layouts/home/HomeLayout';
 
@@ -42,7 +42,7 @@ function ChildHomeV2({ user }) {
         {/* map start */}
         <div className="lg:z-0 bg-neutral-400 h-72 lg:h-screen">
           <div className="w-full h-[100vh]">
-            <Maps
+            <GoogleMapsComponent
               selectPosition={selectPosition}
               setSelectPosition={setSelectPosition}
               isMarkerDraggable={false}

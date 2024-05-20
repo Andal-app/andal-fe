@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-hot-toast';
 import 'react-spring-bottom-sheet/dist/style.css';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-draw/dist/leaflet.draw.css';
@@ -11,7 +10,7 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import BottomSheetModal from '../../components/modals/BottomSheetModal';
 import ChildInfoBox from '../../components/box/ChildInfoBox';
 import Sidebar from '../../components/navigation/Sidebar';
-import Maps from '../../components/maps/Maps';
+import GoogleMapsComponent from '../../components/maps/GoogleMapsComponent';
 import IconBtn from '../../components/buttons/IconBtn';
 
 function PositionDetailV2({ user }) {
@@ -29,17 +28,15 @@ function PositionDetailV2({ user }) {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await axios.get(process.env.REACT_APP_API_URL + `child/${childId}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}child/${childId}`);
         setChildData(response.data);
         const { latestLat, latestLong } = response.data.child;
         setSelectPosition({ lat: latestLat, lon: latestLong });
       } catch (err) {
         if (err.response) {
           setError(err.response.data.message);
-          // toast.error(err.response.data.message);
         } else {
           setError('Terjadi kesalahan. Coba cek koneksi internet Anda.');
-          // toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
         }
       } finally {
         setIsLoading(false);
@@ -92,7 +89,7 @@ function PositionDetailV2({ user }) {
         {/* map section start */}
         <div className="z-0 h-screen w-full flex justify-center items-center">
           <div className="w-full h-[100vh]">
-            <Maps
+            <GoogleMapsComponent
               selectPosition={selectPosition ? selectPosition : null}
               setSelectPosition={setSelectPosition ? setSelectPosition : null}
               isMarkerDraggable={false}
