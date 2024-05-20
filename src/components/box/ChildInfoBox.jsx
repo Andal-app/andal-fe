@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import PositionDetailBox from './PositionDetailBox';
 import ScheduleItem from './ScheduleItem';
 
-function ChildInfoBox({ data, error, isLoading }) {
+function ChildInfoBox({ address, data, error, isLoading }) {
   return (
     <div className="py-2 px-4 lg:p-3 flex flex-col gap-2">
       <div className="bg-violet-300 px-4 py-2 text-violet-900 rounded-xl border border-violet-500">
@@ -19,7 +19,7 @@ function ChildInfoBox({ data, error, isLoading }) {
 
       <div id="location__detail" className="text-b-sm">
         <PositionDetailBox
-          address=""
+          address={address}
           lat={data?.child?.latestLat}
           lng={data?.child?.latestLong}
           error={error}

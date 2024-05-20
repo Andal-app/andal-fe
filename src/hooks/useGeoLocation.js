@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 // Instance axios untuk Google Maps API tanpa header Authorization
-const axiosGoogleMaps = axios.create({
+export const axiosGoogleMaps = axios.create({
   baseURL: 'https://maps.googleapis.com/maps/api',
   headers: {
     'Content-Type': 'application/json'

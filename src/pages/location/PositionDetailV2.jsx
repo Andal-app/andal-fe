@@ -12,16 +12,34 @@ import ChildInfoBox from '../../components/box/ChildInfoBox';
 import Sidebar from '../../components/navigation/Sidebar';
 import GoogleMapsComponent from '../../components/maps/GoogleMapsComponent';
 import IconBtn from '../../components/buttons/IconBtn';
+import { axiosGoogleMaps } from '../../hooks/useGeoLocation';
 
 function PositionDetailV2({ user }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [childData, setChildData] = useState([]);
+  const [address, setAddress] = useState('');
   const [isLoading, setIsLoading] = useState(null);
   const [error, setError] = useState(null);
   const [selectPosition, setSelectPosition] = useState(null);
 
   const { childId } = location?.state || {}; // get current child info
+
+  const fetchAddress = async (lat, lon) => {
+    try {
+      const response = await axiosGoogleMaps.get('/geocode/json', {
+        params: {
+          latlng: `${lat},${lon}`,
+          key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+        }
+      });
+      const address = response.data.results[0]?.formatted_address || 'Alamat tidak ditemukan';
+      return address;
+    } catch (error) {
+      console.error('Error fetching address:', error);
+      return 'Error fetching address';
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +50,10 @@ function PositionDetailV2({ user }) {
         setChildData(response.data);
         const { latestLat, latestLong } = response.data.child;
         setSelectPosition({ lat: latestLat, lon: latestLong });
+
+        // call fetchAddress
+        const address = await fetchAddress(latestLat, latestLong);
+        setAddress(address);
       } catch (err) {
         if (err.response) {
           setError(err.response.data.message);
@@ -103,7 +125,7 @@ function PositionDetailV2({ user }) {
         <div id="information__detail">
           {/* for small screen: show bottom sheet modal */}
           <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
-            <ChildInfoBox data={childData} error={error} isLoading={isLoading} />
+            <ChildInfoBox data={childData} address={address} error={error} isLoading={isLoading} />
           </BottomSheetModal>
 
           {/* for LARGE screen: show floating box start*/}
@@ -114,7 +136,7 @@ function PositionDetailV2({ user }) {
               ) : isLoading ? (
                 <div className="h-96 w-full animate-pulse bg-neutral-50 rounded-xl"></div>
               ) : (
-                <ChildInfoBox data={childData} />
+                <ChildInfoBox data={childData} address={address} error={error} isLoading={isLoading} />
               )}
             </div>
 
