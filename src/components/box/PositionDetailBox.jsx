@@ -7,9 +7,9 @@ function PositionDetailBox({ address, lat, lng, error, isLoading }) {
       <div className="container mx-auto text-b-sm">
         <table className="table-auto">
           <tbody>
-            <tr>
-              <td className="pr-8">Alamat</td>
-              <td className="pr-2">:</td>
+            <tr className="">
+              <td className="pr-8 table-cell align-top">Alamat</td>
+              <td className="pr-2 table-cell align-top">:</td>
               {error ? (
                 <p className="text-black">{error}</p>
               ) : isLoading ? (
