@@ -21,6 +21,7 @@ function EditGeofencing({ user }) {
 
   const [formData, setFormData] = useState({
     geofenceName: '',
+    radius: '',
     startTime: '',
     endTime: ''
   });
@@ -74,6 +75,7 @@ function EditGeofencing({ user }) {
         // Set initial form data
         setFormData({
           geofenceName: response.data.geofence.geofenceName,
+          radius: response.data.geofence.radius,
           startTime: response.data.geofence.startTime,
           endTime: response.data.geofence.endTime
         });
@@ -111,6 +113,7 @@ function EditGeofencing({ user }) {
       await axios
         .patch(process.env.REACT_APP_API_URL + `geofence-schedule/${geofenceId}`, {
           geofenceName: formData.geofenceName,
+          radius: formData.radius,
           latitude: selectPosition?.lat,
           longitude: selectPosition?.lon,
           startTime: formData.startTime,
@@ -153,7 +156,7 @@ function EditGeofencing({ user }) {
       </BottomSheetModal>
 
       {/* for large screen: show floating box */}
-      <div className="hidden lg:flex lg:flex-col lg:gap-1 absolute top-20 left-6">
+      <div className="hidden lg:flex lg:flex-col lg:gap-1 absolute top-36 left-6">
         {/* searchbar start */}
         <div className="w-full lg:w-[310px] flex items-center justify-center">
           <MapsSearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} />

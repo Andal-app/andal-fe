@@ -33,8 +33,26 @@ const useGeoLocation = () => {
     }
   };
 
+  // const fetchPlaces = async () => {
+  //   try {
+  //     const response = await axiosGoogleMaps.get('/place/textsearch/json', {
+  //       params: {
+  //         query: 'gambir',
+  //         key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+  //       }
+  //     });
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error('Error fetching address:', error);
+  //     return 'Error fetching address';
+  //   }
+  // };
+
   const onSuccess = async (position) => {
     const { latitude, longitude } = position.coords;
+    // const places = await fetchPlaces();
+    // console.log(places);
+
     const address = await fetchAddress(latitude, longitude);
     const newLocation = {
       loaded: true,

@@ -25,7 +25,13 @@ function ResetCenterView({ selectPosition }) {
   return null;
 }
 
-export default function Maps({ selectPosition, setSelectPosition, isMarkerDraggable = true, showCircle = true }) {
+export default function Maps({
+  selectPosition,
+  setSelectPosition,
+  isMarkerDraggable = true,
+  showCircle = true,
+  circleRadius
+}) {
   const locationSelection = selectPosition ? [selectPosition.lat, selectPosition.lon] : centerPosition;
 
   const [markerPosition, setMarkerPosition] = useState(centerPosition);
@@ -88,7 +94,12 @@ export default function Maps({ selectPosition, setSelectPosition, isMarkerDragga
         </Popup> */}
       </Marker>
 
-      {showCircle && <Circle center={selectPosition ? locationSelection : markerPosition} radius={100} />}
+      {showCircle && (
+        <Circle
+          center={selectPosition ? locationSelection : markerPosition}
+          radius={circleRadius ? circleRadius : 100}
+        />
+      )}
 
       <MapEvents />
 

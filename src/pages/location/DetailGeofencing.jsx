@@ -54,6 +54,8 @@ function DetailGeofencing({ user }) {
       selectPosition={selectPosition}
       setSelectPosition={setSelectPosition}
       isMarkerDraggable={false}
+      showCircle={true}
+      circleRadius={geofenceData?.radius}
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
@@ -62,11 +64,12 @@ function DetailGeofencing({ user }) {
           geofenceName={geofenceData?.geofenceName}
           startTime={geofenceData?.startTime}
           endTime={geofenceData?.endTime}
+          radius={geofenceData?.radius}
         />
       </BottomSheetModal>
 
       {/* for large screen: show floating box */}
-      <div className="hidden lg:flex lg:flex-col lg:gap-1 absolute top-20 left-6">
+      <div className="hidden lg:flex lg:flex-col lg:gap-1 absolute top-36 left-6">
         {/* add geofencing form start */}
         <div className="bg-white rounded-xl py-0.5">
           <DetailGeoForm
@@ -74,6 +77,7 @@ function DetailGeofencing({ user }) {
             geofenceName={geofenceData?.geofenceName}
             startTime={geofenceData?.startTime}
             endTime={geofenceData?.endTime}
+            radius={geofenceData?.radius}
           />
         </div>
         {/* add geofencing form end */}

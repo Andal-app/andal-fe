@@ -22,6 +22,7 @@ function PositionDetailV2({ user }) {
   const [isLoading, setIsLoading] = useState(null);
   const [error, setError] = useState(null);
   const [selectPosition, setSelectPosition] = useState(null);
+  const [activeGeofPosition, setActiveGeofPosition] = useState({ lat: -6.221956940535826, lon: 106.79914927430218 }); // Data dummy
 
   const { childId } = location?.state || {}; // get current child info
 
@@ -89,7 +90,7 @@ function PositionDetailV2({ user }) {
 
       <main className="relative mx-0 flex flex-col gap-4 w-full">
         {/* top  nav start */}
-        <nav className="absolute z-10 w-full lg:w-[310px] lg:left-6 top-4 lg:top-8 flex items-center justify-center">
+        <nav className="absolute z-10 w-full lg:w-[310px] lg:left-6 top-4 lg:top-24 flex items-center justify-center">
           {/* circular back button start */}
           <Link
             to="/beranda/orangtua"
@@ -114,6 +115,8 @@ function PositionDetailV2({ user }) {
             <GoogleMapsComponent
               selectPosition={selectPosition ? selectPosition : null}
               setSelectPosition={setSelectPosition ? setSelectPosition : null}
+              secondMarkerPosition={activeGeofPosition}
+              setSecondMarkerPosition={setActiveGeofPosition}
               isMarkerDraggable={false}
               showCircle={false}
             />
@@ -129,7 +132,7 @@ function PositionDetailV2({ user }) {
           </BottomSheetModal>
 
           {/* for LARGE screen: show floating box start*/}
-          <div className="hidden lg:flex lg:flex-col lg:gap-2 lg:w-80 absolute top-20 left-6">
+          <div className="hidden lg:flex lg:flex-col lg:gap-2 lg:w-80 absolute top-36 left-6">
             <div className=" bg-white rounded-xl">
               {error ? (
                 <p className="text-black text-center text-b-sm">{error}</p>

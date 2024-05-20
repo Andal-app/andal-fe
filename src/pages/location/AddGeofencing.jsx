@@ -7,6 +7,7 @@ import BottomSheetModal from '../../components/modals/BottomSheetModal';
 import GeofencePageLayout from '../../layouts/geofencing/GeofencePageLayout';
 import AddGeoForm from '../../components/inputs/AddGeoForm';
 import MapsSearchBox from '../../components/maps/MapsSearchBox';
+import GoogleMapsSearchBox from '../../components/maps/GoogleMapsSearchBox';
 
 function AddGeofencing({ user }) {
   const location = useLocation();
@@ -18,6 +19,7 @@ function AddGeofencing({ user }) {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false); // control for bottom sheet modal
   const [formData, setFormData] = useState({
     geofenceName: '',
+    radius: '',
     startTime: '',
     endTime: ''
   });
@@ -79,7 +81,7 @@ function AddGeofencing({ user }) {
           startTime: formData.startTime,
           endTime: formData.endTime,
           shape: 'circle',
-          radius: 100,
+          radius: formData.radius,
           childId: childId
         })
         .then((res) => {
@@ -120,10 +122,10 @@ function AddGeofencing({ user }) {
       </BottomSheetModal>
 
       {/* for large screen: show floating box */}
-      <div className="hidden lg:flex lg:flex-col lg:gap-1 absolute top-20 left-6">
+      <div className="hidden lg:flex lg:flex-col lg:gap-1 absolute top-36 left-6">
         {/* searchbar start */}
         <div className="w-full lg:w-[310px] flex items-center justify-center">
-          <MapsSearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
+          <GoogleMapsSearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
         </div>
         {/* searchbar end */}
 
