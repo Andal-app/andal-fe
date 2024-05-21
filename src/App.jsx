@@ -49,6 +49,7 @@ import CobaLeaflet from './pages/CobaLeaflet';
 import DetailGeofencing from './pages/location/DetailGeofencing';
 import EditGeofencing from './pages/location/EditGeofencing';
 import SelectChildSchedule from './pages/location/SelectChildSchedule';
+import GoogleMapsWrapper from './wrappers/GoogleMapsWrapper';
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt);
@@ -193,7 +194,9 @@ function App() {
             path="/tambahgeofence/:childUsername"
             element={
               <ParentRouter user={user}>
-                <AddGeofencing user={user} />
+                <GoogleMapsWrapper>
+                  <AddGeofencing user={user} />
+                </GoogleMapsWrapper>
               </ParentRouter>
             }
           />
@@ -201,7 +204,9 @@ function App() {
             path="/detailgeofence/:geofenceId"
             element={
               <ParentRouter user={user}>
-                <DetailGeofencing user={user} />
+                <GoogleMapsWrapper>
+                  <DetailGeofencing user={user} />
+                </GoogleMapsWrapper>
               </ParentRouter>
             }
           />
@@ -209,7 +214,9 @@ function App() {
             path="/editgeofence/:geofenceId"
             element={
               <ParentRouter user={user}>
-                <EditGeofencing user={user} />
+                <GoogleMapsWrapper>
+                  <EditGeofencing user={user} />
+                </GoogleMapsWrapper>
               </ParentRouter>
             }
           />
@@ -217,7 +224,9 @@ function App() {
             path="/detailposisi/:childUsername"
             element={
               <ParentRouter user={user}>
-                <PositionDetailV2 user={user} />
+                <GoogleMapsWrapper>
+                  <PositionDetailV2 user={user} />
+                </GoogleMapsWrapper>
               </ParentRouter>
             }
           />
@@ -245,7 +254,9 @@ function App() {
             path="/beranda/anak"
             element={
               <ChildRouter user={user}>
-                <ChildHomeV2 user={user} />
+                <GoogleMapsWrapper>
+                  <ChildHomeV2 user={user} />
+                </GoogleMapsWrapper>
               </ChildRouter>
             }
           />

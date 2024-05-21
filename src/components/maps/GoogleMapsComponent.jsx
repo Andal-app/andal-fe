@@ -46,15 +46,13 @@ export default function GoogleMapsComponent({
   };
 
   return (
-    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
-      <GoogleMap mapContainerStyle={containerStyle} center={markerPosition} zoom={13} onClick={handleMapClick}>
-        {/* marker */}
-        <Marker position={markerPosition} draggable={isMarkerDraggable} onDragEnd={handleMarkerDragEnd} />
-        {/* circle */}
-        {showCircle && <Circle center={markerPosition} radius={circleRadius} />}
-        {/* second marker */}
-        {secondMarkerPosition && <Marker position={{ lat: secondMarkerPosition.lat, lng: secondMarkerPosition.lon }} />}
-      </GoogleMap>
-    </LoadScript>
+    <GoogleMap mapContainerStyle={containerStyle} center={markerPosition} zoom={13} onClick={handleMapClick}>
+      {/* marker */}
+      <Marker position={markerPosition} draggable={isMarkerDraggable} onDragEnd={handleMarkerDragEnd} />
+      {/* circle */}
+      {showCircle && <Circle center={markerPosition} radius={circleRadius} />}
+      {/* second marker */}
+      {secondMarkerPosition && <Marker position={{ lat: secondMarkerPosition.lat, lng: secondMarkerPosition.lon }} />}
+    </GoogleMap>
   );
 }

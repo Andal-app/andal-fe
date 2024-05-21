@@ -1,25 +1,7 @@
 import { useState } from 'react';
-import { useJsApiLoader, StandaloneSearchBox } from '@react-google-maps/api';
+import { StandaloneSearchBox } from '@react-google-maps/api';
 
-const mapContainerStyle = {
-  height: '80vh',
-  width: '100vw'
-};
-
-const center = {
-  lat: 40.75378,
-  lng: -73.55658
-};
-
-const zoom = 10;
-
-export default function GoogleMapsSearchBox({ selectPosition, setSelectPosition }) {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyABX4LTqTLQGg_b3jFOH8Z6_H5CDqn8tbc',
-    libraries: ['places']
-  });
-
+const GoogleMapsSearchBox = ({ selectPosition, setSelectPosition }) => {
   const [searchBox, setSearchBox] = useState(null);
 
   const onSearchBoxLoad = (ref) => {
@@ -40,31 +22,29 @@ export default function GoogleMapsSearchBox({ selectPosition, setSelectPosition 
 
   return (
     <div className="App">
-      {isLoaded && (
-        <div>
-          <StandaloneSearchBox onLoad={onSearchBoxLoad} onPlacesChanged={onPlacesChanged}>
-            <input
-              type="text"
-              placeholder="Enter your location"
-              style={{
-                boxSizing: `border-box`,
-                border: `1px solid transparent`,
-                width: `240px`,
-                height: `32px`,
-                padding: `0 12px`,
-                borderRadius: `3px`,
-                boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-                fontSize: `14px`,
-                outline: `none`,
-                textOverflow: `ellipses`,
-                position: 'absolute',
-                left: '50%',
-                marginLeft: '-120px'
-              }}
-            />
-          </StandaloneSearchBox>
-        </div>
-      )}
+      <StandaloneSearchBox onLoad={onSearchBoxLoad} onPlacesChanged={onPlacesChanged}>
+        <input
+          type="text"
+          placeholder="Enter your location"
+          style={{
+            boxSizing: `border-box`,
+            border: `1px solid transparent`,
+            width: `240px`,
+            height: `32px`,
+            padding: `0 12px`,
+            borderRadius: `3px`,
+            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+            fontSize: `14px`,
+            outline: `none`,
+            textOverflow: `ellipses`,
+            position: 'absolute',
+            left: '50%',
+            marginLeft: '-120px'
+          }}
+        />
+      </StandaloneSearchBox>
     </div>
   );
-}
+};
+
+export default GoogleMapsSearchBox;
