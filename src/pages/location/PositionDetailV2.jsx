@@ -22,7 +22,8 @@ function PositionDetailV2({ user }) {
   const [isLoading, setIsLoading] = useState(null);
   const [error, setError] = useState(null);
   const [selectPosition, setSelectPosition] = useState(null);
-  const [activeGeofPosition, setActiveGeofPosition] = useState({ lat: -6.221956940535826, lon: 106.79914927430218 }); // Data dummy
+  const [activeGeofPosition, setActiveGeofPosition] = useState(null);
+  const [activeGF, setActiveGF] = useState(null);
 
   const { childId } = location?.state || {}; // get current child info
 
@@ -49,8 +50,20 @@ function PositionDetailV2({ user }) {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}child/${childId}`);
         setChildData(response.data);
+
+        // set chld latest position
         const { latestLat, latestLong } = response.data.child;
         setSelectPosition({ lat: latestLat, lon: latestLong });
+
+        // Set activeGF
+        const activeGeofence = response.data.activeGF;
+        setActiveGF(activeGeofence);
+
+        // Set activeGeofPosition
+        if (activeGeofence) {
+          const { coordinates } = activeGeofence.location;
+          setActiveGeofPosition({ lat: coordinates[1], lon: coordinates[0] });
+        }
 
         // call fetchAddress
         const address = await fetchAddress(latestLat, latestLong);

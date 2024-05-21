@@ -8,12 +8,7 @@ function ChildInfoBox({ address, data, error, isLoading }) {
     <div className="py-2 px-4 lg:p-3 flex flex-col gap-2">
       <div className="bg-violet-300 px-4 py-2 text-violet-900 rounded-xl border border-violet-500">
         <div id="latest__location" className="flex text-b-md font-medium">
-          <p>{`${data?.child?.fullname?.split(' ')[0]} berada di ${'Fakultas Teknik'}`} </p>
-        </div>
-
-        <div id="latest__time" className="flex gap-2 text-b-sm">
-          <p>08.00</p>
-          <p>WIB</p>
+          <p>{`${data?.child?.fullname?.split(' ')[0]}  ${data?.status?.toLowerCase()}`} </p>
         </div>
       </div>
 
@@ -29,10 +24,10 @@ function ChildInfoBox({ address, data, error, isLoading }) {
 
       {/* status start */}
       <div id="status" className="text-b-sm">
-        <div id="location__status" className="flex gap-2">
+        {/* <div id="location__status" className="flex gap-2">
           <p className="font-bold text-violet-900">Status:</p>
           <p>Berada dalam geofence sesuai jadwal</p>
-        </div>
+        </div> */}
 
         {/* battery and gps status start */}
         <div id="battery__gps__status" className="flex gap-4">
