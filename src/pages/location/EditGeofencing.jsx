@@ -7,6 +7,7 @@ import BottomSheetModal from '../../components/modals/BottomSheetModal';
 import GeofencePageLayout from '../../layouts/geofencing/GeofencePageLayout';
 import AddGeoForm from '../../components/inputs/AddGeoForm';
 import MapsSearchBox from '../../components/maps/MapsSearchBox';
+import GoogleMapsSearchBox from '../../components/maps/GoogleMapsSearchBox';
 
 function EditGeofencing({ user }) {
   const location = useLocation();
@@ -159,7 +160,7 @@ function EditGeofencing({ user }) {
       <div className="hidden lg:flex lg:flex-col lg:gap-1 absolute top-36 left-6">
         {/* searchbar start */}
         <div className="w-full lg:w-[310px] flex items-center justify-center">
-          <MapsSearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
+          <GoogleMapsSearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
         </div>
         {/* searchbar end */}
 

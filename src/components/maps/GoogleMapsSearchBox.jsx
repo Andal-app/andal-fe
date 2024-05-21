@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { StandaloneSearchBox } from '@react-google-maps/api';
+import { Icon } from '@iconify/react';
+import './GoogleMapsSearchBox.css';
 
 const GoogleMapsSearchBox = ({ selectPosition, setSelectPosition }) => {
   const [searchBox, setSearchBox] = useState(null);
@@ -20,28 +22,24 @@ const GoogleMapsSearchBox = ({ selectPosition, setSelectPosition }) => {
     }
   };
 
+  const handleButtonClick = () => {
+    // Trigger the places changed event
+    onPlacesChanged();
+  };
+
   return (
-    <div className="App">
+    <div className="w-full">
       <StandaloneSearchBox onLoad={onSearchBoxLoad} onPlacesChanged={onPlacesChanged}>
-        <input
-          type="text"
-          placeholder="Enter your location"
-          style={{
-            boxSizing: `border-box`,
-            border: `1px solid transparent`,
-            width: `240px`,
-            height: `32px`,
-            padding: `0 12px`,
-            borderRadius: `3px`,
-            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-            fontSize: `14px`,
-            outline: `none`,
-            textOverflow: `ellipses`,
-            position: 'absolute',
-            left: '50%',
-            marginLeft: '-120px'
-          }}
-        />
+        <div className="w-full h-[40px] border-2 border-violet-900 rounded-3xl flex items-center justify-between overflow-hidden bg-white">
+          <input
+            type="text"
+            placeholder="Cari Lokasi"
+            className="w-full text-b-md font-medium focus:outline-none focus:border-transparent px-4"
+          />
+          <button type="submit" className="w-14 h-full flex items-center justify-center">
+            <Icon icon={'iconamoon:search-bold'} className="w-[20px] h-[20px] text-violet-900" />
+          </button>
+        </div>
       </StandaloneSearchBox>
     </div>
   );
