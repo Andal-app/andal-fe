@@ -13,6 +13,7 @@ import Sidebar from '../../components/navigation/Sidebar';
 import GoogleMapsComponent from '../../components/maps/GoogleMapsComponent';
 import IconBtn from '../../components/buttons/IconBtn';
 import { axiosGoogleMaps } from '../../hooks/useGeoLocation';
+import BottomNavbar from '../../components/navigation/BottomNavbar';
 
 function PositionDetailV2({ user }) {
   const location = useLocation();
@@ -100,6 +101,7 @@ function PositionDetailV2({ user }) {
   return (
     <div className="flex">
       <Sidebar user={user} />
+      <BottomNavbar />
 
       <main className="relative mx-0 flex flex-col gap-4 w-full">
         {/* top  nav start */}

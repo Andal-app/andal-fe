@@ -9,6 +9,7 @@ import TopBackNav from '../../components/navigation/TopBackNav';
 import Sidebar from '../../components/navigation/Sidebar';
 import InputProfPic from '../../components/inputs/InputProfPic';
 import validateInput from '../../helpers/validateInput';
+import BottomNavbar from '../../components/navigation/BottomNavbar';
 
 function EditProfile({ user }) {
   const [formData, setFormData] = useState({
@@ -57,6 +58,7 @@ function EditProfile({ user }) {
   return (
     <div className="flex">
       <Sidebar user={user} />
+      <BottomNavbar />
 
       <div className="w-full lg:w-1/2 h-screen flex flex-col items-center lg:border-r lg:border-neutral-300">
         <TopBackNav navigateTo="/profil" title="Ubah Profil" link="/profil" />

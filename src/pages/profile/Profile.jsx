@@ -2,6 +2,7 @@ import Sidebar from '../../components/navigation/Sidebar';
 import ProfSetItem from './ProfSetItem';
 import ProfPic from '../../assets/images/profile_picture.jpeg';
 import translateUserRole from '../../helpers/translateUserRole';
+import BottomNavbar from '../../components/navigation/BottomNavbar';
 
 function Profile({ user }) {
   //autentikasi
@@ -23,6 +24,7 @@ function Profile({ user }) {
   return (
     <div className="flex">
       <Sidebar user={user} />
+      <BottomNavbar />
 
       <main className="w-full lg:w-1/2 lg:border-r lg:border-neutral-300">
         {/* page title start */}

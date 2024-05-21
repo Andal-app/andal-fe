@@ -6,6 +6,7 @@ import Sidebar from '../../components/navigation/Sidebar';
 import TopBackNav from '../../components/navigation/TopBackNav';
 import CodeInput from '../../components/inputs/CodeInput';
 import TutorialImg from '../../assets/images/tutorial.svg';
+import BottomNavbar from '../../components/navigation/BottomNavbar';
 
 const ConnectAccount = ({ user }) => {
   const [isConnectSuccess, setIsConnectSuccess] = useState(false);
@@ -49,6 +50,7 @@ const ConnectAccount = ({ user }) => {
   return (
     <div className="flex">
       <Sidebar user={user} />
+      <BottomNavbar />
 
       <div className="w-full lg:w-1/2 h-screen flex flex-col items-center lg:border-r lg:border-neutral-300">
         {/* page title start */}

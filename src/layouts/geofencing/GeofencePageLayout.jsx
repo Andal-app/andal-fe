@@ -7,6 +7,7 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import Sidebar from '../../components/navigation/Sidebar';
 import GoogleMapsComponent from '../../components/maps/GoogleMapsComponent';
 import { Link } from 'react-router-dom';
+import BottomNavbar from '../../components/navigation/BottomNavbar';
 
 function GeofencePageLayout({
   children,
@@ -25,6 +26,7 @@ function GeofencePageLayout({
   return (
     <div className="flex">
       <Sidebar user={user} />
+      <BottomNavbar />
 
       <main className="relative mx-0 flex flex-col gap-4 w-full">
         {/* top  nav start */}

@@ -1,10 +1,12 @@
 import Sidebar from '../../components/navigation/Sidebar';
 import TopWave3 from '../../assets/waves/wave_top_3.svg';
+import BottomNavbar from '../../components/navigation/BottomNavbar';
 
 function HomeLayout({ children, user }) {
   return (
     <div className="flex flex-col lg:flex-row">
       <Sidebar user={user} />
+      <BottomNavbar />
 
       {/* top wave start */}
       <div className="z-0 lg:hidden fixed top-0 left-0 right-0 w-full">
@@ -25,11 +27,6 @@ function HomeLayout({ children, user }) {
       {/* main start */}
       <main className="mt-14 lg:mt-0 w-full">{children}</main>
       {/* main end */}
-
-      {/* 
-  <div>
-    <BottomNavbar className="h-screen flex justify-center items-center bg-gray-900" />
-  </div> */}
     </div>
   );
 }

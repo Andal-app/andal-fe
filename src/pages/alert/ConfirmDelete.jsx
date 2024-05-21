@@ -8,6 +8,7 @@ import TopWave1Red from '../../assets/waves/wave_top_1_red.svg';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { LogoutAction } from '../../redux/actions/authActions';
+import BottomNavbar from '../../components/navigation/BottomNavbar';
 
 function ConfirmDelete({ user }) {
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ function ConfirmDelete({ user }) {
       </style>
 
       <Sidebar user={user} />
+      <BottomNavbar />
 
       <div id="main__container" className="w-full lg:w-1/2 bg-white h-screen flex items-center justify-center">
         {/* top wave start */}

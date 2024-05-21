@@ -6,6 +6,7 @@ import { Icon } from '@iconify/react';
 import Sidebar from '../../components/navigation/Sidebar';
 import TopBackNav from '../../components/navigation/TopBackNav';
 import LocationListView from '../../components/listViews/LocationListView';
+import BottomNavbar from '../../components/navigation/BottomNavbar';
 
 function GeofSchedule({ user }) {
   const location = useLocation();
@@ -45,6 +46,7 @@ function GeofSchedule({ user }) {
   return (
     <div className="flex">
       <Sidebar user={user} />
+      <BottomNavbar />
 
       <div className="relative w-full lg:w-1/2 h-screen flex flex-col items-center lg:border-r lg:border-neutral-300">
         {/* top back nav start */}
