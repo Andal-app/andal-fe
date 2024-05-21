@@ -1,96 +1,70 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Icon } from '@iconify/react';
-import axios from 'axios';
+import { useState } from 'react';
+import { useJsApiLoader, StandaloneSearchBox } from '@react-google-maps/api';
 
-const GoogleMapsSearchBox = ({ selectPosition, setSelectPosition }) => {
-  const [searchText, setSearchText] = useState('');
-  const [listPlace, setListPlace] = useState([]);
-  const searchResultRef = useRef(null);
-
-  const handleSearch = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json`, {
-        params: {
-          query: searchText,
-          key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-        }
-      });
-
-      setListPlace(response.data.results);
-    } catch (error) {
-      console.error('Error fetching Google Places API:', error);
-    }
-  };
-
-  const handleClickOutside = (event) => {
-    if (searchResultRef.current && !searchResultRef.current.contains(event.target)) {
-      setListPlace([]);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  return (
-    <div className="w-full">
-      {/* searchbar start */}
-      <form
-        id="searchbar"
-        onSubmit={handleSearch}
-        className="w-full h-[40px] border-2 border-violet-900 rounded-3xl flex items-center justify-between overflow-hidden bg-white"
-      >
-        <input
-          type="text"
-          placeholder="Cari"
-          aria-label="Search"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          className="w-full text-b-md font-medium focus:outline-none focus:border-transparent px-4"
-        />
-
-        <button type="submit" className="w-14 h-full flex items-center justify-center">
-          <Icon icon={'iconamoon:search-bold'} className="w-[20px] h-[20px] text-violet-900" />
-        </button>
-      </form>
-      {/* searchbar end  */}
-
-      {/* result list start */}
-      <ul
-        id="search__result"
-        ref={searchResultRef}
-        className={`w-full lg:w-[700px] mt-1 ${
-          listPlace.length > 0 && 'py-2'
-        } bg-white text-b-md rounded-xl drop-shadow-xl`}
-      >
-        {listPlace?.map((item) => (
-          <li
-            key={item.place_id}
-            className="px-3 py-2 flex hover:bg-violet-50 hover:cursor-pointer"
-            onClick={() => {
-              setSelectPosition({
-                lat: item.geometry.location.lat,
-                lon: item.geometry.location.lng,
-                display_name: item.formatted_address
-              });
-              setListPlace([]); // Close the list after selection
-            }}
-          >
-            <div className="py-1 min-w-8 flex justify-center">
-              <Icon icon={'tabler:map-pin'} className="w-5 h-5 text-violet-900" />
-            </div>
-            <p>{item.name}</p>
-          </li>
-        ))}
-      </ul>
-      {/* result list end */}
-    </div>
-  );
+const mapContainerStyle = {
+  height: '80vh',
+  width: '100vw'
 };
 
-export default GoogleMapsSearchBox;
+const center = {
+  lat: 40.75378,
+  lng: -73.55658
+};
+
+const zoom = 10;
+
+export default function GoogleMapsSearchBox({ selectPosition, setSelectPosition }) {
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: 'AIzaSyABX4LTqTLQGg_b3jFOH8Z6_H5CDqn8tbc',
+    libraries: ['places']
+  });
+
+  const [searchBox, setSearchBox] = useState(null);
+
+  const onSearchBoxLoad = (ref) => {
+    setSearchBox(ref);
+  };
+
+  const onPlacesChanged = () => {
+    const places = searchBox.getPlaces();
+    if (places && places.length > 0) {
+      const location = places[0].geometry.location;
+      const lat = location.lat();
+      const lng = location.lng();
+      console.log('Latitude: ', lat);
+      console.log('Longitude: ', lng);
+      setSelectPosition({ lat, lon: lng });
+    }
+  };
+
+  return (
+    <div className="App">
+      {isLoaded && (
+        <div>
+          <StandaloneSearchBox onLoad={onSearchBoxLoad} onPlacesChanged={onPlacesChanged}>
+            <input
+              type="text"
+              placeholder="Enter your location"
+              style={{
+                boxSizing: `border-box`,
+                border: `1px solid transparent`,
+                width: `240px`,
+                height: `32px`,
+                padding: `0 12px`,
+                borderRadius: `3px`,
+                boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+                fontSize: `14px`,
+                outline: `none`,
+                textOverflow: `ellipses`,
+                position: 'absolute',
+                left: '50%',
+                marginLeft: '-120px'
+              }}
+            />
+          </StandaloneSearchBox>
+        </div>
+      )}
+    </div>
+  );
+}
