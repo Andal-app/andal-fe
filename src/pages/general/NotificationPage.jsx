@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { formatDateTime } from '../../utils/dateTimeUtils';
 import Sidebar from '../../components/navigation/Sidebar';
 import TopBackNav from '../../components/navigation/TopBackNav';
 import NotifListView from '../../components/listViews/NotifListView';
@@ -17,11 +18,8 @@ function NotificationPage({ user }) {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await axios.get(process.env.REACT_APP_API_URL + `notification`);
-        const filteredData = response.data.data.filter((notif) => notif.childUsername === 'hwangyeji');
-        // console.log('Response received:', response.data); // Debug log
-        const data = filteredData || [];
-        setNotifData(Array.isArray(data) ? data : []);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}notification/?parentId=${user?.parentId}`);
+        setNotifData(response.data.data);
       } catch (err) {
         if (err.response) {
           setError(err.response.data.message);
@@ -51,9 +49,21 @@ function NotificationPage({ user }) {
 
         <main className="w-full">
           <ul id="notification__list__container">
-            {notifData.map(({ _id, message, createdAt }) => (
-              <NotifListView key={_id} title={message} detail="" dateTime={createdAt} />
-            ))}
+            {error ? (
+              <p className="text-black text-center text-b-md">{error}</p>
+            ) : isLoading ? (
+              <div className="space-y-1">
+                <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
+                <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
+                <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
+              </div>
+            ) : notifData?.length === 0 ? (
+              <p className="text-black text-center text-b-md">Belum ada notifikasi</p>
+            ) : (
+              notifData.map(({ _id, message, createdAt }) => (
+                <NotifListView key={_id} title={message} detail="" dateTime={formatDateTime(createdAt)} />
+              ))
+            )}
           </ul>
         </main>
       </div>

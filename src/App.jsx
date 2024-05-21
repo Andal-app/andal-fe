@@ -62,6 +62,7 @@ function App() {
   const user = {
     isConnected: auth?.isConnected || false,
     role: auth?.user?.role || '',
+    parentId: auth?.user?.user?._id || '',
     username: auth?.user?.user?.username || '',
     fullname: auth?.user?.user?.fullname || ''
   };
