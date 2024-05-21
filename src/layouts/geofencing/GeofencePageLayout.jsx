@@ -17,7 +17,6 @@ function GeofencePageLayout({
   setSelectPosition,
   isMarkerDraggable,
   backBtnNavTo,
-  showCircle,
   showChildMarker,
   showGeofMarker,
   circleRadius
@@ -62,7 +61,7 @@ function GeofencePageLayout({
               showChildMarker={showChildMarker}
               showGeofMarker={showGeofMarker}
               isMarkerDraggable={isMarkerDraggable}
-              showCircle={false}
+              circleRadius={circleRadius}
             />
           </div>
         </div>

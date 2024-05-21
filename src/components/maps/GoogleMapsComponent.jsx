@@ -16,7 +16,6 @@ export default function GoogleMapsComponent({
   showChildMarker,
   showGeofMarker,
   isMarkerDraggable,
-  showCircle,
   circleRadius
 }) {
   // const locationSelection = selectPosition ? { lat: selectPosition.lat, lng: selectPosition.lon } : centerPosition;
@@ -88,8 +87,18 @@ export default function GoogleMapsComponent({
       {showGeofMarker && (
         <Marker position={geofPosition} draggable={isMarkerDraggable} onDragEnd={handleGeofMarkerDragEnd} />
       )}
-      {/* circle */}
-      {showCircle && <Circle center={geofPosition} radius={circleRadius} />}
+      {/* circle for geofMarker */}
+      {showGeofMarker && (
+        <Circle
+          center={geofPosition}
+          radius={circleRadius}
+          options={{
+            strokeColor: '#C4B5FD',
+            strokeWeight: 2,
+            fillColor: '#C4B5FD'
+          }}
+        />
+      )}
     </GoogleMap>
   );
 }

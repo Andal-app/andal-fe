@@ -55,7 +55,6 @@ function DetailGeofencing({ user }) {
       setSelectPosition={setSelectPosition}
       showChildMarker={false}
       showGeofMarker={true}
-      showCircle={true}
       circleRadius={geofenceData?.radius}
       isMarkerDraggable={false}
     >

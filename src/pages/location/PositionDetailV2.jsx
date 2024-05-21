@@ -135,7 +135,7 @@ function PositionDetailV2({ user }) {
               showChildMarker={true}
               showGeofMarker={true}
               isMarkerDraggable={false}
-              showCircle={false}
+              circleRadius={activeGF?.radius}
             />
           </div>
         </div>
