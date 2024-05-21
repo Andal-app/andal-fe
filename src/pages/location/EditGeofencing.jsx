@@ -143,6 +143,9 @@ function EditGeofencing({ user }) {
       user={user}
       selectPosition={selectPosition}
       setSelectPosition={setSelectPosition}
+      showChildMarker={false}
+      showGeofMarker={true}
+      isMarkerDraggable={true}
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>

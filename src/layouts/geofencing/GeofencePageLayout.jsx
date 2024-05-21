@@ -15,9 +15,11 @@ function GeofencePageLayout({
   user,
   selectPosition,
   setSelectPosition,
-  isMarkerDraggable = true,
+  isMarkerDraggable,
   backBtnNavTo,
   showCircle,
+  showChildMarker,
+  showGeofMarker,
   circleRadius
 }) {
   // const [selectPosition, setSelectPosition] = useState(null);
@@ -53,11 +55,14 @@ function GeofencePageLayout({
         <div className="z-0 h-screen w-full flex justify-center items-center">
           <div className="w-full h-[100vh]">
             <GoogleMapsComponent
-              selectPosition={selectPosition}
-              setSelectPosition={setSelectPosition}
+              childMarkerPosition={null}
+              setChildMarkerPosition={() => {}}
+              geofMarkerPosition={selectPosition}
+              setGeofMarkerPosition={setSelectPosition}
+              showChildMarker={showChildMarker}
+              showGeofMarker={showGeofMarker}
               isMarkerDraggable={isMarkerDraggable}
-              showCircle={showCircle}
-              circleRadius={circleRadius}
+              showCircle={false}
             />
           </div>
         </div>

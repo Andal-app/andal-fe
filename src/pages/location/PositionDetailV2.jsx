@@ -22,8 +22,8 @@ function PositionDetailV2({ user }) {
   const [address, setAddress] = useState('');
   const [isLoading, setIsLoading] = useState(null);
   const [error, setError] = useState(null);
-  const [selectPosition, setSelectPosition] = useState(null);
-  const [activeGeofPosition, setActiveGeofPosition] = useState(null);
+  const [childMarkerPosition, setChildMarkerPosition] = useState(null);
+  const [geofMarkerPosition, setGeofMarkerPosition] = useState(null);
   const [activeGF, setActiveGF] = useState(null);
 
   const { childId } = location?.state || {}; // get current child info
@@ -52,9 +52,9 @@ function PositionDetailV2({ user }) {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}child/${childId}`);
         setChildData(response.data);
 
-        // set chld latest position
+        // Set child latest position
         const { latestLat, latestLong } = response.data.child;
-        setSelectPosition({ lat: latestLat, lon: latestLong });
+        setChildMarkerPosition({ lat: latestLat, lon: latestLong });
 
         // Set activeGF
         const activeGeofence = response.data.activeGF;
@@ -63,7 +63,7 @@ function PositionDetailV2({ user }) {
         // Set activeGeofPosition
         if (activeGeofence) {
           const { coordinates } = activeGeofence.location;
-          setActiveGeofPosition({ lat: coordinates[1], lon: coordinates[0] });
+          setGeofMarkerPosition({ lat: coordinates[1], lon: coordinates[0] });
         }
 
         // call fetchAddress
@@ -128,10 +128,12 @@ function PositionDetailV2({ user }) {
         <div className="z-0 h-screen w-full flex justify-center items-center">
           <div className="w-full h-[100vh]">
             <GoogleMapsComponent
-              selectPosition={selectPosition ? selectPosition : null}
-              setSelectPosition={setSelectPosition ? setSelectPosition : null}
-              secondMarkerPosition={activeGeofPosition}
-              setSecondMarkerPosition={setActiveGeofPosition}
+              childMarkerPosition={childMarkerPosition}
+              setChildMarkerPosition={setChildMarkerPosition}
+              geofMarkerPosition={geofMarkerPosition}
+              setGeofMarkerPosition={setGeofMarkerPosition}
+              showChildMarker={true}
+              showGeofMarker={true}
               isMarkerDraggable={false}
               showCircle={false}
             />

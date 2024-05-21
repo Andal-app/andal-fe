@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, Marker, Circle } from '@react-google-maps/api';
 
-const centerPosition = { lat: -7.7761951, lng: 110.3762101 };
+const centerPositionDefault = { lat: -7.7761951, lng: 110.3762101 };
 
 const containerStyle = {
   width: '100%',
@@ -9,50 +9,87 @@ const containerStyle = {
 };
 
 export default function GoogleMapsComponent({
-  selectPosition,
-  setSelectPosition,
-  secondMarkerPosition,
-  setSecondMarkerPosition,
-  isMarkerDraggable = true,
-  showCircle = true,
+  childMarkerPosition,
+  setChildMarkerPosition,
+  geofMarkerPosition,
+  setGeofMarkerPosition,
+  showChildMarker,
+  showGeofMarker,
+  isMarkerDraggable,
+  showCircle,
   circleRadius
 }) {
-  const locationSelection = selectPosition ? { lat: selectPosition.lat, lng: selectPosition.lon } : centerPosition;
+  // const locationSelection = selectPosition ? { lat: selectPosition.lat, lng: selectPosition.lon } : centerPosition;
 
-  const [markerPosition, setMarkerPosition] = useState(centerPosition);
+  const [childPosition, setChildPosition] = useState(centerPositionDefault);
+  const [geofPosition, setGeofPosition] = useState(centerPositionDefault);
+  const [centerPosition, setCenterPosition] = useState(centerPosition);
 
   useEffect(() => {
-    if (selectPosition) {
-      setMarkerPosition({ lat: selectPosition.lat, lng: selectPosition.lon });
+    if (childMarkerPosition) {
+      setChildPosition({ lat: childMarkerPosition.lat, lng: childMarkerPosition.lon });
     }
-  }, [selectPosition]);
+  }, [childMarkerPosition]);
+
+  useEffect(() => {
+    if (geofMarkerPosition) {
+      setGeofPosition({ lat: geofMarkerPosition.lat, lng: geofMarkerPosition.lon });
+    }
+  }, [geofMarkerPosition]);
+
+  useEffect(() => {
+    // Update centerPosition when geofMarkerPosition/childMarkerPosition changes
+    if (geofMarkerPosition) {
+      setCenterPosition({ lat: geofMarkerPosition.lat, lng: geofMarkerPosition.lon });
+    } else if (childMarkerPosition && !geofMarkerPosition) {
+      setCenterPosition({ lat: childMarkerPosition.lat, lng: childMarkerPosition.lon });
+    }
+  }, [geofMarkerPosition, childMarkerPosition]);
 
   const handleMapClick = (event) => {
-    if (isMarkerDraggable) {
-      const { latLng } = event;
-      const lat = latLng.lat();
-      const lng = latLng.lng();
-      setMarkerPosition({ lat, lng });
-      setSelectPosition({ lat, lon: lng });
+    const { latLng } = event;
+    const lat = latLng.lat();
+    const lng = latLng.lng();
+
+    if (showChildMarker) {
+      setChildPosition({ lat, lng });
+      setChildMarkerPosition({ lat, lon: lng });
+    }
+
+    if (showGeofMarker) {
+      setGeofPosition({ lat, lng });
+      setGeofMarkerPosition({ lat, lon: lng });
     }
   };
 
-  const handleMarkerDragEnd = (event) => {
-    if (isMarkerDraggable) {
-      const lat = event.latLng.lat();
-      const lng = event.latLng.lng();
-      setSelectPosition({ lat, lon: lng });
-    }
+  const handleChildMarkerDragEnd = (event) => {
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+    setChildMarkerPosition({ lat, lon: lng });
+  };
+
+  const handleGeofMarkerDragEnd = (event) => {
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+    setGeofMarkerPosition({ lat, lon: lng });
   };
 
   return (
-    <GoogleMap mapContainerStyle={containerStyle} center={markerPosition} zoom={13} onClick={handleMapClick}>
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={centerPosition ? centerPosition : centerPositionDefault}
+      zoom={13}
+      onClick={handleMapClick}
+    >
       {/* marker */}
-      <Marker position={markerPosition} draggable={isMarkerDraggable} onDragEnd={handleMarkerDragEnd} />
+      {showChildMarker && (
+        <Marker position={childPosition} draggable={isMarkerDraggable} onDragEnd={handleChildMarkerDragEnd} />
+      )}
+      {showGeofMarker && (
+        <Marker position={geofPosition} draggable={isMarkerDraggable} onDragEnd={handleGeofMarkerDragEnd} />
+      )}
       {/* circle */}
-      {showCircle && <Circle center={markerPosition} radius={circleRadius} />}
-      {/* second marker */}
-      {secondMarkerPosition && <Marker position={{ lat: secondMarkerPosition.lat, lng: secondMarkerPosition.lon }} />}
+      {showCircle && <Circle center={geofPosition} radius={circleRadius} />}
     </GoogleMap>
   );
 }

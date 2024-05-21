@@ -53,9 +53,11 @@ function DetailGeofencing({ user }) {
       user={user}
       selectPosition={selectPosition}
       setSelectPosition={setSelectPosition}
-      isMarkerDraggable={false}
+      showChildMarker={false}
+      showGeofMarker={true}
       showCircle={true}
       circleRadius={geofenceData?.radius}
+      isMarkerDraggable={false}
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>

@@ -3,7 +3,7 @@ import { StandaloneSearchBox } from '@react-google-maps/api';
 import { Icon } from '@iconify/react';
 import './GoogleMapsSearchBox.css';
 
-const GoogleMapsSearchBox = ({ selectPosition, setSelectPosition }) => {
+const GoogleMapsSearchBox = ({ setSelectPosition }) => {
   const [searchBox, setSearchBox] = useState(null);
 
   const onSearchBoxLoad = (ref) => {
@@ -16,8 +16,8 @@ const GoogleMapsSearchBox = ({ selectPosition, setSelectPosition }) => {
       const location = places[0].geometry.location;
       const lat = location.lat();
       const lng = location.lng();
-      console.log('Latitude: ', lat);
-      console.log('Longitude: ', lng);
+      // console.log('Latitude: ', lat);
+      // console.log('Longitude: ', lng);
       setSelectPosition({ lat, lon: lng });
     }
   };

@@ -108,6 +108,9 @@ function AddGeofencing({ user }) {
       user={user}
       selectPosition={selectPosition}
       setSelectPosition={setSelectPosition}
+      showChildMarker={false}
+      showGeofMarker={true}
+      isMarkerDraggable={true}
       backBtnNavTo="/beranda/orangtua"
     >
       {/* for small screen: show bottom sheet modal */}

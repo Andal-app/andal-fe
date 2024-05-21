@@ -45,8 +45,9 @@ function ChildHomeV2({ user }) {
         <div className="lg:z-0 bg-neutral-400 h-72 lg:h-screen">
           <div className="w-full h-[100vh]">
             <GoogleMapsComponent
-              selectPosition={selectPosition}
-              setSelectPosition={setSelectPosition}
+              showChildMarker={true}
+              childMarkerPosition={selectPosition}
+              setChildMarkerPosition={setSelectPosition}
               isMarkerDraggable={false}
               showCircle={false}
             />
