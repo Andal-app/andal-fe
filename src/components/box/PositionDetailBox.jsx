@@ -11,9 +11,9 @@ function PositionDetailBox({ address, lat, lng, error, isLoading }) {
               <td className="pr-8 table-cell align-top">Alamat</td>
               <td className="pr-2 table-cell align-top">:</td>
               {error ? (
-                <p className="text-black">{error}</p>
+                <td className="text-black">{error}</td>
               ) : isLoading ? (
-                <div className="h-2 w-full animate-pulse bg-neutral-100"></div>
+                <td className="h-2 w-full animate-pulse bg-neutral-100"></td>
               ) : (
                 <td className=" ">{address ? address : '-'}</td>
               )}
@@ -23,9 +23,9 @@ function PositionDetailBox({ address, lat, lng, error, isLoading }) {
               <td className="">Latitude</td>
               <td className="">:</td>
               {error ? (
-                <p className="text-black">{error}</p>
+                <td className="text-black">{error}</td>
               ) : isLoading ? (
-                <div className="h-2 w-full animate-pulse bg-neutral-100"></div>
+                <td className="h-2 w-full animate-pulse bg-neutral-100"></td>
               ) : (
                 <td className="">{lat ? lat : '-'}</td>
               )}
@@ -35,9 +35,9 @@ function PositionDetailBox({ address, lat, lng, error, isLoading }) {
               <td className="">Longitude</td>
               <td className="">:</td>
               {error ? (
-                <p className="text-black">{error}</p>
+                <td className="text-black">{error}</td>
               ) : isLoading ? (
-                <div className="h-2 w-full animate-pulse bg-neutral-100"></div>
+                <td className="h-2 w-full animate-pulse bg-neutral-100"></td>
               ) : (
                 <td className="">{lng ? lng : '-'}</td>
               )}

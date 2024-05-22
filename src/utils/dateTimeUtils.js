@@ -5,8 +5,9 @@ export const formatDateTimeWIB = (dateTime) => {
   const date = new Date(dateTime);
 
   // Tambahkan 7 jam untuk konversi dari UTC ke GMT+7
-  const offsetMilliseconds = 7 * 60 * 60 * 1000;
-  const localDate = new Date(date.getTime() + offsetMilliseconds);
+  // const offsetMilliseconds = 7 * 60 * 60 * 1000;
+  // const localDate = new Date(date.getTime() + offsetMilliseconds);
 
+  const localDate = new Date(date.getTime());
   return format(localDate, 'EEEE, dd MMMM yyyy HH:mm', { locale: id });
 };

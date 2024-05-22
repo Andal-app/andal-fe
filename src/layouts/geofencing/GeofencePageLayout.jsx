@@ -26,7 +26,7 @@ function GeofencePageLayout({
   // console.log(selectPosition);
 
   return (
-    <div className="flex">
+    <div className="flex ">
       <Sidebar user={user} />
       <BottomNavbar />
 
