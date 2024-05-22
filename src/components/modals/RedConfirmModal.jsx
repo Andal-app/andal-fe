@@ -1,20 +1,19 @@
 import React from 'react';
 import CancelBtn from '../buttons/CancelBtn';
-import DeleteBtn from '../buttons/DeleteBtn';
+import RedConfirmBtn from '../buttons/RedConfirmBtn';
 import BasicModal from './BasicModal';
 
-const DeleteConfirmModal = ({ toggleModal, onDeleteClick, onCancelClick }) => {
+const RedConfirmModal = ({ title, detail, toggleModal, confirmBtnText, onConfirmClick, onCancelClick }) => {
   return (
     <BasicModal toggleModal={toggleModal}>
       <div className="flex flex-col gap-6">
         <div className="flex flex-col items-center gap-6 text-center">
-          <p className="text-red-500 text-h-sm font-bold">Apakah Anda yakin ingin menghapus data?</p>
-          <p>Data akan dihapus secara permanen</p>
+          <p className="text-red-500 text-h-sm font-bold">{title}</p>
+          <p>{detail}</p>
         </div>
 
         <div className="flex flex-col gap-1">
-          <DeleteBtn onClick={onDeleteClick} />
-          {/* <button onClick={onCancelClick}>CANCEL</button> */}
+          <RedConfirmBtn onClick={onConfirmClick} confirmBtnText={confirmBtnText} />
           <CancelBtn onClick={onCancelClick} />
         </div>
       </div>
@@ -22,4 +21,4 @@ const DeleteConfirmModal = ({ toggleModal, onDeleteClick, onCancelClick }) => {
   );
 };
 
-export default DeleteConfirmModal;
+export default RedConfirmModal;

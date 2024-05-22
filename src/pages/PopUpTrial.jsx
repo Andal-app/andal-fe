@@ -3,7 +3,7 @@ import InputChildUname from '../components/connect/InputChildUname';
 import InputConnectCode from '../components/connect/InputConnectCode';
 import ShowConnectCode from '../components/connect/ShowConnectCode';
 import BasicModal from '../components/modals/BasicModal';
-import DeleteConfirmModal from '../components/modals/DeleteConfirmModal';
+import RedConfirmModal from '../components/modals/RedConfirmModal';
 
 function PopUpTrial() {
   const [isConnectModalOpen, setConnectModalOpen] = useState(false);
@@ -51,7 +51,13 @@ function PopUpTrial() {
 
       {isCodeModalOpen && <ShowConnectCode toggleModal={toggleCodeModal} />}
 
-      {isDeleteConfirmModalOpen && <DeleteConfirmModal toggleModal={toggleDeleteConfirmModal} />}
+      {isDeleteConfirmModalOpen && (
+        <RedConfirmModal
+          title="Apakah Anda yakin ingin menghapus data?"
+          detail="Data akan dihapus secara permanen"
+          toggleModal={toggleDeleteConfirmModal}
+        />
+      )}
     </div>
   );
 }

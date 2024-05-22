@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, Marker, Circle } from '@react-google-maps/api';
+import { GoogleMap, Marker, Circle } from '@react-google-maps/api';
+import ChildMarkerImg from '../../assets/images/child_marker.png';
 
 const centerPositionDefault = { lat: -7.7761951, lng: 110.3762101 };
 
@@ -82,7 +83,12 @@ export default function GoogleMapsComponent({
     >
       {/* marker */}
       {showChildMarker && (
-        <Marker position={childPosition} draggable={isMarkerDraggable} onDragEnd={handleChildMarkerDragEnd} />
+        <Marker
+          position={childPosition}
+          draggable={isMarkerDraggable}
+          onDragEnd={handleChildMarkerDragEnd}
+          icon={ChildMarkerImg}
+        />
       )}
       {showGeofMarker && (
         <Marker position={geofPosition} draggable={isMarkerDraggable} onDragEnd={handleGeofMarkerDragEnd} />

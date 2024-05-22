@@ -88,9 +88,9 @@ const useGeoLocation = () => {
     axios
       .post(`${process.env.REACT_APP_API_URL}location/send-location`, {
         latitude: data.coordinates.lat,
-        longitude: data.coordinates.lng,
-        gpsStatus: data.gpsStatus,
-        batteryPercentage: data.batteryPercentage
+        longitude: data.coordinates.lng
+        // gpsStatus: data.gpsStatus,
+        // batteryPercentage: data.batteryPercentage
       })
       .then((response) => {
         console.log('Location posted successfully:', response.data);
@@ -121,9 +121,9 @@ const useGeoLocation = () => {
 
     fetchLocation();
 
-    // const intervalId = setInterval(fetchLocation, 10000); // Interval 10 detik
+    const intervalId = setInterval(fetchLocation, 10000); // Interval 10 detik
 
-    // return () => clearInterval(intervalId);
+    return () => clearInterval(intervalId);
   }, []);
 
   return location;

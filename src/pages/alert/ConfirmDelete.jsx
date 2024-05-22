@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import CancelBtn from '../../components/buttons/CancelBtn';
-import DeleteBtn from '../../components/buttons/DeleteBtn';
+import RedConfirmBtn from '../../components/buttons/RedConfirmBtn';
 import Sidebar from '../../components/navigation/Sidebar';
 import TopWave1Red from '../../assets/waves/wave_top_1_red.svg';
 import { useNavigate } from 'react-router-dom';
@@ -63,7 +63,7 @@ function ConfirmDelete({ user }) {
           </div>
 
           <div className="flex flex-col gap-3">
-            <DeleteBtn onClick={handleDelete} />
+            <RedConfirmBtn onClick={handleDelete} />
             <CancelBtn onClick={() => [navigate(`/profil`)]} />
           </div>
         </main>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Icon } from '@iconify/react';
-import DeleteConfirmModal from '../modals/DeleteConfirmModal';
+import RedConfirmModal from '../modals/RedConfirmModal';
 
 function LocationListView({ geofenceId, geofenceName, startTime, endTime, childId, childUsername }) {
   const navigate = useNavigate();
@@ -66,9 +66,11 @@ function LocationListView({ geofenceId, geofenceName, startTime, endTime, childI
         </button>
 
         {isDeleteConfirmModalOpen && (
-          <DeleteConfirmModal
+          <RedConfirmModal
+            title="Apakah Anda yakin ingin menghapus data?"
+            detail="Data akan dihapus secara permanen"
             toggleModal={toggleDeleteConfirmModal}
-            onDeleteClick={handleDelete}
+            onConfirmClick={handleDelete}
             onCancelClick={handleCancelDelete}
           />
         )}
