@@ -111,7 +111,7 @@ function AddGeofencing({ user }) {
       showChildMarker={false}
       showGeofMarker={true}
       isMarkerDraggable={true}
-      // circleRadius={formData?.radius}
+      circleRadius={parseFloat(formData.radius) || 0}
       backBtnNavTo="/beranda/orangtua"
     >
       {/* for small screen: show bottom sheet modal */}
