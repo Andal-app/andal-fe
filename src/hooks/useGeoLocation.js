@@ -14,7 +14,9 @@ const useGeoLocation = () => {
     loaded: false,
     coordinates: { lat: '', lng: '' },
     address: '',
-    error: null
+    error: null,
+    gpsStatus: 'Mengecek status...',
+    batteryPercentage: 0
   });
 
   const fetchAddress = async (lat, lng) => {
@@ -33,25 +35,8 @@ const useGeoLocation = () => {
     }
   };
 
-  // const fetchPlaces = async () => {
-  //   try {
-  //     const response = await axiosGoogleMaps.get('/place/textsearch/json', {
-  //       params: {
-  //         query: 'gambir',
-  //         key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-  //       }
-  //     });
-  //     return response.data;
-  //   } catch (error) {
-  //     console.error('Error fetching address:', error);
-  //     return 'Error fetching address';
-  //   }
-  // };
-
   const onSuccess = async (position) => {
     const { latitude, longitude } = position.coords;
-    // const places = await fetchPlaces();
-    // console.log(places);
 
     const address = await fetchAddress(latitude, longitude);
     const newLocation = {
@@ -60,15 +45,52 @@ const useGeoLocation = () => {
         lat: latitude,
         lng: longitude
       },
-      address: address
+      address: address,
+      gpsStatus: 'Aktif',
+      batteryPercentage: await getBatteryPercentage()
     };
     setLocation(newLocation);
-    console.log('Coordinates and address updated:', newLocation);
+    console.log(newLocation);
 
+    // Kirim data ke endpoint API
+    postDataToAPI(newLocation);
+  };
+
+  const onError = (error) => {
+    setLocation({
+      loaded: true,
+      error,
+      gpsStatus: 'Tidak Aktif atau Izin Ditolak',
+      batteryPercentage: 0
+    });
+    console.error('Error getting location:', error);
+
+    // Kirim data ke endpoint API
+    postDataToAPI({
+      ...location,
+      coordinates: { lat: null, lng: null } // Set nilai null untuk latitude dan longitude
+    });
+  };
+
+  // Fungsi untuk mengambil persentase baterai
+  const getBatteryPercentage = async () => {
+    if ('getBattery' in navigator) {
+      const battery = await navigator.getBattery();
+      return battery.level * 100; // Kembalikan persentase baterai
+    } else {
+      console.error('Battery Status API is not supported in this browser.');
+      return 0;
+    }
+  };
+
+  // Fungsi untuk melakukan POST data ke endpoint API
+  const postDataToAPI = (data) => {
     axios
       .post(`${process.env.REACT_APP_API_URL}location/send-location`, {
-        latitude: newLocation.coordinates.lat,
-        longitude: newLocation.coordinates.lng
+        latitude: data.coordinates.lat,
+        longitude: data.coordinates.lng,
+        gpsStatus: data.gpsStatus,
+        batteryPercentage: data.batteryPercentage
       })
       .then((response) => {
         console.log('Location posted successfully:', response.data);
@@ -76,14 +98,6 @@ const useGeoLocation = () => {
       .catch((error) => {
         console.error('Error posting location:', error);
       });
-  };
-
-  const onError = (error) => {
-    setLocation({
-      loaded: true,
-      error
-    });
-    console.error('Error getting location:', error);
   };
 
   useEffect(() => {

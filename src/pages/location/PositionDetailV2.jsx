@@ -12,8 +12,8 @@ import ChildInfoBox from '../../components/box/ChildInfoBox';
 import Sidebar from '../../components/navigation/Sidebar';
 import GoogleMapsComponent from '../../components/maps/GoogleMapsComponent';
 import IconBtn from '../../components/buttons/IconBtn';
-import { axiosGoogleMaps } from '../../hooks/useGeoLocation';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
+import { axiosGoogleMaps } from '../../hooks/useGeoLocation';
 
 function PositionDetailV2({ user }) {
   const location = useLocation();

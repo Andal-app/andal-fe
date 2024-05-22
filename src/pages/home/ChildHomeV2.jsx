@@ -5,23 +5,23 @@ import useGeoLocation from '../../hooks/useGeoLocation';
 import HomeLayout from '../../layouts/home/HomeLayout';
 
 function LocationDetail({ setSelectPosition }) {
-  const location = useGeoLocation();
+  const geoLocation = useGeoLocation();
   const [address, setAddress] = useState('');
 
   useEffect(() => {
-    if (location.loaded && location.coordinates) {
+    if (geoLocation.loaded && geoLocation.coordinates) {
       setSelectPosition({
-        lat: location.coordinates.lat,
-        lon: location.coordinates.lng
+        lat: geoLocation.coordinates.lat,
+        lon: geoLocation.coordinates.lng
       });
-      setAddress(location.address);
+      setAddress(geoLocation.address);
     }
-  }, [location, setSelectPosition]);
+  }, [geoLocation, setSelectPosition]);
 
   return (
     <div className="bg-white lg:max-w-96 lg:max-h-[200px] overflow-auto lg:absolute lg:top-32 lg:left-8 lg:z-10 lg:rounded-xl lg:drop-shadow-xl lg:p-5">
-      {location.loaded ? (
-        <PositionDetailBox lat={location.coordinates.lat} lng={location.coordinates.lng} address={address} />
+      {geoLocation.loaded ? (
+        <PositionDetailBox lat={geoLocation.coordinates.lat} lng={geoLocation.coordinates.lng} address={address} />
       ) : (
         <p>Lokasi belum tersedia</p>
       )}

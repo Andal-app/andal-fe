@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import PositionDetailBox from './PositionDetailBox';
 import ScheduleItem from './ScheduleItem';
 
-function ChildInfoBox({ address, data, error, isLoading }) {
+function ChildInfoBox({ address, gpsStatus, data, error, isLoading }) {
   return (
     <div className="py-2 px-4 lg:p-3 flex flex-col gap-2">
       <div className="bg-violet-300 px-4 py-2 text-violet-900 rounded-xl border border-violet-500">
@@ -46,7 +46,7 @@ function ChildInfoBox({ address, data, error, isLoading }) {
           {/* gps status start */}
           <div id="gps__status" className="flex gap-2">
             <p className="text-violet-900 font-bold">GPS</p>
-            <p>Aktif</p>
+            <p>{gpsStatus}</p>
           </div>
           {/* gps status end */}
         </div>
