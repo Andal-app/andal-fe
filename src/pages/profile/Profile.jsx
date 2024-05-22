@@ -3,9 +3,16 @@ import ProfSetItem from './ProfSetItem';
 import ProfPic from '../../assets/images/profile_picture.jpeg';
 import translateUserRole from '../../helpers/translateUserRole';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
+import { useDispatch } from 'react-redux';
+import { LogoutAction } from '../../redux/actions/authActions';
 
 function Profile({ user }) {
   //autentikasi
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(LogoutAction());
+  };
+
   const role = translateUserRole(user?.role ? user.role : null);
 
   const ParentSettingItems = [
@@ -17,7 +24,7 @@ function Profile({ user }) {
       pass_value: 'Kembali'
     },
     { link: '', icon: 'material-symbols:lock-outline', text: ' Ganti pasword' },
-    { link: '', icon: 'tabler:logout', text: 'Keluar' },
+    { link: '', icon: 'tabler:logout', text: 'Keluar', onClick: handleLogout },
     { link: '/profil/hapusakun', icon: 'typcn:delete-outline', text: 'Hapus akun', redText: true }
   ];
 
@@ -44,8 +51,17 @@ function Profile({ user }) {
         {/* user setting list start */}
         <div id="user__setting__list">
           <ul>
-            {ParentSettingItems.map(({ link, icon, text, redText, index, pass_value }) => (
-              <ProfSetItem link={link} icon={icon} text={text} redText={redText} index={index} passValue={pass_value} />
+            {ParentSettingItems.map(({ link, icon, text, redText, pass_value, onClick }, index) => (
+              <ProfSetItem
+                key={index}
+                link={link}
+                icon={icon}
+                text={text}
+                redText={redText}
+                index={index}
+                passValue={pass_value}
+                onClick={onClick}
+              />
             ))}
           </ul>
         </div>

@@ -48,7 +48,7 @@ function SelectChildSchedule({ user }) {
         <TopBackNav navigateTo="/beranda/orangtua" title="Jadwal dan Titik Geofencing" />
         {/* top back nav end */}
 
-        <main className="w-full  px-10 py-4">
+        <main className="px-10 py-4 flex lg:flex-col flex-wrap lg:flex-nowrap w-full justify-between gap-2 lg:gap-4">
           {error ? (
             <p className="text-black text-center text-b-md">{error}</p>
           ) : isLoading ? (

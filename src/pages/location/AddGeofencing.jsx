@@ -112,7 +112,8 @@ function AddGeofencing({ user }) {
       showGeofMarker={true}
       isMarkerDraggable={true}
       circleRadius={parseFloat(formData.radius) || 0}
-      backBtnNavTo="/beranda/orangtua"
+      backBtnNavTo={`/detailposisi/${childUsername}`}
+      backBtnState={{ childId: childId, childUsername: childUsername, childFullname: childFullname }}
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>

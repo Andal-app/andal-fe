@@ -17,6 +17,8 @@ function DetailGeofencing({ user }) {
   const [selectPosition, setSelectPosition] = useState(null); // dapatkan koordinat [lintang, bujur]
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false); // control for bottom sheet modal
 
+  console.log('geofenceID: ' + geofenceId);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,6 +59,8 @@ function DetailGeofencing({ user }) {
       showGeofMarker={true}
       circleRadius={geofenceData?.radius}
       isMarkerDraggable={false}
+      backBtnNavTo={`/kelolajadwal/${childUsername}`}
+      backBtnState={{ childId: childId, childUsername: childUsername }}
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>

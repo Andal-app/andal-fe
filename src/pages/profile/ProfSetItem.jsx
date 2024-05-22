@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 
-function ProfSetItem({ link, icon, text, redText, index, passValue }) {
+function ProfSetItem({ link, icon, text, redText, index, onClick }) {
   return (
     <Link
       to={link}
+      onClick={onClick}
       key={index}
       className="h-14 flex items-center justify-between px-8 lg:px-12 border-b border-neutral-300 hover:bg-violet-50 duration-300"
     >

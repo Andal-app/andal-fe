@@ -147,6 +147,8 @@ function EditGeofencing({ user }) {
       showGeofMarker={true}
       isMarkerDraggable={true}
       circleRadius={parseFloat(formData.radius) || 0}
+      backBtnNavTo={`/detailgeofence/${geofenceId}`}
+      backBtnState={{ geofenceId: `${geofenceId}` }}
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
