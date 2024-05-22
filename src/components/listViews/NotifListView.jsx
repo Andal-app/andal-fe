@@ -13,10 +13,10 @@ function NotifListView({ title, detail, dateTime }) {
         </div>
       </div>
 
-      <div className="space-y-2">
-        <p className="text-b-sm font-bold">{title}</p>
-        <p className="text-b-xsm text-neutral-500">{detail}</p>
-        <p className="text-b-xsm text-neutral-500">{dateTime}</p>
+      <div className="space-y-0">
+        <p className="text-b-md font-bold">{title}</p>
+        {/* <p className="text-b-xsm text-neutral-500">{detail}</p> */}
+        <p className="text-b-sm text-neutral-500">{`${dateTime} WIB`}</p>
       </div>
     </li>
   );

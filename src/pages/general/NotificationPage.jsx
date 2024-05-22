@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { formatDateTime } from '../../utils/dateTimeUtils';
+import { formatDateTimeWIB } from '../../utils/dateTimeUtils';
 import Sidebar from '../../components/navigation/Sidebar';
 import TopBackNav from '../../components/navigation/TopBackNav';
 import NotifListView from '../../components/listViews/NotifListView';
@@ -51,17 +51,19 @@ function NotificationPage({ user }) {
           <ul id="notification__list__container">
             {error ? (
               <p className="text-black text-center text-b-md">{error}</p>
-            ) : isLoading ? (
-              <div className="space-y-1">
-                <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
-                <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
-                <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
-              </div>
-            ) : notifData?.length === 0 ? (
-              <p className="text-black text-center text-b-md">Belum ada notifikasi</p>
             ) : (
+              // : isLoading ? (
+              //   <div className="space-y-1">
+              //     <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
+              //     <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
+              //     <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
+              //   </div>
+              // )
+              // notifData?.length === 0 ? (
+              //   <p className="text-black text-center text-b-md">Belum ada notifikasi</p>
+              // ) :
               notifData.map(({ _id, message, createdAt }) => (
-                <NotifListView key={_id} title={message} detail="" dateTime={formatDateTime(createdAt)} />
+                <NotifListView key={_id} title={message} detail="" dateTime={formatDateTimeWIB(createdAt)} />
               ))
             )}
           </ul>

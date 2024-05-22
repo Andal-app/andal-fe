@@ -21,7 +21,7 @@ const BottomNavbar = () => {
   }, [location.pathname, Menus]);
 
   return (
-    <nav className="fixed bottom-0 md:hidden bg-violet-400 h-16 w-full px-6 rounded-t-3xl text-white">
+    <nav className="sticky bottom-0 md:hidden bg-violet-400 h-16 w-full px-6 rounded-t-3xl text-white">
       <ul className="relative flex justify-center w-full h-full">
         {Menus.map((menu, i) => (
           <Link
