@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ChildBox from '../../components/box/ChildBox';
 import HomeLayout from '../../layouts/home/HomeLayout';
+import { requestNotificationPermission } from '../../utils/notificationUtils';
 
 function ParentHomeV2({ user }) {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ function ParentHomeV2({ user }) {
       }
     };
 
+    requestNotificationPermission();
     fetchData();
 
     return () => {};

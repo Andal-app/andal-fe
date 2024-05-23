@@ -7,7 +7,6 @@ import TopBackNav from '../../components/navigation/TopBackNav';
 import NotifListView from '../../components/listViews/NotifListView';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
 
-// const REALM_APP_ID = process.env.REACT_APP_REALM_APP_ID;
 const app = new App({ id: 'application-0-pzubklv' });
 
 function NotificationPage({ user }) {
@@ -44,11 +43,20 @@ function NotificationPage({ user }) {
         for await (const change of notificationsCollection.watch()) {
           if (change.operationType === 'insert' && childUsernames.includes(change.fullDocument.childUsername)) {
             setNotifData((prevData) => [change.fullDocument, ...prevData]);
+            showNotification(change.fullDocument);
           }
         }
       } catch (err) {
         setError('Failed to connect to the database.');
         console.error(err);
+      }
+    };
+
+    const showNotification = (notification) => {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('New Notification', {
+          body: notification.message
+        });
       }
     };
 
