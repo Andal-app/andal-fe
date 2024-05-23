@@ -2,8 +2,12 @@ import React from 'react';
 import { Icon } from '@iconify/react';
 import PositionDetailBox from './PositionDetailBox';
 import ScheduleItem from './ScheduleItem';
+import IconBtn from '../buttons/IconBtn';
+import { useNavigate } from 'react-router-dom';
 
 function ChildInfoBox({ address, gpsStatus, data, error, isLoading }) {
+  const navigate = useNavigate();
+
   return (
     <div className="py-2 px-4 lg:p-3 flex flex-col gap-2">
       <div className="bg-violet-300 px-4 py-2 text-violet-900 rounded-xl border border-violet-500">
@@ -56,7 +60,44 @@ function ChildInfoBox({ address, gpsStatus, data, error, isLoading }) {
 
       {/* schedule box start */}
       <div className="flex flex-col gap-2">
-        <p className="font-bold text-violet-900 text-b-sm">Jadwal</p>
+        {/* jadwal title & buttons start */}
+        <div className="w-full flex">
+          <p className="w-[30%] font-bold text-violet-900 text-b-xl">Jadwal</p>
+
+          <div className="w-full md:hidden flex gap-2">
+            <div className="w-1/2 h-[40px]">
+              <IconBtn
+                icon="tabler:plus"
+                text="Tambah jadwal"
+                onClick={() => [
+                  navigate(`/tambahgeofence/${data?.child?.username}`, {
+                    state: {
+                      childId: data?.child?._id,
+                      childUsername: data?.child?.username,
+                      childFullname: data?.child?.fullname
+                    }
+                  })
+                ]}
+              />
+            </div>
+            <div className="w-1/2 h-[40px]">
+              <IconBtn
+                icon="bx:edit"
+                text="Kelola jadwal"
+                onClick={() => [
+                  navigate(`/kelolajadwal/${data?.child?.username}`, {
+                    state: {
+                      childId: data?.child?._id,
+                      childUsername: data?.child?.username,
+                      childFullname: data?.child?.fullname
+                    }
+                  })
+                ]}
+              />
+            </div>
+          </div>
+        </div>
+        {/* jadwal title & buttons end */}
 
         {/* schedule items start */}
         <ul className="min-h-min max-h-[110px] flex flex-col gap-2 overflow-auto scrollbar-thin scrollbar-thumb-neutral-300 scrollbar-track-neutral-100 scrollbar-thumb-rounded-full">

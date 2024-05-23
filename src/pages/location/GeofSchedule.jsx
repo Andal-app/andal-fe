@@ -90,7 +90,7 @@ function GeofSchedule({ user }) {
         </main>
 
         {/* add button start */}
-        <div className="h-[50px] absolute z-10 right-8 bottom-12">
+        <div className="h-[50px] absolute z-10 right-8 bottom-24 lg:bottom-12">
           <button
             onClick={() => [
               navigate(`/tambahgeofence/${childData?.child?.username}`, {
