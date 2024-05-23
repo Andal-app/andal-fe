@@ -7,7 +7,7 @@ import TopBackNav from '../../components/navigation/TopBackNav';
 import NotifListView from '../../components/listViews/NotifListView';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
 
-const app = new App({ id: 'application-0-pzubklv' });
+const app = new App({ id: process.env.REACT_APP_REALM_APP_ID });
 
 function NotificationPage({ user }) {
   const [notifData, setNotifData] = useState([]);
@@ -18,7 +18,6 @@ function NotificationPage({ user }) {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}notification/?parentId=${user?.parentId}`);
         const sortedData = response.data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        console.log(sortedData);
         setNotifData(sortedData);
       } catch (err) {
         console.error('Failed to fetch initial notifications:', err);
