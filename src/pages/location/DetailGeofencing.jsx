@@ -74,7 +74,7 @@ function DetailGeofencing({ user }) {
       </BottomSheetModal>
 
       {/* for large screen: show floating box */}
-      <div className="hidden lg:flex lg:flex-col lg:gap-1 absolute top-36 left-6">
+      <div className="hidden lg:flex lg:flex-col lg:gap-1 absolute top-20 left-6">
         {/* add geofencing form start */}
         <div className="bg-white rounded-xl py-0.5">
           <DetailGeoForm

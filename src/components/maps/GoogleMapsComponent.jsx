@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, Marker, Circle } from '@react-google-maps/api';
 import ChildMarkerImg from '../../assets/images/child_marker.png';
+// import './GoogleMapsComponent.css';
 
 const centerPositionDefault = { lat: -7.7761951, lng: 110.3762101 };
 
@@ -19,11 +20,10 @@ export default function GoogleMapsComponent({
   isMarkerDraggable,
   circleRadius
 }) {
-  // const locationSelection = selectPosition ? { lat: selectPosition.lat, lng: selectPosition.lon } : centerPosition;
-
   const [childPosition, setChildPosition] = useState(centerPositionDefault);
   const [geofPosition, setGeofPosition] = useState(centerPositionDefault);
-  const [centerPosition, setCenterPosition] = useState(centerPosition);
+  const [centerPosition, setCenterPosition] = useState(centerPositionDefault);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 600);
 
   useEffect(() => {
     if (childMarkerPosition) {
@@ -38,13 +38,26 @@ export default function GoogleMapsComponent({
   }, [geofMarkerPosition]);
 
   useEffect(() => {
-    // Update centerPosition when geofMarkerPosition/childMarkerPosition changes
     if (geofMarkerPosition) {
       setCenterPosition({ lat: geofMarkerPosition.lat, lng: geofMarkerPosition.lon });
     } else if (childMarkerPosition && !geofMarkerPosition) {
       setCenterPosition({ lat: childMarkerPosition.lat, lng: childMarkerPosition.lon });
     }
   }, [geofMarkerPosition, childMarkerPosition]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isSmall = window.innerWidth <= 600;
+      setIsSmallScreen(isSmall);
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleMapClick = (event) => {
     const { latLng } = event;
@@ -80,6 +93,21 @@ export default function GoogleMapsComponent({
       center={centerPosition ? centerPosition : centerPositionDefault}
       zoom={13}
       onClick={handleMapClick}
+      options={{
+        mapTypeControl: !isSmallScreen,
+        streetViewControl: true,
+        zoomControl: true,
+
+        mapTypeControlOptions: {
+          position: isSmallScreen ? null : window.google.maps.ControlPosition.TOP_RIGHT
+        },
+        streetViewControlOptions: {
+          position: isSmallScreen && window.google.maps.ControlPosition.TOP_RIGHT
+        },
+        zoomControlOptions: {
+          position: isSmallScreen && window.google.maps.ControlPosition.TOP_RIGHT
+        }
+      }}
     >
       {/* marker */}
       {showChildMarker && (

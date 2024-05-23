@@ -163,7 +163,7 @@ function EditGeofencing({ user }) {
       </BottomSheetModal>
 
       {/* for large screen: show floating box */}
-      <div className="hidden lg:flex lg:flex-col lg:gap-1 absolute top-36 left-6">
+      <div className="hidden lg:flex lg:flex-col lg:gap-1 absolute top-20 left-6">
         {/* searchbar start */}
         <div className="w-full lg:w-[310px] flex items-center justify-center">
           <GoogleMapsSearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} />

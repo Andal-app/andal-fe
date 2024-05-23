@@ -47,7 +47,7 @@ function NotificationPage({ user }) {
         <TopBackNav navigateTo="/beranda/orangtua" title="Riwayat Notifikasi" />
         {/* top back nav end */}
 
-        <main className="w-full overflow-auto sm:scrollbar-thin lg:scrollbar scrollbar-thumb-neutral-300 scrollbar-track-neutral-100 scrollbar-thumb-rounded-full">
+        <main className="w-full overflow-auto lg:scrollbar scrollbar-thumb-neutral-300 scrollbar-track-neutral-100 scrollbar-thumb-rounded-full">
           <ul id="notification__list__container" className="">
             {error ? (
               <p className="text-black text-center text-b-md">{error}</p>

@@ -105,7 +105,7 @@ function PositionDetailV2({ user }) {
 
       <main className="relative mx-0 flex flex-col gap-4 w-full">
         {/* top  nav start */}
-        <nav className="absolute z-10 w-full lg:w-[310px] lg:left-6 top-4 lg:top-24 flex items-center justify-center">
+        <nav className="absolute z-10 w-full lg:w-[310px] lg:left-6 top-4 lg:top-8 flex items-center justify-center">
           {/* circular back button start */}
           <Link
             to="/beranda/orangtua"
@@ -149,7 +149,7 @@ function PositionDetailV2({ user }) {
           </BottomSheetModal>
 
           {/* for LARGE screen: show floating box start*/}
-          <div className="hidden lg:flex lg:flex-col lg:gap-2 lg:w-80 absolute top-36 left-6">
+          <div className="hidden lg:flex lg:flex-col lg:gap-2 lg:w-80 absolute top-20 left-6">
             <div className=" bg-white rounded-xl">
               {error ? (
                 <p className="text-black text-center text-b-sm">{error}</p>

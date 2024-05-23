@@ -32,7 +32,7 @@ function GeofencePageLayout({
 
       <main className="relative mx-0 flex flex-col gap-4 w-full">
         {/* top  nav start */}
-        <nav className="absolute z-10 w-full lg:w-[310px] lg:left-6 top-4 lg:top-24 flex items-center justify-center">
+        <nav className="bg-red-300 absolute z-10 w-full lg:w-[310px] lg:left-6 top-4 lg:top-8 flex items-center justify-center">
           {/* circular back button start */}
           <Link
             to={backBtnNavTo}
@@ -54,7 +54,7 @@ function GeofencePageLayout({
 
         {/* map section start */}
         <div className="z-0 h-screen w-full flex justify-center items-center">
-          <div className="w-full h-[100vh]">
+          <div className="w-full h-screen">
             <GoogleMapsComponent
               childMarkerPosition={null}
               setChildMarkerPosition={() => {}}
