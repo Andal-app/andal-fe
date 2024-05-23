@@ -11,17 +11,27 @@ const app = new App({ id: process.env.REACT_APP_REALM_APP_ID });
 
 function NotificationPage({ user }) {
   const [notifData, setNotifData] = useState([]);
+  const [isLoading, setIsLoading] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchInitialNotifications = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}notification/?parentId=${user?.parentId}`);
         const sortedData = response.data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setNotifData(sortedData);
       } catch (err) {
-        console.error('Failed to fetch initial notifications:', err);
-        setError('Failed to fetch initial notifications.');
+        if (err.response) {
+          setError(err.response.data.message);
+          // toast.error(err.response.data.message);
+        } else {
+          setError('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+          // toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+        }
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -93,6 +103,12 @@ function NotificationPage({ user }) {
           <ul id="notification__list__container">
             {error ? (
               <p className="text-black text-center text-b-md">{error}</p>
+            ) : isLoading ? (
+              <div className="space-y-1">
+                <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
+                <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
+                <div className="h-14 lg:h-[70px] w-full animate-pulse bg-neutral-100"></div>
+              </div>
             ) : notifData.length === 0 ? (
               <p className="text-black text-center text-b-md">...</p>
             ) : (
