@@ -14,6 +14,18 @@ function NotificationPage({ user }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const fetchInitialNotifications = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}notification/?parentId=${user?.parentId}`);
+        const sortedData = response.data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        console.log(sortedData);
+        setNotifData(sortedData);
+      } catch (err) {
+        console.error('Failed to fetch initial notifications:', err);
+        setError('Failed to fetch initial notifications.');
+      }
+    };
+
     const fetchChildUsernames = async () => {
       try {
         const response = await axios.get(process.env.REACT_APP_API_URL + 'parent/get-my-child');
@@ -25,19 +37,12 @@ function NotificationPage({ user }) {
       }
     };
 
-    const fetchNotifications = async (childUsernames) => {
+    const watchNotifications = async (childUsernames) => {
       try {
         const credentials = Credentials.anonymous();
         const user = await app.logIn(credentials);
         const mongodb = app.currentUser.mongoClient('mongodb-atlas');
         const notificationsCollection = mongodb.db('childtrackr-new').collection('notifications');
-
-        // Fetch initial data filtered by childUsername
-        const initialData = await notificationsCollection.find(
-          { childUsername: { $in: childUsernames } },
-          { sort: { createdAt: -1 } }
-        );
-        setNotifData(initialData);
 
         // Watch for changes in the notifications collection
         for await (const change of notificationsCollection.watch()) {
@@ -61,9 +66,10 @@ function NotificationPage({ user }) {
     };
 
     const initializeNotifications = async () => {
+      await fetchInitialNotifications();
       const childUsernames = await fetchChildUsernames();
       if (childUsernames.length > 0) {
-        await fetchNotifications(childUsernames);
+        await watchNotifications(childUsernames);
       } else {
         setError('No child usernames found.');
       }
@@ -74,7 +80,7 @@ function NotificationPage({ user }) {
     return () => {
       app.currentUser?.logOut();
     };
-  }, []);
+  }, [user?.parentId]);
 
   return (
     <div className="flex">
