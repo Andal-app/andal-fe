@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import { Link, useLocation } from 'react-router-dom';
 
-const BottomNavbar = () => {
+const BottomNavbar = ({ user }) => {
   const Menus = [
     { name: 'Beranda', icon: 'octicon:home-16', link: '/beranda/orangtua' },
     { name: 'Hubungkan', icon: 'fluent:link-multiple-20-filled', link: '/anak/hubungkan' },
     { name: 'Notifikasi', icon: 'mingcute:notification-line', link: '/notifikasi' },
     { name: 'Jadwal', icon: 'akar-icons:schedule', link: '/jadwalgeofence' },
+    { name: 'Profil', icon: 'gg:profile', link: '/profil' }
+  ];
+
+  const ChildMenus = [
+    { name: 'Beranda', icon: 'octicon:home-16', link: '/beranda/anak' },
     { name: 'Profil', icon: 'gg:profile', link: '/profil' }
   ];
 

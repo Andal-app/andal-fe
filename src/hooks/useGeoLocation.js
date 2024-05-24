@@ -15,8 +15,8 @@ const useGeoLocation = () => {
     coordinates: { lat: '', lng: '' },
     address: '',
     error: null,
-    gpsStatus: 'Mengecek status...',
-    batteryPercentage: 0
+    gpsActive: 'Mengecek status...',
+    batteryStatus: 0
   });
 
   const fetchAddress = async (lat, lng) => {
@@ -27,11 +27,15 @@ const useGeoLocation = () => {
           key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
         }
       });
-      const address = response.data.results[0]?.formatted_address || 'Alamat tidak ditemukan';
-      return address;
+      console.log('Geocoding response:', response.data);
+      if (response.data.results && response.data.results.length > 0) {
+        return response.data.results[0].formatted_address || 'Alamat tidak ditemukan';
+      } else {
+        return 'Alamat tidak ditemukan';
+      }
     } catch (error) {
       console.error('Error fetching address:', error);
-      return 'Error fetching address';
+      return 'Eror mencari alamat';
     }
   };
 
@@ -39,6 +43,8 @@ const useGeoLocation = () => {
     const { latitude, longitude } = position.coords;
 
     const address = await fetchAddress(latitude, longitude);
+    const batteryStatus = await getBatteryPercentage();
+
     const newLocation = {
       loaded: true,
       coordinates: {
@@ -46,58 +52,68 @@ const useGeoLocation = () => {
         lng: longitude
       },
       address: address,
-      gpsStatus: 'Aktif',
-      batteryPercentage: await getBatteryPercentage()
+      gpsActive: true,
+      batteryStatus: batteryStatus
     };
     setLocation(newLocation);
-    console.log(newLocation);
-
-    // Kirim data ke endpoint API
-    postDataToAPI(newLocation);
-  };
-
-  const onError = (error) => {
-    setLocation({
-      loaded: true,
-      error,
-      gpsStatus: 'Tidak Aktif atau Izin Ditolak',
-      batteryPercentage: 0
-    });
-    console.error('Error getting location:', error);
+    console.log('New location:', newLocation);
 
     // Kirim data ke endpoint API
     postDataToAPI({
-      ...location,
-      coordinates: { lat: null, lng: null } // Set nilai null untuk latitude dan longitude
+      latitude: latitude,
+      longitude: longitude,
+      gps: true,
+      battery: batteryStatus.toString() // Ensure batteryStatus is a string
     });
   };
 
-  // Fungsi untuk mengambil persentase baterai
+  const onError = (error) => {
+    const newLocation = {
+      loaded: true,
+      error,
+      gpsActive: false,
+      batteryStatus: '0',
+      coordinates: { lat: null, lng: null }
+    };
+
+    setLocation(newLocation);
+    console.error('Error getting location:', error);
+
+    // Jika onError, tidak kirim data ke endpoint API
+    // postDataToAPI({
+    //   latitude: null,
+    //   longitude: null,
+    //   gps: false,
+    //   battery: '0'
+    // });
+  };
+
   const getBatteryPercentage = async () => {
     if ('getBattery' in navigator) {
       const battery = await navigator.getBattery();
-      return battery.level * 100; // Kembalikan persentase baterai
+      return (battery.level * 100).toString();
     } else {
-      console.error('Battery Status API is not supported in this browser.');
-      return 0;
+      console.error('Status baterai tidak dapat diakses pada browser ini');
+      return '0';
     }
   };
 
-  // Fungsi untuk melakukan POST data ke endpoint API
-  const postDataToAPI = (data) => {
-    axios
-      .post(`${process.env.REACT_APP_API_URL}location/send-location`, {
-        latitude: data.coordinates.lat,
-        longitude: data.coordinates.lng
-        // gpsStatus: data.gpsStatus,
-        // batteryPercentage: data.batteryPercentage
-      })
-      .then((response) => {
-        console.log('Location posted successfully:', response.data);
-      })
-      .catch((error) => {
-        console.error('Error posting location:', error);
+  const postDataToAPI = async (data) => {
+    // console.log('Posting data to API:', data); // Log the data being sent
+
+    try {
+      await axios.post(`${process.env.REACT_APP_API_URL}location/send-location`, data).then((response) => {
+        console.log('Location posted successfully', response.data);
       });
+    } catch (err) {
+      if (err.response) {
+        // console.log(err.response.data.message);
+        toast.error(err.response.data.message);
+      } else {
+        // console.log(err.message);
+        toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+      }
+    }
   };
 
   useEffect(() => {
@@ -121,9 +137,9 @@ const useGeoLocation = () => {
 
     fetchLocation();
 
-    const intervalId = setInterval(fetchLocation, 10000); // Interval 10 detik
+    // const intervalId = setInterval(fetchLocation, 10000); // Interval 10 detik
 
-    return () => clearInterval(intervalId);
+    // return () => clearInterval(intervalId);
   }, []);
 
   return location;
