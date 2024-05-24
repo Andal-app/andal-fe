@@ -15,7 +15,7 @@ function PositionDetailBox({ address, lat, lng, error, isLoading }) {
               ) : isLoading ? (
                 <td className="h-2 w-full animate-pulse bg-neutral-100"></td>
               ) : (
-                <td className=" ">{address ? address : '-'}</td>
+                <td className=" ">{address ? address : 'Tidak mendapat akses'}</td>
               )}
             </tr>
 
@@ -27,7 +27,7 @@ function PositionDetailBox({ address, lat, lng, error, isLoading }) {
               ) : isLoading ? (
                 <td className="h-2 w-full animate-pulse bg-neutral-100"></td>
               ) : (
-                <td className="">{lat ? lat : '-'}</td>
+                <td className="">{lat ? lat : 'Tidak mendapat akses'}</td>
               )}
             </tr>
 
@@ -39,7 +39,7 @@ function PositionDetailBox({ address, lat, lng, error, isLoading }) {
               ) : isLoading ? (
                 <td className="h-2 w-full animate-pulse bg-neutral-100"></td>
               ) : (
-                <td className="">{lng ? lng : '-'}</td>
+                <td className="">{lng ? lng : 'Tidak mendapat akses'}</td>
               )}
             </tr>
           </tbody>

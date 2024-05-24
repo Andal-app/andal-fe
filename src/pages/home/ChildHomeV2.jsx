@@ -9,12 +9,20 @@ function LocationDetail({ setSelectPosition }) {
   const [address, setAddress] = useState('');
 
   useEffect(() => {
-    if (geoLocation.loaded && geoLocation.coordinates) {
+    if (
+      geoLocation.loaded &&
+      typeof geoLocation.coordinates.lat === 'number' &&
+      typeof geoLocation.coordinates.lng === 'number'
+    ) {
       setSelectPosition({
         lat: geoLocation.coordinates.lat,
         lon: geoLocation.coordinates.lng
       });
       setAddress(geoLocation.address);
+    } else {
+      // Jika lokasi tidak tersedia atau koordinat tidak valid, tetapkan nilai default atau abaikan
+      setSelectPosition(null);
+      setAddress(null);
     }
   }, [geoLocation, setSelectPosition]);
 
@@ -43,9 +51,9 @@ function ChildHomeV2({ user }) {
 
         {/* map start */}
         <div className="lg:z-0 bg-neutral-400 h-72 lg:h-screen">
-          <div className="w-full h-72">
+          <div className="w-full h-72 md:h-[100vh]">
             <GoogleMapsComponent
-              showChildMarker={true}
+              showChildMarker={selectPosition ? true : false}
               childMarkerPosition={selectPosition}
               setChildMarkerPosition={setSelectPosition}
               isMarkerDraggable={false}

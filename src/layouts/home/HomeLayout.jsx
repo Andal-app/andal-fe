@@ -1,8 +1,11 @@
 import Sidebar from '../../components/navigation/Sidebar';
 import TopWave3 from '../../assets/waves/wave_top_3.svg';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
+import translateUserRole from '../../helpers/translateUserRole';
 
 function HomeLayout({ children, user }) {
+  const role = translateUserRole(user?.role ? user.role : null);
+
   return (
     <div className="flex flex-col lg:flex-row">
       <Sidebar user={user} />
@@ -18,8 +21,8 @@ function HomeLayout({ children, user }) {
       <div className="fixed lg:hidden z-10 mt-10 mx-4 text-white flex gap-2">
         <img className="w-12 h-12 rounded-full bg-white"></img>
         <div>
-          <p className="text-b-md font-bold">Halo, Raisa!</p>
-          <p className="text-b-sm">Orang Tua</p>
+          <p className="text-b-md font-bold">{`Halo, ${user?.fullname?.split(' ')[0]}!`}</p>
+          <p className="text-b-sm">{role}</p>
         </div>
       </div>
       {/* profile end */}
