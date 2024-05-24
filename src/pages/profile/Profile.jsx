@@ -5,6 +5,8 @@ import translateUserRole from '../../helpers/translateUserRole';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
 import { useDispatch } from 'react-redux';
 import { LogoutAction } from '../../redux/actions/authActions';
+import User06bSvg from '../../assets/dummy_data/user_06b.svg';
+import User01aSvg from '../../assets/dummy_data/user_01a.svg';
 
 function Profile({ user }) {
   //autentikasi
@@ -40,7 +42,11 @@ function Profile({ user }) {
 
         {/* user profile start */}
         <div id="user__profile" className={`flex flex-col items-center gap-4 py-6`}>
-          <img id="user__profile__picture" src={ProfPic} className={`w-36 h-36 rounded-full`}></img>
+          <img
+            id="user__profile__picture"
+            src={user?.role === 'parent' ? User06bSvg : User01aSvg}
+            className={`w-36 h-36 rounded-full`}
+          ></img>
           <div className="text-center">
             <p className={`text-b-md font-bold`}>{user ? user.fullname : 'Nama Lengkap'}</p>
             <p className={`text-b-sm`}>{role ? role : 'Peran'}</p>

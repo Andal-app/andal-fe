@@ -5,14 +5,24 @@ import ScheduleItem from './ScheduleItem';
 import IconBtn from '../buttons/IconBtn';
 import { useNavigate } from 'react-router-dom';
 
-function ChildInfoBox({ address, gpsStatus, data, error, isLoading }) {
+function ChildInfoBox({ address, data, error, isLoading }) {
   const navigate = useNavigate();
 
   return (
     <div className="py-2 px-4 lg:p-3 flex flex-col gap-2">
-      <div className="bg-violet-300 px-4 py-2 text-violet-900 rounded-xl border border-violet-500">
+      <div
+        className={`px-4 py-2 rounded-xl border ${
+          data?.child?.isInside
+            ? 'border-violet-500 bg-violet-300 text-violet-900'
+            : 'border-red-500 bg-red-300 text-red-700'
+        } `}
+      >
         <div id="latest__location" className="flex text-b-md font-medium">
-          <p>{`${data?.child?.fullname?.split(' ')[0]}  ${data?.status?.toLowerCase()}`} </p>
+          <p>
+            {`${data?.child?.fullname?.split(' ')[0]}  ${
+              data?.child?.isInside ? 'berada di dalam wilayah geofence' : 'berada di luar wilayah geofence'
+            }`}{' '}
+          </p>
         </div>
       </div>
 
@@ -28,10 +38,10 @@ function ChildInfoBox({ address, gpsStatus, data, error, isLoading }) {
 
       {/* status start */}
       <div id="status" className="text-b-sm">
-        {/* <div id="location__status" className="flex gap-2">
+        <div id="location__status" className="flex gap-2">
           <p className="font-bold text-violet-900">Status:</p>
-          <p>Berada dalam geofence sesuai jadwal</p>
-        </div> */}
+          <p>{data ? data?.status : null}</p>
+        </div>
 
         {/* battery and gps status start */}
         <div id="battery__gps__status" className="flex gap-4">
@@ -48,7 +58,7 @@ function ChildInfoBox({ address, gpsStatus, data, error, isLoading }) {
           {/* gps status start */}
           <div id="gps__status" className="flex gap-2">
             <p className="text-violet-900 font-bold">GPS</p>
-            <p>{data ? (data.child.gpsActive ? 'Aktif' : 'Tidak Aktif') : null}</p>
+            <p>{data ? (data?.child?.gpsActive ? 'Aktif' : 'Tidak Aktif') : null}</p>
           </div>
           {/* gps status end */}
         </div>

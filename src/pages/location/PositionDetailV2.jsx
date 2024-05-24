@@ -44,55 +44,52 @@ function PositionDetailV2({ user }) {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}child/${childId}`);
-        setChildData(response.data);
+  const fetchData = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}child/${childId}`);
+      setChildData(response.data);
 
-        // Set child latest position
-        const { latestLat, latestLong } = response.data.child;
-        setChildMarkerPosition({ lat: latestLat, lon: latestLong });
+      // Set child latest position
+      const { latestLat, latestLong } = response.data.child;
+      setChildMarkerPosition({ lat: latestLat, lon: latestLong });
 
-        // Set activeGF
-        const activeGeofence = response.data.activeGF;
-        setActiveGF(activeGeofence);
+      // Set activeGF
+      const activeGeofence = response.data.activeGF;
+      setActiveGF(activeGeofence);
 
-        // Set activeGeofPosition
-        if (activeGeofence) {
-          const { coordinates } = activeGeofence.location;
-          setGeofMarkerPosition({ lat: coordinates[1], lon: coordinates[0] });
-        }
-
-        // call fetchAddress
-        const address = await fetchAddress(latestLat, latestLong);
-        setAddress(address);
-      } catch (err) {
-        if (err.response) {
-          setError(err.response.data.message);
-        } else {
-          setError('Terjadi kesalahan. Coba cek koneksi internet Anda.');
-        }
-      } finally {
-        setIsLoading(false);
+      // Set activeGeofPosition
+      if (activeGeofence) {
+        const { coordinates } = activeGeofence.location;
+        setGeofMarkerPosition({ lat: coordinates[1], lon: coordinates[0] });
       }
-    };
 
+      // call fetchAddress
+      const address = await fetchAddress(latestLat, latestLong);
+      setAddress(address);
+    } catch (err) {
+      if (err.response) {
+        setError(err.response.data.message);
+      } else {
+        setError('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
     if (childId) {
       fetchData();
-    }
+      const intervalId = setInterval(fetchData, 10000); // fetch data every 10 seconds
 
-    return () => {};
+      return () => clearInterval(intervalId); // cleanup on unmount
+    }
   }, [childId]);
 
   // control for bottom sheet modal
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-
-  // const handleOpenBottomSheet = () => {
-  //   setIsBottomSheetOpen(true);
-  // };
 
   const handleCloseBottomSheet = () => {
     setIsBottomSheetOpen(false);
@@ -145,7 +142,7 @@ function PositionDetailV2({ user }) {
         <div id="information__detail">
           {/* for small screen: show bottom sheet modal */}
           <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
-            <ChildInfoBox data={childData} address={address} error={error} isLoading={isLoading} />
+            <ChildInfoBox data={childData} address={address} error={error} />
           </BottomSheetModal>
 
           {/* for LARGE screen: show floating box start*/}
@@ -153,10 +150,11 @@ function PositionDetailV2({ user }) {
             <div className=" bg-white rounded-xl">
               {error ? (
                 <p className="text-black text-center text-b-sm">{error}</p>
-              ) : isLoading ? (
-                <div className="h-96 w-full animate-pulse bg-neutral-50 rounded-xl"></div>
               ) : (
-                <ChildInfoBox data={childData} address={address} error={error} isLoading={isLoading} />
+                // : isLoading ? (
+                //   <div className="h-96 w-full animate-pulse bg-neutral-50 rounded-xl"></div>
+                // )
+                <ChildInfoBox data={childData} address={address} error={error} />
               )}
             </div>
 

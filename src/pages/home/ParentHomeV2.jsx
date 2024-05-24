@@ -4,6 +4,13 @@ import axios from 'axios';
 import ChildBox from '../../components/box/ChildBox';
 import HomeLayout from '../../layouts/home/HomeLayout';
 import { requestNotificationPermission, registerServiceWorker } from '../../utils/notificationUtils';
+import User01aSvg from '../../assets/dummy_data/user_01a.svg';
+import User01bSvg from '../../assets/dummy_data/user_01b.svg';
+import User04bSvg from '../../assets/dummy_data/user_04b.svg';
+import User06aSvg from '../../assets/dummy_data/user_06a.svg';
+import User06cSvg from '../../assets/dummy_data/user_06c.svg';
+
+const ChildrenPicDummy = [User01aSvg, User01bSvg, User04bSvg, User06aSvg, User06cSvg];
 
 function ParentHomeV2({ user }) {
   const navigate = useNavigate();
@@ -54,10 +61,11 @@ function ParentHomeV2({ user }) {
           ) : childrenData === 0 ? (
             <p className="text-black text-center text-b-md">Tambahkan data baru</p>
           ) : (
-            childrenData?.map(({ id, username, fullname }) => (
+            childrenData?.map(({ id, username, fullname }, index) => (
               <ChildBox
                 key={id}
                 fullname={fullname}
+                profPic={ChildrenPicDummy[index % ChildrenPicDummy.length]}
                 onClick={() => [
                   navigate(`/detailposisi/${username}`, {
                     state: { childId: id, childUsername: username, childFullname: fullname }

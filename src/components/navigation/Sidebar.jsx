@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { LogoutAction } from '../../redux/actions/authActions';
 import translateUserRole from '../../helpers/translateUserRole';
 import translateUserRoleURL from '../../helpers/translateUserRoleURL';
+import User06bSvg from '../../assets/dummy_data/user_06b.svg';
+import User01aSvg from '../../assets/dummy_data/user_01a.svg';
 
 function Sidebar({ user }) {
   // authentication
@@ -65,7 +67,11 @@ function Sidebar({ user }) {
 
       {/* user profile start */}
       <div className={`flex gap-4 px-6 my-4 py-4 ${!open && 'hidden'}`}>
-        <img id="profile__picture" src="https://via.placeholder.com/150" className="w-14 h-14 rounded-full"></img>
+        <img
+          id="profile__picture"
+          src={user?.role === 'parent' ? User06bSvg : User01aSvg}
+          className="w-14 h-14 rounded-full"
+        ></img>
         <div className="flex flex-col justify-center">
           <p className="text-b-sm font-semibold">{user ? user.fullname : 'Nama Lengkap'}</p>
           <p className="text-b-xsm">{role ? role : 'Peran'}</p>
