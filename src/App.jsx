@@ -39,6 +39,7 @@ import DetailGeofencing from './pages/location/DetailGeofencing';
 import EditGeofencing from './pages/location/EditGeofencing';
 import SelectChildSchedule from './pages/location/SelectChildSchedule';
 import GoogleMapsWrapper from './wrappers/GoogleMapsWrapper';
+import { LocationProvider } from './context/LocationContext';
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt);
@@ -60,193 +61,195 @@ function App() {
 
   return (
     <div className="font-poppins">
-      <BrowserRouter>
-        <Toaster
-          position="top-center"
-          containerStyle={
-            {
-              // top: '40px'
+      <LocationProvider user={user}>
+        <BrowserRouter>
+          <Toaster
+            position="top-center"
+            containerStyle={
+              {
+                // top: '40px'
+              }
             }
-          }
-          toastOptions={{
-            duration: 5000,
-            style: {
-              minHeight: '60px',
-              minWidth: '300px',
-              background: '#F5F3FF',
-              fontWeight: '600'
-              // color: '#555c5d',
-              // fontSize: '1rem'
-            }
-          }}
-        />
-        <Routes>
-          {/* -------------- routes baru start -------------- */}
-          {/* ------ general routes (unprotected)*/}
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/tutorial" element={<TutorialPage />} />
-          <Route path="/pilihperan" element={<SelectRole />} />
-          <Route path="/daftar/orangtua" element={<ParentRegister />} />
-          <Route path="/daftar/anak" element={<ChildRegister />} />
-          {/* <Route path="/sheettrial" element={<BottomSheetTrial />} /> */}
-          {/* <Route path="/trial" element={<Trial />} /> */}
-          {/* <Route path="/popuptrial" element={<PopUpTrial />} /> */}
+            toastOptions={{
+              duration: 5000,
+              style: {
+                minHeight: '60px',
+                minWidth: '300px',
+                background: '#F5F3FF',
+                fontWeight: '600'
+                // color: '#555c5d',
+                // fontSize: '1rem'
+              }
+            }}
+          />
+          <Routes>
+            {/* -------------- routes baru start -------------- */}
+            {/* ------ general routes (unprotected)*/}
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/tutorial" element={<TutorialPage />} />
+            <Route path="/pilihperan" element={<SelectRole />} />
+            <Route path="/daftar/orangtua" element={<ParentRegister />} />
+            <Route path="/daftar/anak" element={<ChildRegister />} />
+            {/* <Route path="/sheettrial" element={<BottomSheetTrial />} /> */}
+            {/* <Route path="/trial" element={<Trial />} /> */}
+            {/* <Route path="/popuptrial" element={<PopUpTrial />} /> */}
 
-          {/* ------ errors routes (unprotected)*/}
-          <Route path="*" element={<NotFound />} />
-          <Route path="/noaccess" element={<NoAccess />} />
+            {/* ------ errors routes (unprotected)*/}
+            <Route path="*" element={<NotFound />} />
+            <Route path="/noaccess" element={<NoAccess />} />
 
-          {/* ------ private (parent & child) routes start (protected) */}
-          <Route
-            path="/profil"
-            element={
-              <PrivateRouter user={user}>
-                <Profile user={user} />
-              </PrivateRouter>
-            }
-          />
-          <Route
-            path="/editprofil"
-            element={
-              <PrivateRouter user={user}>
-                <EditProfile user={user} />
-              </PrivateRouter>
-            }
-          />
-          <Route
-            path="/profil/hapusakun"
-            element={
-              <PrivateRouter user={user}>
-                <ConfirmDelete user={user} />
-              </PrivateRouter>
-            }
-          />
-          {/* ------private routes end */}
+            {/* ------ private (parent & child) routes start (protected) */}
+            <Route
+              path="/profil"
+              element={
+                <PrivateRouter user={user}>
+                  <Profile user={user} />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/editprofil"
+              element={
+                <PrivateRouter user={user}>
+                  <EditProfile user={user} />
+                </PrivateRouter>
+              }
+            />
+            <Route
+              path="/profil/hapusakun"
+              element={
+                <PrivateRouter user={user}>
+                  <ConfirmDelete user={user} />
+                </PrivateRouter>
+              }
+            />
+            {/* ------private routes end */}
 
-          {/* ------ parent routes start (protected) */}
-          <Route
-            path="/masuk/orangtua"
-            element={
-              <ForceRedirect user={user}>
-                <ParentLogin />
-              </ForceRedirect>
-            }
-          />
-          <Route
-            path="/beranda/orangtua"
-            element={
-              <ParentRouter user={user}>
-                <ParentHomeV2 user={user} />
-              </ParentRouter>
-            }
-          />
-          <Route
-            path="/orangtua/hubungkan"
-            element={
-              <ParentRouter user={user}>
-                <ConnectAccount user={user} />
-              </ParentRouter>
-            }
-          />
+            {/* ------ parent routes start (protected) */}
+            <Route
+              path="/masuk/orangtua"
+              element={
+                <ForceRedirect user={user}>
+                  <ParentLogin />
+                </ForceRedirect>
+              }
+            />
+            <Route
+              path="/beranda/orangtua"
+              element={
+                <ParentRouter user={user}>
+                  <ParentHomeV2 user={user} />
+                </ParentRouter>
+              }
+            />
+            <Route
+              path="/orangtua/hubungkan"
+              element={
+                <ParentRouter user={user}>
+                  <ConnectAccount user={user} />
+                </ParentRouter>
+              }
+            />
 
-          <Route
-            path="/jadwalgeofence"
-            element={
-              <ParentRouter user={user}>
-                <SelectChildSchedule user={user} />
-              </ParentRouter>
-            }
-          />
-          <Route
-            path="/notifikasi"
-            element={
-              <ParentRouter user={user}>
-                <NotificationPage user={user} />
-              </ParentRouter>
-            }
-          />
-          <Route
-            path="/tambahgeofence/:childUsername"
-            element={
-              <ParentRouter user={user}>
-                <GoogleMapsWrapper>
-                  <AddGeofencing user={user} />
-                </GoogleMapsWrapper>
-              </ParentRouter>
-            }
-          />
-          <Route
-            path="/detailgeofence/:geofenceId"
-            element={
-              <ParentRouter user={user}>
-                <GoogleMapsWrapper>
-                  <DetailGeofencing user={user} />
-                </GoogleMapsWrapper>
-              </ParentRouter>
-            }
-          />
-          <Route
-            path="/editgeofence/:geofenceId"
-            element={
-              <ParentRouter user={user}>
-                <GoogleMapsWrapper>
-                  <EditGeofencing user={user} />
-                </GoogleMapsWrapper>
-              </ParentRouter>
-            }
-          />
-          <Route
-            path="/detailposisi/:childUsername"
-            element={
-              <ParentRouter user={user}>
-                <GoogleMapsWrapper>
-                  <PositionDetailV2 user={user} />
-                </GoogleMapsWrapper>
-              </ParentRouter>
-            }
-          />
-          <Route
-            path="/kelolajadwal/:childUsername"
-            element={
-              <ParentRouter user={user}>
-                <GeofSchedule user={user} />
-              </ParentRouter>
-            }
-          />
-          {/* ------parent routes end */}
+            <Route
+              path="/jadwalgeofence"
+              element={
+                <ParentRouter user={user}>
+                  <SelectChildSchedule user={user} />
+                </ParentRouter>
+              }
+            />
+            <Route
+              path="/notifikasi"
+              element={
+                <ParentRouter user={user}>
+                  <NotificationPage user={user} />
+                </ParentRouter>
+              }
+            />
+            <Route
+              path="/tambahgeofence/:childUsername"
+              element={
+                <ParentRouter user={user}>
+                  <GoogleMapsWrapper>
+                    <AddGeofencing user={user} />
+                  </GoogleMapsWrapper>
+                </ParentRouter>
+              }
+            />
+            <Route
+              path="/detailgeofence/:geofenceId"
+              element={
+                <ParentRouter user={user}>
+                  <GoogleMapsWrapper>
+                    <DetailGeofencing user={user} />
+                  </GoogleMapsWrapper>
+                </ParentRouter>
+              }
+            />
+            <Route
+              path="/editgeofence/:geofenceId"
+              element={
+                <ParentRouter user={user}>
+                  <GoogleMapsWrapper>
+                    <EditGeofencing user={user} />
+                  </GoogleMapsWrapper>
+                </ParentRouter>
+              }
+            />
+            <Route
+              path="/detailposisi/:childUsername"
+              element={
+                <ParentRouter user={user}>
+                  <GoogleMapsWrapper>
+                    <PositionDetailV2 user={user} />
+                  </GoogleMapsWrapper>
+                </ParentRouter>
+              }
+            />
+            <Route
+              path="/kelolajadwal/:childUsername"
+              element={
+                <ParentRouter user={user}>
+                  <GeofSchedule user={user} />
+                </ParentRouter>
+              }
+            />
+            {/* ------parent routes end */}
 
-          {/* ------ child routes start (protected)*/}
-          <Route
-            path="/masuk/anak"
-            element={
-              <ForceRedirect user={user}>
-                <ChildLogin />
-              </ForceRedirect>
-            }
-          />
-          <Route
-            path="/beranda/anak"
-            element={
-              <ChildRouter user={user}>
-                <GoogleMapsWrapper>
-                  <ChildHomeV2 user={user} />
-                </GoogleMapsWrapper>
-              </ChildRouter>
-            }
-          />
-          <Route
-            path="/anak/hubungkan"
-            element={
-              <ChildRouter user={user}>
-                <InsertConnectCode user={user} />
-              </ChildRouter>
-            }
-          />
-          {/* ------ child routes end */}
+            {/* ------ child routes start (protected)*/}
+            <Route
+              path="/masuk/anak"
+              element={
+                <ForceRedirect user={user}>
+                  <ChildLogin />
+                </ForceRedirect>
+              }
+            />
+            <Route
+              path="/beranda/anak"
+              element={
+                <ChildRouter user={user}>
+                  <GoogleMapsWrapper>
+                    <ChildHomeV2 user={user} />
+                  </GoogleMapsWrapper>
+                </ChildRouter>
+              }
+            />
+            <Route
+              path="/anak/hubungkan"
+              element={
+                <ChildRouter user={user}>
+                  <InsertConnectCode user={user} />
+                </ChildRouter>
+              }
+            />
+            {/* ------ child routes end */}
 
-          {/* -------------- routes baru end -------------- */}
-        </Routes>
-      </BrowserRouter>
+            {/* -------------- routes baru end -------------- */}
+          </Routes>
+        </BrowserRouter>
+      </LocationProvider>
     </div>
   );
 }

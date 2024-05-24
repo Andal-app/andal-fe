@@ -13,7 +13,7 @@ import Sidebar from '../../components/navigation/Sidebar';
 import GoogleMapsComponent from '../../components/maps/GoogleMapsComponent';
 import IconBtn from '../../components/buttons/IconBtn';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
-import { axiosGoogleMaps } from '../../hooks/useGeoLocation';
+import { axiosGoogleMaps } from '../../context/LocationContext';
 
 function PositionDetailV2({ user }) {
   const location = useLocation();

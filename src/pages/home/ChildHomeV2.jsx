@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import HomeLayout from '../../layouts/home/HomeLayout';
 import PositionDetailBox from '../../components/box/PositionDetailBox';
 import GoogleMapsComponent from '../../components/maps/GoogleMapsComponent';
-import useGeoLocation from '../../hooks/useGeoLocation';
-import HomeLayout from '../../layouts/home/HomeLayout';
+import { useGeoLocation } from '../../context/LocationContext';
 
 function LocationDetail({ setSelectPosition }) {
   const geoLocation = useGeoLocation();

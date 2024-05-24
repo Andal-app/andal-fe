@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 
-// Instance axios untuk Google Maps API tanpa header Authorization
+const LocationContext = createContext();
+
 export const axiosGoogleMaps = axios.create({
   baseURL: 'https://maps.googleapis.com/maps/api',
   headers: {
@@ -9,7 +10,7 @@ export const axiosGoogleMaps = axios.create({
   }
 });
 
-const useGeoLocation = () => {
+export const LocationProvider = ({ children, user }) => {
   const [location, setLocation] = useState({
     loaded: false,
     coordinates: { lat: '', lng: '' },
@@ -27,7 +28,6 @@ const useGeoLocation = () => {
           key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
         }
       });
-      console.log('Geocoding response:', response.data);
       if (response.data.results && response.data.results.length > 0) {
         return response.data.results[0].formatted_address || 'Alamat tidak ditemukan';
       } else {
@@ -36,6 +36,30 @@ const useGeoLocation = () => {
     } catch (error) {
       console.error('Error fetching address:', error);
       return 'Eror mencari alamat';
+    }
+  };
+
+  const getBatteryPercentage = async () => {
+    if ('getBattery' in navigator) {
+      const battery = await navigator.getBattery();
+      return (battery.level * 100).toString();
+    } else {
+      console.error('Status baterai tidak dapat diakses pada browser ini');
+      return '0';
+    }
+  };
+
+  const postDataToAPI = async (data) => {
+    try {
+      await axios.post(`${process.env.REACT_APP_API_URL}location/send-location`, data).then((response) => {
+        console.log('Location posted successfully', response.data);
+      });
+    } catch (err) {
+      if (err.response) {
+        console.error(err.response.data.message);
+      } else {
+        console.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+      }
     }
   };
 
@@ -56,14 +80,15 @@ const useGeoLocation = () => {
       batteryStatus: batteryStatus
     };
     setLocation(newLocation);
-    console.log('New location:', newLocation);
+
+    console.log(newLocation);
 
     // Kirim data ke endpoint API
     postDataToAPI({
       latitude: latitude,
       longitude: longitude,
       gps: true,
-      battery: batteryStatus.toString() // Ensure batteryStatus is a string
+      battery: batteryStatus.toString()
     });
   }, []);
 
@@ -79,30 +104,6 @@ const useGeoLocation = () => {
     setLocation(newLocation);
     console.error('Error getting location:', error);
   }, []);
-
-  const getBatteryPercentage = async () => {
-    if ('getBattery' in navigator) {
-      const battery = await navigator.getBattery();
-      return (battery.level * 100).toString();
-    } else {
-      console.error('Status baterai tidak dapat diakses pada browser ini');
-      return '0';
-    }
-  };
-
-  const postDataToAPI = async (data) => {
-    try {
-      await axios.post(`${process.env.REACT_APP_API_URL}location/send-location`, data).then((response) => {
-        console.log('Location posted successfully', response.data);
-      });
-    } catch (err) {
-      if (err.response) {
-        toast.error(err.response.data.message);
-      } else {
-        toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
-      }
-    }
-  };
 
   const fetchLocation = useCallback(() => {
     if (!('geolocation' in navigator)) {
@@ -123,12 +124,14 @@ const useGeoLocation = () => {
   }, [onError, onSuccess]);
 
   useEffect(() => {
-    fetchLocation();
-    // const intervalId = setInterval(fetchLocation, 10000); // Interval 10 detik
-    // return () => clearInterval(intervalId);
-  }, [fetchLocation]);
+    if (user.role === 'child') {
+      fetchLocation();
+      const interval = setInterval(fetchLocation, 60000);
+      return () => clearInterval(interval);
+    }
+  }, [user, fetchLocation]);
 
-  return { location, fetchLocation };
+  return <LocationContext.Provider value={location}>{children}</LocationContext.Provider>;
 };
 
-export default useGeoLocation;
+export const useGeoLocation = () => useContext(LocationContext);

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ChildBox from '../../components/box/ChildBox';
 import HomeLayout from '../../layouts/home/HomeLayout';
-import { requestNotificationPermission } from '../../utils/notificationUtils';
+import { requestNotificationPermission, registerServiceWorker } from '../../utils/notificationUtils';
 
 function ParentHomeV2({ user }) {
   const navigate = useNavigate();
@@ -18,7 +18,6 @@ function ParentHomeV2({ user }) {
       try {
         const response = await axios.get(process.env.REACT_APP_API_URL + 'parent/get-my-child');
         setChildrenData(response.data.children);
-        // console.log(childrenData);
       } catch (err) {
         setError(err);
       } finally {
@@ -27,6 +26,10 @@ function ParentHomeV2({ user }) {
     };
 
     requestNotificationPermission();
+    registerServiceWorker().then(() => {
+      // Optional: Test push notification
+      // showTestNotification();
+    });
     fetchData();
 
     return () => {};

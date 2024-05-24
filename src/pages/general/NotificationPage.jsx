@@ -6,6 +6,7 @@ import Sidebar from '../../components/navigation/Sidebar';
 import TopBackNav from '../../components/navigation/TopBackNav';
 import NotifListView from '../../components/listViews/NotifListView';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
+import { requestNotificationPermission, registerServiceWorker, showNotification } from '../../utils/notificationUtils';
 
 const app = new App({ id: process.env.REACT_APP_REALM_APP_ID });
 
@@ -57,7 +58,11 @@ function NotificationPage({ user }) {
         for await (const change of notificationsCollection.watch()) {
           if (change.operationType === 'insert' && childUsernames.includes(change.fullDocument.childUsername)) {
             setNotifData((prevData) => [change.fullDocument, ...prevData]);
-            showNotification(change.fullDocument);
+            showNotification('New Notification', {
+              body: change.fullDocument.message,
+              icon: '/icon.png',
+              badge: '/badge.png'
+            });
           }
         }
       } catch (err) {
@@ -66,21 +71,17 @@ function NotificationPage({ user }) {
       }
     };
 
-    const showNotification = (notification) => {
-      if ('Notification' in window && Notification.permission === 'granted') {
-        new Notification('New Notification', {
-          body: notification.message
-        });
-      }
-    };
-
     const initializeNotifications = async () => {
-      await fetchInitialNotifications();
-      const childUsernames = await fetchChildUsernames();
-      if (childUsernames.length > 0) {
-        await watchNotifications(childUsernames);
-      } else {
-        setError('No child usernames found.');
+      await requestNotificationPermission();
+      const registration = await registerServiceWorker();
+      if (registration) {
+        await fetchInitialNotifications();
+        const childUsernames = await fetchChildUsernames();
+        if (childUsernames.length > 0) {
+          await watchNotifications(childUsernames);
+        } else {
+          setError('No child usernames found.');
+        }
       }
     };
 
