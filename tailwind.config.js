@@ -15,7 +15,8 @@ module.exports = {
       'b-md': ['0.875rem', '1.5rem'], // 14px
       'b-sm': ['0.75rem', '1.3rem'], // 12px
       'b-xsm': ['0.625rem', '1rem'], // 10px
-      'b-xxsm': ['0.5rem', '0.8rem'] // 8px, 12px
+      'b-xxsm': ['0.5rem', '0.8rem'], // 8px, 12px,
+      '8xl': ['6rem', '1 rem']
     },
     colors: {
       transparent: 'transparent',

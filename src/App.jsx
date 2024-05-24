@@ -5,16 +5,6 @@ import ParentLogin from './pages/login/ParentLogin';
 import ChildLogin from './pages/login/ChildLogin';
 import ParentRegister from './pages/ParentRegister';
 import ChildRegister from './pages/ChildRegister';
-import ParentHome from './pages/ParentHome';
-import ChildHome from './pages/ChildHome';
-import ParentGeofencingHistory from './pages/ParentGeofencingHistory';
-import ParentHistory from './pages/ParentHistory';
-import ParentNotificationHistory from './pages/ParentNotificationHistory';
-import ParentNotification from './pages/ParentNotification';
-import ParentChildLocation from './pages/ParentChildLocation';
-import ParentGeofencing from './pages/ParentGeofencing';
-import PrivateRoute from './routes/PrivateRoute';
-import ProtectedRoute from './routes/ProtectedRoute';
 import Profile from './pages/profile/Profile';
 import Trial from './pages/Trial';
 import EditProfile from './pages/profile/EditProfile';
@@ -45,7 +35,6 @@ import ConnectAccount from './pages/connect/ConnectAccount';
 import { Toaster } from 'react-hot-toast';
 import PrivateRouter from './components/routes/PrivateRouter';
 import InsertConnectCode from './pages/connect/InsertConnectCode';
-import CobaLeaflet from './pages/CobaLeaflet';
 import DetailGeofencing from './pages/location/DetailGeofencing';
 import EditGeofencing from './pages/location/EditGeofencing';
 import SelectChildSchedule from './pages/location/SelectChildSchedule';
@@ -92,32 +81,16 @@ function App() {
           }}
         />
         <Routes>
-          <Route element={<ProtectedRoute />}>
-            <Route path="/sheettrial" element={<BottomSheetTrial />} />
-
-            <Route path="/anak/beranda" element={<ChildHome />} />
-            <Route path="/orangtua/beranda" element={<ParentHome />} />
-            <Route path="/parent/history" element={<ParentGeofencingHistory />} />
-            <Route path="/parent/history/:childname" element={<ParentHistory />} />
-            <Route path="/parent/notification_history" element={<ParentNotificationHistory />} />
-            <Route path="/parent/notification_history/:childname" element={<ParentNotification />} />
-            <Route path="/parent/lokasianak/:childname" element={<ParentChildLocation />} />
-
-            <Route path="/parent/geofencing/:childname" element={<ParentGeofencing />} />
-          </Route>
-
-          <Route element={<PrivateRoute />}></Route>
-
           {/* -------------- routes baru start -------------- */}
-
           {/* ------ general routes (unprotected)*/}
           <Route path="/" element={<LandingPage />} />
           <Route path="/tutorial" element={<TutorialPage />} />
           <Route path="/pilihperan" element={<SelectRole />} />
           <Route path="/daftar/orangtua" element={<ParentRegister />} />
           <Route path="/daftar/anak" element={<ChildRegister />} />
-          <Route path="/trial" element={<Trial />} />
-          <Route path="/popuptrial" element={<PopUpTrial />} />
+          {/* <Route path="/sheettrial" element={<BottomSheetTrial />} /> */}
+          {/* <Route path="/trial" element={<Trial />} /> */}
+          {/* <Route path="/popuptrial" element={<PopUpTrial />} /> */}
 
           {/* ------ errors routes (unprotected)*/}
           <Route path="*" element={<NotFound />} />
@@ -170,11 +143,12 @@ function App() {
           <Route
             path="/orangtua/hubungkan"
             element={
-              // <ParentRouter user={user}>
-              <ConnectAccount user={user} />
-              // </ParentRouter>
+              <ParentRouter user={user}>
+                <ConnectAccount user={user} />
+              </ParentRouter>
             }
           />
+
           <Route
             path="/jadwalgeofence"
             element={
@@ -239,7 +213,6 @@ function App() {
               </ParentRouter>
             }
           />
-          <Route path="/cobaleaflet" element={<CobaLeaflet />} />
           {/* ------parent routes end */}
 
           {/* ------ child routes start (protected)*/}
@@ -264,12 +237,11 @@ function App() {
           <Route
             path="/anak/hubungkan"
             element={
-              // <ParentRouter user={user}>
-              <InsertConnectCode user={user} />
-              // </ParentRouter>
+              <ChildRouter user={user}>
+                <InsertConnectCode user={user} />
+              </ChildRouter>
             }
           />
-
           {/* ------ child routes end */}
 
           {/* -------------- routes baru end -------------- */}

@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 const BottomNavbar = ({ user }) => {
   const ParentMenus = [
     { name: 'Beranda', icon: 'octicon:home-16', link: '/beranda/orangtua' },
-    { name: 'Hubungkan', icon: 'fluent:link-multiple-20-filled', link: '/anak/hubungkan' },
+    { name: 'Hubungkan', icon: 'fluent:link-multiple-20-filled', link: '/orangtua/hubungkan' },
     { name: 'Notifikasi', icon: 'mingcute:notification-line', link: '/notifikasi' },
     { name: 'Jadwal', icon: 'akar-icons:schedule', link: '/jadwalgeofence' },
     { name: 'Profil', icon: 'gg:profile', link: '/profil' }
@@ -13,6 +13,7 @@ const BottomNavbar = ({ user }) => {
 
   const ChildMenus = [
     { name: 'Beranda', icon: 'octicon:home-16', link: '/beranda/anak' },
+    { name: 'Hubungkan', icon: 'fluent:link-multiple-20-filled', link: '/anak/hubungkan' },
     { name: 'Profil', icon: 'gg:profile', link: '/profil' }
   ];
 

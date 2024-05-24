@@ -26,7 +26,8 @@ function Sidebar({ user }) {
   ];
 
   const ChildMenuUtamaItems = [
-    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/${roleURL}` }
+    { title: 'Beranda', icon: 'octicon:home-16', cat: 'menu_utama', link: `/beranda/${roleURL}` },
+    { title: 'Hubungkan', icon: 'fluent:link-multiple-20-filled', cat: 'menu_utama', link: `/${roleURL}/hubungkan` }
   ];
 
   const MenuUtamaItems =
