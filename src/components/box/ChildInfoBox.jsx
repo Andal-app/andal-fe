@@ -41,16 +41,14 @@ function ChildInfoBox({ address, gpsStatus, data, error, isLoading }) {
               {' '}
               <Icon icon="fluent:battery-6-24-regular" className="w-5 h-5" />
             </p>
-            <p>
-              100<span>%</span>
-            </p>
+            <p>{`${data ? data?.child?.batteryStatus : null}%`}</p>
           </div>
           {/* battery status end */}
 
           {/* gps status start */}
           <div id="gps__status" className="flex gap-2">
             <p className="text-violet-900 font-bold">GPS</p>
-            <p>{gpsStatus}</p>
+            <p>{data ? (data.child.gpsActive ? 'Aktif' : 'Tidak Aktif') : null}</p>
           </div>
           {/* gps status end */}
         </div>
