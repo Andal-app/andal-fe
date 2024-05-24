@@ -1,7 +1,4 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { reset } from '../features/parentSlice';
-import { resetChild } from '../features/childSlice';
+import React from 'react';
 import RoleBox from '../components/role/RoleBox';
 
 import RoleOrangtua from '../assets/images/role_orangtua.svg';
@@ -13,13 +10,6 @@ import Tutorial from '../components/tutorial/Tutorial';
 import TutorialImg from '../assets/images/tutorial.svg';
 
 function SelectRole() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(reset());
-    dispatch(resetChild());
-  }, []);
-
   return (
     <BasicLayout>
       <div id="left__pane__container" className="hidden lg:basis-1/2 lg:flex justify-center items-center px-16">
