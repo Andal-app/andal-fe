@@ -47,7 +47,7 @@ function ConfirmDelete({ user }) {
       </style>
 
       <Sidebar user={user} />
-      <BottomNavbar />
+      <BottomNavbar user={user} />
 
       <div id="main__container" className="w-full lg:w-1/2 bg-white h-screen flex items-center justify-center">
         {/* top wave start */}

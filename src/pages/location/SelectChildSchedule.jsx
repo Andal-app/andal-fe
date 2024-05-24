@@ -74,7 +74,7 @@ function SelectChildSchedule({ user }) {
         </main>
       </div>
 
-      <BottomNavbar />
+      <BottomNavbar user={user} />
     </div>
   );
 }

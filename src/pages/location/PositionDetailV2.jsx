@@ -101,7 +101,7 @@ function PositionDetailV2({ user }) {
   return (
     <div className="flex">
       <Sidebar user={user} />
-      <BottomNavbar />
+      <BottomNavbar user={user} />
 
       <main className="relative mx-0 flex flex-col gap-4 w-full">
         {/* top  nav start */}

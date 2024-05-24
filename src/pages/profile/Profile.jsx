@@ -31,7 +31,7 @@ function Profile({ user }) {
   return (
     <div className="flex">
       <Sidebar user={user} />
-      <BottomNavbar />
+      <BottomNavbar user={user} />
 
       <main className="w-full lg:w-1/2 lg:border-r lg:border-neutral-300">
         {/* page title start */}
@@ -67,10 +67,6 @@ function Profile({ user }) {
         </div>
         {/* user setting list end*/}
       </main>
-      {/* 
-      <div>
-        <BottomNavbar className="h-screen flex justify-center items-center bg-gray-900" />
-      </div> */}
     </div>
   );
 }

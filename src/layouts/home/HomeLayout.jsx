@@ -6,7 +6,7 @@ function HomeLayout({ children, user }) {
   return (
     <div className="flex flex-col lg:flex-row">
       <Sidebar user={user} />
-      <BottomNavbar />
+      <BottomNavbar user={user} />
 
       {/* top wave start */}
       <div className="z-0 lg:hidden fixed top-0 left-0 right-0 w-full">

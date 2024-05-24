@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import { Link, useLocation } from 'react-router-dom';
 
 const BottomNavbar = ({ user }) => {
-  const Menus = [
+  const ParentMenus = [
     { name: 'Beranda', icon: 'octicon:home-16', link: '/beranda/orangtua' },
     { name: 'Hubungkan', icon: 'fluent:link-multiple-20-filled', link: '/anak/hubungkan' },
     { name: 'Notifikasi', icon: 'mingcute:notification-line', link: '/notifikasi' },
@@ -15,6 +15,8 @@ const BottomNavbar = ({ user }) => {
     { name: 'Beranda', icon: 'octicon:home-16', link: '/beranda/anak' },
     { name: 'Profil', icon: 'gg:profile', link: '/profil' }
   ];
+
+  const Menus = user?.role === 'parent' ? ParentMenus : user?.role === 'child' ? ChildMenus : [];
 
   const location = useLocation();
   const [active, setActive] = useState(null);
