@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TextInput from '../../components/inputs/TextInput';
 import InputLabel from '../../components/inputs/InputLabel';
 import PasswordInput from '../../components/inputs/PasswordInput';
@@ -9,6 +9,7 @@ import SubmitBtn from '../../components/buttons/SubmitBtn';
 import RegisterNowBtn from '../../components/buttons/RegisterNowBtn';
 import LoginLayout from '../../layouts/LoginLayout';
 import { LoginAction } from '../../redux/actions/authActions';
+import LogoPrimary from '../../assets/images/andal_logo_primary.svg';
 
 const ParentLogin = () => {
   const [form, setForm] = useState({});
@@ -36,9 +37,11 @@ const ParentLogin = () => {
       {/* right pane content start */}
       <div className="w-[85%] lg:w-[60%] h-[78%] lg:h-full flex flex-col items-center justify-end lg:justify-center">
         {/* logo start */}
-        <a href="#" className="hidden lg:flex items-center mb-6 bg-violet-300 rounded-full">
-          <div className="h-28 w-28 rounded-full"></div>
-        </a>
+        <Link to="/" target="_blank" className="hidden lg:flex items-center mb-6 bg-violet-300 rounded-full">
+          <div className="h-28 w-28 rounded-full border border-violet-900">
+            <img className="w-full" src={LogoPrimary} />
+          </div>
+        </Link>
         {/* logo end */}
 
         {/* greetings and form start */}

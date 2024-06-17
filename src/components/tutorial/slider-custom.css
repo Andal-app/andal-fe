@@ -1,0 +1,25 @@
+.custom-slick-dots {
+  margin-top: 20px; /* Atur jarak sesuai kebutuhan Anda */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+.custom-slick-dots li {
+  margin: 0 5px; /* Atur jarak antar dots */
+}
+
+.custom-slick-dots li button {
+  width: 10px; /* Ubah lebar dots */
+  height: 10px; /* Ubah tinggi dots */
+  background-color: #8b5cf6; /* Ubah warna dots */
+  border-radius: 50%; /* Membuat dots bulat */
+  border: none; /* Hilangkan border default */
+  padding: 0; /* Hilangkan padding default */
+}
+
+.custom-slick-dots li.slick-active button {
+  background-color: #8b5cf6; /* Warna dots aktif */
+}

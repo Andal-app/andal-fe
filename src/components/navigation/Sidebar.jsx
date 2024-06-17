@@ -8,6 +8,7 @@ import translateUserRole from '../../helpers/translateUserRole';
 import translateUserRoleURL from '../../helpers/translateUserRoleURL';
 import User06bSvg from '../../assets/dummy_data/user_06b.svg';
 import User01aSvg from '../../assets/dummy_data/user_01a.svg';
+import LogoSecondary from '../../assets/images/andal_logo_secondary.svg';
 
 function Sidebar({ user }) {
   // authentication
@@ -58,7 +59,9 @@ function Sidebar({ user }) {
       {/* andal logo start */}
       <div className="px-6 flex gap-x-4 items-center">
         {/* <img src="./src/assets/logo.png" className={`cursor-pointer duration-500 ${open && 'rotate-[360deg]'}`} /> */}
-        <div className="w-10 h-10 bg-violet-500 rounded-full"></div>
+        <div className="w-10 h-10 bg-violet-500 rounded-full">
+          <img className="w-full h-full" src={LogoSecondary} />
+        </div>
         <h1 className={`text-violet-700 origin-left font-semibold text-h-sm duration-200 ${!open && 'scale-0'}`}>
           Andal
         </h1>

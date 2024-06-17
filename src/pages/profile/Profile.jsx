@@ -25,7 +25,7 @@ function Profile({ user }) {
       text: 'Bantuan penggunaan',
       pass_value: 'Kembali'
     },
-    { link: '', icon: 'material-symbols:lock-outline', text: ' Ganti pasword' },
+    // { link: '', icon: 'material-symbols:lock-outline', text: ' Ganti pasword' },
     { link: '', icon: 'tabler:logout', text: 'Keluar', onClick: handleLogout },
     { link: '/profil/hapusakun', icon: 'typcn:delete-outline', text: 'Hapus akun', redText: true }
   ];

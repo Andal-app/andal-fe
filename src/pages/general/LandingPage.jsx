@@ -4,19 +4,21 @@ import { Icon } from '@iconify/react';
 import BasicLayout from '../../layouts/general/BasicLayout';
 import BottomWave1 from '../../assets/waves/wave_bottom_1.svg';
 import OvalNextBtn from '../../components/buttons/OvalNextBtn';
+import LogoPrimary from '../../assets/images/andal_logo_primary.svg';
 
 function LandingPage() {
   return (
     <BasicLayout>
       <div className="relative w-full h-full bg-map flex justify-center items-center">
-        <div className="z-10 flex flex-col items-center gap-8 text-center -mt-36 lg:mt-0">
-          <div id="logo" className="bg-violet-300 w-32 h-32 rounded-full"></div>
+        <div className="z-10 flex flex-col items-center gap-6 text-center -mt-36 lg:mt-0">
+          <div id="logo" className="bg-violet-300 w-32 h-32 rounded-full">
+            <img className="w-full h-full" src={LogoPrimary} />
+          </div>
+
           <h1 className="text-h-lg font-bold text-violet-900">Selamat Datang</h1>
-          <p className="text-b-sm lg:text-b-md text-neutral-900 max-w-[85%] lg:max-w-[420px]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur.
+          <p className="text-b-sm lg:text-b-lg font-medium text-neutral-900 max-w-[85%] lg:max-w-[420px]">
+            Lacak keberadaan anak Anda dengan aplikasi <b>Andal</b>. Tetapkan <b>jadwal dan lokasi</b> kegiatan anak.
+            Kami akan mengirimkan <b>notifikasi</b> jika Anak keluar dari wilayah kegiatannya.
           </p>
         </div>
 

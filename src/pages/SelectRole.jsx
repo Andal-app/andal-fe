@@ -12,13 +12,13 @@ import TutorialImg from '../assets/images/tutorial.svg';
 function SelectRole() {
   return (
     <BasicLayout>
-      <div id="left__pane__container" className="hidden lg:basis-1/2 lg:flex justify-center items-center px-16">
+      <div id="left__pane__container" className="hidden lg:w-1/2 lg:flex justify-center items-center px-16">
         {/* tutorial start */}
         <Tutorial imgSrc={TutorialImg} />
         {/* tutorial end */}
       </div>
 
-      <div id="right__pane__container" className="w-full lg:basis-1/2 h-screen lg:h-min flex justify-center items-end">
+      <div id="right__pane__container" className="w-full lg:w-1/2 h-screen lg:h-min flex justify-center items-end">
         {/* right pane content start */}
         {/* role__container start */}
         <div id="role__container" className="my-24 h-[80%] flex flex-col items-center gap-y-6 w-[85%]">
