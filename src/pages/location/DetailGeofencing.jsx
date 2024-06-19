@@ -88,10 +88,10 @@ function DetailGeofencing({ user }) {
         {/* add geofencing form end */}
 
         {/* lang and long start (temporary)*/}
-        <div className="bg-red-200">
+        {/* <div className="bg-red-200">
           <p>lat: {geofenceData?.location?.coordinates[0]}</p>
           <p>lon: {geofenceData?.location?.coordinates[1]}</p>
-        </div>
+        </div> */}
         {/* lang and long end */}
       </div>
     </GeofencePageLayout>

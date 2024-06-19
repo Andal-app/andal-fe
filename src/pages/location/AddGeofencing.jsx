@@ -147,10 +147,10 @@ function AddGeofencing({ user }) {
         {/* add geofencing form end */}
 
         {/* lang and long start (temporary)*/}
-        <div className="bg-red-200">
+        {/* <div className="bg-red-200">
           <p>lat: {selectPosition?.lat}</p>
           <p>lon: {selectPosition?.lon}</p>
-        </div>
+        </div> */}
         {/* lang and long end */}
       </div>
     </GeofencePageLayout>

@@ -5,6 +5,13 @@ import Sidebar from '../../components/navigation/Sidebar';
 import TopBackNav from '../../components/navigation/TopBackNav';
 import ChildBox from '../../components/box/ChildBox';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
+import User01aSvg from '../../assets/dummy_data/user_01a.svg';
+import User01bSvg from '../../assets/dummy_data/user_01b.svg';
+import User04bSvg from '../../assets/dummy_data/user_04b.svg';
+import User06aSvg from '../../assets/dummy_data/user_06a.svg';
+import User06cSvg from '../../assets/dummy_data/user_06c.svg';
+
+const ChildrenPicDummy = [User01aSvg, User01bSvg, User04bSvg, User06aSvg, User06cSvg];
 
 function SelectChildSchedule({ user }) {
   const location = useLocation();
@@ -59,13 +66,14 @@ function SelectChildSchedule({ user }) {
           ) : childrenData === 0 ? (
             <p className="text-black text-center text-b-md">Tambahkan data baru</p>
           ) : (
-            childrenData?.map(({ id, username, fullname }) => (
+            childrenData?.map(({ _id, username, fullname }, index) => (
               <ChildBox
-                key={id}
+                key={_id}
                 fullname={fullname}
+                profPic={ChildrenPicDummy[index % ChildrenPicDummy.length]}
                 onClick={() => [
                   navigate(`/kelolajadwal/${username}`, {
-                    state: { childId: id, childUsername: username, childFullname: fullname }
+                    state: { childId: _id, childUsername: username, childFullname: fullname }
                   })
                 ]}
               />
