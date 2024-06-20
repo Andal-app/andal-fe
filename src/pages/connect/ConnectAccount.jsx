@@ -6,8 +6,9 @@ import TextInput from '../../components/inputs/TextInput';
 import Sidebar from '../../components/navigation/Sidebar';
 import TopBackNav from '../../components/navigation/TopBackNav';
 import ProfPic from '../../assets/images/profile_picture.jpeg';
-import ShowConnectCode from '../../components/connect/ShowConnectCode';
+import ShowConnectCodeModal from '../../components/connect/ShowConnectCodeModal';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
+import CodeInput from '../../components/inputs/CodeInput';
 
 const ConnectAccount = ({ user }) => {
   const [isCodeModalOpen, setCodeModalOpen] = useState(false);
@@ -18,14 +19,13 @@ const ConnectAccount = ({ user }) => {
   const [verifCode, setVerifCode] = useState('');
 
   const [formData, setFormData] = useState({
-    username: ''
+    code: ''
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleCodeChange = (value) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value
+      code: value // Memperbarui state formData dengan nilai kode baru
     }));
   };
 
@@ -54,7 +54,8 @@ const ConnectAccount = ({ user }) => {
 
       if (err.response) {
         // console.log(err.response.data.message);
-        setChildStatus(err.response.data.message);
+        // setChildStatus(err.response.data.message);
+        setChildStatus('Pengguna tidak ditemukan');
       } else {
         // console.log(err.message);
         setChildStatus('Terjadi kesalahan. Coba cek koneksi internet Anda.');
@@ -103,23 +104,24 @@ const ConnectAccount = ({ user }) => {
         {/* page title end */}
 
         {/* hubungkan start */}
-        <div id="user__profile" className={`w-[85%] h-screen flex flex-col items-center gap-4 py-6`}>
+        <div id="user__profile" className={`w-[85%] lg:w-1/2 h-screen flex flex-col items-center gap-4 py-6`}>
           {/* masukkan username anak start */}
           <form id="insert__child__username" onSubmit={handleSubmit} className="w-full flex flex-col gap-6">
-            <p className="text-center text-violet-900 text-b-md font-semibold">Masukkan Username Anak</p>
+            <div className="space-y-4">
+              {/* title start */}
+              <div className="text-violet-900 text-center">
+                <p className="font-bold text-h-md">MASUKKAN KODE</p>
+                <p className="text-b-md">dari Ponsel Orang Tua</p>
+              </div>
+              {/* title end */}
 
-            <TextInput
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Username Anak"
-              required
-              onChange={handleInputChange}
-              value={formData.username}
-            />
+              <div className="flex justify-center">
+                <CodeInput onChange={handleCodeChange} />
+              </div>
+            </div>
 
             <div>
-              <SubmitBtn text="Cek Username" />
+              <SubmitBtn text="Cek Akun Anak" />
               <p
                 id="check_username_error"
                 className={`text-left text-b-sm mt-1 ${isChildFound ? 'text-emerald-600' : 'text-red-500'}`}
@@ -141,7 +143,7 @@ const ConnectAccount = ({ user }) => {
               <SubmitBtn text="Selanjutnya" onClick={toggleCodeModal} />
 
               {isCodeModalOpen && (
-                <ShowConnectCode toggleModal={toggleCodeModal} verifCode={verifCode ? verifCode : '-----'} />
+                <ShowConnectCodeModal toggleModal={toggleCodeModal} verifCode={verifCode ? verifCode : '-----'} />
               )}
             </div>
           )}

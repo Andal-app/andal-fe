@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import InputChildUname from '../components/connect/InputChildUname';
 import InputConnectCode from '../components/connect/InputConnectCode';
-import ShowConnectCode from '../components/connect/ShowConnectCode';
+import ShowConnectCodeModal from '../components/connect/ShowConnectCodeModal';
 import BasicModal from '../components/modals/BasicModal';
 import RedConfirmModal from '../components/modals/RedConfirmModal';
 
@@ -49,7 +49,7 @@ function PopUpTrial() {
 
       {isInputCodeModalOpen && <InputConnectCode toggleModal={toggleInputCodeModal} />}
 
-      {isCodeModalOpen && <ShowConnectCode toggleModal={toggleCodeModal} />}
+      {isCodeModalOpen && <ShowConnectCodeModal toggleModal={toggleCodeModal} />}
 
       {isDeleteConfirmModalOpen && (
         <RedConfirmModal

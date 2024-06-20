@@ -54,7 +54,7 @@ const ConnectAccount = ({ user }) => {
 
       <div className="w-full lg:w-1/2 h-screen flex flex-col items-center lg:border-r lg:border-neutral-300">
         {/* page title start */}
-        <TopBackNav title="Hubungkan Akun Orang Tua" link="/beranda/anak" />
+        <TopBackNav title="Masukkan OTP" navigateTo="/anak/hubungkan" />
         {/* page title end */}
 
         {/* hubungkan start */}
@@ -82,7 +82,7 @@ const ConnectAccount = ({ user }) => {
             </div>
 
             <p id="error__message" className="hidden text-red-600 text-b-sm">
-              Username tidak ditemukan
+              Pengguna tidak ditemukan
             </p>
 
             <div className="w-full lg:w-[50%] mt-10">
