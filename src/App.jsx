@@ -40,6 +40,7 @@ import EditGeofencing from './pages/location/EditGeofencing';
 import SelectChildSchedule from './pages/location/SelectChildSchedule';
 import GoogleMapsWrapper from './wrappers/GoogleMapsWrapper';
 import { LocationProvider } from './context/LocationContext';
+import ShowChildCode from './pages/connect/ShowChildCode';
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt);
@@ -238,6 +239,14 @@ function App() {
             />
             <Route
               path="/anak/hubungkan"
+              element={
+                <ChildRouter user={user}>
+                  <ShowChildCode user={user} />
+                </ChildRouter>
+              }
+            />
+            <Route
+              path="/anak/hubungkan/masukkankode"
               element={
                 <ChildRouter user={user}>
                   <InsertConnectCode user={user} />

@@ -6,7 +6,7 @@ import TextInput from '../../components/inputs/TextInput';
 import Sidebar from '../../components/navigation/Sidebar';
 import TopBackNav from '../../components/navigation/TopBackNav';
 import ProfPic from '../../assets/images/profile_picture.jpeg';
-import ShowConnectCode from '../../components/connect/ShowConnectCode';
+import ShowConnectCodeModal from '../../components/connect/ShowConnectCodeModal';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
 
 const ConnectAccount = ({ user }) => {
@@ -141,7 +141,7 @@ const ConnectAccount = ({ user }) => {
               <SubmitBtn text="Selanjutnya" onClick={toggleCodeModal} />
 
               {isCodeModalOpen && (
-                <ShowConnectCode toggleModal={toggleCodeModal} verifCode={verifCode ? verifCode : '-----'} />
+                <ShowConnectCodeModal toggleModal={toggleCodeModal} verifCode={verifCode ? verifCode : '-----'} />
               )}
             </div>
           )}
