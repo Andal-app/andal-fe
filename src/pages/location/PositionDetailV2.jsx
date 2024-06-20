@@ -27,6 +27,7 @@ function PositionDetailV2({ user }) {
   const [activeGF, setActiveGF] = useState(null);
 
   const { childId } = location?.state || {}; // get current child info
+  // console.log('childID: ' + childId);
 
   const fetchAddress = async (lat, lon) => {
     try {

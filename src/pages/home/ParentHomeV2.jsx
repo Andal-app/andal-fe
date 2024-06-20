@@ -61,14 +61,14 @@ function ParentHomeV2({ user }) {
           ) : childrenData === 0 ? (
             <p className="text-black text-center text-b-md">Tambahkan data baru</p>
           ) : (
-            childrenData?.map(({ id, username, fullname }, index) => (
+            childrenData?.map(({ _id, username, fullname }, index) => (
               <ChildBox
-                key={id}
+                key={_id}
                 fullname={fullname}
                 profPic={ChildrenPicDummy[index % ChildrenPicDummy.length]}
                 onClick={() => [
                   navigate(`/detailposisi/${username}`, {
-                    state: { childId: id, childUsername: username, childFullname: fullname }
+                    state: { childId: _id, childUsername: username, childFullname: fullname }
                   })
                 ]}
               />
