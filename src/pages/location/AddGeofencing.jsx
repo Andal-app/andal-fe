@@ -114,6 +114,7 @@ function AddGeofencing({ user }) {
       circleRadius={parseFloat(formData.radius) || 0}
       backBtnNavTo={`/detailposisi/${childUsername}`}
       backBtnState={{ childId: childId, childUsername: childUsername, childFullname: childFullname }}
+      // polygon={true}
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { GoogleMap, Marker, Circle } from '@react-google-maps/api';
+import React, { useEffect, useRef, useState } from 'react';
+import { GoogleMap, Marker, Circle, DrawingManager, Polygon } from '@react-google-maps/api';
 import ChildMarkerImg from '../../assets/images/child_marker.png';
 // import './GoogleMapsComponent.css';
 
@@ -18,12 +18,15 @@ export default function GoogleMapsComponent({
   showChildMarker,
   showGeofMarker,
   isMarkerDraggable,
-  circleRadius
+  circleRadius,
+  polygon
 }) {
   const [childPosition, setChildPosition] = useState(centerPositionDefault);
   const [geofPosition, setGeofPosition] = useState(centerPositionDefault);
   const [centerPosition, setCenterPosition] = useState(centerPositionDefault);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 600);
+  const [polygonPaths, setPolygonPaths] = useState([]);
+  const polygonRef = useRef(null);
 
   useEffect(() => {
     if (childMarkerPosition) {
@@ -87,6 +90,41 @@ export default function GoogleMapsComponent({
     setGeofMarkerPosition({ lat, lon: lng });
   };
 
+  const handlePolygonComplete = (polygon) => {
+    // Remove the existing polygon if there is one
+    if (polygonRef.current) {
+      polygonRef.current.setMap(null);
+    }
+
+    // Set the new polygon
+    polygonRef.current = polygon;
+
+    // Get the coordinates of the new polygon
+    const path = polygon.getPath();
+    const coordinates = [];
+
+    for (let i = 0; i < path.getLength(); i++) {
+      const point = path.getAt(i);
+      coordinates.push({ lat: point.lat(), lng: point.lng() });
+    }
+
+    setPolygonPaths(coordinates);
+    console.log('Polygon Coordinates:', coordinates);
+  };
+
+  // const handlePolygonEdit = (polygon) => {
+  //   const path = polygon.getPath();
+  //   const coordinates = [];
+
+  //   for (let i = 0; i < path.getLength(); i++) {
+  //     const point = path.getAt(i);
+  //     coordinates.push({ lat: point.lat(), lng: point.lng() });
+  //   }
+
+  //   setPolygonPaths(coordinates);
+  //   console.log('Updated Polygon Coordinates:', coordinates);
+  // };
+
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -133,6 +171,49 @@ export default function GoogleMapsComponent({
           }}
         />
       )}
+
+      {/* Drawing Manager for Polygon */}
+      {polygon && (
+        <DrawingManager
+          onPolygonComplete={handlePolygonComplete}
+          drawingMode={window.google.maps.drawing.OverlayType.POLYGON}
+          // draggable
+          editable
+          options={{
+            drawingControl: false,
+            polygonOptions: {
+              fillColor: '#C4B5FD',
+              fillOpacity: 0.4,
+              strokeColor: '#8B5CF6',
+              strokeWeight: 2,
+              clickable: true,
+              editable: true,
+              // draggable: true,
+              zIndex: 1
+            }
+          }}
+        />
+      )}
+
+      {/* Editable Polygon */}
+      {/* {polygonPaths.length > 0 && (
+        <Polygon
+          paths={polygonPaths}
+          editable={true}
+          draggable={true}
+          onMouseUp={() => handlePolygonEdit(polygonRef.current)}
+          onDragEnd={() => handlePolygonEdit(polygonRef.current)}
+          options={{
+            fillColor: '#2196F3',
+            fillOpacity: 0.5,
+            strokeWeight: 2,
+            clickable: true,
+            editable: true,
+            draggable: true,
+            zIndex: 1
+          }}
+        />
+      )} */}
     </GoogleMap>
   );
 }
