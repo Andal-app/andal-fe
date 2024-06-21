@@ -4,11 +4,23 @@ import InputLabel from './InputLabel';
 import TextInput from './TextInput';
 import SubmitBtn from '../buttons/SubmitBtn';
 
-function DetailGeoForm({ geofenceId, geofenceName, radius, startTime, endTime }) {
+function DetailGeoForm({ geofenceId, geofenceShape, geofenceName, radius, startTime, endTime }) {
   const navigate = useNavigate();
 
   return (
     <div id="add__geofence__inputs" className="lg:w-72 mx-6 my-4 lg:m-3 flex flex-col gap-4">
+      <div id="geonfece__shape">
+        <InputLabel labelFor="geonfenceShape" content="Bentuk Area" className="font-bold" />
+        <TextInput
+          type="text"
+          name="geonfenceShape"
+          id="geonfenceShape"
+          value={(geofenceShape = 'Lingkaran')}
+          readOnly
+          className="bg-violet-100"
+        />
+      </div>
+
       <div className="flex gap-2">
         <div id="geonfece__name">
           <InputLabel labelFor="geonfenceName" content="Nama Geofence" className="font-bold" />
