@@ -20,7 +20,9 @@ function GeofencePageLayout({
   backBtnState,
   showChildMarker,
   showGeofMarker,
-  circleRadius
+  circleRadius,
+  polygon,
+  setPolygon
 }) {
   // const [selectPosition, setSelectPosition] = useState(null);
   // console.log(selectPosition);
@@ -64,6 +66,8 @@ function GeofencePageLayout({
               showGeofMarker={showGeofMarker}
               isMarkerDraggable={isMarkerDraggable}
               circleRadius={circleRadius}
+              polygon={polygon}
+              setPolygon={setPolygon}
             />
           </div>
         </div>
