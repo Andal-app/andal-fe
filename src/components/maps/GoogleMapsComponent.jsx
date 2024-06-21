@@ -19,7 +19,8 @@ export default function GoogleMapsComponent({
   showGeofMarker,
   isMarkerDraggable,
   circleRadius,
-  polygon
+  polygon,
+  setPolygon
 }) {
   const [childPosition, setChildPosition] = useState(centerPositionDefault);
   const [geofPosition, setGeofPosition] = useState(centerPositionDefault);
@@ -61,6 +62,14 @@ export default function GoogleMapsComponent({
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (!polygon && polygonRef.current) {
+      polygonRef.current.setMap(null);
+      polygonRef.current = null;
+      setPolygonPaths([]);
+    }
+  }, [polygon]);
 
   const handleMapClick = (event) => {
     const { latLng } = event;

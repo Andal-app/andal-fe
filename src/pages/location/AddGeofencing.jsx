@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
@@ -17,11 +17,13 @@ function AddGeofencing({ user }) {
 
   const [selectPosition, setSelectPosition] = useState(null); // dapatkan koordinat [lintang, bujur]
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false); // control for bottom sheet modal
+  const [polygon, setPolygon] = useState(null);
   const [formData, setFormData] = useState({
     geofenceName: '',
     radius: '',
     startTime: '',
-    endTime: ''
+    endTime: '',
+    shape: 'Lingkaran'
   });
 
   const handleCloseBottomSheet = () => {
@@ -35,6 +37,22 @@ function AddGeofencing({ user }) {
       [name]: value
     }));
   };
+
+  const handleShapeChange = (value) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      shape: value
+    }));
+    setPolygon(value === 'Poligon');
+  };
+
+  // Hapus poligon dari peta jika bentuk diubah menjadi Lingkaran
+  useEffect(() => {
+    if (formData.shape === 'Lingkaran' && polygon) {
+      polygon.setMap(null); // Menghapus poligon dari peta
+      setPolygon(null); // Mengosongkan state poligon
+    }
+  }, [formData.shape, polygon]);
 
   // handle input change untuk time picker pada AddGeoForm
   const formatTime = (date) => {
@@ -109,12 +127,13 @@ function AddGeofencing({ user }) {
       selectPosition={selectPosition}
       setSelectPosition={setSelectPosition}
       showChildMarker={false}
-      showGeofMarker={true}
+      showGeofMarker={formData.shape === 'Lingkaran'}
       isMarkerDraggable={true}
       circleRadius={parseFloat(formData.radius) || 0}
       backBtnNavTo={`/detailposisi/${childUsername}`}
       backBtnState={{ childId: childId, childUsername: childUsername, childFullname: childFullname }}
-      // polygon={true}
+      polygon={formData.shape === 'Poligon'}
+      setPolygon={setPolygon}
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
@@ -124,6 +143,7 @@ function AddGeofencing({ user }) {
           handleSubmit={handleSubmit}
           setStartTime={setStartTime}
           setEndTime={setEndTime}
+          handleShapeChange={handleShapeChange}
         />
       </BottomSheetModal>
 
@@ -143,6 +163,7 @@ function AddGeofencing({ user }) {
             handleSubmit={handleSubmit}
             setStartTime={setStartTime}
             setEndTime={setEndTime}
+            handleShapeChange={handleShapeChange}
           />
         </div>
         {/* add geofencing form end */}
