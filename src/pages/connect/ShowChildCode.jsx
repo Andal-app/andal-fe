@@ -1,20 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import QRCode from 'qrcode.react';
 import SubmitBtn from '../../components/buttons/SubmitBtn';
 import Sidebar from '../../components/navigation/Sidebar';
 import TopBackNav from '../../components/navigation/TopBackNav';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
-import ShowConnectCode from '../../components/connect/ShowConnectCode/ShowConnectCode';
 import { useNavigate } from 'react-router-dom';
 
 const ShowChildCode = ({ user }) => {
   const navigate = useNavigate();
-  const dummyCode = '1234567890';
+  const REFRESH_INTERVAL = 60000;
+  const [qrCodeValue, setQrCodeValue] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleClick = (e) => {
     e.preventDefault();
     navigate('/anak/hubungkan/masukkankode');
   };
+
+  useEffect(() => {
+    const fetchQROTP = async () => {
+      try {
+        const response = await axios.get(process.env.REACT_APP_API_URL + `child/code`);
+        setQrCodeValue(response.data.code);
+        setErrorMessage('');
+      } catch (err) {
+        if (err.response) {
+          setErrorMessage(err.response.data.message);
+        } else {
+          setErrorMessage('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+        }
+        setQrCodeValue(''); // Clear the QR code value
+      }
+    };
+
+    fetchQROTP();
+
+    const interval = setInterval(fetchQROTP, REFRESH_INTERVAL);
+
+    return () => clearInterval(interval);
+  }, [REFRESH_INTERVAL]);
 
   return (
     <div className="flex">
@@ -30,8 +55,12 @@ const ShowChildCode = ({ user }) => {
         <div className="w-[85%] lg:w-1/2 py-8 space-y-4">
           {/* qr code start */}
           <div className="flex justify-center items-center">
-            <div className="w-[55%] border border-dashed border-violet-600 rounded-xl flex justify-center items-center p-6">
-              <QRCode value={dummyCode} style={{ width: '100%', height: 'auto' }} />
+            <div className="min-w-[55%] min-h-[200px] border border-dashed border-violet-600 rounded-xl flex justify-center items-center p-6">
+              {qrCodeValue ? (
+                <QRCode value={qrCodeValue} style={{ width: '100%', height: 'auto' }} />
+              ) : (
+                <p className="text-black text-center">{errorMessage || 'Terjadi Kesalahan'}</p>
+              )}
             </div>
           </div>
           {/* qr code end */}
