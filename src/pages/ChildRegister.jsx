@@ -60,7 +60,8 @@ const ChildRegister = () => {
         .post(process.env.REACT_APP_API_URL + 'auth/child/signup', {
           fullname: formData.fullname,
           username: formData.username,
-          password: formData.password
+          password: formData.password,
+          deviceId: 'a7cba941-92e5-4ee6-b51d-779f86111c27'
         })
         .then((res) => {
           // console.log('Response:', response);

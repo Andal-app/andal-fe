@@ -7,10 +7,18 @@ import TopBackNav from '../../components/navigation/TopBackNav';
 import SubmitBtn from '../../components/buttons/SubmitBtn';
 import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
+import ShowConnectCode from '../../components/connect/ShowConnectCode/ShowConnectCode';
 
 const ScanQRCode = ({ user }) => {
+  const COUNTDOWN_TIME = 300; // 300 detik = 5 menit
+
   const [scanResult, setScanResult] = useState('');
   const [isScannerActive, setIsScannerActive] = useState(true);
+  const [otp, setOtp] = useState('');
+  const [isScanSuccess, setIsScanSuccess] = useState(false);
+  const [countdown, setCountdown] = useState(COUNTDOWN_TIME);
+  const [isCodeExpired, setIsCodeExpired] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,6 +27,19 @@ const ScanQRCode = ({ user }) => {
       sendScanResultToServer();
     }
   }, [scanResult]);
+
+  useEffect(() => {
+    let timer;
+    if (isScanSuccess && countdown > 0) {
+      timer = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000); // Setiap 1 detik
+    } else if (countdown === 0) {
+      // Ubah status menjadi kedaluwarsa ketika hitungan mundur selesai
+      setIsCodeExpired(true);
+    }
+    return () => clearInterval(timer);
+  }, [isScanSuccess, countdown]);
 
   const handleScan = (result) => {
     if (result && result.length > 0) {
@@ -36,6 +57,18 @@ const ScanQRCode = ({ user }) => {
 
   const toggleScanner = () => {
     setIsScannerActive(!isScannerActive);
+    setError('');
+    setScanResult('');
+    setIsScanSuccess(false);
+  };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    setIsScannerActive(false);
+    setError('');
+    setScanResult('');
+    setIsScanSuccess(false);
+    navigate('/orangtua/hubungkan');
   };
 
   const sendScanResultToServer = async () => {
@@ -45,19 +78,27 @@ const ScanQRCode = ({ user }) => {
           code: scanResult
         })
         .then((res) => {
-          // console.log('Response:', res);
-          console.log(res.data);
-          navigate('/orangtua/hubungkan/kode', { state: { code: res.data.code } });
+          // console.log(res.data);
+          setOtp(response.data.code);
+          setIsScanSuccess(true);
+          setIsCodeExpired(false);
+          setCountdown(COUNTDOWN_TIME);
+          setError('');
         });
     } catch (err) {
+      setIsScannerActive(false);
       if (err.response) {
-        // console.log(err.response.data.message);
-        console.error(err.response.data.message);
+        setError(err.response.data.message);
       } else {
-        // console.log(err.message);
-        console.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+        setError('Terjadi kesalahan. Coba cek koneksi internet Anda.');
       }
     }
+  };
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
   return (
@@ -70,24 +111,55 @@ const ScanQRCode = ({ user }) => {
         <TopBackNav title="Hubungkan Akun Anak" navigateTo="/beranda/orangtua" />
         {/* page title end */}
 
-        <div id="scanner__container" className="w-1/2 flex flex-col items-center justify-center gap-8 mt-10">
-          {/* scan QR start */}
-          <div className="w-full h-[400px] flex flex-col items-center justify-center">
-            {isScannerActive ? (
-              <Scanner onScan={handleScan} onError={handleError} style={{ width: '100%' }} />
-            ) : (
-              <div className="flex flex-col justify-center items-center gap-4">
-                <p className="w-1/2">
-                  <Icon icon="fluent:camera-off-16-regular" className="w-full h-full text-violet-300" />
-                </p>
-                <p>Kamera dimatikan</p>
-              </div>
-            )}
+        {!isScanSuccess ? (
+          <div id="scanner__container" className="w-1/2 flex flex-col items-center justify-center gap-8 mt-10">
+            {/* scan QR start */}
+            <div className="w-full h-[400px] flex flex-col items-center justify-center">
+              {isScannerActive ? (
+                <Scanner onScan={handleScan} onError={handleError} style={{ width: '100%' }} />
+              ) : (
+                <div className="flex flex-col justify-center items-center gap-4">
+                  <p className="w-1/2">
+                    <Icon icon="fluent:camera-off-16-regular" className="w-full h-full text-violet-300" />
+                  </p>
+                  <p>Kamera dimatikan</p>
+                  {error || (error?.length === 0 && <p className="text-red-500 font-medium">{error}</p>)}
+                </div>
+              )}
+            </div>
+            {/* scan QR end */}
+            <SubmitBtn text={isScannerActive ? 'Matikan Kamera' : 'Aktifkan Kamera'} onClick={toggleScanner} />
           </div>
-          {/* scan QR end */}
+        ) : (
+          <div id="otp__container" className={`w-[85%] lg:w-1/2 h-screen flex flex-col items-center gap-6 py-12`}>
+            {/* masukkan username anak start */}
+            <div id="show__otp" className="w-full flex flex-col gap-8">
+              <ShowConnectCode verifCode={otp} subtitle="Masukkan kode pada akun anak" />
+            </div>
 
-          <SubmitBtn text={isScannerActive ? 'Matikan Kamera' : 'Aktifkan Kamera'} onClick={toggleScanner} />
-        </div>
+            <div className="text-b-lg text-center">
+              {isCodeExpired ? (
+                <div>
+                  <p className="text-red-500">Kode kedaluwarsa</p>
+                  <p>Pindai ulang QR Code untuk memuat OTP baru</p>
+                </div>
+              ) : (
+                <div>
+                  Kode berlaku selama <span className="text-violet-900">{formatTime(countdown)}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="w-full">
+              <SubmitBtn
+                text="Pindai Ulang QR Code"
+                onClick={handleClick}
+                bgColor="bg-yellow-700"
+                bgColorHover="bg-yellow-800"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
