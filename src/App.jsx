@@ -51,12 +51,15 @@ if (localStorage.jwt) {
 function App() {
   const auth = useSelector((state) => state.auth);
 
+  const username = localStorage.getItem('username');
+  const fullname = localStorage.getItem('fullname');
+
   const user = {
     isConnected: auth?.isConnected || false,
     role: auth?.user?.role || '',
     parentId: auth?.user?.user?._id || '',
-    username: auth?.user?.user?.username || '',
-    fullname: auth?.user?.user?.fullname || ''
+    username: username || '',
+    fullname: fullname || ''
   };
 
   // console.log(user);

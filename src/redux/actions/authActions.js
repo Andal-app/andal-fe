@@ -9,8 +9,11 @@ export const LoginAction = (form, navigate, role) => (dispatch) => {
     .post(`${process.env.REACT_APP_API_URL}auth/${role}/signin`, form)
     .then((res) => {
       // console.log(res);
-      const { token } = res.data;
+      const { token, user } = res.data;
       localStorage.setItem('jwt', token);
+      localStorage.setItem('username', user.username);
+      localStorage.setItem('fullname', user.fullname);
+
       const decode = jwt_decode(token);
       // console.log(decode);
       dispatch(setUser(decode));
@@ -42,6 +45,8 @@ export const LoginAction = (form, navigate, role) => (dispatch) => {
 
 export const LogoutAction = () => (dispatch) => {
   localStorage.removeItem('jwt');
+  localStorage.removeItem('username');
+  localStorage.removeItem('fullname');
   dispatch({
     type: SET_USER,
     payload: {}
