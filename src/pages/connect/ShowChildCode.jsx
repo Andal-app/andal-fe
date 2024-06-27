@@ -9,9 +9,10 @@ import { useNavigate } from 'react-router-dom';
 
 const ShowChildCode = ({ user }) => {
   const navigate = useNavigate();
-  const REFRESH_INTERVAL = 60000;
+  const REFRESH_INTERVAL = 180000;
   const [qrCodeValue, setQrCodeValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ const ShowChildCode = ({ user }) => {
 
   useEffect(() => {
     const fetchQROTP = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(process.env.REACT_APP_API_URL + `child/code`);
         setQrCodeValue(response.data.code);
@@ -31,6 +33,8 @@ const ShowChildCode = ({ user }) => {
           setErrorMessage('Terjadi kesalahan. Coba cek koneksi internet Anda.');
         }
         setQrCodeValue(''); // Clear the QR code value
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -56,7 +60,9 @@ const ShowChildCode = ({ user }) => {
           {/* qr code start */}
           <div className="flex justify-center items-center">
             <div className="min-w-[55%] min-h-[200px] border border-dashed border-violet-600 rounded-xl flex justify-center items-center p-6">
-              {qrCodeValue ? (
+              {isLoading ? ( // Display loading indicator while fetching data
+                <p className="text-black text-center">Memuat...</p>
+              ) : qrCodeValue ? (
                 <QRCode value={qrCodeValue} style={{ width: '100%', height: 'auto' }} />
               ) : (
                 <p className="text-black text-center">{errorMessage || 'Terjadi Kesalahan'}</p>

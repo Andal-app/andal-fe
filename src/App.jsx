@@ -165,7 +165,7 @@ function App() {
               }
             />
             <Route
-              path="/orangtua/hubungkan/code"
+              path="/orangtua/hubungkan/kode"
               element={
                 <ParentRouter user={user}>
                   <ShowParentCode user={user} />

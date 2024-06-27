@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Scanner } from '@yudiel/react-qr-scanner';
 import Sidebar from '../../components/navigation/Sidebar';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
 import TopBackNav from '../../components/navigation/TopBackNav';
 import SubmitBtn from '../../components/buttons/SubmitBtn';
 import { Icon } from '@iconify/react';
+import { useNavigate } from 'react-router-dom';
 
 const ScanQRCode = ({ user }) => {
   const [scanResult, setScanResult] = useState('');
   const [isScannerActive, setIsScannerActive] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Send scanResult to server when it has a value
+    if (scanResult) {
+      sendScanResultToServer();
+    }
+  }, [scanResult]);
 
   const handleScan = (result) => {
     if (result && result.length > 0) {
@@ -16,7 +26,7 @@ const ScanQRCode = ({ user }) => {
       setScanResult(rawValue); // Mengambil nilai rawValue sebagai hasil scan
       console.log(rawValue); // Mengambil nilai rawValue sebagai hasil scan
     } else {
-      console.log('No QR code detected');
+      console.log('Tidak ada QR Code terdeteksi');
     }
   };
 
@@ -26,6 +36,28 @@ const ScanQRCode = ({ user }) => {
 
   const toggleScanner = () => {
     setIsScannerActive(!isScannerActive);
+  };
+
+  const sendScanResultToServer = async () => {
+    try {
+      await axios
+        .post(process.env.REACT_APP_API_URL + 'parent/check-child-code', {
+          code: scanResult
+        })
+        .then((res) => {
+          // console.log('Response:', res);
+          console.log(res.data);
+          navigate('/orangtua/hubungkan/kode', { state: { code: res.data.code } });
+        });
+    } catch (err) {
+      if (err.response) {
+        // console.log(err.response.data.message);
+        console.error(err.response.data.message);
+      } else {
+        // console.log(err.message);
+        console.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+      }
+    }
   };
 
   return (
@@ -51,12 +83,6 @@ const ScanQRCode = ({ user }) => {
                 <p>Kamera dimatikan</p>
               </div>
             )}
-            {/* {scanResult && (
-            <div className="mt-4">
-              <p className="text-lg font-semibold">Hasil Scan:</p>
-              <p className="mt-2 text-blue-600">{scanResult}</p>
-            </div>
-          )} */}
           </div>
           {/* scan QR end */}
 
