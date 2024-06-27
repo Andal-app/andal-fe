@@ -7,6 +7,7 @@ import TopBackNav from '../../components/navigation/TopBackNav';
 import CodeInput from '../../components/inputs/CodeInput';
 import TutorialImg from '../../assets/images/tutorial.svg';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
+import { Link } from 'react-router-dom';
 
 const ConnectAccount = ({ user }) => {
   const [isConnectSuccess, setIsConnectSuccess] = useState(false);
@@ -68,12 +69,12 @@ const ConnectAccount = ({ user }) => {
           <form
             onSubmit={handleSubmit}
             id="user__profile"
-            className={`mt-10 w-[85%] h-screen flex flex-col items-center gap-4 py-6`}
+            className={`mt-10 w-[85%] h-screen flex flex-col items-center gap-6 py-6`}
           >
             {/* modal title start */}
             <div className="text-violet-900 text-center">
-              <p className="font-bold text-h-md">MASUKKAN KODE</p>
-              <p className="text-b-md">dari Ponsel Orang Tua</p>
+              <p className="font-bold text-h-md">MASUKKAN KODE OTP</p>
+              <p className="text-b-md">Kode dari Akun Orang Tua</p>
             </div>
             {/* modal title end */}
 
@@ -85,9 +86,13 @@ const ConnectAccount = ({ user }) => {
               Pengguna tidak ditemukan
             </p>
 
-            <div className="w-full lg:w-[50%] mt-10">
+            <div className="w-full lg:w-[50%] mt-6">
               <SubmitBtn type="submit" text="Hubungkan" />
             </div>
+
+            <Link to="/anak/hubungkan" className="text-b-md font-semibold text-violet-900 underline">
+              Klik untuk tampilkan QR Code
+            </Link>
           </form>
         )}
         {/* hubungkan end */}

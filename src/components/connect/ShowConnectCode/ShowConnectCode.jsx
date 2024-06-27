@@ -9,7 +9,7 @@ const ShowConnectCode = ({
 }) => {
   return (
     <div className="flex flex-col items-center gap-6">
-      <p className={`${textColor} text-h-md font-bold`}>KODE SAYA</p>
+      <p className={`${textColor} text-h-md font-bold`}>KODE OTP SAYA</p>
 
       <div
         className={`${textColor} ${bgColor} ${borderColor} text-h-xl font-bold  rounded-xl border  px-6 tracking-[0.3em] drop-shadow-xl`}

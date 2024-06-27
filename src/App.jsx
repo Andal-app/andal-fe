@@ -42,6 +42,7 @@ import GoogleMapsWrapper from './wrappers/GoogleMapsWrapper';
 import { LocationProvider } from './context/LocationContext';
 import ShowChildCode from './pages/connect/ShowChildCode';
 import ScanQRCode from './pages/connect/ScanQRCode';
+import ShowParentCode from './pages/connect/ShowParentCode';
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt);
@@ -160,6 +161,14 @@ function App() {
               element={
                 <ParentRouter user={user}>
                   <ScanQRCode user={user} />
+                </ParentRouter>
+              }
+            />
+            <Route
+              path="/orangtua/hubungkan/code"
+              element={
+                <ParentRouter user={user}>
+                  <ShowParentCode user={user} />
                 </ParentRouter>
               }
             />
