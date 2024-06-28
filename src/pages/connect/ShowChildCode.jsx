@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ShowChildCode = ({ user }) => {
   const navigate = useNavigate();
-  const REFRESH_INTERVAL = 180000;
+  const REFRESH_INTERVAL = 60000; // 60000 ms = 60 s
   const [qrCodeValue, setQrCodeValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);

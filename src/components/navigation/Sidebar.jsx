@@ -73,7 +73,7 @@ function Sidebar({ user }) {
         <img
           id="profile__picture"
           // src={user?.role === 'parent' ? User06bSvg : User01aSvg}
-          src={user?.role === 'parent' ? user.profilePicture : User01aSvg}
+          src={user?.profilePicture}
           className="w-14 h-14 rounded-full"
         ></img>
         <div className="flex flex-col justify-center">

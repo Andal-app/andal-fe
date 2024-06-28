@@ -98,7 +98,7 @@ function AddGeofencing({ user }) {
           longitude: selectPosition?.lon,
           startTime: formData.startTime,
           endTime: formData.endTime,
-          shape: 'circle',
+          shape: formData.shape === 'Lingkaran' ? 'circle' : 'polygon',
           radius: formData.radius,
           childId: childId
         })

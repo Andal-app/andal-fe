@@ -26,7 +26,7 @@ export default function GoogleMapsComponent({
   const [geofPosition, setGeofPosition] = useState(centerPositionDefault);
   const [centerPosition, setCenterPosition] = useState(centerPositionDefault);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 600);
-  const [polygonPaths, setPolygonPaths] = useState([]);
+  const [polygonPoints, setPolygonPoints] = useState([]);
   const polygonRef = useRef(null);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function GoogleMapsComponent({
     if (!polygon && polygonRef.current) {
       polygonRef.current.setMap(null);
       polygonRef.current = null;
-      setPolygonPaths([]);
+      setPolygonPoints([]);
     }
   }, [polygon]);
 
@@ -117,8 +117,8 @@ export default function GoogleMapsComponent({
       coordinates.push({ lat: point.lat(), lng: point.lng() });
     }
 
-    setPolygonPaths(coordinates);
-    console.log('Polygon Coordinates:', coordinates);
+    setPolygonPoints(coordinates);
+    console.log('Polygon Coordinates:', polygonPoints);
   };
 
   // const handlePolygonEdit = (polygon) => {
@@ -130,7 +130,7 @@ export default function GoogleMapsComponent({
   //     coordinates.push({ lat: point.lat(), lng: point.lng() });
   //   }
 
-  //   setPolygonPaths(coordinates);
+  //   setPolygonPoints(coordinates);
   //   console.log('Updated Polygon Coordinates:', coordinates);
   // };
 
@@ -205,9 +205,9 @@ export default function GoogleMapsComponent({
       )}
 
       {/* Editable Polygon */}
-      {/* {polygonPaths.length > 0 && (
+      {/* {polygonPoints.length > 0 && (
         <Polygon
-          paths={polygonPaths}
+          paths={polygonPoints}
           editable={true}
           draggable={true}
           onMouseUp={() => handlePolygonEdit(polygonRef.current)}

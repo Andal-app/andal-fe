@@ -65,7 +65,7 @@ function EditProfile({ user }) {
         <TopBackNav navigateTo="/profil" title="Ubah Profil" link="/profil" />
 
         <main className="w-[85%] lg:w-[80%] h-[80%] flex flex-col items-center">
-          <InputProfPic src={user?.role === 'parent' ? user.profilePicture : User01aSvg} />
+          <InputProfPic src={user?.profilePicture} />
 
           <form onSubmit={handleSubmit} className="w-full h-full flex flex-col">
             <div id="edit__inputs" className="flex flex-col gap-4">
