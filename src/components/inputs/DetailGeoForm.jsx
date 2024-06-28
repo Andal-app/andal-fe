@@ -4,7 +4,7 @@ import InputLabel from './InputLabel';
 import TextInput from './TextInput';
 import SubmitBtn from '../buttons/SubmitBtn';
 
-function DetailGeoForm({ geofenceId, geofenceShape, geofenceName, radius, startTime, endTime }) {
+function DetailGeoForm({ childId, geofenceId, geofenceShape, geofenceName, radius, startTime, endTime }) {
   const navigate = useNavigate();
 
   return (
@@ -68,7 +68,11 @@ function DetailGeoForm({ geofenceId, geofenceShape, geofenceName, radius, startT
       </div>
 
       <div className="mt-6 lg:mt-2">
-        <SubmitBtn type="button" text="Edit" onClick={() => [navigate(`/editgeofence/${geofenceId}`)]} />
+        <SubmitBtn
+          type="button"
+          text="Edit"
+          onClick={() => [navigate(`/editgeofence/${geofenceId}`, { state: { childId: childId } })]}
+        />
       </div>
     </div>
   );

@@ -81,7 +81,6 @@ function AddGeofencing({ user }) {
     }
   };
 
-  const { geofenceName, radius, startTime, endTime, shape } = formData;
   const transformedPolygonPoints = polygonPoints.map((point) => [point.lng, point.lat]);
 
   const newGeofence = {

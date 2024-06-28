@@ -13,7 +13,6 @@ function EditGeofencing({ user }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { childId, childFullname } = location?.state || {}; // get current child info
-
   const { geofenceId } = useParams();
 
   const [geofenceData, setGeofenceData] = useState([]);
@@ -139,33 +138,50 @@ function EditGeofencing({ user }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!selectPosition) {
-      toast.error('Tambahkan titik lokasi terlebih dahulu');
+    // Check conditions for shape
+    if (
+      (formData.shape === 'Lingkaran' && !selectPosition) ||
+      (formData.shape === 'Poligon' && polygonPoints.length === 0)
+    ) {
+      toast.error('Tambahkan area geofence terlebih dahulu');
       return;
     }
 
+    // Prepare geofence data based on shape
+    const updatedGeofence = {
+      childId: childId,
+      geofenceName: formData.geofenceName,
+      startTime: formData.startTime,
+      endTime: formData.endTime,
+      shape: formData.shape === 'Lingkaran' ? 'circle' : 'polygon'
+    };
+
+    // Conditionally add the center field if shape is not "Poligon"
+    if (formData.shape === 'Lingkaran') {
+      updatedGeofence.center = [selectPosition?.lat, selectPosition?.lon];
+      updatedGeofence.radius = formData.radius;
+    }
+
+    // Conditionally add the center field if shape is "Poligon"
+    if (formData.shape === 'Poligon') {
+      updatedGeofence.polygonPoints = polygonPoints.map((point) => [point.lng, point.lat]);
+    }
+
+    // console.log(JSON.stringify(updatedGeofence, null, 2));
+
     try {
       await axios
-        .patch(process.env.REACT_APP_API_URL + `geofence-schedule/${geofenceId}`, {
-          geofenceName: formData.geofenceName,
-          radius: formData.radius,
-          latitude: selectPosition?.lat,
-          longitude: selectPosition?.lon,
-          startTime: formData.startTime,
-          endTime: formData.endTime,
-          radius: 100
-        })
+        .patch(`${process.env.REACT_APP_API_URL}geofence-schedule/${geofenceId}`, updatedGeofence)
         .then((res) => {
-          // console.log('Response:', res);
           toast.success(res.data.message);
-          // navigate(`/detailposisi/${childUsername}`);
+          navigate(`/detailgeofence/${geofenceId}`, {
+            state: { childId: childId, geofenceId: geofenceId }
+          });
         });
     } catch (err) {
       if (err.response) {
-        // console.log(err.response.data.message);
         toast.error(err.response.data.message);
       } else {
-        // console.log(err.message);
         toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
       }
     }

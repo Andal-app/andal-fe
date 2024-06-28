@@ -12,12 +12,13 @@ function DetailGeofencing({ user }) {
   const navigate = useNavigate();
   const { childId, geofenceId } = location?.state || {}; // get current child info
   const { childUsername } = useParams();
+  // console.log('childID: ' + childId);
   const [geofenceData, setGeofenceData] = useState([]);
 
   const [selectPosition, setSelectPosition] = useState(null); // dapatkan koordinat [lintang, bujur]
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false); // control for bottom sheet modal
 
-  console.log('geofenceID: ' + geofenceId);
+  // console.log('geofenceID: ' + geofenceId);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,6 +66,7 @@ function DetailGeofencing({ user }) {
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
         <DetailGeoForm
+          childId={childId}
           geofenceId={geofenceData?._id}
           geofenceName={geofenceData?.geofenceName}
           startTime={geofenceData?.startTime}
@@ -78,6 +80,7 @@ function DetailGeofencing({ user }) {
         {/* add geofencing form start */}
         <div className="bg-white rounded-xl py-0.5">
           <DetailGeoForm
+            childId={childId}
             geofenceId={geofenceData?._id}
             geofenceName={geofenceData?.geofenceName}
             startTime={geofenceData?.startTime}
