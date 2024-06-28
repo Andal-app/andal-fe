@@ -27,7 +27,7 @@ function LocationDetail({ setSelectPosition }) {
   }, [geoLocation, setSelectPosition]);
 
   return (
-    <div className="bg-white lg:max-w-96 lg:max-h-[200px] overflow-auto lg:absolute lg:top-32 lg:left-8 lg:z-10 lg:rounded-xl lg:drop-shadow-xl lg:p-5">
+    <div className="bg-white lg:max-w-96 lg:max-h-[300px] overflow-auto lg:absolute lg:top-32 lg:left-8 lg:z-10 lg:rounded-xl lg:drop-shadow-xl lg:p-5">
       {geoLocation.loaded ? (
         <PositionDetailBox lat={geoLocation.coordinates.lat} lng={geoLocation.coordinates.lng} address={address} />
       ) : (

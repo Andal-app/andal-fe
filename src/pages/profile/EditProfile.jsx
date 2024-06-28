@@ -10,6 +10,7 @@ import Sidebar from '../../components/navigation/Sidebar';
 import InputProfPic from '../../components/inputs/InputProfPic';
 import validateInput from '../../helpers/validateInput';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
+import User01aSvg from '../../assets/dummy_data/user_01a.svg';
 
 function EditProfile({ user }) {
   const [formData, setFormData] = useState({
@@ -64,7 +65,7 @@ function EditProfile({ user }) {
         <TopBackNav navigateTo="/profil" title="Ubah Profil" link="/profil" />
 
         <main className="w-[85%] lg:w-[80%] h-[80%] flex flex-col items-center">
-          <InputProfPic src={ProfPic} />
+          <InputProfPic src={user?.role === 'parent' ? user.profilePicture : User01aSvg} />
 
           <form onSubmit={handleSubmit} className="w-full h-full flex flex-col">
             <div id="edit__inputs" className="flex flex-col gap-4">

@@ -29,7 +29,7 @@ const ParentLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    dispatch(LoginAction(form, navigate, role));
+    dispatch(LoginAction(form, role));
   };
 
   return (

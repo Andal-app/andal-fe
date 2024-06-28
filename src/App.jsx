@@ -54,13 +54,15 @@ function App() {
 
   const username = localStorage.getItem('username');
   const fullname = localStorage.getItem('fullname');
+  const profilePicture = localStorage.getItem('profilePicture');
 
   const user = {
     isConnected: auth?.isConnected || false,
     role: auth?.user?.role || '',
     parentId: auth?.user?.user?._id || '',
     username: username || '',
-    fullname: fullname || ''
+    fullname: fullname || '',
+    profilePicture: profilePicture || ''
   };
 
   // console.log(user);
