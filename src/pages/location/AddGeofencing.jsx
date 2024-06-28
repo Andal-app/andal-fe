@@ -18,6 +18,7 @@ function AddGeofencing({ user }) {
   const [selectPosition, setSelectPosition] = useState(null); // dapatkan koordinat [lintang, bujur]
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false); // control for bottom sheet modal
   const [polygon, setPolygon] = useState(null);
+  const [polygonPoints, setPolygonPoints] = useState([]);
   const [formData, setFormData] = useState({
     geofenceName: '',
     radius: '',
@@ -81,40 +82,53 @@ function AddGeofencing({ user }) {
     }
   };
 
+  const { geofenceName, radius, startTime, endTime, shape } = formData;
+  const transformedPolygonPoints = polygonPoints.map((point) => [point.lng, point.lat]);
+
+  const newGeofence = {
+    childId: childId,
+    geofenceName: formData.geofenceName,
+    startTime: formData.startTime,
+    endTime: formData.endTime,
+    shape: formData.shape === 'Lingkaran' ? 'circle' : 'polygon'
+  };
+
+  // Conditionally add the center field if shape is not "Poligon"
+  if (formData.shape == 'Lingkaran') {
+    newGeofence.center = [selectPosition?.lat, selectPosition?.lon];
+    newGeofence.radius = formData.radius;
+  }
+  // Conditionally add the center field if shape is "Poligon"
+  if (formData.shape == 'Poligon') {
+    newGeofence.polygonPoints = transformedPolygonPoints;
+  }
+
   // post data titik dan informasi geofencing
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!selectPosition) {
-      toast.error('Tambahkan titik lokasi terlebih dahulu');
+    // Check conditions for shape
+    if (
+      (formData.shape === 'Lingkaran' && !selectPosition) ||
+      (formData.shape === 'Poligon' && polygonPoints.length === 0)
+    ) {
+      toast.error('Tambahkan area geofence terlebih dahulu');
       return;
     }
 
+    // console.log(JSON.stringify(newGeofence, null, 2));
+
     try {
-      await axios
-        .post(process.env.REACT_APP_API_URL + 'geofence-schedule', {
-          geofenceName: formData.geofenceName,
-          latitude: selectPosition?.lat,
-          longitude: selectPosition?.lon,
-          startTime: formData.startTime,
-          endTime: formData.endTime,
-          shape: formData.shape === 'Lingkaran' ? 'circle' : 'polygon',
-          radius: formData.radius,
-          childId: childId
-        })
-        .then((res) => {
-          // console.log('Response:', res);
-          toast.success(res.data.message);
-          navigate(`/detailposisi/${childUsername}`, {
-            state: { childId: childId }
-          });
+      await axios.post(process.env.REACT_APP_API_URL + 'geofence-schedule', newGeofence).then((res) => {
+        toast.success(res.data.message);
+        navigate(`/detailposisi/${childUsername}`, {
+          state: { childId: childId }
         });
+      });
     } catch (err) {
       if (err.response) {
-        // console.log(err.response.data.message);
         toast.error(err.response.data.message);
       } else {
-        // console.log(err.message);
         toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
       }
     }
@@ -134,6 +148,7 @@ function AddGeofencing({ user }) {
       backBtnState={{ childId: childId, childUsername: childUsername, childFullname: childFullname }}
       polygon={formData.shape === 'Poligon'}
       setPolygon={setPolygon}
+      setPolygonPoints={setPolygonPoints}
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>

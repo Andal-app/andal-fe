@@ -20,13 +20,14 @@ export default function GoogleMapsComponent({
   isMarkerDraggable,
   circleRadius,
   polygon,
-  setPolygon
+  setPolygon,
+  setPolygonPoints
 }) {
   const [childPosition, setChildPosition] = useState(centerPositionDefault);
   const [geofPosition, setGeofPosition] = useState(centerPositionDefault);
   const [centerPosition, setCenterPosition] = useState(centerPositionDefault);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 600);
-  const [polygonPoints, setPolygonPoints] = useState([]);
+  // const [polygonPoints, setPolygonPoints] = useState([]);
   const polygonRef = useRef(null);
 
   useEffect(() => {
@@ -118,7 +119,7 @@ export default function GoogleMapsComponent({
     }
 
     setPolygonPoints(coordinates);
-    console.log('Polygon Coordinates:', polygonPoints);
+    // console.log('Polygon Coordinates:', coordinates);
   };
 
   // const handlePolygonEdit = (polygon) => {
