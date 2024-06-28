@@ -23,7 +23,8 @@ function GeofencePageLayout({
   circleRadius,
   polygon,
   setPolygon,
-  setPolygonPoints
+  setPolygonPoints,
+  polygonPoints
 }) {
   // const [selectPosition, setSelectPosition] = useState(null);
   // console.log(selectPosition);
@@ -70,6 +71,7 @@ function GeofencePageLayout({
               polygon={polygon}
               setPolygon={setPolygon}
               setPolygonPoints={setPolygonPoints}
+              polygonPoints={polygonPoints}
             />
           </div>
         </div>

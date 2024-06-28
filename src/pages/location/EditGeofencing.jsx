@@ -20,6 +20,7 @@ function EditGeofencing({ user }) {
   const [selectPosition, setSelectPosition] = useState(null); // dapatkan koordinat [lintang, bujur]
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false); // control for bottom sheet modal
   const [polygon, setPolygon] = useState(null);
+  const [polygonPoints, setPolygonPoints] = useState([]);
   const [formData, setFormData] = useState({
     geofenceName: '',
     radius: '',
@@ -45,13 +46,19 @@ function EditGeofencing({ user }) {
       ...prevFormData,
       shape: value
     }));
-    setPolygon(value === 'Poligon');
+    if (value === 'Lingkaran') {
+      setPolygon(false);
+    } else if (value === 'Poligon') {
+      setPolygon(true);
+    }
   };
 
   // Hapus poligon dari peta jika bentuk diubah menjadi Lingkaran
   useEffect(() => {
     if (formData.shape === 'Lingkaran' && polygon) {
-      polygon.setMap(null); // Menghapus poligon dari peta
+      if (polygon.setMap) {
+        polygon.setMap(null); // Menghapus poligon dari peta jika ada
+      }
       setPolygon(null); // Mengosongkan state poligon
     }
   }, [formData.shape, polygon]);
@@ -90,20 +97,30 @@ function EditGeofencing({ user }) {
 
         setGeofenceData(response.data.geofence);
 
-        // Set initial form data
-        setFormData({
+        const initialFormData = {
           geofenceName: response.data.geofence.geofenceName,
-          radius: response.data.geofence.radius,
           startTime: response.data.geofence.startTime,
-          endTime: response.data.geofence.endTime
-        });
+          endTime: response.data.geofence.endTime,
+          shape: response.data.geofence.shape === 'polygon' ? 'Poligon' : 'Lingkaran'
+          // radius: response.data.geofence.shape === 'circle' ? response.data.geofence.radius.toString() : ''
+        };
 
-        // Set the position after fetching the geofence data
-        const { coordinates } = response.data.geofence.location;
-        setSelectPosition({
-          lat: coordinates[1],
-          lon: coordinates[0]
-        });
+        setFormData(initialFormData);
+
+        if (response.data.geofence.shape === 'circle') {
+          const { center, radius } = response.data.geofence;
+          setSelectPosition({
+            lat: center[0],
+            lon: center[1]
+          });
+          initialFormData.radius = radius.toString();
+        } else if (response.data.geofence.shape === 'polygon') {
+          const { polygonPoints } = response.data.geofence;
+          setPolygonPoints(polygonPoints.map((point) => ({ lat: point[1], lng: point[0] })));
+          setPolygon(true);
+
+          handleShapeChange('Poligon');
+        }
       } catch (err) {
         if (err.response) {
           toast.error(err.response.data.message);
@@ -116,7 +133,7 @@ function EditGeofencing({ user }) {
     fetchData();
 
     return () => {};
-  }, []);
+  }, [geofenceId]);
 
   // post data titik dan informasi geofencing
   const handleSubmit = async (e) => {
@@ -168,6 +185,8 @@ function EditGeofencing({ user }) {
       backBtnState={{ geofenceId: `${geofenceId}` }}
       polygon={formData.shape === 'Poligon'}
       setPolygon={setPolygon}
+      setPolygonPoints={setPolygonPoints}
+      polygonPoints={polygonPoints}
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>

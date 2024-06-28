@@ -74,9 +74,9 @@ const ParentLogin = () => {
                     <PasswordInput name="password" onChange={handleChange} />
                   </div>
                   {/* lupa password start */}
-                  <div className="text-end">
+                  {/* <div className="text-end">
                     <ForgotPass />
-                  </div>
+                  </div> */}
                   {/* lupa password end */}
                 </div>
                 {/* password end */}

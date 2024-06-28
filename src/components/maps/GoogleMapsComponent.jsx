@@ -21,7 +21,8 @@ export default function GoogleMapsComponent({
   circleRadius,
   polygon,
   setPolygon,
-  setPolygonPoints
+  setPolygonPoints,
+  polygonPoints
 }) {
   const [childPosition, setChildPosition] = useState(centerPositionDefault);
   const [geofPosition, setGeofPosition] = useState(centerPositionDefault);
@@ -51,6 +52,13 @@ export default function GoogleMapsComponent({
   }, [geofMarkerPosition, childMarkerPosition]);
 
   useEffect(() => {
+    if (polygonPoints && polygonPoints.length > 0) {
+      const firstPoint = polygonPoints[0];
+      setCenterPosition({ lat: firstPoint.lat, lng: firstPoint.lng });
+    }
+  }, [polygonPoints]);
+
+  useEffect(() => {
     const handleResize = () => {
       const isSmall = window.innerWidth <= 600;
       setIsSmallScreen(isSmall);
@@ -70,7 +78,7 @@ export default function GoogleMapsComponent({
       polygonRef.current = null;
       setPolygonPoints([]);
     }
-  }, [polygon]);
+  }, [polygon, setPolygonPoints]);
 
   const handleMapClick = (event) => {
     const { latLng } = event;
@@ -205,6 +213,24 @@ export default function GoogleMapsComponent({
         />
       )}
 
+      {/* show polygon */}
+      {polygonPoints && polygonPoints.length > 0 && (
+        <Polygon
+          paths={polygonPoints}
+          editable={true}
+          draggable={true}
+          options={{
+            fillColor: '#C4B5FD',
+            fillOpacity: 0.4,
+            strokeColor: '#8B5CF6',
+            strokeWeight: 2,
+            clickable: true,
+            editable: true,
+            draggable: true,
+            zIndex: 1
+          }}
+        />
+      )}
       {/* Editable Polygon */}
       {/* {polygonPoints.length > 0 && (
         <Polygon

@@ -46,7 +46,11 @@ const ChildRegister = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const deviceId = getOrCreateUUID();
+    let deviceId = localStorage.getItem('device_uuid');
+    if (!deviceId) {
+      deviceId = getOrCreateUUID();
+      // localStorage.setItem('device_uuid', deviceId);
+    }
     try {
       await axios
         .post(process.env.REACT_APP_API_URL + 'auth/child/signup', {
@@ -102,7 +106,7 @@ const ChildRegister = () => {
 
           <form className="w-full" onSubmit={handleSubmit}>
             {/* form inputs start */}
-            <div id="form__inputs" className="space-y-1">
+            <div id="form__inputs" className="space-y-1 lg:space-y-2">
               {/* full name start */}
               <div>
                 <InputLabel labelFor="fullname" content="Nama Lengkap" />

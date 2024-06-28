@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'tailwindcss/tailwind.css';
 
-export default function ToggleBtn({ onChange, value1, value2 }) {
-  const [active, setActive] = useState(value1);
+export default function ToggleBtn({ onChange, value1, value2, initialShape }) {
+  const [active, setActive] = useState(initialShape);
+
+  useEffect(() => {
+    setActive(initialShape);
+  }, [initialShape]);
 
   const handleToggle = (value) => {
     setActive(value);

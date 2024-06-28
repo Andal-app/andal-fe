@@ -18,7 +18,7 @@ function AddGeoForm({
     <form id="add__geofence__inputs" onSubmit={handleSubmit} className="lg:w-72 mx-6 my-4 lg:m-3 flex flex-col gap-4">
       <div>
         <InputLabel content="Bentuk Area" className="font-bold" />
-        <ToggleBtn onChange={handleShapeChange} value1="Lingkaran" value2="Poligon" />
+        <ToggleBtn onChange={handleShapeChange} initialShape={formData.shape} value1="Lingkaran" value2="Poligon" />
       </div>
 
       <div className="flex gap-2">

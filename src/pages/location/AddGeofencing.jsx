@@ -6,7 +6,6 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import BottomSheetModal from '../../components/modals/BottomSheetModal';
 import GeofencePageLayout from '../../layouts/geofencing/GeofencePageLayout';
 import AddGeoForm from '../../components/inputs/AddGeoForm';
-import MapsSearchBox from '../../components/maps/MapsSearchBox';
 import GoogleMapsSearchBox from '../../components/maps/GoogleMapsSearchBox';
 
 function AddGeofencing({ user }) {
