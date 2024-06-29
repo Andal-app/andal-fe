@@ -25,6 +25,7 @@ function PositionDetailV2({ user }) {
   const [childMarkerPosition, setChildMarkerPosition] = useState(null);
   const [geofMarkerPosition, setGeofMarkerPosition] = useState(null);
   const [activeGF, setActiveGF] = useState(null);
+  const [polygonPoints, setPolygonPoints] = useState([]);
 
   const { childId } = location?.state || {}; // get current child info
   // console.log('childID: ' + childId);
@@ -51,6 +52,7 @@ function PositionDetailV2({ user }) {
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}child/${childId}`);
       setChildData(response.data);
+      console.log(response.data);
 
       // Set child latest position
       const { latestLat, latestLong } = response.data.child;
@@ -60,10 +62,16 @@ function PositionDetailV2({ user }) {
       const activeGeofence = response.data.activeGF;
       setActiveGF(activeGeofence);
 
-      // Set activeGeofPosition
+      // Set geofence position based on shape
       if (activeGeofence) {
-        const { coordinates } = activeGeofence.location;
-        setGeofMarkerPosition({ lat: coordinates[1], lon: coordinates[0] });
+        if (activeGeofence.shape === 'circle') {
+          const { center } = activeGeofence;
+          setGeofMarkerPosition({ lat: center[0], lon: center[1] });
+        } else if (activeGeofence.shape === 'polygon') {
+          const { polygonPoints } = activeGeofence;
+          const formattedPolygonPoints = polygonPoints.map((point) => ({ lat: point[0], lng: point[1] }));
+          setPolygonPoints(formattedPolygonPoints);
+        }
       }
 
       // call fetchAddress
@@ -133,7 +141,8 @@ function PositionDetailV2({ user }) {
               showChildMarker={true}
               showGeofMarker={true}
               isMarkerDraggable={false}
-              circleRadius={activeGF?.radius}
+              circleRadius={activeGF?.shape === 'circle' ? activeGF.radius : null}
+              polygonPoints={polygonPoints}
             />
           </div>
         </div>

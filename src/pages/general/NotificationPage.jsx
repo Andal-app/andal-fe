@@ -15,13 +15,97 @@ function NotificationPage({ user }) {
   const [isLoading, setIsLoading] = useState(null);
   const [error, setError] = useState(null);
 
+  // useEffect(() => {
+  //   const fetchInitialNotifications = async () => {
+  //     setIsLoading(true);
+  //     setError(null);
+  //     try {
+  //       const response = await axios.get(`${process.env.REACT_APP_API_URL}notification/?parentId=${user?.parentId}`);
+  //       const sortedData = response.data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  //       setNotifData(sortedData);
+  //     } catch (err) {
+  //       if (err.response) {
+  //         setError(err.response.data.message);
+  //         // toast.error(err.response.data.message);
+  //       } else {
+  //         setError('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+  //         // toast.error('Terjadi kesalahan. Coba cek koneksi internet Anda.');
+  //       }
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   const fetchChildUsernames = async () => {
+  //     try {
+  //       const response = await axios.get(process.env.REACT_APP_API_URL + 'parent/get-my-child');
+  //       const children = response.data.children;
+  //       return children.map((child) => child.username);
+  //     } catch (err) {
+  //       console.error('Failed to fetch child usernames:', err);
+  //       return [];
+  //     }
+  //   };
+
+  //   const watchNotifications = async (childUsernames) => {
+  //     try {
+  //       const credentials = Credentials.anonymous();
+  //       const user = await app.logIn(credentials);
+  //       const mongodb = app.currentUser.mongoClient('mongodb-atlas');
+  //       const notificationsCollection = mongodb.db('childtrackr-new').collection('notifications');
+
+  //       // Watch for changes in the notifications collection
+  //       for await (const change of notificationsCollection.watch()) {
+  //         if (change.operationType === 'insert' && childUsernames.includes(change.fullDocument.childUsername)) {
+  //           setNotifData((prevData) => [change.fullDocument, ...prevData]);
+  //           showNotification('New Notification', {
+  //             body: change.fullDocument.message,
+  //             icon: '/icon.png',
+  //             badge: '/badge.png'
+  //           });
+  //         }
+  //       }
+  //     } catch (err) {
+  //       setError('Failed to connect to the database.');
+  //       console.error(err);
+  //     }
+  //   };
+
+  //   const initializeNotifications = async () => {
+  //     await requestNotificationPermission();
+  //     const registration = await registerServiceWorker();
+  //     if (registration) {
+  //       await fetchInitialNotifications();
+  //       const childUsernames = await fetchChildUsernames();
+  //       if (childUsernames.length > 0) {
+  //         await watchNotifications(childUsernames);
+  //       } else {
+  //         setError('No child usernames found.');
+  //       }
+  //     }
+  //   };
+
+  //   initializeNotifications();
+
+  //   return () => {
+  //     app.currentUser?.logOut();
+  //   };
+  // }, [user?.parentId]);
+
   useEffect(() => {
-    const fetchInitialNotifications = async () => {
+    const fetchInitialNotifications = async (childUsernames) => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}notification/?parentId=${user?.parentId}`);
-        const sortedData = response.data.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        // Loop through each childUsername to fetch their notifications
+        const promises = childUsernames.map(async (username) => {
+          const response = await axios.get(`${process.env.REACT_APP_API_URL}notification/?childUsername=${username}`);
+          return response.data.data;
+        });
+
+        const notificationsArray = await Promise.all(promises);
+        const allNotifications = notificationsArray.flat();
+        const sortedData = allNotifications.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setNotifData(sortedData);
       } catch (err) {
         if (err.response) {
@@ -75,9 +159,9 @@ function NotificationPage({ user }) {
       await requestNotificationPermission();
       const registration = await registerServiceWorker();
       if (registration) {
-        await fetchInitialNotifications();
         const childUsernames = await fetchChildUsernames();
         if (childUsernames.length > 0) {
+          await fetchInitialNotifications(childUsernames);
           await watchNotifications(childUsernames);
         } else {
           setError('No child usernames found.');

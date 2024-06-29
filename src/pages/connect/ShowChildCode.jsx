@@ -25,6 +25,7 @@ const ShowChildCode = ({ user }) => {
       try {
         const response = await axios.get(process.env.REACT_APP_API_URL + `child/code`);
         setQrCodeValue(response.data.code);
+        console.log('kode anak: ' + response.data.code);
         setErrorMessage('');
       } catch (err) {
         if (err.response) {

@@ -20,7 +20,7 @@ function DetailGeofencing({ user }) {
 
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false); // control for bottom sheet modal
 
-  // console.log('geofenceID: ' + geofenceId);
+  console.log('childId: ' + childId);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +39,7 @@ function DetailGeofencing({ user }) {
           });
         } else if (geofence.shape === 'polygon') {
           const { polygonPoints } = geofence;
-          setPolygonPoints(polygonPoints.map((point) => ({ lat: point[1], lng: point[0] })));
+          setPolygonPoints(polygonPoints.map((point) => ({ lat: point[0], lng: point[1] })));
         }
       } catch (err) {
         if (err.response) {

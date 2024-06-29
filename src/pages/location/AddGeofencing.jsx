@@ -81,7 +81,7 @@ function AddGeofencing({ user }) {
     }
   };
 
-  const transformedPolygonPoints = polygonPoints.map((point) => [point.lng, point.lat]);
+  const transformedPolygonPoints = polygonPoints.map((point) => [point.lat, point.lng]);
 
   const newGeofence = {
     childId: childId,

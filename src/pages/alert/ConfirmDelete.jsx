@@ -52,7 +52,7 @@ function ConfirmDelete({ user }) {
       <div id="main__container" className="w-full lg:w-1/2 bg-white h-screen flex items-center justify-center">
         {/* top wave start */}
         <div className="lg:hidden fixed top-0 left-0 right-0 w-full">
-          <img src={TopWave1Red} className="w-full" />
+          <img src={TopWave1Red} className="bg-red-300 w-full" />
         </div>
         {/* top wave end */}
 

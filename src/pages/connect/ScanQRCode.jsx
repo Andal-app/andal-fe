@@ -24,6 +24,7 @@ const ScanQRCode = ({ user }) => {
   useEffect(() => {
     // Send scanResult to server when it has a value
     if (scanResult) {
+      console.log('scanresult: ' + scanResult);
       sendScanResultToServer();
     }
   }, [scanResult]);
@@ -72,6 +73,7 @@ const ScanQRCode = ({ user }) => {
   };
 
   const sendScanResultToServer = async () => {
+    console.log('scanresult: ' + scanResult);
     try {
       await axios
         .post(process.env.REACT_APP_API_URL + 'parent/check-child-code', {
@@ -79,7 +81,8 @@ const ScanQRCode = ({ user }) => {
         })
         .then((res) => {
           // console.log(res.data);
-          setOtp(response.data.code);
+          setOtp(res.data.code);
+          console.log('new otp: ' + res.data.code);
           setIsScanSuccess(true);
           setIsCodeExpired(false);
           setCountdown(COUNTDOWN_TIME);

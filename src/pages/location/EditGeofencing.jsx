@@ -115,7 +115,7 @@ function EditGeofencing({ user }) {
           initialFormData.radius = radius.toString();
         } else if (response.data.geofence.shape === 'polygon') {
           const { polygonPoints } = response.data.geofence;
-          setPolygonPoints(polygonPoints.map((point) => ({ lat: point[1], lng: point[0] })));
+          setPolygonPoints(polygonPoints.map((point) => ({ lat: point[0], lng: point[1] })));
           setPolygon(true);
 
           handleShapeChange('Poligon');
@@ -164,7 +164,7 @@ function EditGeofencing({ user }) {
 
     // Conditionally add the center field if shape is "Poligon"
     if (formData.shape === 'Poligon') {
-      updatedGeofence.polygonPoints = polygonPoints.map((point) => [point.lng, point.lat]);
+      updatedGeofence.polygonPoints = polygonPoints.map((point) => [point.lat, point.lng]);
     }
 
     // console.log(JSON.stringify(updatedGeofence, null, 2));

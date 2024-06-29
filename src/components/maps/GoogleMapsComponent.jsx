@@ -54,7 +54,7 @@ export default function GoogleMapsComponent({
   useEffect(() => {
     if (polygonPoints && polygonPoints.length > 0) {
       const firstPoint = polygonPoints[0];
-      setCenterPosition({ lat: firstPoint.lat, lng: firstPoint.lng });
+      setCenterPosition({ lat: firstPoint.lat, lng: firstPoint.lng || firstPoint.lon });
     }
   }, [polygonPoints]);
 
