@@ -26,7 +26,7 @@ const ConnectAccount = ({ user }) => {
       <Sidebar user={user} />
       <BottomNavbar user={user} />
 
-      <div className="w-full lg:w-1/2 h-screen flex flex-col items-center lg:border-r lg:border-neutral-300">
+      <div className="w-full lg:w-1/2 h-screen flex flex-col items-center lg:border-r lg:border-neutral-300 gap-16 lg:gap-0">
         {/* page title start */}
         <TopBackNav title="Hubungkan Akun Anak" navigateTo="/beranda/orangtua" />
         {/* page title end */}

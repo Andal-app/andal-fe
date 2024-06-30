@@ -4,6 +4,7 @@ import TextInput from './TextInput';
 import ResponsiveTimePicker from './ResponsiveTimePicker';
 import SubmitBtn from '../buttons/SubmitBtn';
 import ToggleBtn from '../buttons/ToggleBtn';
+import GoogleMapsSearchBox from '../maps/GoogleMapsSearchBox';
 
 function AddGeoForm({
   formData,
@@ -12,10 +13,18 @@ function AddGeoForm({
   setStartTime,
   setEndTime,
   handleShapeChange,
-  btnText
+  btnText,
+  selectPosition,
+  setSelectPosition
 }) {
   return (
     <form id="add__geofence__inputs" onSubmit={handleSubmit} className="lg:w-72 mx-6 my-4 lg:m-3 flex flex-col gap-4">
+      {/* searchbar start */}
+      <div className="w-full lg:hidden flex items-center justify-center">
+        <GoogleMapsSearchBox selectPosition={selectPosition} setSelectPosition={setSelectPosition} />
+      </div>
+      {/* searchbar end */}
+
       <div>
         <InputLabel content="Bentuk Area" className="font-bold" />
         <ToggleBtn onChange={handleShapeChange} initialShape={formData.shape} value1="Lingkaran" value2="Poligon" />

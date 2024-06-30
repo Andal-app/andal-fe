@@ -21,7 +21,8 @@ function HomeLayout({ children, user }) {
 
       {/* profile start */}
       <div className="fixed lg:hidden z-10 mt-10 mx-4 text-white flex gap-2">
-        <img className="w-12 h-12 rounded-full" src={user?.role === 'parent' ? User06bSvg : User01aSvg}></img>
+        {/* <img className="w-12 h-12 rounded-full" src={user?.role === 'parent' ? User06bSvg : User01aSvg}></img> */}
+        <img className="w-12 h-12 rounded-full" src={user?.profilePicture}></img>
         <div>
           <p className="text-b-md font-bold">{`Halo, ${user?.fullname?.split(' ')[0]}!`}</p>
           <p className="text-b-sm">{role}</p>

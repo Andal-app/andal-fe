@@ -214,6 +214,8 @@ function EditGeofencing({ user }) {
           setEndTime={setEndTime}
           btnText="Simpan"
           handleShapeChange={handleShapeChange}
+          selectPosition={selectPosition}
+          setSelectPosition={setSelectPosition}
         />
       </BottomSheetModal>
 
@@ -235,6 +237,8 @@ function EditGeofencing({ user }) {
             setEndTime={setEndTime}
             btnText="Simpan"
             handleShapeChange={handleShapeChange}
+            selectPosition={selectPosition}
+            setSelectPosition={setSelectPosition}
           />
         </div>
         {/* add geofencing form end */}

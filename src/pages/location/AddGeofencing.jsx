@@ -157,6 +157,8 @@ function AddGeofencing({ user }) {
           setStartTime={setStartTime}
           setEndTime={setEndTime}
           handleShapeChange={handleShapeChange}
+          selectPosition={selectPosition}
+          setSelectPosition={setSelectPosition}
         />
       </BottomSheetModal>
 
@@ -177,6 +179,8 @@ function AddGeofencing({ user }) {
             setStartTime={setStartTime}
             setEndTime={setEndTime}
             handleShapeChange={handleShapeChange}
+            selectPosition={selectPosition}
+            setSelectPosition={setSelectPosition}
           />
         </div>
         {/* add geofencing form end */}
