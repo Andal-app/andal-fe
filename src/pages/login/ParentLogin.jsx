@@ -29,7 +29,7 @@ const ParentLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    dispatch(LoginAction(form, navigate, role));
+    dispatch(LoginAction(form, role));
   };
 
   return (
@@ -74,9 +74,9 @@ const ParentLogin = () => {
                     <PasswordInput name="password" onChange={handleChange} />
                   </div>
                   {/* lupa password start */}
-                  <div className="text-end">
+                  {/* <div className="text-end">
                     <ForgotPass />
-                  </div>
+                  </div> */}
                   {/* lupa password end */}
                 </div>
                 {/* password end */}

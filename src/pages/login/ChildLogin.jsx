@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import TextInput from '../../components/inputs/TextInput';
@@ -10,14 +10,29 @@ import RegisterNowBtn from '../../components/buttons/RegisterNowBtn';
 import LoginLayout from '../../layouts/LoginLayout';
 import { LoginAction } from '../../redux/actions/authActions';
 import LogoPrimary from '../../assets/images/andal_logo_primary.svg';
+import { getOrCreateUUID } from '../../helpers/uuidHelper';
 
 const ChildLogin = () => {
+  const UUID_KEY = 'device_uuid';
   const [form, setForm] = useState({});
-
   const dispatch = useDispatch();
   const errors = useSelector((state) => state.errors);
   const navigate = useNavigate();
   const role = 'child';
+
+  useEffect(() => {
+    let deviceId = localStorage.getItem(UUID_KEY);
+
+    if (!deviceId) {
+      deviceId = getOrCreateUUID();
+      localStorage.setItem(UUID_KEY, deviceId);
+    }
+
+    setForm((prevForm) => ({
+      ...prevForm,
+      deviceId
+    }));
+  }, []);
 
   const handleChange = (e) => {
     setForm({
@@ -29,7 +44,7 @@ const ChildLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    dispatch(LoginAction(form, navigate, role));
+    dispatch(LoginAction(form, role));
   };
 
   return (
@@ -74,9 +89,9 @@ const ChildLogin = () => {
                     <PasswordInput name="password" onChange={handleChange} />
                   </div>
                   {/* lupa password start */}
-                  <div className="text-end">
+                  {/* <div className="text-end">
                     <ForgotPass />
-                  </div>
+                  </div> */}
                   {/* lupa password end */}
                 </div>
                 {/* password end */}

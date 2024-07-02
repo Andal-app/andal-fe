@@ -66,11 +66,12 @@ function SelectChildSchedule({ user }) {
           ) : childrenData === 0 ? (
             <p className="text-black text-center text-b-md">Tambahkan data baru</p>
           ) : (
-            childrenData?.map(({ _id, username, fullname }, index) => (
+            childrenData?.map(({ _id, username, fullname, profilePicture }, index) => (
               <ChildBox
                 key={_id}
                 fullname={fullname}
-                profPic={ChildrenPicDummy[index % ChildrenPicDummy.length]}
+                // profPic={ChildrenPicDummy[index % ChildrenPicDummy.length]}
+                profPic={profilePicture}
                 onClick={() => [
                   navigate(`/kelolajadwal/${username}`, {
                     state: { childId: _id, childUsername: username, childFullname: fullname }

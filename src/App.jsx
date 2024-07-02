@@ -40,6 +40,9 @@ import EditGeofencing from './pages/location/EditGeofencing';
 import SelectChildSchedule from './pages/location/SelectChildSchedule';
 import GoogleMapsWrapper from './wrappers/GoogleMapsWrapper';
 import { LocationProvider } from './context/LocationContext';
+import ShowChildCode from './pages/connect/ShowChildCode';
+import ScanQRCode from './pages/connect/ScanQRCode';
+import ShowParentCode from './pages/connect/ShowParentCode';
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt);
@@ -49,12 +52,17 @@ if (localStorage.jwt) {
 function App() {
   const auth = useSelector((state) => state.auth);
 
+  const username = localStorage.getItem('username');
+  const fullname = localStorage.getItem('fullname');
+  const profilePicture = localStorage.getItem('profilePicture');
+
   const user = {
     isConnected: auth?.isConnected || false,
     role: auth?.user?.role || '',
     parentId: auth?.user?.user?._id || '',
-    username: auth?.user?.user?.username || '',
-    fullname: auth?.user?.user?.fullname || ''
+    username: username || '',
+    fullname: fullname || '',
+    profilePicture: profilePicture || ''
   };
 
   // console.log(user);
@@ -150,6 +158,22 @@ function App() {
                 </ParentRouter>
               }
             />
+            <Route
+              path="/orangtua/hubungkan/scan"
+              element={
+                <ParentRouter user={user}>
+                  <ScanQRCode user={user} />
+                </ParentRouter>
+              }
+            />
+            <Route
+              path="/orangtua/hubungkan/kode"
+              element={
+                <ParentRouter user={user}>
+                  <ShowParentCode user={user} />
+                </ParentRouter>
+              }
+            />
 
             <Route
               path="/jadwalgeofence"
@@ -238,6 +262,14 @@ function App() {
             />
             <Route
               path="/anak/hubungkan"
+              element={
+                <ChildRouter user={user}>
+                  <ShowChildCode user={user} />
+                </ChildRouter>
+              }
+            />
+            <Route
+              path="/anak/hubungkan/masukkankode"
               element={
                 <ChildRouter user={user}>
                   <InsertConnectCode user={user} />

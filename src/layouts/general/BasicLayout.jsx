@@ -45,7 +45,7 @@ function BasicLayout({ children }) {
         <div className="absolute z-40 left-14 top-24">
           <img src={VectorZigzag} className="w-24" />
         </div>
-        <div className="absolute z-40 left-[640px] top-8">
+        <div className="absolute z-40 left-[640px] top-4">
           <img src={VectorPlus} className="w-20" />
         </div>
       </div>

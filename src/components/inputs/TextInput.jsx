@@ -17,7 +17,7 @@ function TextInput({ type, name, id, placeholder, required, readOnly = false, on
         readOnly={readOnly}
         onChange={onChange}
         value={value}
-        className={`h-10 lg:h-12 px-2.5 border border-neutral-400 text-gray-900 sm:text-sm lg:text-b-md rounded-lg focus:border-neutral-500 w-full ${className}`}
+        className={`h-10 lg:h-10 px-2.5 border border-neutral-400 text-gray-900 sm:text-sm lg:text-b-md rounded-lg focus:border-neutral-500 w-full ${className}`}
       />
       {errors && <InputError error={errors} />}
     </>

@@ -12,25 +12,35 @@ function DetailGeofencing({ user }) {
   const navigate = useNavigate();
   const { childId, geofenceId } = location?.state || {}; // get current child info
   const { childUsername } = useParams();
+  // console.log('childID: ' + childId);
   const [geofenceData, setGeofenceData] = useState([]);
 
   const [selectPosition, setSelectPosition] = useState(null); // dapatkan koordinat [lintang, bujur]
+  const [polygonPoints, setPolygonPoints] = useState([]);
+
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false); // control for bottom sheet modal
 
-  console.log('geofenceID: ' + geofenceId);
+  console.log('childId: ' + childId);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(process.env.REACT_APP_API_URL + `geofence-schedule/${geofenceId}`);
-        setGeofenceData(response.data.geofence);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}geofence-schedule/${geofenceId}`);
 
-        // Set the position after fetching the geofence data
-        const { coordinates } = response.data.geofence.location;
-        setSelectPosition({
-          lat: coordinates[1],
-          lon: coordinates[0]
-        });
+        const { geofence } = response.data;
+
+        setGeofenceData(geofence);
+
+        if (geofence.shape === 'circle') {
+          const { center, radius } = geofence;
+          setSelectPosition({
+            lat: center[0],
+            lon: center[1]
+          });
+        } else if (geofence.shape === 'polygon') {
+          const { polygonPoints } = geofence;
+          setPolygonPoints(polygonPoints.map((point) => ({ lat: point[0], lng: point[1] })));
+        }
       } catch (err) {
         if (err.response) {
           toast.error(err.response.data.message);
@@ -43,7 +53,7 @@ function DetailGeofencing({ user }) {
     fetchData();
 
     return () => {};
-  }, []);
+  }, [geofenceId]);
 
   const handleCloseBottomSheet = () => {
     setIsBottomSheetOpen(false);
@@ -61,12 +71,16 @@ function DetailGeofencing({ user }) {
       isMarkerDraggable={false}
       backBtnNavTo={`/kelolajadwal/${childUsername}`}
       backBtnState={{ childId: childId, childUsername: childUsername }}
+      polygon={geofenceData.shape === 'polygon'}
+      polygonPoints={polygonPoints}
     >
       {/* for small screen: show bottom sheet modal */}
       <BottomSheetModal id="bottom__sheet__modal" isOpen={isBottomSheetOpen} onClose={handleCloseBottomSheet}>
         <DetailGeoForm
+          childId={childId}
           geofenceId={geofenceData?._id}
           geofenceName={geofenceData?.geofenceName}
+          geofenceShape={geofenceData?.shape === 'circle' ? 'Lingkaran' : 'Poligon'}
           startTime={geofenceData?.startTime}
           endTime={geofenceData?.endTime}
           radius={geofenceData?.radius}
@@ -78,8 +92,10 @@ function DetailGeofencing({ user }) {
         {/* add geofencing form start */}
         <div className="bg-white rounded-xl py-0.5">
           <DetailGeoForm
+            childId={childId}
             geofenceId={geofenceData?._id}
             geofenceName={geofenceData?.geofenceName}
+            geofenceShape={geofenceData?.shape === 'circle' ? 'Lingkaran' : 'Poligon'}
             startTime={geofenceData?.startTime}
             endTime={geofenceData?.endTime}
             radius={geofenceData?.radius}

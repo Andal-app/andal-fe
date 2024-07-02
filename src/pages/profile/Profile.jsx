@@ -44,7 +44,8 @@ function Profile({ user }) {
         <div id="user__profile" className={`flex flex-col items-center gap-4 py-6`}>
           <img
             id="user__profile__picture"
-            src={user?.role === 'parent' ? User06bSvg : User01aSvg}
+            // src={user?.role === 'parent' ? User06bSvg : User01aSvg}
+            src={user?.profilePicture}
             className={`w-36 h-36 rounded-full`}
           ></img>
           <div className="text-center">

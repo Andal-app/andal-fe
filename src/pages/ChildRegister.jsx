@@ -10,6 +10,7 @@ import LoginNowBtn from '../components/buttons/LoginNowBtn';
 import validateInput from '../helpers/validateInput';
 import { useDispatch } from 'react-redux';
 import { LoginAction } from '../redux/actions/authActions';
+import { getOrCreateUUID } from '../helpers/uuidHelper';
 
 const ChildRegister = () => {
   const [formData, setFormData] = useState({
@@ -43,24 +44,21 @@ const ChildRegister = () => {
 
   const dispatch = useDispatch();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const { username, password } = formData;
-    const loginData = {
-      username,
-      password
-    };
-    dispatch(LoginAction({ form: loginData, role: 'child' }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let deviceId = localStorage.getItem('device_uuid');
+    if (!deviceId) {
+      deviceId = getOrCreateUUID();
+      // localStorage.setItem('device_uuid', deviceId);
+    }
     try {
       await axios
         .post(process.env.REACT_APP_API_URL + 'auth/child/signup', {
           fullname: formData.fullname,
           username: formData.username,
-          password: formData.password
+          password: formData.password,
+          deviceId
+          // deviceId: 'a7cba941-92e5-4ee6-b51d-779f86111c27'
         })
         .then((res) => {
           // console.log('Response:', response);
@@ -80,7 +78,13 @@ const ChildRegister = () => {
 
           // auto login if registration success
           if (res && res.data) {
-            handleLogin();
+            const { username, password } = formData;
+            const loginData = {
+              username,
+              password,
+              deviceId
+            };
+            dispatch(LoginAction(loginData, 'child'));
           }
         });
     } catch (err) {
@@ -102,7 +106,7 @@ const ChildRegister = () => {
 
           <form className="w-full" onSubmit={handleSubmit}>
             {/* form inputs start */}
-            <div id="form__inputs" className="space-y-1">
+            <div id="form__inputs" className="space-y-1 lg:space-y-2">
               {/* full name start */}
               <div>
                 <InputLabel labelFor="fullname" content="Nama Lengkap" />
