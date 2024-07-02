@@ -136,17 +136,28 @@ function NotificationPage({ user }) {
         const credentials = Credentials.anonymous();
         const user = await app.logIn(credentials);
         const mongodb = app.currentUser.mongoClient('mongodb-atlas');
-        const notificationsCollection = mongodb.db('childtrackr-new').collection('notifications');
+        const notificationsCollection = mongodb.db('andal-app').collection('notifications');
+
+        // Keep track of notification IDs to avoid duplicates
+        const displayedNotificationIds = new Set();
 
         // Watch for changes in the notifications collection
         for await (const change of notificationsCollection.watch()) {
           if (change.operationType === 'insert' && childUsernames.includes(change.fullDocument.childUsername)) {
-            setNotifData((prevData) => [change.fullDocument, ...prevData]);
-            showNotification('New Notification', {
-              body: change.fullDocument.message,
-              icon: '/icon.png',
-              badge: '/badge.png'
-            });
+            const notificationId = change.fullDocument._id;
+
+            // Check if the notification has already been displayed
+            if (!displayedNotificationIds.has(notificationId)) {
+              setNotifData((prevData) => [change.fullDocument, ...prevData]);
+              showNotification('Notifikasi Andal', {
+                body: change.fullDocument.message,
+                icon: '/icon.png',
+                badge: '/badge.png'
+              });
+
+              // Add the notification ID to the set
+              displayedNotificationIds.add(notificationId);
+            }
           }
         }
       } catch (err) {
