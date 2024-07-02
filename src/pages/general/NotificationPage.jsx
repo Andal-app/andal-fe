@@ -7,6 +7,7 @@ import TopBackNav from '../../components/navigation/TopBackNav';
 import NotifListView from '../../components/listViews/NotifListView';
 import BottomNavbar from '../../components/navigation/BottomNavbar';
 import { requestNotificationPermission, registerServiceWorker, showNotification } from '../../utils/notificationUtils';
+import AndalLogoSecondary from '../../assets/images/andal_logo_secondary.svg';
 
 const app = new App({ id: process.env.REACT_APP_REALM_APP_ID });
 
@@ -151,8 +152,8 @@ function NotificationPage({ user }) {
               setNotifData((prevData) => [change.fullDocument, ...prevData]);
               showNotification('Notifikasi Andal', {
                 body: change.fullDocument.message,
-                icon: '/icon.png',
-                badge: '/badge.png'
+                icon: AndalLogoSecondary,
+                badge: AndalLogoSecondary
               });
 
               // Add the notification ID to the set
