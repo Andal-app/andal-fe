@@ -115,11 +115,14 @@ const ScanQRCode = ({ user }) => {
         {/* page title end */}
 
         {!isScanSuccess ? (
-          <div id="scanner__container" className="w-1/2 flex flex-col items-center justify-center gap-8 mt-10">
+          <div
+            id="scanner__container"
+            className="w-full lg:w-1/2 flex flex-col items-center justify-center gap-8 mt-10 px-8"
+          >
             {/* scan QR start */}
-            <div className="w-full h-[400px] flex flex-col items-center justify-center">
+            <div className="w-full max-w-md h-96 flex flex-col items-center justify-center">
               {isScannerActive ? (
-                <Scanner onScan={handleScan} onError={handleError} style={{ width: '100%' }} />
+                <Scanner onScan={handleScan} onError={handleError} style={{ width: '100%', height: '100%' }} />
               ) : (
                 <div className="flex flex-col justify-center items-center gap-4">
                   <p className="w-1/2">

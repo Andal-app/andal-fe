@@ -47,12 +47,16 @@ function EditProfile({ user }) {
           username: formData.username
         })
         .then((res) => {
-          // console.log('Response:', res);
-          toast.success('Berhasil memperbarui profil');
+          console.log(res);
+          toast.success(res.data.message);
         });
-    } catch (error) {
-      // console.error('Error:', error);
-      toast.error(error.message);
+    } catch (err) {
+      // console.error('Error:', err);
+      if (err.response && err.response.data && err.response.data.message) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error('Terjadi kesalahan, silakan coba lagi.');
+      }
     }
   };
 
