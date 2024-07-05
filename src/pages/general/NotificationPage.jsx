@@ -153,7 +153,9 @@ function NotificationPage({ user }) {
               showNotification('Notifikasi Andal', {
                 body: change.fullDocument.message,
                 icon: AndalLogoSecondary,
-                badge: AndalLogoSecondary
+                badge: AndalLogoSecondary,
+                requireInteraction: true,
+                vibrate: [200, 100, 200]
               });
 
               // Add the notification ID to the set

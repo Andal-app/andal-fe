@@ -24,7 +24,11 @@ export const registerServiceWorker = async () => {
 export const showNotification = (title, options) => {
   if ('serviceWorker' in navigator && 'Notification' in window && Notification.permission === 'granted') {
     navigator.serviceWorker.ready.then((registration) => {
-      registration.showNotification(title, options);
+      registration.showNotification(title, {
+        ...options,
+        requireInteraction: true, // Notifikasi tetap terlihat sampai ditutup manual
+        vibrate: [200, 100, 200] // Pola getaran
+      });
     });
   }
 };
