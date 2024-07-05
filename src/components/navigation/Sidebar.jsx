@@ -60,7 +60,7 @@ function Sidebar({ user }) {
       <div className="px-6 flex gap-x-4 items-center">
         {/* <img src="./src/assets/logo.png" className={`cursor-pointer duration-500 ${open && 'rotate-[360deg]'}`} /> */}
         <div className="w-10 h-10 bg-violet-500 rounded-full">
-          <img className="w-full h-full" src={LogoSecondary} />
+          <img className="w-full h-full" src={LogoSecondary} alt="Andal" />
         </div>
         <h1 className={`text-violet-700 origin-left font-semibold text-h-sm duration-200 ${!open && 'scale-0'}`}>
           Andal
@@ -72,6 +72,7 @@ function Sidebar({ user }) {
       <div className={`flex gap-4 px-6 my-4 py-4 ${!open && 'hidden'}`}>
         <img
           id="profile__picture"
+          alt="Gambar Profil"
           // src={user?.role === 'parent' ? User06bSvg : User01aSvg}
           src={user?.profilePicture}
           className="w-14 h-14 rounded-full"

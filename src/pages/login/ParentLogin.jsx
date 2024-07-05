@@ -37,7 +37,12 @@ const ParentLogin = () => {
       {/* right pane content start */}
       <div className="w-[85%] lg:w-[60%] h-[78%] lg:h-full flex flex-col items-center justify-end lg:justify-center">
         {/* logo start */}
-        <Link to="/" target="_blank" className="hidden lg:flex items-center mb-6 bg-violet-300 rounded-full">
+        <Link
+          to="/"
+          target="_blank"
+          aria-label="Ke landing page"
+          className="hidden lg:flex items-center mb-6 bg-violet-300 rounded-full"
+        >
           <div className="h-28 w-28 rounded-full border border-violet-900">
             <img className="w-full" src={LogoPrimary} alt="Andal" />
           </div>

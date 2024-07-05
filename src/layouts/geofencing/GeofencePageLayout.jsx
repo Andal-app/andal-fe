@@ -41,6 +41,7 @@ function GeofencePageLayout({
           <Link
             to={backBtnNavTo}
             state={backBtnState}
+            aria-label="Kembali"
             className="absolute left-3 flex justify-center items-center w-8 h-8 bg-violet-300 rounded-full text-black"
           >
             <Icon icon={'ion:arrow-back'} className="w-6 h-6" />

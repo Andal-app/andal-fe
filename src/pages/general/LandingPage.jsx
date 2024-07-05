@@ -30,6 +30,7 @@ function LandingPage() {
           {/* mobile next button start */}
           <Link
             to="/tutorial"
+            aria-label="Lanjut"
             className="z-30 absolute right-8 bottom-14 bg-white hover:bg-violet-50 w-12 h-12 rounded-full flex justify-center items-center"
           >
             <Icon icon={'heroicons:arrow-right-16-solid'} className="w-10 h-10 text-black" />

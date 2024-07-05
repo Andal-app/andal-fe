@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function RoleBox({ link, id, imgSrc, imgAlt, title, detail }) {
   return (
-    <Link to={link}>
+    <Link to={link} aria-label="Pilih peran">
       <div
         id={id}
         className="py-3 px-4 flex flex-row w-full min-h-32 rounded-lg border border-violet-500  bg-violet-300 hover:bg-violet-200 duration-700"

@@ -37,6 +37,7 @@ const BottomNavbar = ({ user }) => {
             key={i} // Added key prop
             className={`w-full h-full flex flex-col text-center items-center justify-center pt-3 pb-1.5 `}
             onClick={() => setActive(i)}
+            aria-label="Item Menu"
           >
             <span
               className={`absolute bottom-7 text-xl cursor-pointer ${
