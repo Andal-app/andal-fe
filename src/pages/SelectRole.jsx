@@ -55,7 +55,7 @@ function SelectRole() {
 
         {/* wave footer start */}
         <div className="fixed bottom-0 left-0 w-full lg:hidden">
-          <img src={BottomWave} className="w-full" />
+          <img src={BottomWave} alt="Bottom Wave" className="w-full" />
         </div>
         {/* wave footer end */}
       </div>

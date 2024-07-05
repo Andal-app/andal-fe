@@ -12,7 +12,7 @@ function LandingPage() {
       <div className="relative w-full h-full bg-map flex justify-center items-center">
         <div className="z-10 flex flex-col items-center gap-6 text-center -mt-36 lg:mt-0">
           <div id="logo" className="bg-violet-300 w-32 h-32 rounded-full">
-            <img className="w-full h-full" src={LogoPrimary} />
+            <img className="w-full h-full" src={LogoPrimary} alt="Logo Andal" />
           </div>
 
           <h1 className="text-h-lg font-bold text-violet-900">Selamat Datang</h1>
@@ -25,7 +25,7 @@ function LandingPage() {
         <div className="z-0 absolute w-full h-full bg-neutral-400 opacity-30 flex justify-center items-center"></div>
 
         <div className="z-20 lg:hidden fixed bottom-0 left-0 right-0 w-full">
-          <img src={BottomWave1} className="w-full" />
+          <img src={BottomWave1} className="w-full" alt="Bottom Wave 1" />
 
           {/* mobile next button start */}
           <Link

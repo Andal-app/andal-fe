@@ -16,7 +16,7 @@ function LoginLayout({ children }) {
       <div id="right__pane__container" className="h-screen w-full lg:w-1/2 flex justify-center items-center">
         {/* top wave decoration start */}
         <div className="z-50 lg:hidden fixed top-0 left-0 right-0 w-full">
-          <img src={TopWave1} className="w-full" />
+          <img src={TopWave1} alt="Top Wave 1" className="w-full" />
         </div>
         {/* top wave decoration end */}
 

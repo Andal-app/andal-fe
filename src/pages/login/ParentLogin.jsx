@@ -39,7 +39,7 @@ const ParentLogin = () => {
         {/* logo start */}
         <Link to="/" target="_blank" className="hidden lg:flex items-center mb-6 bg-violet-300 rounded-full">
           <div className="h-28 w-28 rounded-full border border-violet-900">
-            <img className="w-full" src={LogoPrimary} />
+            <img className="w-full" src={LogoPrimary} alt="Andal" />
           </div>
         </Link>
         {/* logo end */}
