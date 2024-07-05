@@ -15,14 +15,14 @@ function HomeLayout({ children, user }) {
 
       {/* top wave start */}
       <div className="z-0 lg:hidden fixed top-0 left-0 right-0 w-full">
-        <img src={TopWave3} className="w-full" />
+        <img src={TopWave3} alt="Top Wave" className="w-full" />
       </div>
       {/* top wave end */}
 
       {/* profile start */}
       <div className="fixed lg:hidden z-10 mt-10 mx-4 text-white flex gap-2">
         {/* <img className="w-12 h-12 rounded-full" src={user?.role === 'parent' ? User06bSvg : User01aSvg}></img> */}
-        <img className="w-12 h-12 rounded-full" src={user?.profilePicture}></img>
+        <img alt="Gambar Profil" className="w-12 h-12 rounded-full" src={user?.profilePicture}></img>
         <div>
           <p className="text-b-md font-bold">{`Halo, ${user?.fullname?.split(' ')[0]}!`}</p>
           <p className="text-b-sm">{role}</p>

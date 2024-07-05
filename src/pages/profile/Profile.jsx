@@ -46,6 +46,7 @@ function Profile({ user }) {
             id="user__profile__picture"
             // src={user?.role === 'parent' ? User06bSvg : User01aSvg}
             src={user?.profilePicture}
+            alt="Gambar Profil"
             className={`w-36 h-36 rounded-full`}
           ></img>
           <div className="text-center">

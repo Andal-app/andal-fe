@@ -115,6 +115,7 @@ function PositionDetailV2({ user }) {
           {/* circular back button start */}
           <Link
             to="/beranda/orangtua"
+            aria-label="Kembali"
             className="absolute left-3 flex justify-center items-center w-8 h-8 bg-violet-300 rounded-full text-black"
           >
             <Icon icon={'ion:arrow-back'} className="w-6 h-6" />

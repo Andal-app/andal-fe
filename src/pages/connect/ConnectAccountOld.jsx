@@ -136,7 +136,12 @@ const ConnectAccount = ({ user }) => {
 
           {isChildFound && (
             <div id="child__found" className="w-full flex flex-col items-center gap-3">
-              <img id="child__profile__picture" src={ProfPic} className={`w-20 h-20 rounded-full`} />
+              <img
+                id="child__profile__picture"
+                alt="Gambar Profil"
+                src={ProfPic}
+                className={`w-20 h-20 rounded-full`}
+              />
 
               <p className="text-b-md font-bold mb-4">{childUsername}</p>
 

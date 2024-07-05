@@ -34,19 +34,19 @@ function BasicLayout({ children }) {
 
       <div className="hidden lg:block">
         <div className="absolute z-20 left-[-80px] bottom-[-130px]">
-          <img src={Blob1} className="w-80" />
+          <img src={Blob1} alt="Blob 1" className="w-80" />
         </div>
         <div className="absolute z-20 right-[-50px] top-[-110px]">
-          <img src={Blob2} className="w-80" />
+          <img src={Blob2} alt="Blob 2" className="w-80" />
         </div>
         <div className="absolute z-20 right-[-120px] bottom-[-200px]">
-          <img src={RingDouble} className="w-[450px]" />
+          <img src={RingDouble} alt="Ring Double" className="w-[450px]" />
         </div>
         <div className="absolute z-40 left-14 top-24">
-          <img src={VectorZigzag} className="w-24" />
+          <img src={VectorZigzag} alt="Zig Zag" className="w-24" />
         </div>
         <div className="absolute z-40 left-[640px] top-4">
-          <img src={VectorPlus} className="w-20" />
+          <img src={VectorPlus} alt="Plus" className="w-20" />
         </div>
       </div>
       {/* decorations end */}

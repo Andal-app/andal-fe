@@ -10,6 +10,7 @@ function TopBackNav({ title, navigateTo, state }) {
       <Link
         to={navigateTo}
         state={state}
+        aria-label="Kembali"
         className="absolute left-2 top-0 w-14 h-full flex items-center justify-center"
       >
         <div className="flex justify-center items-center w-8 h-8 rounded-full bg-neutral-200">

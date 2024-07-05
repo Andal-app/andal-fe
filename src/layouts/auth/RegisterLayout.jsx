@@ -17,7 +17,7 @@ function RegisterLayout({ children }) {
         {/* decorations start */}
         {/* top wave decoration start */}
         <div className="z-50 lg:hidden fixed top-0 left-0 right-0 w-full">
-          <img src={TopWave2} className="w-full" />
+          <img src={TopWave2} alt="Top Wave 2" className="w-full" />
         </div>
         {/* top wave decoration end */}
 
