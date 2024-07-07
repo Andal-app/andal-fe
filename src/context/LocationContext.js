@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 
+const REFRESH_INTERVAL = 5000;
 const LocationContext = createContext();
 
 export const axiosGoogleMaps = axios.create({
@@ -126,7 +127,7 @@ export const LocationProvider = ({ children, user }) => {
   useEffect(() => {
     if (user.role === 'child') {
       fetchLocation();
-      const interval = setInterval(fetchLocation, 60000);
+      const interval = setInterval(fetchLocation, REFRESH_INTERVAL);
       return () => clearInterval(interval);
     }
   }, [user, fetchLocation]);
