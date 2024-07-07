@@ -66,15 +66,17 @@ export const LocationProvider = ({ children, user }) => {
 
   const onSuccess = useCallback(async (position) => {
     const { latitude, longitude } = position.coords;
+    const roundedLatitude = parseFloat(latitude.toFixed(7));
+    const roundedLongitude = parseFloat(longitude.toFixed(7));
 
-    const address = await fetchAddress(latitude, longitude);
+    const address = await fetchAddress(roundedLatitude, roundedLongitude);
     const batteryStatus = await getBatteryPercentage();
 
     const newLocation = {
       loaded: true,
       coordinates: {
-        lat: latitude,
-        lng: longitude
+        lat: roundedLatitude,
+        lng: roundedLongitude
       },
       address: address,
       gpsActive: true,
@@ -86,8 +88,8 @@ export const LocationProvider = ({ children, user }) => {
 
     // Kirim data ke endpoint API
     postDataToAPI({
-      latitude: latitude,
-      longitude: longitude,
+      latitude: roundedLatitude,
+      longitude: roundedLongitude,
       gps: true,
       battery: batteryStatus.toString()
     });
