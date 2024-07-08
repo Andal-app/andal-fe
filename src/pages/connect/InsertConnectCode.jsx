@@ -30,7 +30,7 @@ const ConnectAccount = ({ user }) => {
       await axios
         .post(process.env.REACT_APP_API_URL + 'child/verif-parent', {
           role: 'child',
-          code: formData.code
+          code: formData.code.toUpperCase()
         })
         .then((res) => {
           // console.log('Response:', res);
