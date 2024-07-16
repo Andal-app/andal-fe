@@ -196,7 +196,9 @@ function NotificationPage({ user }) {
       <BottomNavbar user={user} />
 
       <div className="w-full lg:w-1/2 h-screen flex flex-col items-center lg:border-r lg:border-neutral-300">
-        <TopBackNav navigateTo="/beranda/orangtua" title="Riwayat Notifikasi" />
+        <div className="w-full flex items-center justify-center">
+          <TopBackNav navigateTo="/beranda/orangtua" title="Riwayat Notifikasi" />
+        </div>
 
         <main className="w-full overflow-auto lg:scrollbar scrollbar-thumb-neutral-300 scrollbar-track-neutral-100 scrollbar-thumb-rounded-full">
           <ul id="notification__list__container">

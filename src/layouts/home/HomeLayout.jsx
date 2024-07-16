@@ -9,18 +9,18 @@ function HomeLayout({ children, user }) {
   const role = translateUserRole(user?.role ? user.role : null);
 
   return (
-    <div className="flex flex-col lg:flex-row">
+    <div className="flex flex-col lg:flex-row pb-36 lg:pb-0">
       <Sidebar user={user} />
       <BottomNavbar user={user} />
 
       {/* top wave start */}
-      <div className="z-0 lg:hidden fixed top-0 left-0 right-0 w-full">
+      <div className="z-30 lg:hidden fixed top-0 left-0 right-0 w-full">
         <img src={TopWave3} alt="Top Wave" className="w-full" />
       </div>
       {/* top wave end */}
 
       {/* profile start */}
-      <div className="fixed lg:hidden z-10 mt-10 mx-4 text-white flex gap-2">
+      <div className="fixed lg:hidden z-40 mt-10 mx-4 text-white flex gap-2">
         {/* <img className="w-12 h-12 rounded-full" src={user?.role === 'parent' ? User06bSvg : User01aSvg}></img> */}
         <img alt="Gambar Profil" className="w-12 h-12 rounded-full" src={user?.profilePicture}></img>
         <div>
