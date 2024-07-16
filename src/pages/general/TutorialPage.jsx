@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 function TutorialPage() {
   return (
     <BasicLayout>
-      <div className="h-full lg:mt-0 flex flex-col justify-center items-center gap-36 lg:gap-0">
+      <div className="h-[75%] lg:h-full lg:mt-0 flex flex-col justify-center items-center gap-36 lg:gap-0">
         {/* lewati button start*/}
         <Link
           to="/pilihperan"
-          className="block lg:hidden text-b-xl font-semibold text-violet-500 text-end w-[85%] mb-4 mt-24"
+          className="block lg:hidden text-b-xl font-semibold text-violet-500 text-end w-[85%] mb-4 mt-0"
         >
           Lewati
         </Link>
