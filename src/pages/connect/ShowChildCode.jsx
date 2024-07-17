@@ -47,13 +47,15 @@ const ShowChildCode = ({ user }) => {
   }, [REFRESH_INTERVAL]);
 
   return (
-    <div className="flex">
+    <div className="flex pb-56 lg:pb-0">
       <Sidebar user={user} />
       <BottomNavbar user={user} />
 
       <div className="w-full lg:w-1/2 h-screen flex flex-col items-center lg:border-r lg:border-neutral-300">
         {/* page title start */}
-        <TopBackNav title="Hubungkan Akun Orang Tua" navigateTo="/beranda/anak" />
+        <div className="w-full flex items-center justify-center">
+          <TopBackNav title="Hubungkan Akun Orang Tua" navigateTo="/beranda/anak" />
+        </div>
         {/* page title end */}
 
         {/* show QR code start */}
